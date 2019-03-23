@@ -13,14 +13,23 @@ namespace Proyecto_AccesoDatos
     {
         private string loginURL = "http://localhost:8080/";
         string token = "2JEuksuv86DcFmLrQa7nna4QDeowuGTqpyUK0pf9wSlbe6D5hLtEVxvzMT5gAZG0xBKy00HxS3J79mcr8F54dBD0uIg5HX5fzPOAP";
-        string nombreUsuario = "pepe";
-        string pass = "pepe"; //Cambiar a cifrado
-
-        public AccesoDatos getConexion()
+        string peticion;
+        string nombreUsuario;
+        string pass; // Cambiar a cifrado
+        public AccesoDatos()
         {
-            return new AccesoDatos();
+            // Constructor vacio
         }
-        public async Task<string> enviarPeticionPOST()
+
+        public AccesoDatos(string token, string peticion, string nombreUsuario, string pass)
+        {
+            this.token = token;
+            this.peticion = peticion;
+            this.nombreUsuario = nombreUsuario;
+            this.pass = pass;
+        }
+
+        public async Task<string> enviarPeticionLogin()
         {
             try
             {
@@ -29,7 +38,7 @@ namespace Proyecto_AccesoDatos
                     Client.BaseAddress = new Uri(loginURL);
                     Client.DefaultRequestHeaders.Accept.Clear();
                     Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    // Crea la cadena de datos POST y los convierte en un array de bytes.
+                    // Crea la cadena de datos GET y los convierte en un array de bytes.
                     string postData =   "token=" + token +
                                         "&usuario=" + nombreUsuario +
                                         "&pass=" + pass;

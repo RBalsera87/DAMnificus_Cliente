@@ -103,6 +103,16 @@ namespace Proyecto_Presentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Icono_dividir {
+            get {
+                object obj = ResourceManager.GetObject("Icono_dividir", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Icono_Maximizar {
             get {
                 object obj = ResourceManager.GetObject("Icono_Maximizar", resourceCulture);

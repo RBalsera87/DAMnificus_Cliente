@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using Proyecto_AccesoDatos;
-using System.Windows.Forms.VisualStyles;
+
 
 namespace Proyecto_Presentacion
 {
@@ -26,6 +19,9 @@ namespace Proyecto_Presentacion
         private const int WM_NCHITTEST = 132;
         private const int HTBOTTOMRIGHT = 17;
         private Rectangle sizeGripRectangle;
+        // Variables para division del formulario
+        private Size oldSize;
+        private Point oldPosition;
         // Variable para el efecto sombra del formulario
         private const int CS_DROPSHADOW = 0x20000;
         public FormPrincipal()
@@ -36,9 +32,10 @@ namespace Proyecto_Presentacion
             this.barraTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
             this.barraTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
             this.barraTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
-            //this.lblTitulo.Enabled = false;
-            this.lblTitulo.ForeColor = Color.White;
-            this.lblTitulo.BackColor = Color.Transparent;
+            this.lblTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
+            this.lblTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
+            this.lblTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
+
         }
         /****************************
          * Eventos para los botones *
@@ -69,12 +66,29 @@ namespace Proyecto_Presentacion
             maximizado = false;
             this.WindowState = FormWindowState.Minimized;
         }
+        private void barraTitulo_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (maximizado)
+            {
+                btnRestaurar.Visible = false;
+                btnMaximizar.Visible = true;
+                maximizado = false;
+                this.WindowState = FormWindowState.Normal;
+            }else
+            {
+                btnMaximizar.Visible = false;
+                btnRestaurar.Visible = true;
+                maximizado = true;
+                this.WindowState = FormWindowState.Maximized;
+            }
+            
+        }
         private async void btnLogin_Click_1(object sender, EventArgs e)
         {
             if (menuLateral.Width >= 220)
             {
                 ocultarLogin();
-                string x = await ad.enviarPeticionPOST();
+                string x = await ad.enviarPeticionLogin();
             }
             else
             {
@@ -131,6 +145,44 @@ namespace Proyecto_Presentacion
                 this.lblUsuario.Visible = true;
                 this.lblPass.Visible = true;
                 this.lblConectado.Visible = true;
+            }
+        }
+        private void tmOcultarLogin_Tick(object sender, EventArgs e)
+        {
+
+            if (panelLogin.Height <= 0)
+            {
+                this.tmOcultarLogin.Enabled = false;
+
+            }
+            else
+            {
+                this.panelLogin.Height = panelLogin.Height - 5;
+                this.lblConectado.Location = new Point(
+                    this.lblConectado.Location.X,
+                    this.lblConectado.Location.Y + 5);
+                this.panelLogin.Location = new Point(
+                     this.panelLogin.Location.X,
+                     this.panelLogin.Location.Y + 5);
+            }
+        }
+
+        private void tmMostrarLogin_Tick(object sender, EventArgs e)
+        {
+            if (panelLogin.Height >= 80)
+            {
+                this.tmMostrarLogin.Enabled = false;
+
+            }
+            else
+            {
+                this.panelLogin.Height = panelLogin.Height + 5;
+                this.lblConectado.Location = new Point(
+                    this.lblConectado.Location.X,
+                    this.lblConectado.Location.Y - 5);
+                this.panelLogin.Location = new Point(
+                     this.panelLogin.Location.X,
+                     this.panelLogin.Location.Y - 5);
             }
         }
 
@@ -205,9 +257,9 @@ namespace Proyecto_Presentacion
             }
         }
 
-        /**********************************
+       /***********************************
         * Métodos internos del formulario *
-        **********************************/
+        ***********************************/
         private void abrirFormEnPanel(object formHijo)
         {
             if (this.panelContenido.Controls.Count > 0)
@@ -240,43 +292,33 @@ namespace Proyecto_Presentacion
 
         }
 
-        private void tmOcultarLogin_Tick(object sender, EventArgs e)
+        private void btnDividir_Click(object sender, EventArgs e)
         {
+            int ancho = Screen.PrimaryScreen.Bounds.Width;
+            int alto = Screen.PrimaryScreen.Bounds.Height;
+            if (this.Location != new Point(0, 0) || maximizado)
+            {
+                if (!maximizado)
+                {
+                    oldPosition = this.Location;
+                    oldSize = this.Size;
+                }
+                
+                this.WindowState = FormWindowState.Normal;
+                this.Location = new Point(0, 0);
+                this.Size = new Size(ancho / 2, alto - 30);
+                btnRestaurar.Visible = false;
+                btnMaximizar.Visible = true;
+                maximizado = false;
+                
+            }
+            else
+            {
+                this.Location = oldPosition;
+                this.Size = oldSize;
+            }
             
-            if (panelLogin.Height <= 0)
-            {
-                this.tmOcultarLogin.Enabled = false;
 
-            }
-            else
-            {
-                this.panelLogin.Height = panelLogin.Height - 5;
-                this.lblConectado.Location = new Point(
-                    this.lblConectado.Location.X,
-                    this.lblConectado.Location.Y + 5);
-                this.panelLogin.Location = new Point(
-                     this.panelLogin.Location.X,
-                     this.panelLogin.Location.Y + 5);
-            }
-        }
-
-        private void tmMostrarLogin_Tick(object sender, EventArgs e)
-        {
-            if (panelLogin.Height >= 80)
-            {
-                this.tmMostrarLogin.Enabled = false;
-
-            }
-            else
-            {
-                this.panelLogin.Height = panelLogin.Height + 5;
-                this.lblConectado.Location = new Point(
-                    this.lblConectado.Location.X,
-                    this.lblConectado.Location.Y - 5);
-                this.panelLogin.Location = new Point(
-                     this.panelLogin.Location.X,
-                     this.panelLogin.Location.Y - 5);
-            }
         }
     }
 }
