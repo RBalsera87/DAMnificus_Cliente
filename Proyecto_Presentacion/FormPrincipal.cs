@@ -294,8 +294,8 @@ namespace Proyecto_Presentacion
 
         private void btnDividir_Click(object sender, EventArgs e)
         {
-            int ancho = Screen.PrimaryScreen.Bounds.Width;
-            int alto = Screen.PrimaryScreen.Bounds.Height;
+            int ancho = Screen.PrimaryScreen.WorkingArea.Width;
+            int alto = Screen.PrimaryScreen.WorkingArea.Height;
             if (this.Location != new Point(0, 0) || maximizado)
             {
                 if (!maximizado)
@@ -306,7 +306,7 @@ namespace Proyecto_Presentacion
                 
                 this.WindowState = FormWindowState.Normal;
                 this.Location = new Point(0, 0);
-                this.Size = new Size(ancho / 2, alto - 30);
+                this.Size = new Size(ancho / 2, alto);
                 btnRestaurar.Visible = false;
                 btnMaximizar.Visible = true;
                 maximizado = false;
