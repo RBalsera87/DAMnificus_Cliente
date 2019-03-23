@@ -1,0 +1,282 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using Proyecto_AccesoDatos;
+using System.Windows.Forms.VisualStyles;
+
+namespace Proyecto_Presentacion
+{
+    public partial class FormPrincipal : Form
+    {
+        //Metodos m = new Metodos();
+        AccesoDatos ad = new AccesoDatos();
+        // Variables para el movimiento del formulario
+        private bool agarrado = false;
+        private bool maximizado = false;
+        private Point puntoInicio = new Point(0, 0);
+        // Variables para el cambio de tamaño del formulario
+        private int tolerancia = 16;
+        private const int WM_NCHITTEST = 132;
+        private const int HTBOTTOMRIGHT = 17;
+        private Rectangle sizeGripRectangle;
+        // Variable para el efecto sombra del formulario
+        private const int CS_DROPSHADOW = 0x20000;
+        public FormPrincipal()
+        {
+            InitializeComponent();
+            //Application.VisualStyleState = VisualStyleState.NoneEnabled;
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.barraTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
+            this.barraTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
+            this.barraTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
+            //this.lblTitulo.Enabled = false;
+            this.lblTitulo.ForeColor = Color.White;
+            this.lblTitulo.BackColor = Color.Transparent;
+        }
+        /****************************
+         * Eventos para los botones *
+         ****************************/
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMaximizar_Click(object sender, EventArgs e)
+        {
+            btnMaximizar.Visible = false;
+            btnRestaurar.Visible = true;
+            maximizado = true;
+            this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void btnRestaurar_Click(object sender, EventArgs e)
+        {
+            btnRestaurar.Visible = false;
+            btnMaximizar.Visible = true;
+            maximizado = false;
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void btnMinimizar_Click(object sender, EventArgs e)
+        {
+            maximizado = false;
+            this.WindowState = FormWindowState.Minimized;
+        }
+        private async void btnLogin_Click_1(object sender, EventArgs e)
+        {
+            if (menuLateral.Width >= 220)
+            {
+                ocultarLogin();
+                string x = await ad.enviarPeticionPOST();
+            }
+            else
+            {
+                this.tmMostrarMenu.Enabled = true;
+                this.lblUsuario.Visible = true;
+                this.lblPass.Visible = true;
+            }
+
+        }
+
+        /********************************
+         * Eventos para el menu lateral *
+         ********************************/
+        private void tmOcultarMenu_Tick(object sender, EventArgs e)
+        {
+            if (menuLateral.Width <= 55)
+            {
+                this.tmOcultarMenu.Enabled = false;
+
+            }
+            else
+            {
+                this.menuLateral.Width = menuLateral.Width - 5;
+                actualizarTamañoPanelContenido();
+            }
+        }
+
+        private void tmMostrarMenu_Tick(object sender, EventArgs e)
+        {
+            if (menuLateral.Width >= 220)
+            {
+                this.tmMostrarMenu.Enabled = false;
+
+            }
+            else
+            {
+                this.menuLateral.Width = menuLateral.Width + 5;
+                actualizarTamañoPanelContenido();
+            }
+        }
+
+        private void pbOcultarMenu_Click(object sender, EventArgs e)
+        {
+            if (menuLateral.Width == 220)
+            {
+                this.tmOcultarMenu.Enabled = true;
+                this.lblUsuario.Visible = false;
+                this.lblPass.Visible = false;
+                this.lblConectado.Visible = false;
+            }
+            else if (menuLateral.Width == 55)
+            {
+                this.tmMostrarMenu.Enabled = true;
+                this.lblUsuario.Visible = true;
+                this.lblPass.Visible = true;
+                this.lblConectado.Visible = true;
+            }
+        }
+
+        /******************************************
+         * Eventos para movimiento del formulario *
+         ******************************************/
+        public void Titulo_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.agarrado = false;
+        }
+
+        public void Titulo_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.puntoInicio = e.Location;
+            this.agarrado = true;
+        }
+
+        public void Titulo_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.agarrado)
+            {
+                Point p1 = new Point(e.X, e.Y);
+                Point p2 = this.barraTitulo.PointToScreen(p1);
+                Point p3 = new Point(p2.X - this.puntoInicio.X,
+                                     p2.Y - this.puntoInicio.Y);
+                this.Location = p3;
+            }
+        }
+
+        /************************************************
+         * Eventos para cambio de tamaño del formulario *
+         ************************************************/
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_NCHITTEST:
+                    if (!maximizado)
+                    {
+                        base.WndProc(ref m);
+                        var hitPoint = this.PointToClient(new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16));
+                        if (sizeGripRectangle.Contains(hitPoint))
+                            m.Result = new IntPtr(HTBOTTOMRIGHT);
+                    }
+                    
+                    break;
+                default:
+                    base.WndProc(ref m);
+                    break;
+            }
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            actualizarTamañoPanelContenido();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            ControlPaint.DrawSizeGrip(e.Graphics, Color.Black, sizeGripRectangle);
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ClassStyle |= CS_DROPSHADOW;
+                return cp;
+            }
+        }
+
+        /**********************************
+        * Métodos internos del formulario *
+        **********************************/
+        private void abrirFormEnPanel(object formHijo)
+        {
+            if (this.panelContenido.Controls.Count > 0)
+            {
+                this.panelContenido.Controls.RemoveAt(0);
+            }
+            Form fh = formHijo as Form;
+            fh.TopLevel = false;
+            fh.FormBorderStyle = FormBorderStyle.None;
+            fh.Dock = DockStyle.Fill;
+            this.panelContenido.Controls.Add(fh);
+            this.panelContenido.Tag = fh;
+            fh.Show();
+        }
+        private void ocultarLogin()
+        {
+            this.tmOcultarLogin.Enabled = true;
+        }
+        private void mostrarLogin()
+        {
+            this.tmMostrarLogin.Enabled = true;
+        }
+        private void actualizarTamañoPanelContenido()
+        {
+            var region = new Region(new Rectangle(0, 0, this.panelContenido.ClientRectangle.Width, this.panelContenido.ClientRectangle.Height));
+            sizeGripRectangle = new Rectangle(this.ClientRectangle.Width - tolerancia, this.ClientRectangle.Height - tolerancia, tolerancia, tolerancia);
+            if (!maximizado) region.Exclude(new Rectangle(this.panelContenido.Width - tolerancia, this.panelContenido.Height - tolerancia, tolerancia, tolerancia));
+            this.panelContenido.Region = region;
+            this.Invalidate();
+
+        }
+
+        private void tmOcultarLogin_Tick(object sender, EventArgs e)
+        {
+            
+            if (panelLogin.Height <= 0)
+            {
+                this.tmOcultarLogin.Enabled = false;
+
+            }
+            else
+            {
+                this.panelLogin.Height = panelLogin.Height - 5;
+                this.lblConectado.Location = new Point(
+                    this.lblConectado.Location.X,
+                    this.lblConectado.Location.Y + 5);
+                this.panelLogin.Location = new Point(
+                     this.panelLogin.Location.X,
+                     this.panelLogin.Location.Y + 5);
+            }
+        }
+
+        private void tmMostrarLogin_Tick(object sender, EventArgs e)
+        {
+            if (panelLogin.Height >= 80)
+            {
+                this.tmMostrarLogin.Enabled = false;
+
+            }
+            else
+            {
+                this.panelLogin.Height = panelLogin.Height + 5;
+                this.lblConectado.Location = new Point(
+                    this.lblConectado.Location.X,
+                    this.lblConectado.Location.Y - 5);
+                this.panelLogin.Location = new Point(
+                     this.panelLogin.Location.X,
+                     this.panelLogin.Location.Y - 5);
+            }
+        }
+    }
+}
