@@ -11,7 +11,7 @@ namespace Proyecto_AccesoDatos
         }
         private static readonly Random random = new Random();
         //Recibe el String de la clave que introduce el usuario (Sería para cuando se registre)
-        public static string EncriptarClave(string plainText, byte[] saltBytes = null)
+        public static string encriptarClave(string plainText, byte[] saltBytes = null)
         {
             if (saltBytes == null)
             {
@@ -73,7 +73,7 @@ namespace Proyecto_AccesoDatos
         }
 
         //Recibe el String de la clave que introduce el usuario y la clave encriptada de la base de datos
-        public static bool ComprobarClave(string pass, string hash)
+        public static bool comprobarClave(string pass, string hash)
         {
             // Convierte al hash a arreglo de bytes
             byte[] hashWithSaltBytes = Convert.FromBase64String(hash);
@@ -99,7 +99,7 @@ namespace Proyecto_AccesoDatos
             }
 
             // Calcula de nuevo el hash
-            string expectedHashString = EncriptarClave(pass, saltBytes);
+            string expectedHashString = encriptarClave(pass, saltBytes);
 
             // Si ambos hash coinciden la contraseña es correcta
             return (hash == expectedHashString);

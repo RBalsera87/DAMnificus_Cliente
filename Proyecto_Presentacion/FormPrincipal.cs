@@ -146,11 +146,11 @@ namespace Proyecto_Presentacion
             {
                 //ocultarLogin();
                 //Esta linea seria para encriptar la clave 
-                string hash = Clave.EncriptarClave("admin");
+                string hash = Clave.encriptarClave("admin");
                 //Imprimir la clave codificada
                 MessageBox.Show(hash);
                 //Esta linea seria para comprobar la clave con la BD
-                bool isValid = Clave.ComprobarClave(tbPass.Text, hash);
+                bool isValid = Clave.comprobarClave(tbPass.Text, hash);
                 
 
                 AccesoDatos Acceso = new AccesoDatos("2JEuksuv86DcFmLrQa7nna4QDeowuGTqpyUK0pf9wSlbe6D5hLtEVxvzMT5gAZG0xBKy00HxS3J79mcr8F54dBD0uIg5HX5fzPOAP", "", tbUsuario.Text, hash);
@@ -222,7 +222,6 @@ namespace Proyecto_Presentacion
             if (panelLogin.Height <= 0)
             {
                 this.tmOcultarLogin.Enabled = false;
-
             }
             else
             {
@@ -235,7 +234,6 @@ namespace Proyecto_Presentacion
                      this.panelLogin.Location.Y + 5);
             }
         }
-
         private void tmMostrarLogin_Tick(object sender, EventArgs e)
         {
             if (panelLogin.Height >= 80)
