@@ -295,7 +295,7 @@ namespace Proyecto_Presentacion
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
-            actualizarTamañoPanelContenido();
+            //actualizarTamañoPanelContenido();
         }
 
         protected override void OnPaint(PaintEventArgs e)
