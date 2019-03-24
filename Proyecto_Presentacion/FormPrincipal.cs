@@ -153,9 +153,9 @@ namespace Proyecto_Presentacion
                 bool isValid = Clave.comprobarClave(tbPass.Text, hash);
                 
 
-                AccesoDatos Acceso = new AccesoDatos("2JEuksuv86DcFmLrQa7nna4QDeowuGTqpyUK0pf9wSlbe6D5hLtEVxvzMT5gAZG0xBKy00HxS3J79mcr8F54dBD0uIg5HX5fzPOAP", "", tbUsuario.Text, hash);
+                AccesoDatos Acceso = new AccesoDatos();
 
-                string x = await ad.enviarPeticionLogin();
+                string x = await ad.enviarPeticionLogin("login","admin",hash,null);
                 //Imprimir la respuesta al complobar
                 MessageBox.Show(isValid ? "válida" : "no válida");
             }
