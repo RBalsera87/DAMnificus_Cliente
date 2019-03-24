@@ -30,6 +30,13 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblNotaPrimero = new System.Windows.Forms.Label();
+            this.lblNotaMarc = new System.Windows.Forms.Label();
+            this.lblNotaFol = new System.Windows.Forms.Label();
+            this.lblNotaEntor = new System.Windows.Forms.Label();
+            this.lblNotaSist = new System.Windows.Forms.Label();
+            this.lblNotaBD = new System.Windows.Forms.Label();
+            this.lblNotaProg = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -39,6 +46,14 @@
             this.l1 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblNotaSegundo = new System.Windows.Forms.Label();
+            this.lblNotaEIE = new System.Windows.Forms.Label();
+            this.lblNotaAndroid = new System.Windows.Forms.Label();
+            this.lblNotaIngles = new System.Windows.Forms.Label();
+            this.lblNotaGestion = new System.Windows.Forms.Label();
+            this.lblNotaInterf = new System.Windows.Forms.Label();
+            this.lblNotaPSP = new System.Windows.Forms.Label();
+            this.lblNotaAcceso = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -48,21 +63,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lblNotaProg = new System.Windows.Forms.Label();
-            this.lblNotaBD = new System.Windows.Forms.Label();
-            this.lblNotaSist = new System.Windows.Forms.Label();
-            this.lblNotaEntor = new System.Windows.Forms.Label();
-            this.lblNotaFol = new System.Windows.Forms.Label();
-            this.lblNotaMarc = new System.Windows.Forms.Label();
-            this.lblNotaPrimero = new System.Windows.Forms.Label();
-            this.lblNotaAcceso = new System.Windows.Forms.Label();
-            this.lblNotaPSP = new System.Windows.Forms.Label();
-            this.lblNotaInterf = new System.Windows.Forms.Label();
-            this.lblNotaGestion = new System.Windows.Forms.Label();
-            this.lblNotaIngles = new System.Windows.Forms.Label();
-            this.lblNotaAndroid = new System.Windows.Forms.Label();
-            this.lblNotaEIE = new System.Windows.Forms.Label();
-            this.lblNotaSegundo = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -107,6 +107,90 @@
             this.tabPage1.Size = new System.Drawing.Size(951, 618);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "PRIMERO";
+            // 
+            // lblNotaPrimero
+            // 
+            this.lblNotaPrimero.AutoSize = true;
+            this.lblNotaPrimero.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaPrimero.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaPrimero.Location = new System.Drawing.Point(584, 471);
+            this.lblNotaPrimero.Name = "lblNotaPrimero";
+            this.lblNotaPrimero.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaPrimero.Size = new System.Drawing.Size(134, 65);
+            this.lblNotaPrimero.TabIndex = 21;
+            this.lblNotaPrimero.Text = "X.XXX";
+            // 
+            // lblNotaMarc
+            // 
+            this.lblNotaMarc.AutoSize = true;
+            this.lblNotaMarc.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaMarc.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaMarc.Location = new System.Drawing.Point(587, 338);
+            this.lblNotaMarc.Name = "lblNotaMarc";
+            this.lblNotaMarc.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaMarc.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaMarc.TabIndex = 20;
+            this.lblNotaMarc.Text = "X.XXX";
+            // 
+            // lblNotaFol
+            // 
+            this.lblNotaFol.AutoSize = true;
+            this.lblNotaFol.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaFol.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaFol.Location = new System.Drawing.Point(587, 293);
+            this.lblNotaFol.Name = "lblNotaFol";
+            this.lblNotaFol.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaFol.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaFol.TabIndex = 19;
+            this.lblNotaFol.Text = "X.XXX";
+            // 
+            // lblNotaEntor
+            // 
+            this.lblNotaEntor.AutoSize = true;
+            this.lblNotaEntor.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaEntor.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaEntor.Location = new System.Drawing.Point(587, 248);
+            this.lblNotaEntor.Name = "lblNotaEntor";
+            this.lblNotaEntor.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaEntor.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaEntor.TabIndex = 18;
+            this.lblNotaEntor.Text = "X.XXX";
+            // 
+            // lblNotaSist
+            // 
+            this.lblNotaSist.AutoSize = true;
+            this.lblNotaSist.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaSist.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaSist.Location = new System.Drawing.Point(587, 203);
+            this.lblNotaSist.Name = "lblNotaSist";
+            this.lblNotaSist.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaSist.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaSist.TabIndex = 17;
+            this.lblNotaSist.Text = "X.XXX";
+            // 
+            // lblNotaBD
+            // 
+            this.lblNotaBD.AutoSize = true;
+            this.lblNotaBD.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaBD.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaBD.Location = new System.Drawing.Point(587, 158);
+            this.lblNotaBD.Name = "lblNotaBD";
+            this.lblNotaBD.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaBD.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaBD.TabIndex = 16;
+            this.lblNotaBD.Text = "X.XXX";
+            // 
+            // lblNotaProg
+            // 
+            this.lblNotaProg.AutoSize = true;
+            this.lblNotaProg.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaProg.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaProg.Location = new System.Drawing.Point(587, 113);
+            this.lblNotaProg.Name = "lblNotaProg";
+            this.lblNotaProg.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaProg.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaProg.TabIndex = 15;
+            this.lblNotaProg.Text = "X.XXX";
             // 
             // label7
             // 
@@ -232,6 +316,102 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "SEGUNDO";
             // 
+            // lblNotaSegundo
+            // 
+            this.lblNotaSegundo.AutoSize = true;
+            this.lblNotaSegundo.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaSegundo.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaSegundo.Location = new System.Drawing.Point(627, 494);
+            this.lblNotaSegundo.Name = "lblNotaSegundo";
+            this.lblNotaSegundo.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaSegundo.Size = new System.Drawing.Size(134, 65);
+            this.lblNotaSegundo.TabIndex = 31;
+            this.lblNotaSegundo.Text = "X.XXX";
+            // 
+            // lblNotaEIE
+            // 
+            this.lblNotaEIE.AutoSize = true;
+            this.lblNotaEIE.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaEIE.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaEIE.Location = new System.Drawing.Point(630, 367);
+            this.lblNotaEIE.Name = "lblNotaEIE";
+            this.lblNotaEIE.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaEIE.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaEIE.TabIndex = 30;
+            this.lblNotaEIE.Text = "X.XXX";
+            // 
+            // lblNotaAndroid
+            // 
+            this.lblNotaAndroid.AutoSize = true;
+            this.lblNotaAndroid.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaAndroid.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaAndroid.Location = new System.Drawing.Point(630, 322);
+            this.lblNotaAndroid.Name = "lblNotaAndroid";
+            this.lblNotaAndroid.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaAndroid.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaAndroid.TabIndex = 29;
+            this.lblNotaAndroid.Text = "X.XXX";
+            // 
+            // lblNotaIngles
+            // 
+            this.lblNotaIngles.AutoSize = true;
+            this.lblNotaIngles.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaIngles.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaIngles.Location = new System.Drawing.Point(630, 277);
+            this.lblNotaIngles.Name = "lblNotaIngles";
+            this.lblNotaIngles.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaIngles.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaIngles.TabIndex = 28;
+            this.lblNotaIngles.Text = "X.XXX";
+            // 
+            // lblNotaGestion
+            // 
+            this.lblNotaGestion.AutoSize = true;
+            this.lblNotaGestion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaGestion.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaGestion.Location = new System.Drawing.Point(630, 232);
+            this.lblNotaGestion.Name = "lblNotaGestion";
+            this.lblNotaGestion.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaGestion.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaGestion.TabIndex = 27;
+            this.lblNotaGestion.Text = "X.XXX";
+            // 
+            // lblNotaInterf
+            // 
+            this.lblNotaInterf.AutoSize = true;
+            this.lblNotaInterf.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaInterf.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaInterf.Location = new System.Drawing.Point(630, 187);
+            this.lblNotaInterf.Name = "lblNotaInterf";
+            this.lblNotaInterf.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaInterf.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaInterf.TabIndex = 26;
+            this.lblNotaInterf.Text = "X.XXX";
+            // 
+            // lblNotaPSP
+            // 
+            this.lblNotaPSP.AutoSize = true;
+            this.lblNotaPSP.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaPSP.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaPSP.Location = new System.Drawing.Point(630, 142);
+            this.lblNotaPSP.Name = "lblNotaPSP";
+            this.lblNotaPSP.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaPSP.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaPSP.TabIndex = 25;
+            this.lblNotaPSP.Text = "X.XXX";
+            // 
+            // lblNotaAcceso
+            // 
+            this.lblNotaAcceso.AutoSize = true;
+            this.lblNotaAcceso.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaAcceso.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblNotaAcceso.Location = new System.Drawing.Point(630, 97);
+            this.lblNotaAcceso.Name = "lblNotaAcceso";
+            this.lblNotaAcceso.Padding = new System.Windows.Forms.Padding(10);
+            this.lblNotaAcceso.Size = new System.Drawing.Size(80, 45);
+            this.lblNotaAcceso.TabIndex = 24;
+            this.lblNotaAcceso.Text = "X.XXX";
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -340,186 +520,6 @@
             this.label15.TabIndex = 15;
             this.label15.Text = "RESUMEN DEL SEGUNDO CURSO";
             this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lblNotaProg
-            // 
-            this.lblNotaProg.AutoSize = true;
-            this.lblNotaProg.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaProg.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaProg.Location = new System.Drawing.Point(587, 113);
-            this.lblNotaProg.Name = "lblNotaProg";
-            this.lblNotaProg.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaProg.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaProg.TabIndex = 15;
-            this.lblNotaProg.Text = "X.XXX";
-            // 
-            // lblNotaBD
-            // 
-            this.lblNotaBD.AutoSize = true;
-            this.lblNotaBD.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaBD.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaBD.Location = new System.Drawing.Point(587, 158);
-            this.lblNotaBD.Name = "lblNotaBD";
-            this.lblNotaBD.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaBD.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaBD.TabIndex = 16;
-            this.lblNotaBD.Text = "X.XXX";
-            // 
-            // lblNotaSist
-            // 
-            this.lblNotaSist.AutoSize = true;
-            this.lblNotaSist.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaSist.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaSist.Location = new System.Drawing.Point(587, 203);
-            this.lblNotaSist.Name = "lblNotaSist";
-            this.lblNotaSist.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaSist.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaSist.TabIndex = 17;
-            this.lblNotaSist.Text = "X.XXX";
-            // 
-            // lblNotaEntor
-            // 
-            this.lblNotaEntor.AutoSize = true;
-            this.lblNotaEntor.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaEntor.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaEntor.Location = new System.Drawing.Point(587, 248);
-            this.lblNotaEntor.Name = "lblNotaEntor";
-            this.lblNotaEntor.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaEntor.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaEntor.TabIndex = 18;
-            this.lblNotaEntor.Text = "X.XXX";
-            // 
-            // lblNotaFol
-            // 
-            this.lblNotaFol.AutoSize = true;
-            this.lblNotaFol.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaFol.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaFol.Location = new System.Drawing.Point(587, 293);
-            this.lblNotaFol.Name = "lblNotaFol";
-            this.lblNotaFol.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaFol.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaFol.TabIndex = 19;
-            this.lblNotaFol.Text = "X.XXX";
-            // 
-            // lblNotaMarc
-            // 
-            this.lblNotaMarc.AutoSize = true;
-            this.lblNotaMarc.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaMarc.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaMarc.Location = new System.Drawing.Point(587, 338);
-            this.lblNotaMarc.Name = "lblNotaMarc";
-            this.lblNotaMarc.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaMarc.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaMarc.TabIndex = 20;
-            this.lblNotaMarc.Text = "X.XXX";
-            // 
-            // lblNotaPrimero
-            // 
-            this.lblNotaPrimero.AutoSize = true;
-            this.lblNotaPrimero.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaPrimero.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaPrimero.Location = new System.Drawing.Point(584, 471);
-            this.lblNotaPrimero.Name = "lblNotaPrimero";
-            this.lblNotaPrimero.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaPrimero.Size = new System.Drawing.Size(134, 65);
-            this.lblNotaPrimero.TabIndex = 21;
-            this.lblNotaPrimero.Text = "X.XXX";
-            // 
-            // lblNotaAcceso
-            // 
-            this.lblNotaAcceso.AutoSize = true;
-            this.lblNotaAcceso.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaAcceso.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaAcceso.Location = new System.Drawing.Point(630, 97);
-            this.lblNotaAcceso.Name = "lblNotaAcceso";
-            this.lblNotaAcceso.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaAcceso.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaAcceso.TabIndex = 24;
-            this.lblNotaAcceso.Text = "X.XXX";
-            // 
-            // lblNotaPSP
-            // 
-            this.lblNotaPSP.AutoSize = true;
-            this.lblNotaPSP.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaPSP.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaPSP.Location = new System.Drawing.Point(630, 142);
-            this.lblNotaPSP.Name = "lblNotaPSP";
-            this.lblNotaPSP.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaPSP.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaPSP.TabIndex = 25;
-            this.lblNotaPSP.Text = "X.XXX";
-            // 
-            // lblNotaInterf
-            // 
-            this.lblNotaInterf.AutoSize = true;
-            this.lblNotaInterf.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaInterf.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaInterf.Location = new System.Drawing.Point(630, 187);
-            this.lblNotaInterf.Name = "lblNotaInterf";
-            this.lblNotaInterf.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaInterf.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaInterf.TabIndex = 26;
-            this.lblNotaInterf.Text = "X.XXX";
-            // 
-            // lblNotaGestion
-            // 
-            this.lblNotaGestion.AutoSize = true;
-            this.lblNotaGestion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaGestion.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaGestion.Location = new System.Drawing.Point(630, 232);
-            this.lblNotaGestion.Name = "lblNotaGestion";
-            this.lblNotaGestion.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaGestion.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaGestion.TabIndex = 27;
-            this.lblNotaGestion.Text = "X.XXX";
-            // 
-            // lblNotaIngles
-            // 
-            this.lblNotaIngles.AutoSize = true;
-            this.lblNotaIngles.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaIngles.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaIngles.Location = new System.Drawing.Point(630, 277);
-            this.lblNotaIngles.Name = "lblNotaIngles";
-            this.lblNotaIngles.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaIngles.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaIngles.TabIndex = 28;
-            this.lblNotaIngles.Text = "X.XXX";
-            // 
-            // lblNotaAndroid
-            // 
-            this.lblNotaAndroid.AutoSize = true;
-            this.lblNotaAndroid.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaAndroid.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaAndroid.Location = new System.Drawing.Point(630, 322);
-            this.lblNotaAndroid.Name = "lblNotaAndroid";
-            this.lblNotaAndroid.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaAndroid.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaAndroid.TabIndex = 29;
-            this.lblNotaAndroid.Text = "X.XXX";
-            // 
-            // lblNotaEIE
-            // 
-            this.lblNotaEIE.AutoSize = true;
-            this.lblNotaEIE.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaEIE.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaEIE.Location = new System.Drawing.Point(630, 367);
-            this.lblNotaEIE.Name = "lblNotaEIE";
-            this.lblNotaEIE.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaEIE.Size = new System.Drawing.Size(80, 45);
-            this.lblNotaEIE.TabIndex = 30;
-            this.lblNotaEIE.Text = "X.XXX";
-            // 
-            // lblNotaSegundo
-            // 
-            this.lblNotaSegundo.AutoSize = true;
-            this.lblNotaSegundo.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaSegundo.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblNotaSegundo.Location = new System.Drawing.Point(627, 494);
-            this.lblNotaSegundo.Name = "lblNotaSegundo";
-            this.lblNotaSegundo.Padding = new System.Windows.Forms.Padding(10);
-            this.lblNotaSegundo.Size = new System.Drawing.Size(134, 65);
-            this.lblNotaSegundo.TabIndex = 31;
-            this.lblNotaSegundo.Text = "X.XXX";
             // 
             // tabPage3
             // 
