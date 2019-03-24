@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Proyecto_AccesoDatos;
-
+using System.Runtime.InteropServices;
 
 namespace Proyecto_Presentacion
 {
@@ -40,11 +40,13 @@ namespace Proyecto_Presentacion
         /****************************
          * Eventos para los botones *
          ****************************/
+
+         // Boton cerrar
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        // Boton maximizar
         private void btnMaximizar_Click(object sender, EventArgs e)
         {
             btnMaximizar.Visible = false;
@@ -52,7 +54,7 @@ namespace Proyecto_Presentacion
             maximizado = true;
             this.WindowState = FormWindowState.Maximized;
         }
-
+        // Boton restaurar
         private void btnRestaurar_Click(object sender, EventArgs e)
         {
             btnRestaurar.Visible = false;
@@ -60,12 +62,42 @@ namespace Proyecto_Presentacion
             maximizado = false;
             this.WindowState = FormWindowState.Normal;
         }
-
+        // Boton minimizar
         private void btnMinimizar_Click(object sender, EventArgs e)
         {
             maximizado = false;
             this.WindowState = FormWindowState.Minimized;
         }
+        // Boton maximizar dividido
+        private void btnDividir_Click(object sender, EventArgs e)
+        {
+            int ancho = Screen.PrimaryScreen.WorkingArea.Width;
+            int alto = Screen.PrimaryScreen.WorkingArea.Height;
+            if (this.Location != new Point(0, 0) || maximizado)
+            {
+                if (!maximizado)
+                {
+                    oldPosition = this.Location;
+                    oldSize = this.Size;
+                }
+
+                this.WindowState = FormWindowState.Normal;
+                this.Location = new Point(0, 0);
+                this.Size = new Size(ancho / 2, alto);
+                btnRestaurar.Visible = false;
+                btnMaximizar.Visible = true;
+                maximizado = false;
+
+            }
+            else
+            {
+                this.Location = oldPosition;
+                this.Size = oldSize;
+            }
+
+
+        }
+        // Doble click en titulo maximiza
         private void barraTitulo_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (maximizado)
@@ -83,7 +115,32 @@ namespace Proyecto_Presentacion
             }
             
         }
-        private async void btnLogin_Click_1(object sender, EventArgs e)
+        //Botones del menu lateral
+        private void btnPrincipal_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnCursos_Click(object sender, EventArgs e)
+        {
+            abrirFormEnPanel(new FormCursos());
+        }
+
+        private void btnAreaPersonal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnComunidad_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConfiguracion_Click(object sender, EventArgs e)
+        {
+
+        }
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
             if (menuLateral.Width >= 220)
             {
@@ -95,8 +152,8 @@ namespace Proyecto_Presentacion
                 this.tmMostrarMenu.Enabled = true;
                 this.lblUsuario.Visible = true;
                 this.lblPass.Visible = true;
+                this.lblConectado.Visible = true;
             }
-
         }
 
         /********************************
@@ -291,34 +348,7 @@ namespace Proyecto_Presentacion
             this.Invalidate();
 
         }
+        
 
-        private void btnDividir_Click(object sender, EventArgs e)
-        {
-            int ancho = Screen.PrimaryScreen.WorkingArea.Width;
-            int alto = Screen.PrimaryScreen.WorkingArea.Height;
-            if (this.Location != new Point(0, 0) || maximizado)
-            {
-                if (!maximizado)
-                {
-                    oldPosition = this.Location;
-                    oldSize = this.Size;
-                }
-                
-                this.WindowState = FormWindowState.Normal;
-                this.Location = new Point(0, 0);
-                this.Size = new Size(ancho / 2, alto);
-                btnRestaurar.Visible = false;
-                btnMaximizar.Visible = true;
-                maximizado = false;
-                
-            }
-            else
-            {
-                this.Location = oldPosition;
-                this.Size = oldSize;
-            }
-            
-
-        }
     }
 }
