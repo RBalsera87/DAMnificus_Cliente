@@ -128,7 +128,7 @@ namespace Proyecto_Presentacion
 
         private void btnAreaPersonal_Click(object sender, EventArgs e)
         {
-
+            abrirFormEnPanel(new FormAreaPersonal());
         }
 
         private void btnComunidad_Click(object sender, EventArgs e)

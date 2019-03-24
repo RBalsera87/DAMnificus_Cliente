@@ -53,6 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAreaPersonal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAreaPersonal.Designer.cs">
+      <DependentUpon>FormAreaPersonal.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCursos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAreaPersonal.resx">
+      <DependentUpon>FormAreaPersonal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCursos.resx">
       <DependentUpon>FormCursos.cs</DependentUpon>
     </EmbeddedResource>
