@@ -73,6 +73,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FormWidget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWidget.Designer.cs">
+      <DependentUpon>FormWidget.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormAreaPersonal.resx">
       <DependentUpon>FormAreaPersonal.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,7 +98,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
+    <EmbeddedResource Include="FormWidget.resx">
+      <DependentUpon>FormWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Graficas\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -104,7 +113,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Graficas\App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Proyecto_AccesoDatos\Proyecto_AccesoDatos.csproj">
@@ -157,6 +166,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icono dividir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Graficas\GraficaBarras.html" />
+    <Content Include="Graficas\Grafica3d.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Graficas\code\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
