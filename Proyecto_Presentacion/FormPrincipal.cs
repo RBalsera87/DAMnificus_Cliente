@@ -123,12 +123,12 @@ namespace Proyecto_Presentacion
 
         private void btnCursos_Click(object sender, EventArgs e)
         {
-            abrirFormEnPanel(new FormCursos());
+            abrirFormEnPanel(new Form1());
         }
 
         private void btnAreaPersonal_Click(object sender, EventArgs e)
         {
-            abrirFormEnPanel(new Widget());
+            abrirFormEnPanel(new FormAreaPersonal());
         }
 
         private void btnComunidad_Click(object sender, EventArgs e)

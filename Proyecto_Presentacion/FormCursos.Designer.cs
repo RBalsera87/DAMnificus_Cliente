@@ -28,7 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
+            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // objectListView1
+            // 
+            this.objectListView1.Location = new System.Drawing.Point(0, 0);
+            this.objectListView1.Name = "objectListView1";
+            this.objectListView1.TabIndex = 0;
+            this.objectListView1.View = System.Windows.Forms.View.Details;
             // 
             // FormCursos
             // 
@@ -40,10 +49,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormCursos";
             this.Text = "FormCursos";
+            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private BrightIdeasSoftware.ObjectListView objectListView1;
     }
 }
