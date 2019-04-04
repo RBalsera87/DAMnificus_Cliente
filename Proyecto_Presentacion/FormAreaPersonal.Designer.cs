@@ -35,26 +35,29 @@
             // 
             // graficoBarras
             // 
-            this.graficoBarras.Location = new System.Drawing.Point(37, 24);
+            this.graficoBarras.Dock = System.Windows.Forms.DockStyle.Left;
+            this.graficoBarras.Location = new System.Drawing.Point(0, 0);
             this.graficoBarras.Name = "graficoBarras";
-            this.graficoBarras.Size = new System.Drawing.Size(421, 253);
+            this.graficoBarras.Size = new System.Drawing.Size(421, 644);
             this.graficoBarras.TabIndex = 0;
             this.graficoBarras.Text = "cartesianChart1";
             this.graficoBarras.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.cartesianChart1_ChildChanged);
             // 
             // graficoTarta
             // 
-            this.graficoTarta.Location = new System.Drawing.Point(37, 320);
+            this.graficoTarta.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.graficoTarta.Location = new System.Drawing.Point(421, 365);
             this.graficoTarta.Name = "graficoTarta";
-            this.graficoTarta.Size = new System.Drawing.Size(418, 279);
+            this.graficoTarta.Size = new System.Drawing.Size(538, 279);
             this.graficoTarta.TabIndex = 1;
             this.graficoTarta.Text = "pieChart1";
             // 
             // graficoApilado
             // 
-            this.graficoApilado.Location = new System.Drawing.Point(488, 38);
+            this.graficoApilado.Dock = System.Windows.Forms.DockStyle.Right;
+            this.graficoApilado.Location = new System.Drawing.Point(534, 0);
             this.graficoApilado.Name = "graficoApilado";
-            this.graficoApilado.Size = new System.Drawing.Size(425, 239);
+            this.graficoApilado.Size = new System.Drawing.Size(425, 365);
             this.graficoApilado.TabIndex = 2;
             this.graficoApilado.Text = "cartesianChart1";
             // 
