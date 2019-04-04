@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using Proyecto_AccesoDatos;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Proyecto_Presentacion
 {
@@ -28,6 +30,7 @@ namespace Proyecto_Presentacion
         public FormPrincipal()
         {
             InitializeComponent();
+            DoubleBuffered = true;
             //Application.VisualStyleState = VisualStyleState.NoneEnabled;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.barraTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
@@ -119,31 +122,42 @@ namespace Proyecto_Presentacion
         //Botones del menu lateral
         private void btnPrincipal_Click(object sender, EventArgs e)
         {
-            resaltarColor(1);
+            restaurarColorBotones();
+            this.btnPrincipal.BackColor = Color.FromArgb(73, 55, 34);
+            //resaltarColor(1);
         }
 
         private void btnCursos_Click(object sender, EventArgs e)
         {
-            abrirFormEnPanel(new Form1());
-            resaltarColor(2);
+            
+            restaurarColorBotones();
+            this.btnCursos.BackColor = Color.FromArgb(73, 55, 34);
+            abrirFormEnPanel(new FormCursos());
+            //resaltarColor(2);
         }
 
         private void btnAreaPersonal_Click(object sender, EventArgs e)
         {
+            
+            restaurarColorBotones();
+            this.btnAreaPersonal.BackColor = Color.FromArgb(73, 55, 34);
             abrirFormEnPanel(new FormAreaPersonal());
-            resaltarColor(3);
+            //resaltarColor(3);
         }
 
         private void btnComunidad_Click(object sender, EventArgs e)
         {
-            resaltarColor(4);
+            restaurarColorBotones();
+            this.btnComunidad.BackColor = Color.FromArgb(73, 55, 34);
+            //resaltarColor(4);
         }
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
-            resaltarColor(5);
+            restaurarColorBotones();
+            this.btnConfiguracion.BackColor = Color.FromArgb(73, 55, 34);
+            //resaltarColor(5);
         }
-
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             if (menuLateral.Width >= 220)
@@ -160,7 +174,7 @@ namespace Proyecto_Presentacion
                 AccesoDatos Acceso = new AccesoDatos();
 
                 string x = await ad.enviarPeticionLogin("login","admin",hash,null);
-                //Imprimir la respuesta al comprobar
+                //Imprimir la respuesta al complobar
                 MessageBox.Show(isValid ? "válida" : "no válida");
             }
             else
@@ -169,23 +183,6 @@ namespace Proyecto_Presentacion
                 this.lblUsuario.Visible = true;
                 this.lblPass.Visible = true;
                 this.lblConectado.Visible = true;
-            }
-        }
-
-        //Método que resalta en el menú lateral el apartado en el que se encuentra el usuario
-        public void resaltarColor(int origen)
-        {
-            Panel[] paneles = { panel1, panel2, panel3, panel4, panel5 };
-            for (int x = 0; x < 5; x++)
-            {
-                if (origen == (x + 1))
-                {
-                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 0, 0);
-                }
-                else
-                {
-                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 153, 39);
-                }
             }
         }
 
@@ -381,7 +378,30 @@ namespace Proyecto_Presentacion
             this.Invalidate();
 
         }
-        
+        private void restaurarColorBotones()
+        {
+            List<Button> botones = menuLateral.Controls.OfType<Button>().ToList();
+            foreach (Button btn in botones)
+            {
+                btn.BackColor = Color.FromArgb(32, 32, 32);
+            }
+        }
+        private void resaltarColor(int origen)
+        {
+            Panel[] paneles = { panel1, panel2, panel3, panel4, panel5 };
+            for (int x = 0; x < 5; x++)
+            {
+                if (origen == (x + 1))
+                {
+                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 0, 0);
+                }
+                else
+                {
+                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 153, 39);
+                }
+            }
+        }
+
 
     }
 }
