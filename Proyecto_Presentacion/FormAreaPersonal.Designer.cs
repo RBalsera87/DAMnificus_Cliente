@@ -29,37 +29,30 @@
         private void InitializeComponent()
         {
             this.graficoBarras = new LiveCharts.WinForms.CartesianChart();
-            this.graficoTarta = new LiveCharts.WinForms.PieChart();
-            this.graficoApilado = new LiveCharts.WinForms.CartesianChart();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // graficoBarras
             // 
-            this.graficoBarras.Dock = System.Windows.Forms.DockStyle.Left;
+            this.graficoBarras.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graficoBarras.Location = new System.Drawing.Point(0, 0);
+            this.graficoBarras.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.graficoBarras.Name = "graficoBarras";
-            this.graficoBarras.Size = new System.Drawing.Size(421, 644);
+            this.graficoBarras.Size = new System.Drawing.Size(959, 644);
             this.graficoBarras.TabIndex = 0;
             this.graficoBarras.Text = "cartesianChart1";
             this.graficoBarras.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.cartesianChart1_ChildChanged);
             // 
-            // graficoTarta
+            // button1
             // 
-            this.graficoTarta.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.graficoTarta.Location = new System.Drawing.Point(421, 365);
-            this.graficoTarta.Name = "graficoTarta";
-            this.graficoTarta.Size = new System.Drawing.Size(538, 279);
-            this.graficoTarta.TabIndex = 1;
-            this.graficoTarta.Text = "pieChart1";
-            // 
-            // graficoApilado
-            // 
-            this.graficoApilado.Dock = System.Windows.Forms.DockStyle.Right;
-            this.graficoApilado.Location = new System.Drawing.Point(534, 0);
-            this.graficoApilado.Name = "graficoApilado";
-            this.graficoApilado.Size = new System.Drawing.Size(425, 365);
-            this.graficoApilado.TabIndex = 2;
-            this.graficoApilado.Text = "cartesianChart1";
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.Location = new System.Drawing.Point(0, 621);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(959, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // FormAreaPersonal
             // 
@@ -67,8 +60,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(959, 644);
-            this.Controls.Add(this.graficoApilado);
-            this.Controls.Add(this.graficoTarta);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.graficoBarras);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -81,7 +73,6 @@
         #endregion
 
         private LiveCharts.WinForms.CartesianChart graficoBarras;
-        private LiveCharts.WinForms.PieChart graficoTarta;
-        private LiveCharts.WinForms.CartesianChart graficoApilado;
+        private System.Windows.Forms.Button button1;
     }
 }

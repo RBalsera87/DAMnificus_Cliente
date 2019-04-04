@@ -143,6 +143,7 @@ namespace Proyecto_Presentacion
         {
             resaltarColor(5);
         }
+
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             if (menuLateral.Width >= 220)
@@ -159,7 +160,7 @@ namespace Proyecto_Presentacion
                 AccesoDatos Acceso = new AccesoDatos();
 
                 string x = await ad.enviarPeticionLogin("login","admin",hash,null);
-                //Imprimir la respuesta al complobar
+                //Imprimir la respuesta al comprobar
                 MessageBox.Show(isValid ? "válida" : "no válida");
             }
             else
@@ -171,6 +172,7 @@ namespace Proyecto_Presentacion
             }
         }
 
+        //Método que resalta en el menú lateral el apartado en el que se encuentra el usuario
         public void resaltarColor(int origen)
         {
             Panel[] paneles = { panel1, panel2, panel3, panel4, panel5 };

@@ -14,120 +14,61 @@ namespace Proyecto_Presentacion
 {
     public partial class FormAreaPersonal : Form
     {
+        List<double> controles = new List<double> { 7.8, 5.0, 3.9, 9.65, 6, 8, 2 };
+        List<double> finales = new List<double> { 6.2, 4.4, 9.01, 10, 7, 8, 9 };
         public FormAreaPersonal()
         {
             InitializeComponent();
 
+            /******************************************************************************************
+             * Para cargar los controles y los examenes se accederá a la base de datos del alumno     *
+             * En la base de datos, las notas estaran guardadas tal y como se obtienen en el examen,  *
+             *  para luego ser tratadas con los pesos correspondientes aplicados a cada asignatura,   *
+             *  para por ultimo ser cargados aqui y que la suma de las notas no supere el 10          *
+             *                                                                                        *
+             *                      #TODO: HACER QUE SEA DEL TODO RESPONSIVE                          *
+             ******************************************************************************************/
+
             // Grafico de barras
             graficoBarras.Series = new SeriesCollection
             {
-                new ColumnSeries
+                new StackedRowSeries
                 {
-                    Title = "2015",
-                    Values = new ChartValues<double> { 10, 50, 39, 50 }
+                    Values = new ChartValues<double>(controles),
+                    StackMode = StackMode.Values,
+                    Title = "Primer control",
+                    DataLabels = true
+                },
+                new StackedRowSeries
+                {
+                    Values = new ChartValues<double>(finales),
+                    StackMode = StackMode.Values, 
+                    Title = "Examen final",
+                    DataLabels = true
                 }
             };
-
-            //adding series will update and animate the chart automatically
-            graficoBarras.Series.Add(new ColumnSeries
-            {
-                Title = "2016",
-                Values = new ChartValues<double> { 11, 56, 42 }
-            });
-
-            //also adding values updates and animates the chart automatically
-            graficoBarras.Series[1].Values.Add(48d);
-
-            graficoBarras.AxisX.Add(new Axis
-            {
-                Title = "Sales Man",
-                Labels = new[] { "Maria", "Susan", "Charles", "Frida" }
-            });
+            
 
             graficoBarras.AxisY.Add(new Axis
             {
-                Title = "Sold Apps",
-                LabelFormatter = value => value.ToString("N")
+                Labels = new[] { "Acceso a Datos", "Desarrollo de Interfaces", "Empresa e Iniciativa Emprendedora",
+                    "Inglés Técnico", "Programación de Servicios y Procesos", "Programación Multimedia y Dispositivos Móviles",
+                "Sistemas de Gestión Empresarial"}
             });
 
-            // Gráfico Tarta
-            Func<ChartPoint, string> labelPoint = chartPoint =>
-    string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
-
-            graficoTarta.Series = new SeriesCollection
+            graficoBarras.AxisX.Add(new Axis
             {
-                new PieSeries
-                {
-                    Title = "Maria",
-                    Values = new ChartValues<double> {3},
-                    PushOut = 15,
-                    DataLabels = true,
-                    LabelPoint = labelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Charles",
-                    Values = new ChartValues<double> {4},
-                    DataLabels = true,
-                    LabelPoint = labelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Frida",
-                    Values = new ChartValues<double> {6},
-                    DataLabels = true,
-                    LabelPoint = labelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Frederic",
-                    Values = new ChartValues<double> {2},
-                    DataLabels = true,
-                    LabelPoint = labelPoint
-                }
+                Title = "NOTA"
+            });
+
+            var tooltip = new DefaultTooltip
+            {
+                SelectionMode = TooltipSelectionMode.SharedYValues
             };
 
-            graficoTarta.LegendLocation = LegendLocation.Bottom;
+            graficoBarras.DataTooltip = tooltip;
 
-            // Gráfico Apilado
-            graficoApilado.Series = new SeriesCollection
-            {
-                new StackedColumnSeries
-                {
-                    Values = new ChartValues<double> {4, 5, 6, 8},
-                    StackMode = StackMode.Values, // this is not necessary, values is the default stack mode
-                    DataLabels = true
-                },
-                new StackedColumnSeries
-                {
-                    Values = new ChartValues<double> {2, 5, 6, 7},
-                    StackMode = StackMode.Values,
-                    DataLabels = true
-                }
-            };
-
-            //adding series updates and animates the chart
-            graficoApilado.Series.Add(new StackedColumnSeries
-            {
-                Values = new ChartValues<double> { 6, 2, 7 },
-                StackMode = StackMode.Values
-            });
-
-            //adding values also updates and animates
-            graficoApilado.Series[2].Values.Add(4d);
-
-            graficoApilado.AxisX.Add(new Axis
-            {
-                Title = "Browser",
-                Labels = new[] { "Chrome", "Mozilla", "Opera", "IE" },
-                Separator = DefaultAxes.CleanSeparator
-            });
-
-            graficoApilado.AxisY.Add(new Axis
-            {
-                Title = "Usage",
-                LabelFormatter = value => value + " Mill"
-            });
+            
         }
 
         private void cartesianChart1_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
