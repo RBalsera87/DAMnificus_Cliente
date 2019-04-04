@@ -8,8 +8,9 @@ namespace Proyecto_Presentacion
 {
     public partial class FormPrincipal : Form
     {
-        //Metodos m = new Metodos();
-        AccesoDatos ad = new AccesoDatos();
+        
+    //Metodos m = new Metodos();
+    AccesoDatos ad = new AccesoDatos();
         // Variables para el movimiento del formulario
         private bool agarrado = false;
         private bool maximizado = false;
@@ -118,27 +119,29 @@ namespace Proyecto_Presentacion
         //Botones del menu lateral
         private void btnPrincipal_Click(object sender, EventArgs e)
         {
-            
+            resaltarColor(1);
         }
 
         private void btnCursos_Click(object sender, EventArgs e)
         {
             abrirFormEnPanel(new Form1());
+            resaltarColor(2);
         }
 
         private void btnAreaPersonal_Click(object sender, EventArgs e)
         {
             abrirFormEnPanel(new FormAreaPersonal());
+            resaltarColor(3);
         }
 
         private void btnComunidad_Click(object sender, EventArgs e)
         {
-
+            resaltarColor(4);
         }
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
-
+            resaltarColor(5);
         }
         private async void btnLogin_Click(object sender, EventArgs e)
         {
@@ -165,6 +168,22 @@ namespace Proyecto_Presentacion
                 this.lblUsuario.Visible = true;
                 this.lblPass.Visible = true;
                 this.lblConectado.Visible = true;
+            }
+        }
+
+        public void resaltarColor(int origen)
+        {
+            Panel[] paneles = { panel1, panel2, panel3, panel4, panel5 };
+            for (int x = 0; x < 5; x++)
+            {
+                if (origen == (x + 1))
+                {
+                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 0, 0);
+                }
+                else
+                {
+                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 153, 39);
+                }
             }
         }
 
@@ -252,6 +271,8 @@ namespace Proyecto_Presentacion
                      this.panelLogin.Location.Y - 5);
             }
         }
+
+        
 
         /******************************************
          * Eventos para movimiento del formulario *

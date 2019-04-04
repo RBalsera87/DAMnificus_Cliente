@@ -291,6 +291,7 @@
             // 
             this.tbPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tbPass.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
             this.tbPass.Location = new System.Drawing.Point(68, 47);
             this.tbPass.Name = "tbPass";
             this.tbPass.PasswordChar = '●';
@@ -301,6 +302,7 @@
             // 
             this.tbUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tbUsuario.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
             this.tbUsuario.Location = new System.Drawing.Point(68, 11);
             this.tbUsuario.Name = "tbUsuario";
             this.tbUsuario.Size = new System.Drawing.Size(143, 25);
