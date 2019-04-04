@@ -204,6 +204,7 @@
   <ItemGroup>
     <Content Include="Graficas\GraficaBarras.html" />
     <Content Include="Graficas\Grafica3d.html" />
+    <None Include="Resources\iconocurso.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Graficas\code\" />
