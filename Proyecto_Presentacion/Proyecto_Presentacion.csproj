@@ -83,6 +83,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAgregarNotas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAgregarNotas.Designer.cs">
+      <DependentUpon>FormAgregarNotas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAreaPersonal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAgregarNotas.resx">
+      <DependentUpon>FormAgregarNotas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAreaPersonal.resx">
       <DependentUpon>FormAreaPersonal.cs</DependentUpon>
