@@ -3,14 +3,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Proyecto_AccesoDatos
 {
     public class AccesoDatos
     {
-        private string loginURL = "http://localhost:8080/login";
-        private string peticionURL = "http://localhost:8080/peticion";
-
+        private string loginURL = "http://localhost:8080/";
         public AccesoDatos()
         {
 
@@ -35,16 +34,25 @@ namespace Proyecto_AccesoDatos
                 {
                     // Ejecuta la solicitud actual y espera la respuesta
                     var httpResponse = await httpClient.PostAsync(loginURL, httpContent);
-                    // Si la respuesta contiene contenido lo leemos
                     if (httpResponse.Content != null)
                     {
-                        var responseContent = await httpResponse.Content.ReadAsStringAsync();
-                        // TODO de aquí en adelante se podría deserializar ResponseContent de nuevo a un tipo de C# concreto utilizando Json.Net
-                        return responseContent;
-                    }else
+                        var responseContent = await httpResponse.Content.ReadAsStringAsync();                        
+                        var objetoJSON = JObject.Parse(responseContent);
+                        Respuesta respuesta = objetoJSON.ToObject<Respuesta>();
+                        if (pet.Equals("requestSalt"))
+                        {
+                            return respuesta.salt;
+                        } else if (pet.Equals("login"))
+                        {
+                            return respuesta.token;
+                        }
+
+                    }
+                    else
                     {
                         return null; //TODO añadir un mensaje o algo
                     }
+                    return null; //TODO añadir un mensaje o algo
                 }
             }
             catch (Exception e)

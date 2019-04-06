@@ -2,17 +2,15 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Proyecto_AccesoDatos;
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Linq;
+using Proyecto_Negocio;
 
 namespace Proyecto_Presentacion
 {
     public partial class FormPrincipal : Form
     {
         
-    //Metodos m = new Metodos();
-    AccesoDatos ad = new AccesoDatos();
+        Metodos m = new Metodos();
+        AccesoDatos ad = new AccesoDatos();
         // Variables para el movimiento del formulario
         private bool agarrado = false;
         private bool maximizado = false;
@@ -122,49 +120,44 @@ namespace Proyecto_Presentacion
         //Botones del menu lateral
         private void btnPrincipal_Click(object sender, EventArgs e)
         {
-            restaurarColorBotones();
+            m.restaurarColorBotones(this.menuLateral);
             this.btnPrincipal.BackColor = Color.FromArgb(73, 55, 34);
-            //resaltarColor(1);
         }
 
         private void btnCursos_Click(object sender, EventArgs e)
         {
-            
-            restaurarColorBotones();
+
+            m.restaurarColorBotones(this.menuLateral);
             this.btnCursos.BackColor = Color.FromArgb(73, 55, 34);
-            abrirFormEnPanel(new FormCursos());
-            //resaltarColor(2);
+            m.abrirFormEnPanel(new FormCursos(), this.panelContenido);
         }
 
         private void btnAreaPersonal_Click(object sender, EventArgs e)
         {
-            
-            restaurarColorBotones();
+
+            m.restaurarColorBotones(this.menuLateral);
             this.btnAreaPersonal.BackColor = Color.FromArgb(73, 55, 34);
-            abrirFormEnPanel(new FormAreaPersonal());
-            //resaltarColor(3);
+            m.abrirFormEnPanel(new FormAreaPersonal(), this.panelContenido);
         }
 
         private void btnComunidad_Click(object sender, EventArgs e)
         {
-            restaurarColorBotones();
+            m.restaurarColorBotones(this.menuLateral);
             this.btnComunidad.BackColor = Color.FromArgb(73, 55, 34);
-            //resaltarColor(4);
         }
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
-            restaurarColorBotones();
+            m.restaurarColorBotones(this.menuLateral);
             this.btnConfiguracion.BackColor = Color.FromArgb(73, 55, 34);
-            //resaltarColor(5);
         }
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             if (menuLateral.Width >= 220)
             {
-                //ocultarLogin();
+                //m.ocultarLogin(this.tmOcultarLogin);
                 //Peticion para que nos sevuelva la sal para encriptar la clave del usuario antes de mandarla para comprobar
-                string salBD = await ad.enviarPeticionLogin("login",tbUsuario.Text,null,null);
+                string salBD = await ad.enviarPeticionLogin("requestSalt",tbUsuario.Text,null,null);
                 //Si al hacer la peticion el servidor esta caido devuelve un null
                 if(salBD != null)
                 {
@@ -178,8 +171,8 @@ namespace Proyecto_Presentacion
                         //Encripta clave con la "sal" recibida
                         String PassEncriptado = Clave.encriptarClaveConexion(tbPass.Text, salBD);
                         //Petición enviando clave encriptada si es correcta nos devolvera el "Token"
-                        salBD = await ad.enviarPeticionLogin("login", tbUsuario.Text, PassEncriptado, null);
-                        MessageBox.Show(salBD);
+                        String token = await ad.enviarPeticionLogin("login", tbUsuario.Text, PassEncriptado, null);
+                        MessageBox.Show(token);
                     }
                 }
                 else
@@ -356,31 +349,12 @@ namespace Proyecto_Presentacion
             }
         }
 
-       /***********************************
-        * Métodos internos del formulario *
-        ***********************************/
-        private void abrirFormEnPanel(object formHijo)
-        {
-            if (this.panelContenido.Controls.Count > 0)
-            {
-                this.panelContenido.Controls.RemoveAt(0);
-            }
-            Form fh = formHijo as Form;
-            fh.TopLevel = false;
-            fh.FormBorderStyle = FormBorderStyle.None;
-            fh.Dock = DockStyle.Fill;
-            this.panelContenido.Controls.Add(fh);
-            this.panelContenido.Tag = fh;
-            fh.Show();
-        }
-        private void ocultarLogin()
-        {
-            this.tmOcultarLogin.Enabled = true;
-        }
-        private void mostrarLogin()
-        {
-            this.tmMostrarLogin.Enabled = true;
-        }
+        /***********************************
+         * Métodos internos del formulario *
+         ***********************************/
+
+        // Este metodo redibuja el panel donde se cargan los formularios 
+        // con un boton para redimensionar la ventana.
         private void actualizarTamañoPanelContenido()
         {
             var region = new Region(new Rectangle(0, 0, this.panelContenido.ClientRectangle.Width, this.panelContenido.ClientRectangle.Height));
@@ -388,32 +362,7 @@ namespace Proyecto_Presentacion
             if (!maximizado) region.Exclude(new Rectangle(this.panelContenido.Width - tolerancia, this.panelContenido.Height - tolerancia, tolerancia, tolerancia));
             this.panelContenido.Region = region;
             this.Invalidate();
-
         }
-        private void restaurarColorBotones()
-        {
-            List<Button> botones = menuLateral.Controls.OfType<Button>().ToList();
-            foreach (Button btn in botones)
-            {
-                btn.BackColor = Color.FromArgb(32, 32, 32);
-            }
-        }
-        private void resaltarColor(int origen)
-        {
-            Panel[] paneles = { panel1, panel2, panel3, panel4, panel5 };
-            for (int x = 0; x < 5; x++)
-            {
-                if (origen == (x + 1))
-                {
-                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 0, 0);
-                }
-                else
-                {
-                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 153, 39);
-                }
-            }
-        }
-
 
     }
 }

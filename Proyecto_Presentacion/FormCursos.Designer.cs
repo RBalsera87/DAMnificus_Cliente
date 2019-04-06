@@ -35,7 +35,9 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.tbBuscar = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnSegundo = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPrimero = new System.Windows.Forms.Button();
             this.panelListado = new System.Windows.Forms.Panel();
             this.listadoEnlaces = new BrightIdeasSoftware.ObjectListView();
             this.columnaImagen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -60,8 +62,6 @@
             this.tmPanelAsig2 = new System.Windows.Forms.Timer(this.components);
             this.tmPanelAsigOcultar1 = new System.Windows.Forms.Timer(this.components);
             this.tmPanelAsigOcultar2 = new System.Windows.Forms.Timer(this.components);
-            this.btnSegundo = new System.Windows.Forms.Button();
-            this.btnPrimero = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.panelCabecera.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -141,6 +141,26 @@
             this.panel2.Size = new System.Drawing.Size(5, 40);
             this.panel2.TabIndex = 21;
             // 
+            // btnSegundo
+            // 
+            this.btnSegundo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSegundo.FlatAppearance.BorderSize = 0;
+            this.btnSegundo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnSegundo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnSegundo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSegundo.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSegundo.ForeColor = System.Drawing.Color.White;
+            this.btnSegundo.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
+            this.btnSegundo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSegundo.Location = new System.Drawing.Point(152, 0);
+            this.btnSegundo.Name = "btnSegundo";
+            this.btnSegundo.Size = new System.Drawing.Size(170, 40);
+            this.btnSegundo.TabIndex = 20;
+            this.btnSegundo.Text = "Segundo curso";
+            this.btnSegundo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSegundo.UseVisualStyleBackColor = true;
+            this.btnSegundo.Click += new System.EventHandler(this.btnSegundo_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
@@ -148,6 +168,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(5, 40);
             this.panel1.TabIndex = 19;
+            // 
+            // btnPrimero
+            // 
+            this.btnPrimero.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrimero.FlatAppearance.BorderSize = 0;
+            this.btnPrimero.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnPrimero.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnPrimero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrimero.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrimero.ForeColor = System.Drawing.Color.White;
+            this.btnPrimero.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
+            this.btnPrimero.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrimero.Location = new System.Drawing.Point(0, 0);
+            this.btnPrimero.Name = "btnPrimero";
+            this.btnPrimero.Size = new System.Drawing.Size(152, 40);
+            this.btnPrimero.TabIndex = 18;
+            this.btnPrimero.Text = "Primer curso";
+            this.btnPrimero.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrimero.UseVisualStyleBackColor = true;
+            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
             // 
             // panelListado
             // 
@@ -164,6 +204,7 @@
             this.listadoEnlaces.AllColumns.Add(this.columnaTitulo);
             this.listadoEnlaces.AllColumns.Add(this.columnaValoracion);
             this.listadoEnlaces.AllColumns.Add(this.columnaEnlace);
+            this.listadoEnlaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.listadoEnlaces.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listadoEnlaces.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnaImagen,
@@ -464,46 +505,6 @@
             // 
             this.tmPanelAsigOcultar2.Interval = 10;
             this.tmPanelAsigOcultar2.Tick += new System.EventHandler(this.tmPanelAsigOcultar2_Tick);
-            // 
-            // btnSegundo
-            // 
-            this.btnSegundo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSegundo.FlatAppearance.BorderSize = 0;
-            this.btnSegundo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnSegundo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnSegundo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSegundo.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSegundo.ForeColor = System.Drawing.Color.White;
-            this.btnSegundo.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnSegundo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSegundo.Location = new System.Drawing.Point(152, 0);
-            this.btnSegundo.Name = "btnSegundo";
-            this.btnSegundo.Size = new System.Drawing.Size(170, 40);
-            this.btnSegundo.TabIndex = 20;
-            this.btnSegundo.Text = "Segundo curso";
-            this.btnSegundo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSegundo.UseVisualStyleBackColor = true;
-            this.btnSegundo.Click += new System.EventHandler(this.btnSegundo_Click);
-            // 
-            // btnPrimero
-            // 
-            this.btnPrimero.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrimero.FlatAppearance.BorderSize = 0;
-            this.btnPrimero.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnPrimero.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnPrimero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrimero.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrimero.ForeColor = System.Drawing.Color.White;
-            this.btnPrimero.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnPrimero.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrimero.Location = new System.Drawing.Point(0, 0);
-            this.btnPrimero.Name = "btnPrimero";
-            this.btnPrimero.Size = new System.Drawing.Size(152, 40);
-            this.btnPrimero.TabIndex = 18;
-            this.btnPrimero.Text = "Primer curso";
-            this.btnPrimero.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrimero.UseVisualStyleBackColor = true;
-            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
             // 
             // FormCursos
             // 
