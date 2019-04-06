@@ -165,11 +165,15 @@ namespace Proyecto_Presentacion
                 //ocultarLogin();
                 //Peticion para que nos sevuelva la sal para encriptar la clave del usuario antes de mandarla para comprobar
                 string salBD = await ad.enviarPeticionLogin("login",tbUsuario.Text,null,null);
-                if(salBD.Equals("null"))
+                //Si al hacer la peticion el servidor esta caido devuelve un null
+                if(salBD != null)
                 {
-                    MessageBox.Show("Usuario no registrado");
+                    if (salBD.Equals("null"))
+                    {
+                        MessageBox.Show("Usuario no registrado");
                     
-                }else
+                    }
+                    else
                     {
                         //Encripta clave con la "sal" recibida
                         String PassEncriptado = Clave.encriptarClaveConexion(tbPass.Text, salBD);
@@ -177,6 +181,13 @@ namespace Proyecto_Presentacion
                         salBD = await ad.enviarPeticionLogin("login", tbUsuario.Text, PassEncriptado, null);
                         MessageBox.Show(salBD);
                     }
+                }
+                else
+                {
+                    //Mensaje por si el servido esta caido
+                    MessageBox.Show("Servido en mantenimiento\nPor favor intente conectarse en unos minutos\nDisculpe las molestias");
+                }
+                
             }
             else
             {
