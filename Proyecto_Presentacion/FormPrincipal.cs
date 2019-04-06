@@ -3,13 +3,16 @@ using System.Drawing;
 using System.Windows.Forms;
 using Proyecto_AccesoDatos;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Proyecto_Presentacion
 {
     public partial class FormPrincipal : Form
     {
-        //Metodos m = new Metodos();
-        AccesoDatos ad = new AccesoDatos();
+        
+    //Metodos m = new Metodos();
+    AccesoDatos ad = new AccesoDatos();
         // Variables para el movimiento del formulario
         private bool agarrado = false;
         private bool maximizado = false;
@@ -27,6 +30,7 @@ namespace Proyecto_Presentacion
         public FormPrincipal()
         {
             InitializeComponent();
+            DoubleBuffered = true;
             //Application.VisualStyleState = VisualStyleState.NoneEnabled;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.barraTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
@@ -118,27 +122,41 @@ namespace Proyecto_Presentacion
         //Botones del menu lateral
         private void btnPrincipal_Click(object sender, EventArgs e)
         {
-            
+            restaurarColorBotones();
+            this.btnPrincipal.BackColor = Color.FromArgb(73, 55, 34);
+            //resaltarColor(1);
         }
 
         private void btnCursos_Click(object sender, EventArgs e)
         {
-            abrirFormEnPanel(new Form1());
+            
+            restaurarColorBotones();
+            this.btnCursos.BackColor = Color.FromArgb(73, 55, 34);
+            abrirFormEnPanel(new FormCursos());
+            //resaltarColor(2);
         }
 
         private void btnAreaPersonal_Click(object sender, EventArgs e)
         {
+            
+            restaurarColorBotones();
+            this.btnAreaPersonal.BackColor = Color.FromArgb(73, 55, 34);
             abrirFormEnPanel(new FormAreaPersonal());
+            //resaltarColor(3);
         }
 
         private void btnComunidad_Click(object sender, EventArgs e)
         {
-
+            restaurarColorBotones();
+            this.btnComunidad.BackColor = Color.FromArgb(73, 55, 34);
+            //resaltarColor(4);
         }
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
-
+            restaurarColorBotones();
+            this.btnConfiguracion.BackColor = Color.FromArgb(73, 55, 34);
+            //resaltarColor(5);
         }
         private async void btnLogin_Click(object sender, EventArgs e)
         {
@@ -254,6 +272,8 @@ namespace Proyecto_Presentacion
             }
         }
 
+        
+
         /******************************************
          * Eventos para movimiento del formulario *
          ******************************************/
@@ -359,7 +379,30 @@ namespace Proyecto_Presentacion
             this.Invalidate();
 
         }
-        
+        private void restaurarColorBotones()
+        {
+            List<Button> botones = menuLateral.Controls.OfType<Button>().ToList();
+            foreach (Button btn in botones)
+            {
+                btn.BackColor = Color.FromArgb(32, 32, 32);
+            }
+        }
+        private void resaltarColor(int origen)
+        {
+            Panel[] paneles = { panel1, panel2, panel3, panel4, panel5 };
+            for (int x = 0; x < 5; x++)
+            {
+                if (origen == (x + 1))
+                {
+                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 0, 0);
+                }
+                else
+                {
+                    paneles[x].BackColor = System.Drawing.Color.FromArgb(255, 153, 39);
+                }
+            }
+        }
+
 
     }
 }
