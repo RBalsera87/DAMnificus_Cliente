@@ -145,19 +145,20 @@ namespace Proyecto_Presentacion
             if (menuLateral.Width >= 220)
             {
                 //ocultarLogin();
-                //Esta linea seria para encriptar la clave 
-                string hash = Clave.encriptarClave("admin");
-                //Imprimir la clave codificada
-                MessageBox.Show(hash);
-                //Esta linea seria para comprobar la clave con la BD
-                bool isValid = Clave.comprobarClave(tbPass.Text, hash);
-                
-
-                AccesoDatos Acceso = new AccesoDatos();
-
-                string x = await ad.enviarPeticionLogin("login","admin",hash,null);
-                //Imprimir la respuesta al complobar
-                MessageBox.Show(isValid ? "válida" : "no válida");
+                //Peticion para que nos sevuelva la sal para encriptar la clave del usuario antes de mandarla para comprobar
+                string salBD = await ad.enviarPeticionLogin("login",tbUsuario.Text,null,null);
+                if(salBD.Equals("null"))
+                {
+                    MessageBox.Show("Usuario no registrado");
+                    
+                }else
+                    {
+                        //Encripta clave con la "sal" recibida
+                        String PassEncriptado = Clave.encriptarClaveConexion(tbPass.Text, salBD);
+                        //Petición enviando clave encriptada si es correcta nos devolvera el "Token"
+                        salBD = await ad.enviarPeticionLogin("login", tbUsuario.Text, PassEncriptado, null);
+                        MessageBox.Show(salBD);
+                    }
             }
             else
             {
