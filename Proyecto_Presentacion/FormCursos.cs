@@ -175,7 +175,7 @@ namespace Proyecto_Presentacion
             }
         }
 
-        /***********************************
+       /***********************************
         * Métodos internos del formulario *
         ***********************************/
         private void restaurarColorBotones(Panel panel)

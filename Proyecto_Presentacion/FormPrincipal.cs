@@ -9,7 +9,7 @@ namespace Proyecto_Presentacion
     public partial class FormPrincipal : Form
     {
         
-        Metodos m = new Metodos();
+        MetodosFormPrincipal m = new MetodosFormPrincipal();
         AccesoDatos ad = new AccesoDatos();
         // Variables para el movimiento del formulario
         private bool agarrado = false;
@@ -28,8 +28,7 @@ namespace Proyecto_Presentacion
         public FormPrincipal()
         {
             InitializeComponent();
-            DoubleBuffered = true;
-            //Application.VisualStyleState = VisualStyleState.NoneEnabled;
+            this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.barraTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
             this.barraTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
@@ -156,31 +155,11 @@ namespace Proyecto_Presentacion
             if (menuLateral.Width >= 220)
             {
                 //m.ocultarLogin(this.tmOcultarLogin);
-                //Peticion para que nos sevuelva la sal para encriptar la clave del usuario antes de mandarla para comprobar
-                string salBD = await ad.enviarPeticionLogin("requestSalt",tbUsuario.Text,null,null);
-                //Si al hacer la peticion el servidor esta caido devuelve un null
-                if(salBD != null)
-                {
-                    if (salBD.Equals("null"))
-                    {
-                        MessageBox.Show("Usuario no registrado");
-                    
-                    }
-                    else
-                    {
-                        //Encripta clave con la "sal" recibida
-                        String PassEncriptado = Clave.encriptarClaveConexion(tbPass.Text, salBD);
-                        //Petición enviando clave encriptada si es correcta nos devolvera el "Token"
-                        String token = await ad.enviarPeticionLogin("login", tbUsuario.Text, PassEncriptado, null);
-                        MessageBox.Show(token);
-                    }
-                }
-                else
-                {
-                    //Mensaje por si el servido esta caido
-                    MessageBox.Show("Servido en mantenimiento\nPor favor intente conectarse en unos minutos\nDisculpe las molestias");
-                }
+                string respuesta = await ad.comenzarLogin(tbUsuario.Text, tbPass.Text);
                 
+                MessageBox.Show(respuesta);
+                
+                                
             }
             else
             {

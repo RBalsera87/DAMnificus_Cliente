@@ -10,11 +10,48 @@ namespace Proyecto_AccesoDatos
     public class AccesoDatos
     {
         private string loginURL = "http://localhost:8080/";
+        private static string token = "";
         public AccesoDatos()
         {
 
         }
-        public async Task<string> enviarPeticionLogin(string pet, string user, string pass, string token)
+        public async Task<string> comenzarLogin(string usuario, string clave)
+        {
+            //Peticion para que nos devuelva una respuesta con la sal que necesitamos
+            Respuesta respConSal = await this.enviarPeticionesLogin("requestSalt", usuario, null, null);
+            //Si al hacer la peticion el servidor esta caido devuelve un null
+            if (respConSal != null)
+            {
+                if (respConSal.respuesta.Equals("noExisteUsuario"))
+                {
+                    return "Usuario no registrado";
+
+                }
+                else // if(respActual.respuesta.Equals("usuarioEncontrado"))
+                {
+                    // Encripta clave con la "sal" recibida
+                    string PassEncriptado = Clave.encriptarClaveConexion(clave, respConSal.salt);
+                    // Petición enviando clave encriptada si es correcta nos devolvera el "Token"
+                    Respuesta respConToken = await this.enviarPeticionesLogin("login", usuario, PassEncriptado, null);
+                    // Asignamos nuestro token
+                    if (respConToken.respuesta.Equals("passValida"))
+                    {
+                        token = respConToken.token;
+                        return "Acceso concedido";
+                    } else
+                    {
+                        return "Contraseña no válida";
+                    }
+                    
+                }
+            }
+            else
+            {
+                //Mensaje por si el servidor esta caido
+                return "Servidor caido";
+            }
+        }
+        public async Task<Respuesta> enviarPeticionesLogin(string pet, string user, string pass, string token)
         {
             try
             {
@@ -36,30 +73,25 @@ namespace Proyecto_AccesoDatos
                     var httpResponse = await httpClient.PostAsync(loginURL, httpContent);
                     if (httpResponse.Content != null)
                     {
-                        var responseContent = await httpResponse.Content.ReadAsStringAsync();                        
+                        var responseContent = await httpResponse.Content.ReadAsStringAsync();
                         var objetoJSON = JObject.Parse(responseContent);
+                        //Retornamos el objeto respuesta con todos sus atributos
                         Respuesta respuesta = objetoJSON.ToObject<Respuesta>();
-                        if (pet.Equals("requestSalt"))
-                        {
-                            return respuesta.salt;
-                        } else if (pet.Equals("login"))
-                        {
-                            return respuesta.token;
-                        }
-
+                        return respuesta;
                     }
                     else
                     {
-                        return null; //TODO añadir un mensaje o algo
+                        return null;
                     }
-                    return null; //TODO añadir un mensaje o algo
+                    
                 }
             }
             catch (Exception e)
             {
-                return null; //TODO añadir una excepcion decente con un mensaje o algo
+                Console.WriteLine("Exception: {0}", e);
+                return null;
             }
         }
-        
+
     }
 }

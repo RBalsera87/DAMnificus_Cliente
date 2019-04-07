@@ -2,7 +2,7 @@
 
 namespace Proyecto_AccesoDatos
 {
-    class Respuesta
+    public class Respuesta
     {
         [JsonProperty("respuesta")]
         public string respuesta { get; set; }

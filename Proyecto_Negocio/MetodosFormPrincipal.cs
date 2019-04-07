@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto_Negocio
 {
-    
-    public class Metodos
-    {
-        /****************************************
-         * Métodos para el Formulario Principal *
-         ****************************************/
+    /****************************************
+    * Métodos para el Formulario Principal *
+    ****************************************/
+    public class MetodosFormPrincipal
+    {       
         public void abrirFormEnPanel(object formHijo, Panel panelContenido)
         {
             if (panelContenido.Controls.Count > 0)
