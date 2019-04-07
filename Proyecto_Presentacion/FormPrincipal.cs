@@ -11,6 +11,7 @@ namespace Proyecto_Presentacion
         
         MetodosFormPrincipal m = new MetodosFormPrincipal();
         AccesoDatos ad = new AccesoDatos();
+        private string usuarioConectado = "";
         // Variables para el movimiento del formulario
         private bool agarrado = false;
         private bool maximizado = false;
@@ -152,23 +153,60 @@ namespace Proyecto_Presentacion
         }
         private async void btnLogin_Click(object sender, EventArgs e)
         {
+
             if (menuLateral.Width >= 220)
             {
-                //m.ocultarLogin(this.tmOcultarLogin);
-                string respuesta = await ad.comenzarLogin(tbUsuario.Text, tbPass.Text);
-                
-                MessageBox.Show(respuesta);
-                
-                                
+                string usuario = tbUsuario.Text;
+                string pass = tbPass.Text;
+                if (usuarioConectado.Equals(""))
+                {
+                    
+                    lblConectado.Text = "Conectando...";
+                    string respuesta = await ad.comenzarLogin(usuario, pass);
+                    if (respuesta.Equals("Acceso concedido"))
+                    {
+                        usuarioConectado = usuario;
+                        lblConectado.Text = "Conectando como " + usuario;
+                        btnLogin.Text = "Desconectarse";
+                        btnLogin.BackColor = Color.FromArgb(91, 183, 108);
+                        m.ocultarLogin(this.tmOcultarLogin);
+                        tbUsuario.Text = "";
+                        tbPass.Text = "";
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(respuesta);
+                        lblConectado.Text = "Conectado como invitado";
+                        
+                    }
+
+                }
+                else
+                {
+                    // Borra token y desconecta
+                    if (await ad.borrarToken(usuarioConectado))
+                    {
+                        btnLogin.BackColor = Color.FromArgb(32, 32, 32);
+                        btnLogin.Text = "Conectarse";
+                        lblConectado.Text = "Conectado como invitado";
+                        m.mostrarLogin(this.tmMostrarLogin);
+                        usuarioConectado = "";
+                    }else
+                    {
+                        MessageBox.Show("Error al borrar token");
+                    }
+                    
+                }
             }
             else
             {
-                this.tmMostrarMenu.Enabled = true;
-                this.lblUsuario.Visible = true;
-                this.lblPass.Visible = true;
-                this.lblConectado.Visible = true;
+            this.tmMostrarMenu.Enabled = true;
+            this.lblUsuario.Visible = true;
+            this.lblPass.Visible = true;
+            this.lblConectado.Visible = true;
             }
-        }
+        }    
 
         /********************************
          * Eventos para el menu lateral *
@@ -283,9 +321,9 @@ namespace Proyecto_Presentacion
             }
         }
 
-        /************************************************
-         * Eventos para cambio de tamaño del formulario *
-         ************************************************/
+        /*************************************************************
+         * Eventos para cambio de tamaño y redibujado del formulario *
+         *************************************************************/
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -327,11 +365,6 @@ namespace Proyecto_Presentacion
                 return cp;
             }
         }
-
-        /***********************************
-         * Métodos internos del formulario *
-         ***********************************/
-
         // Este metodo redibuja el panel donde se cargan los formularios 
         // con un boton para redimensionar la ventana.
         private void actualizarTamañoPanelContenido()
@@ -343,5 +376,10 @@ namespace Proyecto_Presentacion
             this.Invalidate();
         }
 
+        // Evento para borrar el token si el usuario sale de la aplicación sin desconectarse
+        private async void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            await ad.borrarToken(usuarioConectado);
+        }
     }
 }

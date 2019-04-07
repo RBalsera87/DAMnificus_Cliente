@@ -511,6 +511,7 @@
             this.Name = "FormPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DAMnificus App";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPrincipal_FormClosing);
             this.barraTitulo.ResumeLayout(false);
             this.barraTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
