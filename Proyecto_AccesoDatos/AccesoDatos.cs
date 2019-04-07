@@ -18,7 +18,7 @@ namespace Proyecto_AccesoDatos
         public async Task<string> comenzarLogin(string usuario, string clave)
         {
             //Peticion para que nos devuelva una respuesta con la sal que necesitamos
-            Respuesta respConSal = await this.enviarPeticionesLogin("requestSalt", usuario, null, null);
+            Respuesta respConSal = await this.enviarPeticion("requestSalt", usuario, null, null);
             //Si al hacer la peticion el servidor esta caido devuelve un null
             if (respConSal != null)
             {
@@ -32,7 +32,7 @@ namespace Proyecto_AccesoDatos
                     // Encripta clave con la "sal" recibida
                     string PassEncriptado = Clave.encriptarClaveConexion(clave, respConSal.salt);
                     // Petición enviando clave encriptada si es correcta nos devolvera el "Token"
-                    Respuesta respConToken = await this.enviarPeticionesLogin("login", usuario, PassEncriptado, null);
+                    Respuesta respConToken = await this.enviarPeticion("login", usuario, PassEncriptado, null);
                     // Asignamos nuestro token
                     if (respConToken.respuesta.Equals("passValida"))
                     {
@@ -51,7 +51,7 @@ namespace Proyecto_AccesoDatos
                 return "Servidor caido";
             }
         }
-        public async Task<Respuesta> enviarPeticionesLogin(string pet, string user, string pass, string token)
+        public async Task<Respuesta> enviarPeticion(string pet, string user, string pass, string token)
         {
             try
             {
@@ -91,6 +91,19 @@ namespace Proyecto_AccesoDatos
                 Console.WriteLine("Exception: {0}", e);
                 return null;
             }
+        }
+        public async Task<bool> borrarToken(string usuario)
+        {
+            Respuesta respuesta = await enviarPeticion("borrarToken", usuario, null, token);
+            if (respuesta.respuesta.Equals("tokenBorrado"))
+            {
+                token = "";
+                return true;
+            }else
+            {
+                return false;
+            }
+            
         }
 
     }
