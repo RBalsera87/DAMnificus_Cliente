@@ -28,277 +28,188 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.graficoBarras = new LiveCharts.WinForms.CartesianChart();
-            this.panelCabecera = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnSegundo = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnPrimero = new System.Windows.Forms.Button();
-            this.panelContenedor = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.btnIntroducirNota = new System.Windows.Forms.Button();
-            this.panelDinamico1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnT1 = new System.Windows.Forms.Button();
-            this.btnT2 = new System.Windows.Forms.Button();
-            this.btnT3 = new System.Windows.Forms.Button();
-            this.btnTF = new System.Windows.Forms.Button();
-            this.panelCabecera.SuspendLayout();
-            this.panelContenedor.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panelDinamico1.SuspendLayout();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.graficaNotas = new LiveCharts.Wpf.CartesianChart();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.elementHost2 = new System.Windows.Forms.Integration.ElementHost();
+            this.pieChart1 = new LiveCharts.Wpf.PieChart();
+            this.cbCurso = new System.Windows.Forms.ComboBox();
+            this.cbAsignatura = new System.Windows.Forms.ComboBox();
+            this.cbTrimestre = new System.Windows.Forms.ComboBox();
+            this.nota = new System.Windows.Forms.NumericUpDown();
+            this.btnAgregarNota = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nota)).BeginInit();
             this.SuspendLayout();
             // 
-            // graficoBarras
+            // groupBox1
             // 
-            this.graficoBarras.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graficoBarras.Location = new System.Drawing.Point(0, 0);
-            this.graficoBarras.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
-            this.graficoBarras.Name = "graficoBarras";
-            this.graficoBarras.Size = new System.Drawing.Size(999, 637);
-            this.graficoBarras.TabIndex = 0;
-            this.graficoBarras.Text = "cartesianChart1";
-            this.graficoBarras.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.cartesianChart1_ChildChanged);
+            this.groupBox1.Controls.Add(this.elementHost1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1127, 403);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "NOTAS";
             // 
-            // panelCabecera
+            // elementHost1
             // 
-            this.panelCabecera.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panelCabecera.Controls.Add(this.panel2);
-            this.panelCabecera.Controls.Add(this.btnSegundo);
-            this.panelCabecera.Controls.Add(this.panel1);
-            this.panelCabecera.Controls.Add(this.btnPrimero);
-            this.panelCabecera.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelCabecera.Location = new System.Drawing.Point(0, 0);
-            this.panelCabecera.Name = "panelCabecera";
-            this.panelCabecera.Size = new System.Drawing.Size(999, 40);
-            this.panelCabecera.TabIndex = 1;
+            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elementHost1.Location = new System.Drawing.Point(3, 25);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(1121, 375);
+            this.elementHost1.TabIndex = 0;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.graficaNotas;
             // 
-            // panel2
+            // groupBox2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel2.Location = new System.Drawing.Point(152, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(5, 40);
-            this.panel2.TabIndex = 21;
+            this.groupBox2.Controls.Add(this.btnAgregarNota);
+            this.groupBox2.Controls.Add(this.nota);
+            this.groupBox2.Controls.Add(this.cbTrimestre);
+            this.groupBox2.Controls.Add(this.cbAsignatura);
+            this.groupBox2.Controls.Add(this.cbCurso);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.Location = new System.Drawing.Point(0, 403);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(474, 368);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "AGREGAR NOTAS";
             // 
-            // btnSegundo
+            // groupBox3
             // 
-            this.btnSegundo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSegundo.FlatAppearance.BorderSize = 0;
-            this.btnSegundo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnSegundo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnSegundo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSegundo.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSegundo.ForeColor = System.Drawing.Color.White;
-            this.btnSegundo.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnSegundo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSegundo.Location = new System.Drawing.Point(152, 0);
-            this.btnSegundo.Name = "btnSegundo";
-            this.btnSegundo.Size = new System.Drawing.Size(170, 40);
-            this.btnSegundo.TabIndex = 20;
-            this.btnSegundo.Text = "Segundo curso";
-            this.btnSegundo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSegundo.UseVisualStyleBackColor = true;
-            this.btnSegundo.Click += new System.EventHandler(this.btnSegundo_Click);
+            this.groupBox3.Controls.Add(this.elementHost2);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox3.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
+            this.groupBox3.ForeColor = System.Drawing.Color.White;
+            this.groupBox3.Location = new System.Drawing.Point(474, 403);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(386, 368);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "VALORACION DE ENLACES SUBIDOS";
             // 
-            // panel1
+            // elementHost2
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(5, 40);
-            this.panel1.TabIndex = 19;
+            this.elementHost2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elementHost2.Location = new System.Drawing.Point(3, 25);
+            this.elementHost2.Name = "elementHost2";
+            this.elementHost2.Size = new System.Drawing.Size(380, 340);
+            this.elementHost2.TabIndex = 0;
+            this.elementHost2.Text = "elementHost2";
+            this.elementHost2.Child = this.pieChart1;
             // 
-            // btnPrimero
+            // cbCurso
             // 
-            this.btnPrimero.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrimero.FlatAppearance.BorderSize = 0;
-            this.btnPrimero.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnPrimero.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnPrimero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrimero.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrimero.ForeColor = System.Drawing.Color.White;
-            this.btnPrimero.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnPrimero.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrimero.Location = new System.Drawing.Point(0, 0);
-            this.btnPrimero.Name = "btnPrimero";
-            this.btnPrimero.Size = new System.Drawing.Size(152, 40);
-            this.btnPrimero.TabIndex = 18;
-            this.btnPrimero.Text = "Primer curso";
-            this.btnPrimero.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrimero.UseVisualStyleBackColor = true;
-            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
+            this.cbCurso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cbCurso.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbCurso.ForeColor = System.Drawing.Color.White;
+            this.cbCurso.FormattingEnabled = true;
+            this.cbCurso.Location = new System.Drawing.Point(3, 25);
+            this.cbCurso.Name = "cbCurso";
+            this.cbCurso.Size = new System.Drawing.Size(468, 29);
+            this.cbCurso.TabIndex = 0;
             // 
-            // panelContenedor
+            // cbAsignatura
             // 
-            this.panelContenedor.Controls.Add(this.graficoBarras);
-            this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenedor.Location = new System.Drawing.Point(0, 40);
-            this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(999, 637);
-            this.panelContenedor.TabIndex = 2;
+            this.cbAsignatura.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cbAsignatura.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbAsignatura.ForeColor = System.Drawing.Color.White;
+            this.cbAsignatura.FormattingEnabled = true;
+            this.cbAsignatura.Location = new System.Drawing.Point(3, 54);
+            this.cbAsignatura.Name = "cbAsignatura";
+            this.cbAsignatura.Size = new System.Drawing.Size(468, 29);
+            this.cbAsignatura.TabIndex = 1;
             // 
-            // panel3
+            // cbTrimestre
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel3.Controls.Add(this.panel5);
-            this.panel3.Controls.Add(this.btnIntroducirNota);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 637);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(999, 40);
-            this.panel3.TabIndex = 3;
+            this.cbTrimestre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cbTrimestre.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbTrimestre.ForeColor = System.Drawing.Color.White;
+            this.cbTrimestre.FormattingEnabled = true;
+            this.cbTrimestre.Location = new System.Drawing.Point(3, 83);
+            this.cbTrimestre.Name = "cbTrimestre";
+            this.cbTrimestre.Size = new System.Drawing.Size(468, 29);
+            this.cbTrimestre.TabIndex = 2;
             // 
-            // panel5
+            // nota
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(5, 40);
-            this.panel5.TabIndex = 19;
+            this.nota.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.nota.DecimalPlaces = 2;
+            this.nota.Dock = System.Windows.Forms.DockStyle.Top;
+            this.nota.ForeColor = System.Drawing.Color.White;
+            this.nota.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nota.Location = new System.Drawing.Point(3, 112);
+            this.nota.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            65536});
+            this.nota.Name = "nota";
+            this.nota.Size = new System.Drawing.Size(468, 29);
+            this.nota.TabIndex = 3;
+            this.nota.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nota.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             // 
-            // btnIntroducirNota
+            // btnAgregarNota
             // 
-            this.btnIntroducirNota.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnIntroducirNota.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnIntroducirNota.FlatAppearance.BorderSize = 0;
-            this.btnIntroducirNota.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnIntroducirNota.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnIntroducirNota.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIntroducirNota.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIntroducirNota.ForeColor = System.Drawing.Color.White;
-            this.btnIntroducirNota.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnIntroducirNota.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIntroducirNota.Location = new System.Drawing.Point(0, 0);
-            this.btnIntroducirNota.Name = "btnIntroducirNota";
-            this.btnIntroducirNota.Size = new System.Drawing.Size(999, 40);
-            this.btnIntroducirNota.TabIndex = 18;
-            this.btnIntroducirNota.Text = "INTRODUCIR NOTA";
-            this.btnIntroducirNota.UseVisualStyleBackColor = true;
-            this.btnIntroducirNota.Click += new System.EventHandler(this.btnIntroducirNota_Click);
-            // 
-            // panelDinamico1
-            // 
-            this.panelDinamico1.Controls.Add(this.btnT1);
-            this.panelDinamico1.Controls.Add(this.btnT2);
-            this.panelDinamico1.Controls.Add(this.btnT3);
-            this.panelDinamico1.Controls.Add(this.btnTF);
-            this.panelDinamico1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelDinamico1.Location = new System.Drawing.Point(0, 40);
-            this.panelDinamico1.Name = "panelDinamico1";
-            this.panelDinamico1.Size = new System.Drawing.Size(999, 40);
-            this.panelDinamico1.TabIndex = 5;
-            // 
-            // btnT1
-            // 
-            this.btnT1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnT1.FlatAppearance.BorderSize = 0;
-            this.btnT1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnT1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnT1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnT1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnT1.ForeColor = System.Drawing.Color.White;
-            this.btnT1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnT1.Location = new System.Drawing.Point(3, 3);
-            this.btnT1.Name = "btnT1";
-            this.btnT1.Size = new System.Drawing.Size(137, 40);
-            this.btnT1.TabIndex = 22;
-            this.btnT1.Text = "TRIMESTRE 1";
-            this.btnT1.UseVisualStyleBackColor = true;
-            this.btnT1.Click += new System.EventHandler(this.btnT1_Click);
-            // 
-            // btnT2
-            // 
-            this.btnT2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnT2.FlatAppearance.BorderSize = 0;
-            this.btnT2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnT2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnT2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnT2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnT2.ForeColor = System.Drawing.Color.White;
-            this.btnT2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnT2.Location = new System.Drawing.Point(146, 3);
-            this.btnT2.Name = "btnT2";
-            this.btnT2.Size = new System.Drawing.Size(179, 40);
-            this.btnT2.TabIndex = 24;
-            this.btnT2.Text = "TRIMESTRE 2";
-            this.btnT2.UseVisualStyleBackColor = true;
-            this.btnT2.Click += new System.EventHandler(this.btnT2_Click);
-            // 
-            // btnT3
-            // 
-            this.btnT3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnT3.FlatAppearance.BorderSize = 0;
-            this.btnT3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnT3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnT3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnT3.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnT3.ForeColor = System.Drawing.Color.White;
-            this.btnT3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnT3.Location = new System.Drawing.Point(331, 3);
-            this.btnT3.Name = "btnT3";
-            this.btnT3.Size = new System.Drawing.Size(179, 40);
-            this.btnT3.TabIndex = 25;
-            this.btnT3.Text = "TRIMESTRE 3";
-            this.btnT3.UseVisualStyleBackColor = true;
-            this.btnT3.Click += new System.EventHandler(this.btnT3_Click);
-            // 
-            // btnTF
-            // 
-            this.btnTF.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTF.FlatAppearance.BorderSize = 0;
-            this.btnTF.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnTF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnTF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTF.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTF.ForeColor = System.Drawing.Color.White;
-            this.btnTF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTF.Location = new System.Drawing.Point(516, 3);
-            this.btnTF.Name = "btnTF";
-            this.btnTF.Size = new System.Drawing.Size(133, 40);
-            this.btnTF.TabIndex = 26;
-            this.btnTF.Text = "FINAL";
-            this.btnTF.UseVisualStyleBackColor = true;
-            this.btnTF.Click += new System.EventHandler(this.btnTF_Click);
+            this.btnAgregarNota.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.btnAgregarNota.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAgregarNota.Location = new System.Drawing.Point(3, 141);
+            this.btnAgregarNota.Name = "btnAgregarNota";
+            this.btnAgregarNota.Size = new System.Drawing.Size(468, 46);
+            this.btnAgregarNota.TabIndex = 4;
+            this.btnAgregarNota.Text = "Agregar Nota";
+            this.btnAgregarNota.UseVisualStyleBackColor = false;
             // 
             // FormAreaPersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(999, 677);
-            this.Controls.Add(this.panelDinamico1);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panelContenedor);
-            this.Controls.Add(this.panelCabecera);
+            this.ClientSize = new System.Drawing.Size(1127, 771);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAreaPersonal";
             this.Text = "FormAreaPersonal";
-            this.panelCabecera.ResumeLayout(false);
-            this.panelContenedor.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panelDinamico1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nota)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private LiveCharts.WinForms.CartesianChart graficoBarras;
-        private System.Windows.Forms.Panel panelCabecera;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnSegundo;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnPrimero;
-        private System.Windows.Forms.Panel panelContenedor;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btnIntroducirNota;
-        private System.Windows.Forms.FlowLayoutPanel panelDinamico1;
-        private System.Windows.Forms.Button btnT1;
-        private System.Windows.Forms.Button btnT2;
-        private System.Windows.Forms.Button btnT3;
-        private System.Windows.Forms.Button btnTF;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private LiveCharts.Wpf.CartesianChart graficaNotas;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Integration.ElementHost elementHost2;
+        private LiveCharts.Wpf.PieChart pieChart1;
+        private System.Windows.Forms.ComboBox cbTrimestre;
+        private System.Windows.Forms.ComboBox cbAsignatura;
+        private System.Windows.Forms.ComboBox cbCurso;
+        private System.Windows.Forms.NumericUpDown nota;
+        private System.Windows.Forms.Button btnAgregarNota;
     }
 }
