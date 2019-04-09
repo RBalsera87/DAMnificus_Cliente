@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDatos.cs" />
+    <Compile Include="CifradoPeticion.cs" />
     <Compile Include="Clave.cs" />
     <Compile Include="Peticion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
