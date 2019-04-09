@@ -37,7 +37,11 @@ namespace Proyecto_Negocio
             List<Button> botones = menuLateral.Controls.OfType<Button>().ToList();
             foreach (Button btn in botones)
             {
-                btn.BackColor = Color.FromArgb(32, 32, 32);
+                if (btn.Name != "btnLogin")
+                {
+                    btn.BackColor = Color.FromArgb(32, 32, 32);
+                }
+                
             }
         }
 

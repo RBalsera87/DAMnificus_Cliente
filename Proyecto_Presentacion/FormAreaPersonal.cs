@@ -11,207 +11,90 @@ namespace Proyecto_Presentacion
     
     public partial class FormAreaPersonal : Form
     {
-        FormPrincipal aux = new FormPrincipal();
-        List<double> notasPrimeroPrimer = new List<double> { 1, 8, 0, 4, 5, 0 };
-        List<double> notasPrimeroSegundo = new List<double> { 2, 8, 0, 4, 5, 0 };
-        List<double> notasPrimeroTercer = new List<double> { 3, 8, 0, 4, 5, 0 };
-        List<double> notasPrimeroFinal = new List<double> { 4, 8, 0, 4, 5, 0 };
-
-        List<double> notasSegundoPrimer = new List<double> { 1, 8, 0, 4, 5, 0 , 3};
-        List<double> notasSegundoSegundo = new List<double> { 2, 8, 0, 4, 5, 0 , 5};
-        List<double> notasSegundoTercer = new List<double> { 3, 8, 0, 4, 5, 0, 8 };
-        List<double> notasSegundoFinal = new List<double> { 4, 8, 0, 4, 5, 0, 10 };
+        Proyecto_Negocio.MetodosFormAreaPersonal met = new Proyecto_Negocio.MetodosFormAreaPersonal();
+        List<double> notas = new List<double> { };
+        List<String> cursos = new List<string> { };
+        List<String> asignaturas = new List<string> { };
+        List<String> trimestres = new List<string> { };
 
         public FormAreaPersonal()
         {
-            
+            notas = met.cargarListaNotas();
+            met.cargarComboboxes(cursos, asignaturas, trimestres);
             InitializeComponent();
             DoubleBuffered = true;
-            this.btnPrimero.BackColor = Color.FromArgb(73, 55, 34);
-            this.btnT1.BackColor = Color.FromArgb(73, 55, 34);
-            cargarPrimeraGrafica();
 
-
-        }
-
-        private void cartesianChart1_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
-        {
-
-        }
-
-        /****************************
-        * Eventos para los botones *
-        ****************************/
-
-        private void btnSegundo_Click(object sender, EventArgs e)
-        {
-
-            this.btnPrimero.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnSegundo.BackColor = Color.FromArgb(73, 55, 34);
-            cargarPrimeraGrafica();
-        }
-
-        private void btnPrimero_Click(object sender, EventArgs e)
-        {
-            
-            this.btnSegundo.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnPrimero.BackColor = Color.FromArgb(73, 55, 34);
-            cargarPrimeraGrafica();
-        }
-
-        private void btnT1_Click(object sender, EventArgs e)
-        {
-            this.btnT1.BackColor = Color.FromArgb(73, 55, 34);
-            this.btnT2.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnT3.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnTF.BackColor = Color.FromArgb(32, 32, 32);
-
-            cargarPrimeraGrafica();
-        }
-
-        private void btnT2_Click(object sender, EventArgs e)
-        {
-            this.btnT1.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnT2.BackColor = Color.FromArgb(73, 55, 34);
-            this.btnT3.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnTF.BackColor = Color.FromArgb(32, 32, 32);
-
-            if (this.btnPrimero.BackColor == Color.FromArgb(73, 55, 34))
+            foreach(string aux in cursos)
             {
-                graficoBarras.Series = new SeriesCollection
+                cbCurso.Items.Add(aux);
+            }
+            foreach (string aux in asignaturas)
+            {
+                cbAsignatura.Items.Add(aux);
+            }
+            foreach (string aux in trimestres)
+            {
+                cbTrimestre.Items.Add(aux);
+            }
+            cbCurso.SelectedIndex = 0;
+            cbAsignatura.SelectedIndex = 0;
+            //cbTrimestre.SelectedIndex = 0;
+
+            graficaNotas.Series = new SeriesCollection
                 {
                     new RowSeries
                     {
                         Title = "NOTAS",
-                        Values = new ChartValues<double> (notasPrimeroSegundo)
+                        Values = new ChartValues<double> (notas)
                     }
                 };
-            }
-            else
+
+            graficaNotas.AxisY.Add(new Axis
             {
-                graficoBarras.Series = new SeriesCollection
+                Title = "ASIGNATURAS",
+                Labels = new[] { "Acceso", "Interfaces", "PSP", "Moviles", "FOL2", "Ingles", "SGE" }
+            });
+
+
+            Func<ChartPoint, string> labelPoint = chartPoint =>
+                string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+
+            graficaValoraciones.Series = new SeriesCollection
+            {
+                new PieSeries
                 {
-                    new RowSeries
-                    {
-                        Title = "NOTAS",
-                        Values = new ChartValues<double> (notasSegundoSegundo)
-                    }
-                };
-            }
+                    Title = "Maria",
+                    Values = new ChartValues<double> {3},
+                    PushOut = 15,
+                    DataLabels = true,
+                    LabelPoint = labelPoint
+                },
+                new PieSeries
+                {
+                    Title = "Charles",
+                    Values = new ChartValues<double> {4},
+                    DataLabels = true,
+                    LabelPoint = labelPoint
+                },
+                new PieSeries
+                {
+                    Title = "Frida",
+                    Values = new ChartValues<double> {6},
+                    DataLabels = true,
+                    LabelPoint = labelPoint
+                },
+                new PieSeries
+                {
+                    Title = "Frederic",
+                    Values = new ChartValues<double> {2},
+                    DataLabels = true,
+                    LabelPoint = labelPoint
+                }
+            };
+
+            graficaValoraciones.LegendLocation = LegendLocation.Bottom;
+
         }
 
-        private void btnT3_Click(object sender, EventArgs e)
-        {
-            this.btnT1.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnT2.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnT3.BackColor = Color.FromArgb(73, 55, 34);
-            this.btnTF.BackColor = Color.FromArgb(32, 32, 32);
-
-            if (this.btnPrimero.BackColor == Color.FromArgb(73, 55, 34))
-            {
-                graficoBarras.Series = new SeriesCollection
-                {
-                    new RowSeries
-                    {
-                        Title = "NOTAS",
-                        Values = new ChartValues<double> (notasPrimeroTercer)
-                    }
-                };
-            }
-            else
-            {
-                graficoBarras.Series = new SeriesCollection
-                {
-                    new RowSeries
-                    {
-                        Title = "NOTAS",
-                        Values = new ChartValues<double> (notasSegundoTercer)
-                    }
-                };
-            }
-        }
-
-        private void btnTF_Click(object sender, EventArgs e)
-        {
-            this.btnT1.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnT2.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnT3.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnTF.BackColor = Color.FromArgb(73, 55, 34);
-
-            if (this.btnPrimero.BackColor == Color.FromArgb(73, 55, 34))
-            {
-                graficoBarras.Series = new SeriesCollection
-                {
-                    new RowSeries
-                    {
-                        Title = "NOTAS",
-                        Values = new ChartValues<double> (notasPrimeroFinal)
-                    }
-                };
-            }
-            else
-            {
-                graficoBarras.Series = new SeriesCollection
-                {
-                    new RowSeries
-                    {
-                        Title = "NOTAS",
-                        Values = new ChartValues<double> (notasSegundoFinal)
-                    }
-                };
-            }
-        }
-
-        private void cargarPrimeraGrafica()
-        {
-            this.btnT1.BackColor = Color.FromArgb(73, 55, 34);
-            this.btnT2.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnT3.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnTF.BackColor = Color.FromArgb(32, 32, 32);
-
-            if (this.btnPrimero.BackColor == Color.FromArgb(73, 55, 34))
-            {
-                graficoBarras.AxisY.Clear();
-                graficoBarras.Series = new SeriesCollection
-                {
-                    new RowSeries
-                    {
-                        Title = "NOTAS",
-                        Values = new ChartValues<double> (notasPrimeroPrimer)
-                    }
-                };
-
-
-                graficoBarras.AxisY.Add(new Axis
-                {
-                    Title = "ASIGNATURAS",
-                    Labels = new[] { "BASES", "ENTORNOS", "FOL", "MARCAS", "PROGRAMACION", "SISTEMAS" }
-                });
-            }
-            else
-            {
-                graficoBarras.AxisY.Clear();
-                graficoBarras.Series = new SeriesCollection
-                {
-                    new RowSeries
-                    {
-                        Title = "NOTAS",
-                        Values = new ChartValues<double> (notasSegundoPrimer)
-                    }
-                };
-
-
-                graficoBarras.AxisY.Add(new Axis
-                {
-                    Title = "ASIGNATURAS",
-                    Labels = new[] { "ACCESO", "INTERFACES", "EIE", "INGLES", "PSP", "PMDM", "SGE" }
-                });
-            }
-        }
-
-        private void btnIntroducirNota_Click(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

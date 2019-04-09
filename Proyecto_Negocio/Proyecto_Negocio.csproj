@@ -42,8 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MetodosFormAreaPersonal.cs" />
     <Compile Include="MetodosFormPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proyecto_AccesoDatos\Proyecto_AccesoDatos.csproj">
+      <Project>{f1e4f4a3-e3c5-4143-9f24-703be4e080e7}</Project>
+      <Name>Proyecto_AccesoDatos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
