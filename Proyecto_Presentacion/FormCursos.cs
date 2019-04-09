@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
-
+using System.Windows.Media.Imaging;
 
 namespace Proyecto_Presentacion
 {
@@ -18,6 +20,10 @@ namespace Proyecto_Presentacion
         {
             panelAsignaturas1.Height = 0;
             panelAsignaturas2.Height = 0;
+            this.InitializeModel();
+            //cargarImagenes();
+            //this.InitializeObjectListView();
+            
         }
 
         /****************************
@@ -92,7 +98,7 @@ namespace Proyecto_Presentacion
             restaurarColorBotones(panelDinamico1);
             this.btnSistemas.BackColor = Color.FromArgb(73, 55, 34);
         }
-
+        
         // Botones de asignaturas de segundo
         private void btnAccesoDatos_Click(object sender, System.EventArgs e)
         {
@@ -186,5 +192,190 @@ namespace Proyecto_Presentacion
                 btn.BackColor = Color.FromArgb(32, 32, 32);
             }
         }
+
+        /***********************************
+        * ListView Mostrar videos *
+        ***********************************/
+        private List<Enlaces> listaEnlaces;
+        public void InitializeModel() {
+            Proyecto_Presentacion.Conexion c  = new Proyecto_Presentacion.Conexion();           
+            listaEnlaces = c.GetListEnlace();
+            cargarImagenes();
+            listadoEnlaces.RowHeight = 90;
+            this.columnaTitulo.AspectToStringConverter = delegate (object x)
+            {
+                return "";
+            };
+            this.listadoEnlaces.SetObjects(this.listaEnlaces);
+        }
+        //Añade a la primera columna la Imagen el Título y la Descripción
+        public void InitializeObjectListView() {
+            //Aumenta el tamaño de las filas
+            listadoEnlaces.RowHeight = 90;
+            this.columnaTitulo.AspectToStringConverter = delegate (object x)
+            {
+                return "";
+            };
+            this.listadoEnlaces.SetObjects(this.listaEnlaces);
+        }
+
+        
+        //Recorre el List que tiene los enlaces, convierte las rutas de images a Images y las añade a imageListLarge
+        public void cargarImagenes()
+        {
+            Image img = null;
+            foreach(Enlaces e in listaEnlaces)
+            {
+                if(e.imagen.Equals("") || e.imagen == null)
+                {
+                    img = Image.FromFile(Application.StartupPath + "/../../Resources/titulo.png");
+                }
+                else if (e.imagen.Contains("http"))
+                {   //Convierte imagen de un URL a Image
+                    var request = WebRequest.Create(e.imagen);
+                    using (var response = request.GetResponse())
+                    using (var stream = response.GetResponseStream())
+                    {
+                        img = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    img = Image.FromFile(Application.StartupPath + e.imagen);
+                }
+
+                imageListLarge.Images.Add(e.id, img);
+                
+            }
+            //Size tamanio = new Size(80, 80);
+            ////Image imagen = Image.FromFile(Application.StartupPath + "/../../images/pildoras.jpg");
+            //Bitmap bitmatImagen = new Bitmap(ima, tamanio);
+
+
+            //Image a = Image.FromFile(Application.StartupPath + "/../../images/pildoras.jpg");
+            //imageListLarge.Images.Add("/../../images/pildoras.jpg", a);
+        }
+        private void listadoEnlaces_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                Enlaces Enlaces = (Enlaces)e.Model;
+                NamedDescriptionDecoration decoration = new NamedDescriptionDecoration();
+                decoration.ImageList = this.imageListLarge;
+                decoration.Title = Enlaces.titulo;
+                decoration.ImageName = Enlaces.id;
+                decoration.Description = Enlaces.descripcion;
+                e.SubItem.Decoration = decoration;
+            }
+        }
+        //Abre link al hacer doble click sobre la Fila
+        private void listadoEnlaces_ItemActivate(object sender, EventArgs e)
+        {
+            Object linkSeleccionado = listadoEnlaces.SelectedObject;
+            Enlaces URL = (Enlaces)linkSeleccionado;
+            System.Diagnostics.Process.Start(URL.link );
+        }
+    }
+    //Clase con todos los atributos de la tabla link
+    public class Enlaces 
+    {   
+        public string id;
+        public string link;
+        public string titulo;
+        public string descripcion;
+        public string valoracion;
+        public string imagen;
+        public string tipo;
+        public string tema;
+        public string uploader;
+        public string activo;
+
+        public string Report { get; internal set; }
+
+        public Enlaces()
+        {
+        }
+        public Enlaces(string id, string link, string titulo, string descripcion, string valoracion, string imagen, string tipo, string tema, string uploader, string activo)
+        {
+            this.id = id;
+            this.link = link;
+            this.titulo = titulo;
+            this.descripcion = descripcion;
+            this.valoracion = valoracion;
+            this.imagen = imagen;
+            this.tipo = tipo;
+            this.tema = tema;
+            this.uploader = uploader;
+            this.activo = activo;
+        }
+    }
+    //Clase que pinta la Imagen el Título y la Descripción en la misma celda
+    public class NamedDescriptionDecoration : BrightIdeasSoftware.AbstractDecoration
+    {
+        public ImageList ImageList;
+        public string ImageName;
+        public string Title;
+        public string Description;
+
+        public Font TitleFont = new Font("Tahoma", 9, FontStyle.Bold);
+        public Color TitleColor = Color.FromArgb(255, 255, 255);
+        public Font DescripionFont = new Font("Tahoma", 9);
+        public Color DescriptionColor = Color.FromArgb(255, 255, 255);
+        public Size CellPadding = new Size(1, 1);
+
+        public override void Draw(BrightIdeasSoftware.ObjectListView olv, Graphics g, Rectangle r) {
+            Rectangle cellBounds = this.CellBounds;
+            cellBounds.Inflate(-this.CellPadding.Width, -this.CellPadding.Height);
+            Rectangle textBounds = cellBounds;
+
+            if (this.ImageList != null && !String.IsNullOrEmpty(this.ImageName))
+            {
+                //var request = WebRequest.Create("");
+                //Image ima;
+                //using (var response = request.GetResponse())
+                //using (var stream = response.GetResponseStream())
+                //{
+                //    ima = Bitmap.FromStream(stream);
+                //}
+                
+                //Size tamanio = new Size(80, 80);
+                ////Image imagen = Image.FromFile(Application.StartupPath + "/../../images/pildoras.jpg");
+                //Bitmap bitmatImagen = new Bitmap(ima,tamanio);
+                //g.DrawImage(bitmatImagen, cellBounds.Location);
+                //textBounds.X += bitmatImagen.Width;
+                //textBounds.Width -= bitmatImagen.Width;
+
+
+                g.DrawImage(this.ImageList.Images[this.ImageName], cellBounds.Location);
+                textBounds.X += this.ImageList.ImageSize.Width;
+                textBounds.Width -= this.ImageList.ImageSize.Width;
+            }
+
+            //g.DrawRectangle(Pens.Red, textBounds);
+
+            // Draw the title
+            StringFormat fmt = new StringFormat(StringFormatFlags.NoWrap);
+            fmt.Trimming = StringTrimming.EllipsisCharacter;
+            fmt.Alignment = StringAlignment.Near;
+            fmt.LineAlignment = StringAlignment.Near;
+
+            using (SolidBrush b = new SolidBrush(this.TitleColor))
+            {
+                g.DrawString(this.Title, this.TitleFont, b, textBounds, fmt);
+            }
+
+            // Draw the description
+            SizeF size = g.MeasureString(this.Title, this.TitleFont, (int)textBounds.Width, fmt);
+            textBounds.Y += (int)size.Height;
+            textBounds.Height -= (int)size.Height;
+            StringFormat fmt2 = new StringFormat();
+            fmt2.Trimming = StringTrimming.EllipsisCharacter;
+            using (SolidBrush b = new SolidBrush(this.DescriptionColor))
+            {
+                g.DrawString(this.Description, this.DescripionFont, b, textBounds, fmt2);
+            }
+        }
+
+        
     }
 }
