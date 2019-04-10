@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Proyecto_AccesoDatos;
+using Proyecto_Negocio;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace Proyecto_Presentacion
 {
     public partial class FormCursos : Form
     {
+        AccesoDatos ad = new AccesoDatos();
         public FormCursos()
         {
             InitializeComponent();
@@ -197,9 +200,8 @@ namespace Proyecto_Presentacion
         * ListView Mostrar videos *
         ***********************************/
         private List<Enlaces> listaEnlaces;
-        public void InitializeModel() {
-            Proyecto_Presentacion.Conexion c  = new Proyecto_Presentacion.Conexion();           
-            listaEnlaces = c.GetListEnlace();
+        private async void InitializeModel() {
+            listaEnlaces = await ad.obtenerEnlaces("admin");
             cargarImagenes();
             listadoEnlaces.RowHeight = 90;
             this.columnaTitulo.AspectToStringConverter = delegate (object x)
@@ -230,7 +232,7 @@ namespace Proyecto_Presentacion
                 {
                     img = Image.FromFile(Application.StartupPath + "/../../Resources/titulo.png");
                 }
-                else if (e.imagen.Contains("http"))
+                else if (!e.imagen.Contains("localhost"))
                 {   //Convierte imagen de un URL a Image
                     var request = WebRequest.Create(e.imagen);
                     using (var response = request.GetResponse())
@@ -260,7 +262,7 @@ namespace Proyecto_Presentacion
             if (e.ColumnIndex == 0)
             {
                 Enlaces Enlaces = (Enlaces)e.Model;
-                NamedDescriptionDecoration decoration = new NamedDescriptionDecoration();
+                pintarImagenTituloDesc decoration = new pintarImagenTituloDesc();
                 decoration.ImageList = this.imageListLarge;
                 decoration.Title = Enlaces.titulo;
                 decoration.ImageName = Enlaces.id;
@@ -276,41 +278,10 @@ namespace Proyecto_Presentacion
             System.Diagnostics.Process.Start(URL.link );
         }
     }
-    //Clase con todos los atributos de la tabla link
-    public class Enlaces 
-    {   
-        public string id;
-        public string link;
-        public string titulo;
-        public string descripcion;
-        public string valoracion;
-        public string imagen;
-        public string tipo;
-        public string tema;
-        public string uploader;
-        public string activo;
 
-        public string Report { get; internal set; }
-
-        public Enlaces()
-        {
-        }
-        public Enlaces(string id, string link, string titulo, string descripcion, string valoracion, string imagen, string tipo, string tema, string uploader, string activo)
-        {
-            this.id = id;
-            this.link = link;
-            this.titulo = titulo;
-            this.descripcion = descripcion;
-            this.valoracion = valoracion;
-            this.imagen = imagen;
-            this.tipo = tipo;
-            this.tema = tema;
-            this.uploader = uploader;
-            this.activo = activo;
-        }
-    }
+    
     //Clase que pinta la Imagen el Título y la Descripción en la misma celda
-    public class NamedDescriptionDecoration : BrightIdeasSoftware.AbstractDecoration
+    public class pintarImagenTituloDesc : BrightIdeasSoftware.AbstractDecoration
     {
         public ImageList ImageList;
         public string ImageName;

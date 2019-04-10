@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Proyecto_AccesoDatos
 {
@@ -12,6 +14,9 @@ namespace Proyecto_AccesoDatos
 
         [JsonProperty("salt")]
         public string salt { get; set; }
+
+        [JsonProperty("coleccion")]
+        public List<Enlaces> coleccion  { get; set; }
     }
 }
 

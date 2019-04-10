@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace Proyecto_AccesoDatos
 {
@@ -97,7 +98,7 @@ namespace Proyecto_AccesoDatos
                         if (respuesta.token != null)
                         {
                             respuesta.token = CifradoPeticion.Descifrado(respuesta.token, respuesta.respuesta);
-                        }
+                        }                        
                         return respuesta;
                     }
                     else
@@ -129,6 +130,12 @@ namespace Proyecto_AccesoDatos
                 }
             }
             return true;     
+        }
+        public async Task<List<Enlaces>> obtenerEnlaces(string usuario)
+        {
+            if (token.Equals("")) { token = null; }
+            Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token);
+            return respuesta.coleccion;
         }
 
     }

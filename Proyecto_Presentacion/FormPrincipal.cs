@@ -11,7 +11,7 @@ namespace Proyecto_Presentacion
         
         MetodosFormPrincipal m = new MetodosFormPrincipal();
         AccesoDatos ad = new AccesoDatos();
-        private string usuarioConectado = "";
+        public static string usuarioConectado = "";
         // Variables para el movimiento del formulario
         private bool agarrado = false;
         private bool maximizado = false;
