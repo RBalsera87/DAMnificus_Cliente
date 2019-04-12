@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Proyecto_AccesoDatos;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto_Negocio
@@ -9,7 +11,8 @@ namespace Proyecto_Negocio
     * Métodos para el Formulario Principal *
     ****************************************/
     public class MetodosFormPrincipal
-    {       
+    {
+        AccesoDatos ad = new AccesoDatos();
         public void abrirFormEnPanel(object formHijo, Panel panelContenido)
         {
             if (panelContenido.Controls.Count > 0)
@@ -23,6 +26,16 @@ namespace Proyecto_Negocio
             panelContenido.Controls.Add(fh);
             panelContenido.Tag = fh;
             fh.Show();
+        }
+        public async Task<string> conectarConServidor(string usuario, string pass)
+        {
+            string respuesta = await ad.comenzarLogin(usuario, pass);
+            return respuesta;
+        }
+        public async Task<bool> borrarToken(string usuario)
+        {
+            bool respuesta = await ad.borrarToken(usuario);
+            return respuesta;
         }
         public void ocultarLogin(Timer tmOcultarLogin)
         {

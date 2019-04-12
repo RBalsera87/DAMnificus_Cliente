@@ -5,6 +5,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using EntidadesCompartidas;
 
 namespace Proyecto_AccesoDatos
 {
@@ -61,13 +62,13 @@ namespace Proyecto_AccesoDatos
             {
                 if (pass != null)
                 {
-                    passCifrado = CifradoPeticion.Cifrado(pass, pet);
+                    passCifrado = CifradoJson.Cifrado(pass, pet);
                 }
                 if (token != null)
                 {
-                    tokenCifrado = CifradoPeticion.Cifrado(token, pet);
+                    tokenCifrado = CifradoJson.Cifrado(token, pet);
                 }
-                usuarioCifrado = CifradoPeticion.Cifrado(user, pet);
+                usuarioCifrado = CifradoJson.Cifrado(user, pet);
                 var peticionActual = new Peticion
                 {
                     peticion = pet,
@@ -93,11 +94,11 @@ namespace Proyecto_AccesoDatos
 
                         if (respuesta.salt != null)
                         {
-                            respuesta.salt = CifradoPeticion.Descifrado(respuesta.salt, respuesta.respuesta);
+                            respuesta.salt = CifradoJson.Descifrado(respuesta.salt, respuesta.respuesta);
                         }
                         if (respuesta.token != null)
                         {
-                            respuesta.token = CifradoPeticion.Descifrado(respuesta.token, respuesta.respuesta);
+                            respuesta.token = CifradoJson.Descifrado(respuesta.token, respuesta.respuesta);
                         }                        
                         return respuesta;
                     }

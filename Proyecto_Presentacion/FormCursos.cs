@@ -1,4 +1,4 @@
-﻿using Proyecto_AccesoDatos;
+﻿using EntidadesCompartidas;
 using Proyecto_Negocio;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,8 @@ namespace Proyecto_Presentacion
 {
     public partial class FormCursos : Form
     {
-        AccesoDatos ad = new AccesoDatos();
+        MetodosFormCursos m = new MetodosFormCursos();
+
         public FormCursos()
         {
             InitializeComponent();
@@ -196,12 +197,12 @@ namespace Proyecto_Presentacion
             }
         }
 
-        /***********************************
-        * ListView Mostrar videos *
-        ***********************************/
+       /************************************
+        * ListView Mostrar videos          *
+        ************************************/
         private List<Enlaces> listaEnlaces;
         private async void InitializeModel() {
-            listaEnlaces = await ad.obtenerEnlaces("admin");
+            listaEnlaces = await m.obtenerEnlaces("admin");
             cargarImagenes();
             listadoEnlaces.RowHeight = 90;
             this.columnaTitulo.AspectToStringConverter = delegate (object x)
