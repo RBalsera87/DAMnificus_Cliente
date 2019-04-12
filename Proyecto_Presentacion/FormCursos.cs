@@ -202,7 +202,7 @@ namespace Proyecto_Presentacion
         ************************************/
         private List<Enlaces> listaEnlaces;
         private async void InitializeModel() {
-            listaEnlaces = await m.obtenerEnlaces("admin");
+            listaEnlaces = await m.obtenerEnlaces("admin"); // OJO AL PIOJO, ESO HAY QUE CAMBIARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             cargarImagenes();
             listadoEnlaces.RowHeight = 90;
             this.columnaTitulo.AspectToStringConverter = delegate (object x)
