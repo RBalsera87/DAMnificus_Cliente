@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="MetodosFormAreaPersonal.cs" />
     <Compile Include="MetodosFormCursos.cs" />
+    <Compile Include="MetodosFormInicio.cs" />
     <Compile Include="MetodosFormPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

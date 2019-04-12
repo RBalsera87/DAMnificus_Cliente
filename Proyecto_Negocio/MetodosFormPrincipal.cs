@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Proyecto_Negocio
 {
-    /****************************************
+   /****************************************
     * Métodos para el Formulario Principal *
     ****************************************/
     public class MetodosFormPrincipal

@@ -35,6 +35,7 @@ namespace Proyecto_Presentacion
             this.lblTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
             this.lblTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
             this.lblTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
+            m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
 
         }
         /****************************
@@ -120,6 +121,7 @@ namespace Proyecto_Presentacion
         {
             m.restaurarColorBotones(this.menuLateral);
             this.btnPrincipal.BackColor = Color.FromArgb(73, 55, 34);
+            m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
         }
 
         private void btnCursos_Click(object sender, EventArgs e)

@@ -30,45 +30,46 @@
         {
             this.components = new System.ComponentModel.Container();
             this.barraTitulo = new System.Windows.Forms.Panel();
-            this.btnDividir = new System.Windows.Forms.Button();
-            this.pbIcono = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.btnRestaurar = new System.Windows.Forms.Button();
-            this.btnMinimizar = new System.Windows.Forms.Button();
-            this.btnMaximizar = new System.Windows.Forms.Button();
-            this.btnCerrar = new System.Windows.Forms.Button();
             this.menuLateral = new System.Windows.Forms.Panel();
             this.lblConectado = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.btnLogin = new System.Windows.Forms.Button();
             this.panelLogin = new System.Windows.Forms.Panel();
             this.lblPass = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.tbPass = new System.Windows.Forms.TextBox();
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnConfiguracion = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnComunidad = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnAreaPersonal = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnCursos = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnPrincipal = new System.Windows.Forms.Button();
-            this.pbOcultarMenu = new System.Windows.Forms.PictureBox();
-            this.pbTitulo = new System.Windows.Forms.PictureBox();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.tmOcultarMenu = new System.Windows.Forms.Timer(this.components);
             this.tmMostrarMenu = new System.Windows.Forms.Timer(this.components);
             this.tmOcultarLogin = new System.Windows.Forms.Timer(this.components);
             this.tmMostrarLogin = new System.Windows.Forms.Timer(this.components);
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnConfiguracion = new System.Windows.Forms.Button();
+            this.btnComunidad = new System.Windows.Forms.Button();
+            this.btnAreaPersonal = new System.Windows.Forms.Button();
+            this.btnCursos = new System.Windows.Forms.Button();
+            this.btnPrincipal = new System.Windows.Forms.Button();
+            this.pbOcultarMenu = new System.Windows.Forms.PictureBox();
+            this.pbTitulo = new System.Windows.Forms.PictureBox();
+            this.btnDividir = new System.Windows.Forms.Button();
+            this.pbIcono = new System.Windows.Forms.PictureBox();
+            this.btnRestaurar = new System.Windows.Forms.Button();
+            this.btnMinimizar = new System.Windows.Forms.Button();
+            this.btnMaximizar = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.barraTitulo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.menuLateral.SuspendLayout();
             this.panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOcultarMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.SuspendLayout();
             // 
             // barraTitulo
@@ -87,6 +88,333 @@
             this.barraTitulo.Size = new System.Drawing.Size(1136, 32);
             this.barraTitulo.TabIndex = 0;
             this.barraTitulo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.barraTitulo_MouseDoubleClick);
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.ForeColor = System.Drawing.Color.White;
+            this.lblTitulo.Location = new System.Drawing.Point(32, 4);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(148, 25);
+            this.lblTitulo.TabIndex = 4;
+            this.lblTitulo.Text = "DAMnificus App";
+            // 
+            // menuLateral
+            // 
+            this.menuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.menuLateral.Controls.Add(this.lblConectado);
+            this.menuLateral.Controls.Add(this.panel7);
+            this.menuLateral.Controls.Add(this.btnLogin);
+            this.menuLateral.Controls.Add(this.panelLogin);
+            this.menuLateral.Controls.Add(this.panel5);
+            this.menuLateral.Controls.Add(this.btnConfiguracion);
+            this.menuLateral.Controls.Add(this.panel4);
+            this.menuLateral.Controls.Add(this.btnComunidad);
+            this.menuLateral.Controls.Add(this.panel3);
+            this.menuLateral.Controls.Add(this.btnAreaPersonal);
+            this.menuLateral.Controls.Add(this.panel2);
+            this.menuLateral.Controls.Add(this.btnCursos);
+            this.menuLateral.Controls.Add(this.panel1);
+            this.menuLateral.Controls.Add(this.btnPrincipal);
+            this.menuLateral.Controls.Add(this.pbOcultarMenu);
+            this.menuLateral.Controls.Add(this.pbTitulo);
+            this.menuLateral.Dock = System.Windows.Forms.DockStyle.Left;
+            this.menuLateral.Location = new System.Drawing.Point(0, 32);
+            this.menuLateral.Name = "menuLateral";
+            this.menuLateral.Size = new System.Drawing.Size(220, 638);
+            this.menuLateral.TabIndex = 1;
+            // 
+            // lblConectado
+            // 
+            this.lblConectado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblConectado.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConectado.ForeColor = System.Drawing.Color.White;
+            this.lblConectado.Location = new System.Drawing.Point(3, 479);
+            this.lblConectado.Name = "lblConectado";
+            this.lblConectado.Size = new System.Drawing.Size(214, 22);
+            this.lblConectado.TabIndex = 18;
+            this.lblConectado.Text = "Conectado como invitado";
+            this.lblConectado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel7.Location = new System.Drawing.Point(0, 588);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(5, 50);
+            this.panel7.TabIndex = 17;
+            // 
+            // panelLogin
+            // 
+            this.panelLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelLogin.Controls.Add(this.lblPass);
+            this.panelLogin.Controls.Add(this.lblUsuario);
+            this.panelLogin.Controls.Add(this.tbPass);
+            this.panelLogin.Controls.Add(this.tbUsuario);
+            this.panelLogin.Location = new System.Drawing.Point(0, 504);
+            this.panelLogin.Name = "panelLogin";
+            this.panelLogin.Size = new System.Drawing.Size(220, 80);
+            this.panelLogin.TabIndex = 13;
+            // 
+            // lblPass
+            // 
+            this.lblPass.AutoSize = true;
+            this.lblPass.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPass.ForeColor = System.Drawing.Color.White;
+            this.lblPass.Location = new System.Drawing.Point(17, 48);
+            this.lblPass.Name = "lblPass";
+            this.lblPass.Size = new System.Drawing.Size(45, 20);
+            this.lblPass.TabIndex = 17;
+            this.lblPass.Text = "Clave";
+            this.lblPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.ForeColor = System.Drawing.Color.White;
+            this.lblUsuario.Location = new System.Drawing.Point(3, 12);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(59, 20);
+            this.lblUsuario.TabIndex = 16;
+            this.lblUsuario.Text = "Usuario";
+            // 
+            // tbPass
+            // 
+            this.tbPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbPass.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPass.ForeColor = System.Drawing.Color.White;
+            this.tbPass.Location = new System.Drawing.Point(68, 47);
+            this.tbPass.Name = "tbPass";
+            this.tbPass.PasswordChar = '●';
+            this.tbPass.Size = new System.Drawing.Size(143, 25);
+            this.tbPass.TabIndex = 1;
+            // 
+            // tbUsuario
+            // 
+            this.tbUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbUsuario.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUsuario.ForeColor = System.Drawing.Color.White;
+            this.tbUsuario.Location = new System.Drawing.Point(68, 11);
+            this.tbUsuario.Name = "tbUsuario";
+            this.tbUsuario.Size = new System.Drawing.Size(143, 25);
+            this.tbUsuario.TabIndex = 0;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel5.Location = new System.Drawing.Point(0, 321);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(5, 50);
+            this.panel5.TabIndex = 12;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel4.Location = new System.Drawing.Point(0, 265);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(5, 50);
+            this.panel4.TabIndex = 10;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel3.Location = new System.Drawing.Point(0, 209);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(5, 50);
+            this.panel3.TabIndex = 8;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel2.Location = new System.Drawing.Point(0, 153);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(5, 50);
+            this.panel2.TabIndex = 6;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel1.Location = new System.Drawing.Point(0, 97);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(5, 50);
+            this.panel1.TabIndex = 4;
+            // 
+            // panelContenido
+            // 
+            this.panelContenido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContenido.ForeColor = System.Drawing.Color.Black;
+            this.panelContenido.Location = new System.Drawing.Point(220, 32);
+            this.panelContenido.Name = "panelContenido";
+            this.panelContenido.Size = new System.Drawing.Size(916, 638);
+            this.panelContenido.TabIndex = 2;
+            // 
+            // tmOcultarMenu
+            // 
+            this.tmOcultarMenu.Interval = 10;
+            this.tmOcultarMenu.Tick += new System.EventHandler(this.tmOcultarMenu_Tick);
+            // 
+            // tmMostrarMenu
+            // 
+            this.tmMostrarMenu.Interval = 10;
+            this.tmMostrarMenu.Tick += new System.EventHandler(this.tmMostrarMenu_Tick);
+            // 
+            // tmOcultarLogin
+            // 
+            this.tmOcultarLogin.Interval = 10;
+            this.tmOcultarLogin.Tick += new System.EventHandler(this.tmOcultarLogin_Tick);
+            // 
+            // tmMostrarLogin
+            // 
+            this.tmMostrarLogin.Interval = 10;
+            this.tmMostrarLogin.Tick += new System.EventHandler(this.tmMostrarLogin_Tick);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
+            this.btnLogin.Image = global::Proyecto_Presentacion.Properties.Resources.empleados;
+            this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogin.Location = new System.Drawing.Point(0, 588);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(220, 50);
+            this.btnLogin.TabIndex = 16;
+            this.btnLogin.TabStop = false;
+            this.btnLogin.Text = "Conectarse";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // btnConfiguracion
+            // 
+            this.btnConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConfiguracion.FlatAppearance.BorderSize = 0;
+            this.btnConfiguracion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnConfiguracion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfiguracion.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfiguracion.ForeColor = System.Drawing.Color.White;
+            this.btnConfiguracion.Image = global::Proyecto_Presentacion.Properties.Resources.producto;
+            this.btnConfiguracion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConfiguracion.Location = new System.Drawing.Point(0, 321);
+            this.btnConfiguracion.Name = "btnConfiguracion";
+            this.btnConfiguracion.Size = new System.Drawing.Size(220, 50);
+            this.btnConfiguracion.TabIndex = 11;
+            this.btnConfiguracion.TabStop = false;
+            this.btnConfiguracion.Text = "Configuración";
+            this.btnConfiguracion.UseVisualStyleBackColor = true;
+            this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
+            // 
+            // btnComunidad
+            // 
+            this.btnComunidad.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnComunidad.FlatAppearance.BorderSize = 0;
+            this.btnComunidad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnComunidad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnComunidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnComunidad.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnComunidad.ForeColor = System.Drawing.Color.White;
+            this.btnComunidad.Image = global::Proyecto_Presentacion.Properties.Resources.clientes;
+            this.btnComunidad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnComunidad.Location = new System.Drawing.Point(0, 265);
+            this.btnComunidad.Name = "btnComunidad";
+            this.btnComunidad.Size = new System.Drawing.Size(220, 50);
+            this.btnComunidad.TabIndex = 9;
+            this.btnComunidad.TabStop = false;
+            this.btnComunidad.Text = "Comunidad";
+            this.btnComunidad.UseVisualStyleBackColor = true;
+            this.btnComunidad.Click += new System.EventHandler(this.btnComunidad_Click);
+            // 
+            // btnAreaPersonal
+            // 
+            this.btnAreaPersonal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAreaPersonal.FlatAppearance.BorderSize = 0;
+            this.btnAreaPersonal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnAreaPersonal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnAreaPersonal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAreaPersonal.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAreaPersonal.ForeColor = System.Drawing.Color.White;
+            this.btnAreaPersonal.Image = global::Proyecto_Presentacion.Properties.Resources.reportes;
+            this.btnAreaPersonal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAreaPersonal.Location = new System.Drawing.Point(0, 209);
+            this.btnAreaPersonal.Name = "btnAreaPersonal";
+            this.btnAreaPersonal.Size = new System.Drawing.Size(220, 50);
+            this.btnAreaPersonal.TabIndex = 7;
+            this.btnAreaPersonal.TabStop = false;
+            this.btnAreaPersonal.Text = "Area Personal";
+            this.btnAreaPersonal.UseVisualStyleBackColor = true;
+            this.btnAreaPersonal.Click += new System.EventHandler(this.btnAreaPersonal_Click);
+            // 
+            // btnCursos
+            // 
+            this.btnCursos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCursos.FlatAppearance.BorderSize = 0;
+            this.btnCursos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnCursos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCursos.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCursos.ForeColor = System.Drawing.Color.White;
+            this.btnCursos.Image = global::Proyecto_Presentacion.Properties.Resources.cursos;
+            this.btnCursos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCursos.Location = new System.Drawing.Point(0, 153);
+            this.btnCursos.Name = "btnCursos";
+            this.btnCursos.Size = new System.Drawing.Size(220, 50);
+            this.btnCursos.TabIndex = 5;
+            this.btnCursos.TabStop = false;
+            this.btnCursos.Text = "Cursos";
+            this.btnCursos.UseVisualStyleBackColor = true;
+            this.btnCursos.Click += new System.EventHandler(this.btnCursos_Click);
+            // 
+            // btnPrincipal
+            // 
+            this.btnPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrincipal.FlatAppearance.BorderSize = 0;
+            this.btnPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrincipal.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrincipal.ForeColor = System.Drawing.Color.White;
+            this.btnPrincipal.Image = global::Proyecto_Presentacion.Properties.Resources.principal;
+            this.btnPrincipal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrincipal.Location = new System.Drawing.Point(0, 97);
+            this.btnPrincipal.Name = "btnPrincipal";
+            this.btnPrincipal.Size = new System.Drawing.Size(220, 50);
+            this.btnPrincipal.TabIndex = 3;
+            this.btnPrincipal.TabStop = false;
+            this.btnPrincipal.Text = "Principal";
+            this.btnPrincipal.UseVisualStyleBackColor = true;
+            this.btnPrincipal.Click += new System.EventHandler(this.btnPrincipal_Click);
+            // 
+            // pbOcultarMenu
+            // 
+            this.pbOcultarMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbOcultarMenu.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Mobile_Menu_Icon;
+            this.pbOcultarMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbOcultarMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbOcultarMenu.Location = new System.Drawing.Point(174, 3);
+            this.pbOcultarMenu.Name = "pbOcultarMenu";
+            this.pbOcultarMenu.Size = new System.Drawing.Size(40, 32);
+            this.pbOcultarMenu.TabIndex = 2;
+            this.pbOcultarMenu.TabStop = false;
+            this.pbOcultarMenu.Click += new System.EventHandler(this.pbOcultarMenu_Click);
+            // 
+            // pbTitulo
+            // 
+            this.pbTitulo.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.titulo;
+            this.pbTitulo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbTitulo.Location = new System.Drawing.Point(0, 51);
+            this.pbTitulo.Name = "pbTitulo";
+            this.pbTitulo.Size = new System.Drawing.Size(220, 40);
+            this.pbTitulo.TabIndex = 0;
+            this.pbTitulo.TabStop = false;
             // 
             // btnDividir
             // 
@@ -113,17 +441,6 @@
             this.pbIcono.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbIcono.TabIndex = 5;
             this.pbIcono.TabStop = false;
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(32, 4);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(148, 25);
-            this.lblTitulo.TabIndex = 4;
-            this.lblTitulo.Text = "DAMnificus App";
             // 
             // btnRestaurar
             // 
@@ -186,315 +503,10 @@
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // menuLateral
+            // contextMenuStrip1
             // 
-            this.menuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.menuLateral.Controls.Add(this.lblConectado);
-            this.menuLateral.Controls.Add(this.panel7);
-            this.menuLateral.Controls.Add(this.btnLogin);
-            this.menuLateral.Controls.Add(this.panelLogin);
-            this.menuLateral.Controls.Add(this.panel5);
-            this.menuLateral.Controls.Add(this.btnConfiguracion);
-            this.menuLateral.Controls.Add(this.panel4);
-            this.menuLateral.Controls.Add(this.btnComunidad);
-            this.menuLateral.Controls.Add(this.panel3);
-            this.menuLateral.Controls.Add(this.btnAreaPersonal);
-            this.menuLateral.Controls.Add(this.panel2);
-            this.menuLateral.Controls.Add(this.btnCursos);
-            this.menuLateral.Controls.Add(this.panel1);
-            this.menuLateral.Controls.Add(this.btnPrincipal);
-            this.menuLateral.Controls.Add(this.pbOcultarMenu);
-            this.menuLateral.Controls.Add(this.pbTitulo);
-            this.menuLateral.Dock = System.Windows.Forms.DockStyle.Left;
-            this.menuLateral.Location = new System.Drawing.Point(0, 32);
-            this.menuLateral.Name = "menuLateral";
-            this.menuLateral.Size = new System.Drawing.Size(220, 638);
-            this.menuLateral.TabIndex = 1;
-            // 
-            // lblConectado
-            // 
-            this.lblConectado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblConectado.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConectado.ForeColor = System.Drawing.Color.White;
-            this.lblConectado.Location = new System.Drawing.Point(3, 479);
-            this.lblConectado.Name = "lblConectado";
-            this.lblConectado.Size = new System.Drawing.Size(214, 22);
-            this.lblConectado.TabIndex = 18;
-            this.lblConectado.Text = "Conectado como invitado";
-            this.lblConectado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel7
-            // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel7.Location = new System.Drawing.Point(0, 588);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(5, 50);
-            this.panel7.TabIndex = 17;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Image = global::Proyecto_Presentacion.Properties.Resources.empleados;
-            this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogin.Location = new System.Drawing.Point(0, 588);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(220, 50);
-            this.btnLogin.TabIndex = 16;
-            this.btnLogin.Text = "Conectarse";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // panelLogin
-            // 
-            this.panelLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelLogin.Controls.Add(this.lblPass);
-            this.panelLogin.Controls.Add(this.lblUsuario);
-            this.panelLogin.Controls.Add(this.tbPass);
-            this.panelLogin.Controls.Add(this.tbUsuario);
-            this.panelLogin.Location = new System.Drawing.Point(0, 504);
-            this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(220, 80);
-            this.panelLogin.TabIndex = 13;
-            // 
-            // lblPass
-            // 
-            this.lblPass.AutoSize = true;
-            this.lblPass.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPass.ForeColor = System.Drawing.Color.White;
-            this.lblPass.Location = new System.Drawing.Point(17, 48);
-            this.lblPass.Name = "lblPass";
-            this.lblPass.Size = new System.Drawing.Size(45, 20);
-            this.lblPass.TabIndex = 17;
-            this.lblPass.Text = "Clave";
-            this.lblPass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblUsuario
-            // 
-            this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuario.ForeColor = System.Drawing.Color.White;
-            this.lblUsuario.Location = new System.Drawing.Point(3, 12);
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(59, 20);
-            this.lblUsuario.TabIndex = 16;
-            this.lblUsuario.Text = "Usuario";
-            // 
-            // tbPass
-            // 
-            this.tbPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tbPass.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.tbPass.Location = new System.Drawing.Point(68, 47);
-            this.tbPass.Name = "tbPass";
-            this.tbPass.PasswordChar = '●';
-            this.tbPass.Size = new System.Drawing.Size(143, 25);
-            this.tbPass.TabIndex = 1;
-            // 
-            // tbUsuario
-            // 
-            this.tbUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tbUsuario.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.tbUsuario.Location = new System.Drawing.Point(68, 11);
-            this.tbUsuario.Name = "tbUsuario";
-            this.tbUsuario.Size = new System.Drawing.Size(143, 25);
-            this.tbUsuario.TabIndex = 0;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel5.Location = new System.Drawing.Point(0, 321);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(5, 50);
-            this.panel5.TabIndex = 12;
-            // 
-            // btnConfiguracion
-            // 
-            this.btnConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfiguracion.FlatAppearance.BorderSize = 0;
-            this.btnConfiguracion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnConfiguracion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfiguracion.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfiguracion.ForeColor = System.Drawing.Color.White;
-            this.btnConfiguracion.Image = global::Proyecto_Presentacion.Properties.Resources.producto;
-            this.btnConfiguracion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConfiguracion.Location = new System.Drawing.Point(0, 321);
-            this.btnConfiguracion.Name = "btnConfiguracion";
-            this.btnConfiguracion.Size = new System.Drawing.Size(220, 50);
-            this.btnConfiguracion.TabIndex = 11;
-            this.btnConfiguracion.Text = "Configuración";
-            this.btnConfiguracion.UseVisualStyleBackColor = true;
-            this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel4.Location = new System.Drawing.Point(0, 265);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(5, 50);
-            this.panel4.TabIndex = 10;
-            // 
-            // btnComunidad
-            // 
-            this.btnComunidad.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnComunidad.FlatAppearance.BorderSize = 0;
-            this.btnComunidad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnComunidad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnComunidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnComunidad.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnComunidad.ForeColor = System.Drawing.Color.White;
-            this.btnComunidad.Image = global::Proyecto_Presentacion.Properties.Resources.clientes;
-            this.btnComunidad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnComunidad.Location = new System.Drawing.Point(0, 265);
-            this.btnComunidad.Name = "btnComunidad";
-            this.btnComunidad.Size = new System.Drawing.Size(220, 50);
-            this.btnComunidad.TabIndex = 9;
-            this.btnComunidad.Text = "Comunidad";
-            this.btnComunidad.UseVisualStyleBackColor = true;
-            this.btnComunidad.Click += new System.EventHandler(this.btnComunidad_Click);
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel3.Location = new System.Drawing.Point(0, 209);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(5, 50);
-            this.panel3.TabIndex = 8;
-            // 
-            // btnAreaPersonal
-            // 
-            this.btnAreaPersonal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAreaPersonal.FlatAppearance.BorderSize = 0;
-            this.btnAreaPersonal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnAreaPersonal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnAreaPersonal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAreaPersonal.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAreaPersonal.ForeColor = System.Drawing.Color.White;
-            this.btnAreaPersonal.Image = global::Proyecto_Presentacion.Properties.Resources.reportes;
-            this.btnAreaPersonal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAreaPersonal.Location = new System.Drawing.Point(0, 209);
-            this.btnAreaPersonal.Name = "btnAreaPersonal";
-            this.btnAreaPersonal.Size = new System.Drawing.Size(220, 50);
-            this.btnAreaPersonal.TabIndex = 7;
-            this.btnAreaPersonal.Text = "Area Personal";
-            this.btnAreaPersonal.UseVisualStyleBackColor = true;
-            this.btnAreaPersonal.Click += new System.EventHandler(this.btnAreaPersonal_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel2.Location = new System.Drawing.Point(0, 153);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(5, 50);
-            this.panel2.TabIndex = 6;
-            // 
-            // btnCursos
-            // 
-            this.btnCursos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCursos.FlatAppearance.BorderSize = 0;
-            this.btnCursos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnCursos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCursos.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCursos.ForeColor = System.Drawing.Color.White;
-            this.btnCursos.Image = global::Proyecto_Presentacion.Properties.Resources.cursos;
-            this.btnCursos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCursos.Location = new System.Drawing.Point(0, 153);
-            this.btnCursos.Name = "btnCursos";
-            this.btnCursos.Size = new System.Drawing.Size(220, 50);
-            this.btnCursos.TabIndex = 5;
-            this.btnCursos.Text = "Cursos";
-            this.btnCursos.UseVisualStyleBackColor = true;
-            this.btnCursos.Click += new System.EventHandler(this.btnCursos_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel1.Location = new System.Drawing.Point(0, 97);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(5, 50);
-            this.panel1.TabIndex = 4;
-            // 
-            // btnPrincipal
-            // 
-            this.btnPrincipal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrincipal.FlatAppearance.BorderSize = 0;
-            this.btnPrincipal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnPrincipal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnPrincipal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrincipal.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrincipal.ForeColor = System.Drawing.Color.White;
-            this.btnPrincipal.Image = global::Proyecto_Presentacion.Properties.Resources.principal;
-            this.btnPrincipal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrincipal.Location = new System.Drawing.Point(0, 97);
-            this.btnPrincipal.Name = "btnPrincipal";
-            this.btnPrincipal.Size = new System.Drawing.Size(220, 50);
-            this.btnPrincipal.TabIndex = 3;
-            this.btnPrincipal.Text = "Principal";
-            this.btnPrincipal.UseVisualStyleBackColor = true;
-            this.btnPrincipal.Click += new System.EventHandler(this.btnPrincipal_Click);
-            // 
-            // pbOcultarMenu
-            // 
-            this.pbOcultarMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbOcultarMenu.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Mobile_Menu_Icon;
-            this.pbOcultarMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbOcultarMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbOcultarMenu.Location = new System.Drawing.Point(174, 3);
-            this.pbOcultarMenu.Name = "pbOcultarMenu";
-            this.pbOcultarMenu.Size = new System.Drawing.Size(40, 32);
-            this.pbOcultarMenu.TabIndex = 2;
-            this.pbOcultarMenu.TabStop = false;
-            this.pbOcultarMenu.Click += new System.EventHandler(this.pbOcultarMenu_Click);
-            // 
-            // pbTitulo
-            // 
-            this.pbTitulo.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.titulo;
-            this.pbTitulo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbTitulo.Location = new System.Drawing.Point(0, 51);
-            this.pbTitulo.Name = "pbTitulo";
-            this.pbTitulo.Size = new System.Drawing.Size(220, 40);
-            this.pbTitulo.TabIndex = 0;
-            this.pbTitulo.TabStop = false;
-            // 
-            // panelContenido
-            // 
-            this.panelContenido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenido.ForeColor = System.Drawing.Color.Black;
-            this.panelContenido.Location = new System.Drawing.Point(220, 32);
-            this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(916, 638);
-            this.panelContenido.TabIndex = 2;
-            // 
-            // tmOcultarMenu
-            // 
-            this.tmOcultarMenu.Interval = 10;
-            this.tmOcultarMenu.Tick += new System.EventHandler(this.tmOcultarMenu_Tick);
-            // 
-            // tmMostrarMenu
-            // 
-            this.tmMostrarMenu.Interval = 10;
-            this.tmMostrarMenu.Tick += new System.EventHandler(this.tmMostrarMenu_Tick);
-            // 
-            // tmOcultarLogin
-            // 
-            this.tmOcultarLogin.Interval = 10;
-            this.tmOcultarLogin.Tick += new System.EventHandler(this.tmOcultarLogin_Tick);
-            // 
-            // tmMostrarLogin
-            // 
-            this.tmMostrarLogin.Interval = 10;
-            this.tmMostrarLogin.Tick += new System.EventHandler(this.tmMostrarLogin_Tick);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // FormPrincipal
             // 
@@ -514,12 +526,12 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPrincipal_FormClosing);
             this.barraTitulo.ResumeLayout(false);
             this.barraTitulo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.menuLateral.ResumeLayout(false);
             this.panelLogin.ResumeLayout(false);
             this.panelLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOcultarMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -560,6 +572,7 @@
         private System.Windows.Forms.Timer tmOcultarLogin;
         private System.Windows.Forms.Timer tmMostrarLogin;
         private System.Windows.Forms.Button btnDividir;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 
