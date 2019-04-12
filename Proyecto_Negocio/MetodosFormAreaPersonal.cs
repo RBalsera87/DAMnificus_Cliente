@@ -18,9 +18,24 @@ namespace Proyecto_Negocio
             return cargado.recogidaNotas();
         }
 
-        public void cargarComboboxes (List<string>cursos, List<string> asignaturas, List<string> trimestres)
+        public void cargarCursos(List<string>cursos)
         {
-            cargado.cargadoComboboxes(cursos, asignaturas, trimestres);
+            cargado.cargadoCursos(cursos);
+        }
+
+        public void cargarAsignaturas(List<string>asignaturas, string curso)
+        {
+            cargado.cargadoAsignaturas(asignaturas, curso);
+        }
+
+        public void cargarTrimestres(List<string>trimestres, string asignatura)
+        {
+            cargado.cargadoTrimestres(trimestres, asignatura);
+        }
+
+        public void agregarNota(string asignatura, string trimestre, string nota)
+        {
+            cargado.cargarNuevaNota(asignatura, trimestre, nota);
         }
 
     }

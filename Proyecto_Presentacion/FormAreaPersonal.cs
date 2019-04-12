@@ -20,7 +20,7 @@ namespace Proyecto_Presentacion
         public FormAreaPersonal()
         {
             notas = met.cargarListaNotas();
-            met.cargarComboboxes(cursos, asignaturas, trimestres);
+            met.cargarCursos(cursos);
             InitializeComponent();
             DoubleBuffered = true;
 
@@ -28,17 +28,8 @@ namespace Proyecto_Presentacion
             {
                 cbCurso.Items.Add(aux);
             }
-            foreach (string aux in asignaturas)
-            {
-                cbAsignatura.Items.Add(aux);
-            }
-            foreach (string aux in trimestres)
-            {
-                cbTrimestre.Items.Add(aux);
-            }
+            
             cbCurso.SelectedIndex = 0;
-            cbAsignatura.SelectedIndex = 0;
-            //cbTrimestre.SelectedIndex = 0;
 
             graficaNotas.Series = new SeriesCollection
                 {
@@ -52,9 +43,8 @@ namespace Proyecto_Presentacion
             graficaNotas.AxisY.Add(new Axis
             {
                 Title = "ASIGNATURAS",
-                Labels = new[] { "Acceso", "Interfaces", "PSP", "Moviles", "FOL2", "Ingles", "SGE" }
+                Labels = new[] { "Acceso", "Interfaces", "PSP", "Moviles", "FOL2", "Ingles", "SGE", "Programacion", "BBDD", "Entornos", "Sistemas", "FOL1", "Marcas" }
             });
-
 
             Func<ChartPoint, string> labelPoint = chartPoint =>
                 string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
@@ -96,5 +86,38 @@ namespace Proyecto_Presentacion
 
         }
 
+        private void cbCurso_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string curso = cbCurso.SelectedItem.ToString();
+            this.cbAsignatura.Items.Clear();
+            this.cbTrimestre.Items.Clear();
+            asignaturas.Clear();
+            met.cargarAsignaturas(asignaturas, curso);
+            foreach (string aux in asignaturas)
+            {
+                cbAsignatura.Items.Add(aux);
+            }
+        }
+
+        private void cbAsignatura_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string asignatura = cbAsignatura.SelectedItem.ToString();
+            this.cbTrimestre.Items.Clear();
+            trimestres.Clear();
+            met.cargarTrimestres(trimestres, asignatura);
+            foreach (string aux in trimestres)
+            {
+                cbTrimestre.Items.Add(aux);
+            }
+        }
+
+        private void btnAgregarNota_Click(object sender, EventArgs e)
+        {
+            string asignatura = cbAsignatura.SelectedItem.ToString();
+            string trimestre = cbTrimestre.SelectedItem.ToString();
+            string nota = this.nota.Value.ToString();
+            nota = nota.Replace(",", ".");
+            met.agregarNota(asignatura, trimestre, nota);
+        }
     }
 }

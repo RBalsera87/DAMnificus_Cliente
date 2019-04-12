@@ -9,13 +9,13 @@ namespace Proyecto_AccesoDatos
 {
     public class CargadoAreaPersonal
     {
-        
 
+        private MySqlConnection conexion;
         public List<double> recogidaNotas()
         {
             List<double> notas = new List<double> { };
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
-            string query = "SELECT Nota FROM notas order by Asignatura asc";
+            string query = "SELECT Nota FROM notas WHERE Trimestre = 1 order by Asignatura asc";
             MySqlConnection databaseConnection = new MySqlConnection(connectionString);
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader;
@@ -45,7 +45,7 @@ namespace Proyecto_AccesoDatos
             return notas;
         }
 
-        public void cargadoComboboxes(List<string> cursos, List<string> asignaturas, List<string> trimestres)
+        public void cargadoCursos(List<string> cursos)
         {
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
             string query = "Select cast(Id as char(1)) from curso;";
@@ -69,20 +69,6 @@ namespace Proyecto_AccesoDatos
                     Console.WriteLine("No se encontraron datos.");
                 }
                 reader.Close();
-                query = "Select Nombre from asignaturas order by Id asc;";
-                commandDatabase = new MySqlCommand(query, databaseConnection);
-                MySqlDataReader reader2 = commandDatabase.ExecuteReader();
-                if (reader2.HasRows)
-                {
-                    while (reader2.Read())
-                    {
-                        asignaturas.Add(reader2.GetString(0));
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No se encontraron datos.");
-                }
                 databaseConnection.Close();
             }
             catch (Exception ex)
@@ -90,6 +76,87 @@ namespace Proyecto_AccesoDatos
                 
             }
 
+        }
+
+        public void cargadoAsignaturas(List<string>asignaturas, string curso)
+        {
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "Select Nombre from asignaturas where Curso = "+curso+" order by Id asc;";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        asignaturas.Add(reader.GetString(0));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontraron datos.");
+                }
+                reader.Close();
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public void cargadoTrimestres(List<string>trimestres, string asignatura)
+        {
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "Select distinct Trimestre from notas n inner join asignaturas a on n.Asignatura = a.Id where a.Nombre = '" + asignatura + "' order by Asignatura asc;";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        trimestres.Add(reader.GetString(0));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontraron datos.");
+                }
+                reader.Close();
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public void cargarNuevaNota(string asignatura, string trimestre, string nota)
+        {
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "UPDATE notas SET Nota = @nota WHERE Trimestre = @trimestre AND Asignatura = (SELECT Id FROM asignaturas WHERE Nombre = @asignatura) AND Usuario = @user;";
+            cmd.Parameters.AddWithValue("@nota", nota);
+            cmd.Parameters.AddWithValue("@trimestre", trimestre);
+            cmd.Parameters.AddWithValue("@asignatura", asignatura);
+            cmd.Parameters.AddWithValue("@user", 2);
+            conexion = new MySqlConnection(connectionString);
+            conexion.Open();
+            cmd.Connection = conexion;
+            cmd.ExecuteNonQuery();
+
+           
         }
     }
 }
