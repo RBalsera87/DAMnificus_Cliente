@@ -13,14 +13,39 @@ namespace Proyecto_Negocio
     public class MetodosFormAreaPersonal
     {
         Proyecto_AccesoDatos.CargadoAreaPersonal cargado = new Proyecto_AccesoDatos.CargadoAreaPersonal();
-        public List<double> cargarListaNotas()
+        public List<double> cargarListaNotasT1()
         {
-            return cargado.recogidaNotas();
+            return cargado.recogidaNotasT1();
         }
 
-        public void cargarComboboxes (List<string>cursos, List<string> asignaturas, List<string> trimestres)
+        public List<double> cargarListaNotasT2()
         {
-            cargado.cargadoComboboxes(cursos, asignaturas, trimestres);
+            return cargado.recogidaNotasT2();
+        }
+
+        public void cargarCursos(List<string>cursos)
+        {
+            cargado.cargadoCursos(cursos);
+        }
+
+        public void cargarAsignaturas(List<string>asignaturas, string curso)
+        {
+            cargado.cargadoAsignaturas(asignaturas, curso);
+        }
+
+        public void cargarTrimestres(List<string>trimestres, string asignatura)
+        {
+            cargado.cargadoTrimestres(trimestres, asignatura);
+        }
+
+        public void agregarNota(string asignatura, string trimestre, string nota)
+        {
+            cargado.cargarNuevaNota(asignatura, trimestre, nota);
+        }
+
+        public double mediaValoraciones()
+        {
+            return cargado.valoraciones();
         }
 
     }
