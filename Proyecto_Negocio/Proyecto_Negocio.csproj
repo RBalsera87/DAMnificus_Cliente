@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntidadesCompartidas">
+      <HintPath>..\..\..\DAMnificus_Compartido\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -43,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MetodosFormAreaPersonal.cs" />
+    <Compile Include="MetodosFormCursos.cs" />
     <Compile Include="MetodosFormPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Proyecto_AccesoDatos;
 using Proyecto_Negocio;
 
 namespace Proyecto_Presentacion
@@ -10,7 +9,6 @@ namespace Proyecto_Presentacion
     {
         
         MetodosFormPrincipal m = new MetodosFormPrincipal();
-        AccesoDatos ad = new AccesoDatos();
         public static string usuarioConectado = "";
         // Variables para el movimiento del formulario
         private bool agarrado = false;
@@ -162,7 +160,7 @@ namespace Proyecto_Presentacion
                 {
                     
                     lblConectado.Text = "Conectando...";
-                    string respuesta = await ad.comenzarLogin(usuario, pass);
+                    string respuesta = await m.conectarConServidor(usuario, pass);
                     if (respuesta.Equals("Acceso concedido"))
                     {
                         usuarioConectado = usuario;
@@ -185,7 +183,7 @@ namespace Proyecto_Presentacion
                 else
                 {
                     // Borra token y desconecta
-                    if (await ad.borrarToken(usuarioConectado))
+                    if (await m.borrarToken(usuarioConectado))
                     {
                         btnLogin.BackColor = Color.FromArgb(32, 32, 32);
                         btnLogin.Text = "Conectarse";
@@ -379,7 +377,7 @@ namespace Proyecto_Presentacion
         // Evento para borrar el token si el usuario sale de la aplicación sin desconectarse
         private async void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await ad.borrarToken(usuarioConectado);
+            await m.borrarToken(usuarioConectado);
         }
     }
 }

@@ -36,6 +36,9 @@
     <StartupObject>Proyecto_Presentacion.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntidadesCompartidas">
+      <HintPath>..\..\..\DAMnificus_Compartido\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll</HintPath>
+    </Reference>
     <Reference Include="ListViewPrinter, Version=2.7.1.31255, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.2.7.1.5\lib\ListViewPrinter.dll</HintPath>
       <Private>True</Private>
@@ -78,7 +81,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conexioncs.cs" />
     <Compile Include="FormAgregarNotas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,9 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Graficas\code\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
