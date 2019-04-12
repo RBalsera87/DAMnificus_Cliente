@@ -11,7 +11,7 @@ namespace Proyecto_AccesoDatos
     {
 
         private MySqlConnection conexion;
-        public List<double> recogidaNotas()
+        public List<double> recogidaNotasT1()
         {
             List<double> notas = new List<double> { };
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
@@ -40,6 +40,40 @@ namespace Proyecto_AccesoDatos
             catch (Exception ex)
             {
                 
+            }
+
+            return notas;
+        }
+
+        public List<double> recogidaNotasT2()
+        {
+            List<double> notas = new List<double> { };
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "SELECT Nota FROM notas WHERE Trimestre = 2 order by Asignatura asc";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        notas.Add((double)reader.GetDecimal(0));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontraron datos.");
+                }
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+
             }
 
             return notas;
@@ -157,6 +191,41 @@ namespace Proyecto_AccesoDatos
             cmd.ExecuteNonQuery();
 
            
+        }
+
+        public double valoraciones()
+        {
+            double salida = 0;
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "SELECT avg(Valoracion) FROM enlaces where Uploader = 2;";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                       salida = (double)reader.GetDecimal(0);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontraron datos.");
+                }
+                reader.Close();
+                databaseConnection.Close();
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return salida;
         }
     }
 }

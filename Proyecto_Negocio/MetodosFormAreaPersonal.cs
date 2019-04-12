@@ -13,9 +13,14 @@ namespace Proyecto_Negocio
     public class MetodosFormAreaPersonal
     {
         Proyecto_AccesoDatos.CargadoAreaPersonal cargado = new Proyecto_AccesoDatos.CargadoAreaPersonal();
-        public List<double> cargarListaNotas()
+        public List<double> cargarListaNotasT1()
         {
-            return cargado.recogidaNotas();
+            return cargado.recogidaNotasT1();
+        }
+
+        public List<double> cargarListaNotasT2()
+        {
+            return cargado.recogidaNotasT2();
         }
 
         public void cargarCursos(List<string>cursos)
@@ -36,6 +41,11 @@ namespace Proyecto_Negocio
         public void agregarNota(string asignatura, string trimestre, string nota)
         {
             cargado.cargarNuevaNota(asignatura, trimestre, nota);
+        }
+
+        public double mediaValoraciones()
+        {
+            return cargado.valoraciones();
         }
 
     }
