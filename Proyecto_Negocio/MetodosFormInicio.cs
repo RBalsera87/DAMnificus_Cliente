@@ -28,8 +28,17 @@ namespace Proyecto_Negocio
         }
         public async Task<string> enviarEmailparaRegistro(string usuario, string pass, Dictionary<string, string> datos)
         {
-
             return await ad.enviarEmailparaRegistro(usuario, pass, datos);
+        }
+        public async Task<bool> buscarEnBD(string modo, string elemento)
+        {
+            if (modo.Equals("email"))
+            {
+                return await ad.buscarEmailEnBD(elemento);
+            }else
+            {
+                return await ad.buscarUsuarioEnBD(elemento);
+            }
         }
     }
 }

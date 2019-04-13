@@ -22,6 +22,7 @@ namespace Proyecto_Presentacion
         private bool userValido = false;
         private bool passValido = false;
 
+        private Dictionary<string, string> datos = new Dictionary<string, string>();
         private string token = "";
 
         public FormInicio()
@@ -30,7 +31,16 @@ namespace Proyecto_Presentacion
             this.DoubleBuffered = true;
 
         }
-
+        /*****************
+         * Evento onLoad *
+         *****************/
+        private void FormInicio_Load(object sender, EventArgs e)
+        {
+            if (!UsuarioConectado.nombre.Equals("invitado"))
+            {
+                this.btnRegistro.Visible = false;
+            }
+        }
         /****************************
          * Eventos para los botones *
          ****************************/
@@ -52,7 +62,7 @@ namespace Proyecto_Presentacion
 
         private async void btnAceptar_Click(object sender, EventArgs e)
         {
-            Dictionary<string, string> datos = new Dictionary<string, string>();
+            datos.Clear();
             datos.Add("nombre", tbNombre.Text);
             datos.Add("apellidos", tbApellidos.Text);
             datos.Add("email", tbEmail.Text);
@@ -78,7 +88,7 @@ namespace Proyecto_Presentacion
             this.panelInicio.Visible = true;
             this.panelToken.Visible = false;
             // Meter al usuario en BBDD
-            this.lblBienvenido.Text = "¡Usuario registrado exitósamente!";
+            this.lblBienvenido.Text = "¡Registrado exitósamente!";
             this.btnRegistro.Visible = false;
             // else this.lblBienvenido.Text = "¡Error al registrar usuario";
         }
@@ -86,6 +96,7 @@ namespace Proyecto_Presentacion
         private void btnCancelarToken_Click(object sender, EventArgs e)
         {
             this.panelInicio.Visible = true;
+            this.tbToken.Clear();
             this.panelToken.Visible = false;
         }
 
@@ -116,7 +127,7 @@ namespace Proyecto_Presentacion
             {
                 this.pbApell.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipApellidos.SetToolTip(pbApell, "Debes rellenar tus apellidos");
-                this.toolTipNombre.Show("Debes rellenar tus apellidos", this.tbApellidos, 1000);
+                this.toolTipApellidos.Show("Debes rellenar tus apellidos", this.tbApellidos, 1000);
                 this.apellidosValido = false;
             }
             else
@@ -128,32 +139,41 @@ namespace Proyecto_Presentacion
             activarBotonAceptar();
         }
 
-        private void tbEmail_Leave(object sender, EventArgs e)
+        private async void tbEmail_Leave(object sender, EventArgs e)
         {
-            if (this.tbEmail.Text == "")
+            string emailIntroducido = this.tbEmail.Text;
+            if (emailIntroducido == "")
             {
                 this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipEmail.SetToolTip(pbEmail, "Debes poner una direccion email");
-                this.toolTipNombre.Show("Debes poner una direccion email", this.tbEmail, 1000);
+                this.toolTipEmail.Show("Debes poner una direccion email", this.tbEmail, 1000);
                 this.emailValido = false;
             }
             else
             {
 
-                if (m.comprobarEmailValido(this.tbEmail.Text))
+                if (m.comprobarEmailValido(emailIntroducido))
                 {
-                    //Aqui se debe comprobar k no exista en la base de datos
-                    //si no existe se pone OK
-                    //si existe imagen error
-                    this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                    this.toolTipEmail.SetToolTip(pbEmail, "Correcto");
-                    this.emailValido = true;
+                    //Aqui se comprueba k no exista ya en la base de datos
+                    if (await m.buscarEnBD("email", emailIntroducido)) // True = duplicado
+                    {
+                        this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.error;
+                        this.toolTipEmail.SetToolTip(pbEmail, "Esta direccion email ya esta registrada");
+                        this.toolTipEmail.Show("Esta direccion email ya esta registrada", this.tbEmail, 1000);
+                        this.emailValido = false;
+                    }else
+                    {
+                        this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                        this.toolTipEmail.SetToolTip(pbEmail, "Correcto");
+                        this.emailValido = true;
+                    }
+                    
                 }
                 else
                 {
-                    this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.error;
+                    this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.problem;
                     this.toolTipEmail.SetToolTip(pbEmail, "Esta direccion email no parece válida");
-                    this.toolTipNombre.Show("Esta direccion email no parece válida", this.tbEmail, 1000);
+                    this.toolTipEmail.Show("Esta direccion email no parece válida", this.tbEmail, 1000);
                     this.emailValido = false;
                 }
                 activarBotonAceptar();
@@ -161,23 +181,33 @@ namespace Proyecto_Presentacion
             
         }
 
-        private void tbUsuario_Leave(object sender, EventArgs e)
+        private async void tbUsuario_Leave(object sender, EventArgs e)
         {
-            if (this.tbUsuario.Text == "")
+            string usuarioIntroducido = this.tbUsuario.Text;
+            if (usuarioIntroducido == "")
             {
                 this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipUsuario.SetToolTip(pbUser, "Debes poner un nombre de usuario");
-                this.toolTipNombre.Show("Debes poner un nombre de usuario", this.tbUsuario, 1000);
+                this.toolTipUsuario.Show("Debes poner un nombre de usuario", this.tbUsuario, 1000);
                 this.userValido = false;
             }
             else
             {
-                //Aqui se debe comprobar k no exista en la base de datos
-                //si no existe se pone OK
-                //si existe imagen error
-                this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipUsuario.SetToolTip(pbUser, "Correcto");
-                this.userValido = true;
+                //Aqui se comprueba k no exista ya en la base de datos
+                if (await m.buscarEnBD("user", usuarioIntroducido)) // True = duplicado
+                {
+                    this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.error;
+                    this.toolTipUsuario.SetToolTip(pbUser, "Este nombre de usuario ya esta registrado");
+                    this.toolTipUsuario.Show("Este nombre de usuario ya esta registrado", this.pbUser, 1000);
+                    this.emailValido = false;
+                }
+                else
+                {
+                    this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                    this.toolTipUsuario.SetToolTip(pbUser, "Correcto");
+                    this.userValido = true;
+                }
+                
             }
             activarBotonAceptar();
         }
@@ -187,7 +217,7 @@ namespace Proyecto_Presentacion
             {
                 this.pbPass1.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipPass1.SetToolTip(pbPass1, "Debes poner una contraseña");
-                this.toolTipNombre.Show("Debes poner una contraseña", this.tbPass, 1000);
+                this.toolTipPass1.Show("Debes poner una contraseña", this.tbPass, 1000);
             }
             else
             {
@@ -203,7 +233,7 @@ namespace Proyecto_Presentacion
             {
                 this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipPass2.SetToolTip(pbPass2, "Vuelve a escribir la contraseña");
-                this.toolTipNombre.Show("Vuelve a escribir la contraseña", this.tbPass2, 1000);
+                this.toolTipPass2.Show("Vuelve a escribir la contraseña", this.tbPass2, 1000);
                 passValido = false;
             }
             else if (!this.tbPass.Text.Equals(this.tbPass2.Text))
@@ -228,10 +258,26 @@ namespace Proyecto_Presentacion
             }
             activarBotonAceptar();
         }
+        private void tbToken_TextChanged(object sender, EventArgs e)
+        {
+            if (tbToken.Text.Length > 0 && tbToken.Text.Equals(token))
+            {
+                this.pbToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                this.toolTipToken.SetToolTip(pbToken, "Token correcto");
+                btnAceptarToken.Enabled = true;
+            }
+            else
+            {
+                this.pbToken.Image = Proyecto_Presentacion.Properties.Resources.error;
+                this.toolTipToken.SetToolTip(pbToken, "El token no parece válido");
+                this.toolTipToken.Show("El token no parece válido", this.tbToken, 1000);
+                btnAceptarToken.Enabled = false;
+            }
+        }
 
-       /**********************************************
-        * Métodos internos para el Formulario Inicio *
-        **********************************************/
+        /**********************************************
+         * Métodos internos para el Formulario Inicio *
+         **********************************************/
         private void activarBotonAceptar()
         {
             if (nombreValido && apellidosValido && emailValido && userValido && passValido)
@@ -270,30 +316,7 @@ namespace Proyecto_Presentacion
             this.pbPass1.Image = null;
             this.pbPass2.Image = null;
         }
-
-        private void tbToken_TextChanged(object sender, EventArgs e)
-        {
-            if (tbToken.Text.Length > 0 && tbToken.Text.Equals(token))
-            {
-                this.pbToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipToken.SetToolTip(pbToken, "Token correcto");
-                btnAceptarToken.Enabled = true;
-            }else
-            {
-                this.pbToken.Image = Proyecto_Presentacion.Properties.Resources.error;
-                this.toolTipToken.SetToolTip(pbToken, "El token no parece válido");
-                this.toolTipToken.Show("El token no parece válido", this.tbToken, 1000);
-                btnAceptarToken.Enabled = false;
-            }
-        }
-
-        private void FormInicio_Load(object sender, EventArgs e)
-        {
-            if (!UsuarioConectado.nombre.Equals("invitado"))
-            {
-                this.btnRegistro.Visible = false;
-            }
-        }
+    
     }
     
 }

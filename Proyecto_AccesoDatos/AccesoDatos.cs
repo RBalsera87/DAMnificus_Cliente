@@ -58,8 +58,8 @@ namespace Proyecto_AccesoDatos
             string passCifrado = null;
             string tokenCifrado = null;
             string usuarioCifrado = null;
-            try
-            {
+            //try
+            //{
                 if (pass != null)
                 {
                     passCifrado = CifradoJson.Cifrado(pass, pet);
@@ -68,7 +68,10 @@ namespace Proyecto_AccesoDatos
                 {
                     tokenCifrado = CifradoJson.Cifrado(token, pet);
                 }
+                if (user != null)
+                {
                 usuarioCifrado = CifradoJson.Cifrado(user, pet);
+                }                
                 var peticionActual = new Peticion
                 {
                     peticion = pet,
@@ -109,12 +112,12 @@ namespace Proyecto_AccesoDatos
                     }
                     
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: {0}", e);
-                return null;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine("Exception: {0}", e);
+            //    return null;
+            //}
         }
         public async Task<bool> borrarToken(string usuario)
         {
@@ -149,6 +152,32 @@ namespace Proyecto_AccesoDatos
             else
             {
                 return "emailNoEnviado";
+            }
+        }
+        public async Task<bool> buscarEmailEnBD(string emailABuscar)
+        {
+            Dictionary<string, string> email = new Dictionary<string, string>();
+            email.Add("email", emailABuscar);
+            Respuesta respuesta = await enviarPeticion("buscaEmailenBD", null, null, null, email);
+            if (respuesta.respuesta.Equals("duplicado"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<bool> buscarUsuarioEnBD(string usuarioABuscar)
+        {
+            Respuesta respuesta = await enviarPeticion("buscaUsuarioenBD", usuarioABuscar, null, null, null);
+            if (respuesta.respuesta.Equals("duplicado"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
