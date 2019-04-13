@@ -9,7 +9,7 @@ namespace Proyecto_Presentacion
     {
         
         MetodosFormPrincipal m = new MetodosFormPrincipal();
-        public static string usuarioConectado = "";
+        
         // Variables para el movimiento del formulario
         private bool agarrado = false;
         private bool maximizado = false;
@@ -19,6 +19,9 @@ namespace Proyecto_Presentacion
         private const int WM_NCHITTEST = 132;
         private const int HTBOTTOMRIGHT = 17;
         private Rectangle sizeGripRectangle;
+        // Variables para los tooltips de validación
+        private ToolTip toolTipUsuario = new ToolTip();
+        private ToolTip toolTipPass = new ToolTip();
         // Variables para division del formulario
         private Size oldSize;
         private Point oldPosition;
@@ -136,6 +139,7 @@ namespace Proyecto_Presentacion
         {
 
             m.restaurarColorBotones(this.menuLateral);
+            //if (UsuarioConectado.nombre.Equals("invitado"))
             this.btnAreaPersonal.BackColor = Color.FromArgb(73, 55, 34);
             m.abrirFormEnPanel(new FormAreaPersonal(), this.panelContenido);
         }
@@ -151,62 +155,66 @@ namespace Proyecto_Presentacion
             m.restaurarColorBotones(this.menuLateral);
             this.btnConfiguracion.BackColor = Color.FromArgb(73, 55, 34);
         }
-        private async void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-
             if (menuLateral.Width >= 220)
             {
                 string usuario = tbUsuario.Text;
                 string pass = tbPass.Text;
-                if (usuarioConectado.Equals(""))
-                {
-                    
-                    lblConectado.Text = "Conectando...";
-                    string respuesta = await m.conectarConServidor(usuario, pass);
-                    if (respuesta.Equals("Acceso concedido"))
-                    {
-                        usuarioConectado = usuario;
-                        lblConectado.Text = "Conectando como " + usuario;
-                        btnLogin.Text = "Desconectarse";
-                        btnLogin.BackColor = Color.FromArgb(91, 183, 108);
-                        m.ocultarLogin(this.tmOcultarLogin);
-                        tbUsuario.Text = "";
-                        tbPass.Text = "";
-
-                    }
-                    else
-                    {
-                        MessageBox.Show(respuesta);
-                        lblConectado.Text = "Conectado como invitado";
-                        
-                    }
-
-                }
-                else
-                {
-                    // Borra token y desconecta
-                    if (await m.borrarToken(usuarioConectado))
-                    {
-                        btnLogin.BackColor = Color.FromArgb(32, 32, 32);
-                        btnLogin.Text = "Conectarse";
-                        lblConectado.Text = "Conectado como invitado";
-                        m.mostrarLogin(this.tmMostrarLogin);
-                        usuarioConectado = "";
-                    }else
-                    {
-                        MessageBox.Show("Error al borrar token");
-                    }
-                    
-                }
+                accionLogearDesloguear(usuario, pass);
             }
             else
             {
-            this.tmMostrarMenu.Enabled = true;
-            this.lblUsuario.Visible = true;
-            this.lblPass.Visible = true;
-            this.lblConectado.Visible = true;
+                this.tmMostrarMenu.Enabled = true;
+                this.lblUsuario.Visible = true;
+                this.lblPass.Visible = true;
+                this.lblConectado.Visible = true;
             }
-        }    
+            
+        }
+        /********************************
+         * Eventos para el menu lateral *
+         ********************************/
+        private void tbUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (UsuarioConectado.nombre.Equals("invitado"))
+                {
+                    accionLogearDesloguear(tbUsuario.Text, tbPass.Text);
+                }
+
+            }
+            else if (Char.IsLetterOrDigit(e.KeyChar)|| e.KeyChar == '\b') // Permitimos BackSpace
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (UsuarioConectado.nombre.Equals("invitado"))
+                {
+                    accionLogearDesloguear(tbUsuario.Text, tbPass.Text);
+                }
+
+            }
+            else if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                this.toolTipPass.Show("Caracter no permitido, solo letras y numeros", this.tbPass, 1000);
+            }
+        }
 
         /********************************
          * Eventos para el menu lateral *
@@ -230,7 +238,11 @@ namespace Proyecto_Presentacion
             if (menuLateral.Width >= 220)
             {
                 this.tmMostrarMenu.Enabled = false;
-
+                this.lblUsuario.Visible = true;
+                this.lblPass.Visible = true;
+                this.lblConectado.Visible = true;
+                this.tbUsuario.Visible = true;
+                this.tbPass.Visible = true;
             }
             else
             {
@@ -247,13 +259,13 @@ namespace Proyecto_Presentacion
                 this.lblUsuario.Visible = false;
                 this.lblPass.Visible = false;
                 this.lblConectado.Visible = false;
+                this.tbUsuario.Visible = false;
+                this.tbPass.Visible = false;
             }
             else if (menuLateral.Width == 55)
             {
                 this.tmMostrarMenu.Enabled = true;
-                this.lblUsuario.Visible = true;
-                this.lblPass.Visible = true;
-                this.lblConectado.Visible = true;
+                             
             }
         }
         private void tmOcultarLogin_Tick(object sender, EventArgs e)
@@ -379,7 +391,65 @@ namespace Proyecto_Presentacion
         // Evento para borrar el token si el usuario sale de la aplicación sin desconectarse
         private async void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await m.borrarToken(usuarioConectado);
+            await m.borrarToken(UsuarioConectado.nombre);
+        }
+
+
+
+        private async void accionLogearDesloguear(string usuario, string pass)
+        {
+            if (usuario.Equals("") && btnLogin.Text.Equals("Conectarse"))
+            {
+                this.toolTipUsuario.Show("Escribe primero tu nombre de usuario", this.tbUsuario, 1000);
+            }
+            else if (pass.Equals("") && btnLogin.Text.Equals("Conectarse"))
+            {
+                this.toolTipPass.Show("Escribe tambien tu contraseña", this.tbPass, 1000);
+            }
+            else
+            {
+                if (UsuarioConectado.nombre.Equals("invitado"))
+                {
+
+                    lblConectado.Text = "Conectando...";
+                    string respuesta = await m.conectarConServidor(usuario, pass);
+                    if (respuesta.Equals("Acceso concedido"))
+                    {
+                        UsuarioConectado.nombre = usuario;
+                        lblConectado.Text = "Conectando como " + usuario;
+                        btnLogin.Text = "Desconectarse";
+                        btnLogin.BackColor = Color.FromArgb(91, 183, 108);
+                        m.ocultarLogin(this.tmOcultarLogin);
+                        tbUsuario.Text = "";
+                        tbPass.Text = "";
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(respuesta);
+                        lblConectado.Text = "Conectado como invitado";
+
+                    }
+
+                }
+                else
+                {
+                    // Borra token y desconecta
+                    if (await m.borrarToken(UsuarioConectado.nombre))
+                    {
+                        btnLogin.BackColor = Color.FromArgb(32, 32, 32);
+                        btnLogin.Text = "Conectarse";
+                        lblConectado.Text = "Conectado como invitado";
+                        m.mostrarLogin(this.tmMostrarLogin);
+                        UsuarioConectado.nombre = "invitado";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al borrar token");
+                    }
+                }
+            }
+            
         }
     }
 }

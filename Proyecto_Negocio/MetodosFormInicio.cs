@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EntidadesCompartidas;
+using Proyecto_AccesoDatos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,7 @@ namespace Proyecto_Negocio
     ****************************************/
     public class MetodosFormInicio
     {
+        AccesoDatos ad = new AccesoDatos();
         public bool comprobarEmailValido(string email)
         {
             try
@@ -22,6 +25,11 @@ namespace Proyecto_Negocio
             {
                 return false;
             }
+        }
+        public async Task<string> enviarEmailparaRegistro(string usuario, string pass, Dictionary<string, string> datos)
+        {
+
+            return await ad.enviarEmailparaRegistro(usuario, pass, datos);
         }
     }
 }

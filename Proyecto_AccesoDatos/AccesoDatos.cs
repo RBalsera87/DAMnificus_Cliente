@@ -20,7 +20,7 @@ namespace Proyecto_AccesoDatos
         public async Task<string> comenzarLogin(string usuario, string clave)
         {
             //Peticion para que nos devuelva una respuesta con la sal que necesitamos
-            Respuesta respConSal = await this.enviarPeticion("requestSalt", usuario, null, null);
+            Respuesta respConSal = await this.enviarPeticion("requestSalt", usuario, null, null, null);
             //Si al hacer la peticion el servidor esta caido devuelve un null
             if (respConSal != null)
             {
@@ -34,7 +34,7 @@ namespace Proyecto_AccesoDatos
                     // Encripta clave con la "sal" recibida
                     string PassEncriptado = Clave.encriptarClaveConexion(clave, respConSal.salt);
                     // Petición enviando clave encriptada si es correcta nos devolvera el "Token"
-                    Respuesta respConToken = await this.enviarPeticion("login", usuario, PassEncriptado, null);
+                    Respuesta respConToken = await this.enviarPeticion("login", usuario, PassEncriptado, null, null);
                     // Asignamos nuestro token
                     if (respConToken.respuesta.Equals("passValida"))
                     {
@@ -53,7 +53,7 @@ namespace Proyecto_AccesoDatos
                 return "Servidor caido";
             }
         }
-        public async Task<Respuesta> enviarPeticion(string pet, string user, string pass, string token)
+        public async Task<Respuesta> enviarPeticion(string pet, string user, string pass, string token, Dictionary<string, string> registro)
         {
             string passCifrado = null;
             string tokenCifrado = null;
@@ -74,7 +74,8 @@ namespace Proyecto_AccesoDatos
                     peticion = pet,
                     usuario = usuarioCifrado,
                     clave = passCifrado,
-                    token = tokenCifrado
+                    token = tokenCifrado,
+                    datos = registro
                 };
                 // Serializa nuestra clase en una cadena JSON
                 var stringPeticion = await Task.Run(() => JsonConvert.SerializeObject(peticionActual));
@@ -119,7 +120,7 @@ namespace Proyecto_AccesoDatos
         {
             if (token != "")
             {
-                Respuesta respuesta = await enviarPeticion("borrarToken", usuario, null, token);
+                Respuesta respuesta = await enviarPeticion("borrarToken", usuario, null, token, null);
                 if (respuesta.respuesta.Equals("tokenBorrado"))
                 {
                     token = "";
@@ -135,9 +136,20 @@ namespace Proyecto_AccesoDatos
         public async Task<List<Enlaces>> obtenerEnlaces(string usuario)
         {
             if (token.Equals("")) { token = null; }
-            Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token);
+            Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token, null);
             return respuesta.coleccion;
         }
-
+        public async Task<string> enviarEmailparaRegistro(string usuario, string pass, Dictionary<string, string> datos)
+        {
+            Respuesta respuesta = await enviarPeticion("emailRegistro", usuario, pass, null, datos);
+            if (respuesta.respuesta.Equals("emailConTokenEnviado"))
+            {
+                return respuesta.token;
+            }
+            else
+            {
+                return "emailNoEnviado";
+            }
+        }
     }
 }

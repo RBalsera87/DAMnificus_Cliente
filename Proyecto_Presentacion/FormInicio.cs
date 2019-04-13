@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Proyecto_Negocio;
+using System.Collections.Generic;
 
 namespace Proyecto_Presentacion
 {
@@ -13,12 +14,15 @@ namespace Proyecto_Presentacion
         private ToolTip toolTipUsuario = new ToolTip();
         private ToolTip toolTipPass1 = new ToolTip();
         private ToolTip toolTipPass2 = new ToolTip();
+        private ToolTip toolTipToken = new ToolTip();
 
         private bool nombreValido = false;
         private bool apellidosValido = false;
         private bool emailValido = false;
         private bool userValido = false;
         private bool passValido = false;
+
+        private string token = "";
 
         public FormInicio()
         {
@@ -32,21 +36,57 @@ namespace Proyecto_Presentacion
          ****************************/
         private void btnRegistro_Click(object sender, EventArgs e)
         {
+            this.panelInicio.Visible = false;
             this.panelRegistro.Visible = true;
             this.tbNombre.Focus();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            this.panelInicio.Visible = true;
             this.panelRegistro.Visible = false;
             resetearTextboxes();
             resetearPictureBoxes();
             resetearTooltips();
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
-            
+            Dictionary<string, string> datos = new Dictionary<string, string>();
+            datos.Add("nombre", tbNombre.Text);
+            datos.Add("apellidos", tbApellidos.Text);
+            datos.Add("email", tbEmail.Text);
+
+            string respuesta = await m.enviarEmailparaRegistro(tbUsuario.Text, tbPass.Text, datos);
+            if (respuesta.Equals("emailNoEnviado")) 
+            {
+                MessageBox.Show("Error al enviar el email, ver consola de servidor");
+            }
+            else
+            {
+                this.panelRegistro.Visible = false;
+                this.panelToken.Visible = true;
+                token = respuesta;
+                resetearTextboxes();
+                resetearPictureBoxes();
+                resetearTooltips();
+            }
+
+        }
+        private void btnAceptarToken_Click(object sender, EventArgs e)
+        {
+            this.panelInicio.Visible = true;
+            this.panelToken.Visible = false;
+            // Meter al usuario en BBDD
+            this.lblBienvenido.Text = "¡Usuario registrado exitósamente!";
+            this.btnRegistro.Visible = false;
+            // else this.lblBienvenido.Text = "¡Error al registrar usuario";
+        }
+
+        private void btnCancelarToken_Click(object sender, EventArgs e)
+        {
+            this.panelInicio.Visible = true;
+            this.panelToken.Visible = false;
         }
 
         /******************************
@@ -231,6 +271,29 @@ namespace Proyecto_Presentacion
             this.pbPass2.Image = null;
         }
 
+        private void tbToken_TextChanged(object sender, EventArgs e)
+        {
+            if (tbToken.Text.Length > 0 && tbToken.Text.Equals(token))
+            {
+                this.pbToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                this.toolTipToken.SetToolTip(pbToken, "Token correcto");
+                btnAceptarToken.Enabled = true;
+            }else
+            {
+                this.pbToken.Image = Proyecto_Presentacion.Properties.Resources.error;
+                this.toolTipToken.SetToolTip(pbToken, "El token no parece válido");
+                this.toolTipToken.Show("El token no parece válido", this.tbToken, 1000);
+                btnAceptarToken.Enabled = false;
+            }
+        }
+
+        private void FormInicio_Load(object sender, EventArgs e)
+        {
+            if (!UsuarioConectado.nombre.Equals("invitado"))
+            {
+                this.btnRegistro.Visible = false;
+            }
+        }
     }
     
 }

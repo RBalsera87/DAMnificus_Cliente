@@ -30,46 +30,46 @@
         {
             this.components = new System.ComponentModel.Container();
             this.barraTitulo = new System.Windows.Forms.Panel();
+            this.btnDividir = new System.Windows.Forms.Button();
+            this.pbIcono = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.btnRestaurar = new System.Windows.Forms.Button();
+            this.btnMinimizar = new System.Windows.Forms.Button();
+            this.btnMaximizar = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
             this.menuLateral = new System.Windows.Forms.Panel();
             this.lblConectado = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.panelLogin = new System.Windows.Forms.Panel();
             this.lblPass = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.tbPass = new System.Windows.Forms.TextBox();
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnConfiguracion = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnComunidad = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnAreaPersonal = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnCursos = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPrincipal = new System.Windows.Forms.Button();
+            this.pbOcultarMenu = new System.Windows.Forms.PictureBox();
+            this.pbTitulo = new System.Windows.Forms.PictureBox();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.tmOcultarMenu = new System.Windows.Forms.Timer(this.components);
             this.tmMostrarMenu = new System.Windows.Forms.Timer(this.components);
             this.tmOcultarLogin = new System.Windows.Forms.Timer(this.components);
             this.tmMostrarLogin = new System.Windows.Forms.Timer(this.components);
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnConfiguracion = new System.Windows.Forms.Button();
-            this.btnComunidad = new System.Windows.Forms.Button();
-            this.btnAreaPersonal = new System.Windows.Forms.Button();
-            this.btnCursos = new System.Windows.Forms.Button();
-            this.btnPrincipal = new System.Windows.Forms.Button();
-            this.pbOcultarMenu = new System.Windows.Forms.PictureBox();
-            this.pbTitulo = new System.Windows.Forms.PictureBox();
-            this.btnDividir = new System.Windows.Forms.Button();
-            this.pbIcono = new System.Windows.Forms.PictureBox();
-            this.btnRestaurar = new System.Windows.Forms.Button();
-            this.btnMinimizar = new System.Windows.Forms.Button();
-            this.btnMaximizar = new System.Windows.Forms.Button();
-            this.btnCerrar = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.barraTitulo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.menuLateral.SuspendLayout();
             this.panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOcultarMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.SuspendLayout();
             // 
             // barraTitulo
@@ -89,6 +89,33 @@
             this.barraTitulo.TabIndex = 0;
             this.barraTitulo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.barraTitulo_MouseDoubleClick);
             // 
+            // btnDividir
+            // 
+            this.btnDividir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDividir.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_dividir;
+            this.btnDividir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDividir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDividir.FlatAppearance.BorderSize = 0;
+            this.btnDividir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDividir.Location = new System.Drawing.Point(1008, 0);
+            this.btnDividir.Name = "btnDividir";
+            this.btnDividir.Size = new System.Drawing.Size(32, 32);
+            this.btnDividir.TabIndex = 6;
+            this.btnDividir.TabStop = false;
+            this.btnDividir.UseVisualStyleBackColor = true;
+            this.btnDividir.Click += new System.EventHandler(this.btnDividir_Click);
+            // 
+            // pbIcono
+            // 
+            this.pbIcono.Enabled = false;
+            this.pbIcono.Image = global::Proyecto_Presentacion.Properties.Resources.principal;
+            this.pbIcono.Location = new System.Drawing.Point(3, 3);
+            this.pbIcono.Name = "pbIcono";
+            this.pbIcono.Size = new System.Drawing.Size(27, 26);
+            this.pbIcono.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbIcono.TabIndex = 5;
+            this.pbIcono.TabStop = false;
+            // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
@@ -99,6 +126,70 @@
             this.lblTitulo.Size = new System.Drawing.Size(148, 25);
             this.lblTitulo.TabIndex = 4;
             this.lblTitulo.Text = "DAMnificus App";
+            // 
+            // btnRestaurar
+            // 
+            this.btnRestaurar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRestaurar.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_Restaurar;
+            this.btnRestaurar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRestaurar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRestaurar.FlatAppearance.BorderSize = 0;
+            this.btnRestaurar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestaurar.Location = new System.Drawing.Point(1072, 0);
+            this.btnRestaurar.Name = "btnRestaurar";
+            this.btnRestaurar.Size = new System.Drawing.Size(32, 32);
+            this.btnRestaurar.TabIndex = 3;
+            this.btnRestaurar.TabStop = false;
+            this.btnRestaurar.UseVisualStyleBackColor = true;
+            this.btnRestaurar.Visible = false;
+            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
+            // 
+            // btnMinimizar
+            // 
+            this.btnMinimizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinimizar.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_Minimizar;
+            this.btnMinimizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMinimizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMinimizar.FlatAppearance.BorderSize = 0;
+            this.btnMinimizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimizar.Location = new System.Drawing.Point(1040, 0);
+            this.btnMinimizar.Name = "btnMinimizar";
+            this.btnMinimizar.Size = new System.Drawing.Size(32, 32);
+            this.btnMinimizar.TabIndex = 2;
+            this.btnMinimizar.TabStop = false;
+            this.btnMinimizar.UseVisualStyleBackColor = true;
+            this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
+            // 
+            // btnMaximizar
+            // 
+            this.btnMaximizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMaximizar.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_Maximizar;
+            this.btnMaximizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMaximizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMaximizar.FlatAppearance.BorderSize = 0;
+            this.btnMaximizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaximizar.Location = new System.Drawing.Point(1072, 0);
+            this.btnMaximizar.Name = "btnMaximizar";
+            this.btnMaximizar.Size = new System.Drawing.Size(32, 32);
+            this.btnMaximizar.TabIndex = 1;
+            this.btnMaximizar.UseVisualStyleBackColor = true;
+            this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerrar.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_cerrar_FN;
+            this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCerrar.FlatAppearance.BorderSize = 0;
+            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrar.Location = new System.Drawing.Point(1104, 0);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(32, 32);
+            this.btnCerrar.TabIndex = 0;
+            this.btnCerrar.TabStop = false;
+            this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // menuLateral
             // 
@@ -128,11 +219,11 @@
             // lblConectado
             // 
             this.lblConectado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblConectado.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConectado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConectado.ForeColor = System.Drawing.Color.White;
-            this.lblConectado.Location = new System.Drawing.Point(3, 479);
+            this.lblConectado.Location = new System.Drawing.Point(3, 487);
             this.lblConectado.Name = "lblConectado";
-            this.lblConectado.Size = new System.Drawing.Size(214, 22);
+            this.lblConectado.Size = new System.Drawing.Size(214, 14);
             this.lblConectado.TabIndex = 18;
             this.lblConectado.Text = "Conectado como invitado";
             this.lblConectado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -145,6 +236,27 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(5, 50);
             this.panel7.TabIndex = 17;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
+            this.btnLogin.Image = global::Proyecto_Presentacion.Properties.Resources.empleados;
+            this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogin.Location = new System.Drawing.Point(0, 588);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(220, 50);
+            this.btnLogin.TabIndex = 16;
+            this.btnLogin.TabStop = false;
+            this.btnLogin.Text = "Conectarse";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // panelLogin
             // 
@@ -191,6 +303,7 @@
             this.tbPass.PasswordChar = '●';
             this.tbPass.Size = new System.Drawing.Size(143, 25);
             this.tbPass.TabIndex = 1;
+            this.tbPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPass_KeyPress);
             // 
             // tbUsuario
             // 
@@ -201,6 +314,7 @@
             this.tbUsuario.Name = "tbUsuario";
             this.tbUsuario.Size = new System.Drawing.Size(143, 25);
             this.tbUsuario.TabIndex = 0;
+            this.tbUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbUsuario_KeyPress);
             // 
             // panel5
             // 
@@ -209,89 +323,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(5, 50);
             this.panel5.TabIndex = 12;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel4.Location = new System.Drawing.Point(0, 265);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(5, 50);
-            this.panel4.TabIndex = 10;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel3.Location = new System.Drawing.Point(0, 209);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(5, 50);
-            this.panel3.TabIndex = 8;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel2.Location = new System.Drawing.Point(0, 153);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(5, 50);
-            this.panel2.TabIndex = 6;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel1.Location = new System.Drawing.Point(0, 97);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(5, 50);
-            this.panel1.TabIndex = 4;
-            // 
-            // panelContenido
-            // 
-            this.panelContenido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenido.ForeColor = System.Drawing.Color.Black;
-            this.panelContenido.Location = new System.Drawing.Point(220, 32);
-            this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(916, 638);
-            this.panelContenido.TabIndex = 2;
-            // 
-            // tmOcultarMenu
-            // 
-            this.tmOcultarMenu.Interval = 10;
-            this.tmOcultarMenu.Tick += new System.EventHandler(this.tmOcultarMenu_Tick);
-            // 
-            // tmMostrarMenu
-            // 
-            this.tmMostrarMenu.Interval = 10;
-            this.tmMostrarMenu.Tick += new System.EventHandler(this.tmMostrarMenu_Tick);
-            // 
-            // tmOcultarLogin
-            // 
-            this.tmOcultarLogin.Interval = 10;
-            this.tmOcultarLogin.Tick += new System.EventHandler(this.tmOcultarLogin_Tick);
-            // 
-            // tmMostrarLogin
-            // 
-            this.tmMostrarLogin.Interval = 10;
-            this.tmMostrarLogin.Tick += new System.EventHandler(this.tmMostrarLogin_Tick);
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Image = global::Proyecto_Presentacion.Properties.Resources.empleados;
-            this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogin.Location = new System.Drawing.Point(0, 588);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(220, 50);
-            this.btnLogin.TabIndex = 16;
-            this.btnLogin.TabStop = false;
-            this.btnLogin.Text = "Conectarse";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnConfiguracion
             // 
@@ -313,6 +344,14 @@
             this.btnConfiguracion.UseVisualStyleBackColor = true;
             this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel4.Location = new System.Drawing.Point(0, 265);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(5, 50);
+            this.panel4.TabIndex = 10;
+            // 
             // btnComunidad
             // 
             this.btnComunidad.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -332,6 +371,14 @@
             this.btnComunidad.Text = "Comunidad";
             this.btnComunidad.UseVisualStyleBackColor = true;
             this.btnComunidad.Click += new System.EventHandler(this.btnComunidad_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel3.Location = new System.Drawing.Point(0, 209);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(5, 50);
+            this.panel3.TabIndex = 8;
             // 
             // btnAreaPersonal
             // 
@@ -353,6 +400,14 @@
             this.btnAreaPersonal.UseVisualStyleBackColor = true;
             this.btnAreaPersonal.Click += new System.EventHandler(this.btnAreaPersonal_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel2.Location = new System.Drawing.Point(0, 153);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(5, 50);
+            this.panel2.TabIndex = 6;
+            // 
             // btnCursos
             // 
             this.btnCursos.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -372,6 +427,14 @@
             this.btnCursos.Text = "Cursos";
             this.btnCursos.UseVisualStyleBackColor = true;
             this.btnCursos.Click += new System.EventHandler(this.btnCursos_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.panel1.Location = new System.Drawing.Point(0, 97);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(5, 50);
+            this.panel1.TabIndex = 4;
             // 
             // btnPrincipal
             // 
@@ -416,92 +479,35 @@
             this.pbTitulo.TabIndex = 0;
             this.pbTitulo.TabStop = false;
             // 
-            // btnDividir
+            // panelContenido
             // 
-            this.btnDividir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDividir.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_dividir;
-            this.btnDividir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDividir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDividir.FlatAppearance.BorderSize = 0;
-            this.btnDividir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDividir.Location = new System.Drawing.Point(1008, 0);
-            this.btnDividir.Name = "btnDividir";
-            this.btnDividir.Size = new System.Drawing.Size(32, 32);
-            this.btnDividir.TabIndex = 6;
-            this.btnDividir.UseVisualStyleBackColor = true;
-            this.btnDividir.Click += new System.EventHandler(this.btnDividir_Click);
+            this.panelContenido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panelContenido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContenido.ForeColor = System.Drawing.Color.Black;
+            this.panelContenido.Location = new System.Drawing.Point(220, 32);
+            this.panelContenido.Name = "panelContenido";
+            this.panelContenido.Size = new System.Drawing.Size(916, 638);
+            this.panelContenido.TabIndex = 2;
             // 
-            // pbIcono
+            // tmOcultarMenu
             // 
-            this.pbIcono.Enabled = false;
-            this.pbIcono.Image = global::Proyecto_Presentacion.Properties.Resources.principal;
-            this.pbIcono.Location = new System.Drawing.Point(3, 3);
-            this.pbIcono.Name = "pbIcono";
-            this.pbIcono.Size = new System.Drawing.Size(27, 26);
-            this.pbIcono.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbIcono.TabIndex = 5;
-            this.pbIcono.TabStop = false;
+            this.tmOcultarMenu.Interval = 10;
+            this.tmOcultarMenu.Tick += new System.EventHandler(this.tmOcultarMenu_Tick);
             // 
-            // btnRestaurar
+            // tmMostrarMenu
             // 
-            this.btnRestaurar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestaurar.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_Restaurar;
-            this.btnRestaurar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRestaurar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRestaurar.FlatAppearance.BorderSize = 0;
-            this.btnRestaurar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestaurar.Location = new System.Drawing.Point(1072, 0);
-            this.btnRestaurar.Name = "btnRestaurar";
-            this.btnRestaurar.Size = new System.Drawing.Size(32, 32);
-            this.btnRestaurar.TabIndex = 3;
-            this.btnRestaurar.UseVisualStyleBackColor = true;
-            this.btnRestaurar.Visible = false;
-            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
+            this.tmMostrarMenu.Interval = 10;
+            this.tmMostrarMenu.Tick += new System.EventHandler(this.tmMostrarMenu_Tick);
             // 
-            // btnMinimizar
+            // tmOcultarLogin
             // 
-            this.btnMinimizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinimizar.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_Minimizar;
-            this.btnMinimizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMinimizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMinimizar.FlatAppearance.BorderSize = 0;
-            this.btnMinimizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimizar.Location = new System.Drawing.Point(1040, 0);
-            this.btnMinimizar.Name = "btnMinimizar";
-            this.btnMinimizar.Size = new System.Drawing.Size(32, 32);
-            this.btnMinimizar.TabIndex = 2;
-            this.btnMinimizar.UseVisualStyleBackColor = true;
-            this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
+            this.tmOcultarLogin.Interval = 10;
+            this.tmOcultarLogin.Tick += new System.EventHandler(this.tmOcultarLogin_Tick);
             // 
-            // btnMaximizar
+            // tmMostrarLogin
             // 
-            this.btnMaximizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMaximizar.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_Maximizar;
-            this.btnMaximizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMaximizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMaximizar.FlatAppearance.BorderSize = 0;
-            this.btnMaximizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMaximizar.Location = new System.Drawing.Point(1072, 0);
-            this.btnMaximizar.Name = "btnMaximizar";
-            this.btnMaximizar.Size = new System.Drawing.Size(32, 32);
-            this.btnMaximizar.TabIndex = 1;
-            this.btnMaximizar.UseVisualStyleBackColor = true;
-            this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
-            // 
-            // btnCerrar
-            // 
-            this.btnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCerrar.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Icono_cerrar_FN;
-            this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCerrar.FlatAppearance.BorderSize = 0;
-            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrar.Location = new System.Drawing.Point(1104, 0);
-            this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(32, 32);
-            this.btnCerrar.TabIndex = 0;
-            this.btnCerrar.UseVisualStyleBackColor = true;
-            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            this.tmMostrarLogin.Interval = 10;
+            this.tmMostrarLogin.Tick += new System.EventHandler(this.tmMostrarLogin_Tick);
             // 
             // contextMenuStrip1
             // 
@@ -526,12 +532,12 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPrincipal_FormClosing);
             this.barraTitulo.ResumeLayout(false);
             this.barraTitulo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.menuLateral.ResumeLayout(false);
             this.panelLogin.ResumeLayout(false);
             this.panelLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOcultarMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.ResumeLayout(false);
 
         }
