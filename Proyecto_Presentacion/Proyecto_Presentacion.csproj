@@ -38,7 +38,7 @@
   <ItemGroup>
     <Reference Include="EntidadesCompartidas, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\DAMnificus_Compartido\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll</HintPath>
+      <HintPath>..\..\DAMnificus_Compartido\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll</HintPath>
     </Reference>
     <Reference Include="ListViewPrinter, Version=2.7.1.31255, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.2.7.1.5\lib\ListViewPrinter.dll</HintPath>
@@ -82,12 +82,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormAgregarNotas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAgregarNotas.Designer.cs">
-      <DependentUpon>FormAgregarNotas.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormAreaPersonal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,9 +114,6 @@
     <Compile Include="FormWidget.Designer.cs">
       <DependentUpon>FormWidget.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormAgregarNotas.resx">
-      <DependentUpon>FormAgregarNotas.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormAreaPersonal.resx">
       <DependentUpon>FormAreaPersonal.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +155,10 @@
     <None Include="Graficas\App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Proyecto_AccesoDatos\Proyecto_AccesoDatos.csproj">
+      <Project>{f1e4f4a3-e3c5-4143-9f24-703be4e080e7}</Project>
+      <Name>Proyecto_AccesoDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Proyecto_Negocio\Proyecto_Negocio.csproj">
       <Project>{7133ec0a-9dce-4edc-9ed1-191f3819e4e9}</Project>
       <Name>Proyecto_Negocio</Name>

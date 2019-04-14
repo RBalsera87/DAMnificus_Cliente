@@ -11,11 +11,11 @@ namespace Proyecto_AccesoDatos
     {
 
         private MySqlConnection conexion;
-        public List<double> recogidaNotasC1T1()
+        public List<double> recogidaNotas(int curso, int trimestre)
         {
             List<double> notas = new List<double> { };
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
-            string query = "SELECT Nota FROM notas n inner join asignaturas a on n.Asignatura = a.Id WHERE a.Curso = 1 AND n.Trimestre = 1 order by n.Asignatura asc";
+            string query = "SELECT Nota FROM notas n inner join asignaturas a on n.Asignatura = a.Id WHERE a.Curso = "+curso+" AND n.Trimestre = "+trimestre+" AND n.Usuario = 2 order by n.Asignatura asc";
             MySqlConnection databaseConnection = new MySqlConnection(connectionString);
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader;
@@ -39,143 +39,7 @@ namespace Proyecto_AccesoDatos
             }
             catch (Exception ex)
             {
-                
-            }
-
-            return notas;
-        }
-
-        public List<double> recogidaNotasC1T2()
-        {
-            List<double> notas = new List<double> { };
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
-            string query = "SELECT Nota FROM notas n inner join asignaturas a on n.Asignatura = a.Id WHERE a.Curso = 1 AND n.Trimestre = 2 order by n.Asignatura asc";
-            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
-            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-            MySqlDataReader reader;
-
-            try
-            {
-                databaseConnection.Open();
-                reader = commandDatabase.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        notas.Add((double)reader.GetDecimal(0));
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No se encontraron datos.");
-                }
-                databaseConnection.Close();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return notas;
-        }
-
-        public List<double> recogidaNotasT3()
-        {
-            List<double> notas = new List<double> { };
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
-            string query = "SELECT Nota FROM notas n inner join asignaturas a on n.Asignatura = a.Id WHERE a.Curso = 1 AND n.Trimestre = 3 order by n.Asignatura asc";
-            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
-            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-            MySqlDataReader reader;
-
-            try
-            {
-                databaseConnection.Open();
-                reader = commandDatabase.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        notas.Add((double)reader.GetDecimal(0));
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No se encontraron datos.");
-                }
-                databaseConnection.Close();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return notas;
-        }
-
-        public List<double> recogidaNotasC2T1()
-        {
-            List<double> notas = new List<double> { };
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
-            string query = "SELECT Nota FROM notas n inner join asignaturas a on n.Asignatura = a.Id WHERE a.Curso = 2 AND n.Trimestre = 1 order by n.Asignatura asc";
-            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
-            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-            MySqlDataReader reader;
-
-            try
-            {
-                databaseConnection.Open();
-                reader = commandDatabase.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        notas.Add((double)reader.GetDecimal(0));
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No se encontraron datos.");
-                }
-                databaseConnection.Close();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return notas;
-        }
-
-        public List<double> recogidaNotasC2T2()
-        {
-            List<double> notas = new List<double> { };
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
-            string query = "SELECT Nota FROM notas n inner join asignaturas a on n.Asignatura = a.Id WHERE a.Curso = 2 AND n.Trimestre = 2 order by n.Asignatura asc";
-            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
-            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-            MySqlDataReader reader;
-
-            try
-            {
-                databaseConnection.Open();
-                reader = commandDatabase.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        notas.Add((double)reader.GetDecimal(0));
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No se encontraron datos.");
-                }
-                databaseConnection.Close();
-            }
-            catch (Exception ex)
-            {
-
+                Console.WriteLine(ex);
             }
 
             return notas;
@@ -209,7 +73,7 @@ namespace Proyecto_AccesoDatos
             }
             catch (Exception ex)
             {
-                
+                Console.WriteLine(ex);
             }
 
         }
@@ -242,7 +106,7 @@ namespace Proyecto_AccesoDatos
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
         }
 
@@ -274,7 +138,7 @@ namespace Proyecto_AccesoDatos
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
         }
 
@@ -325,7 +189,7 @@ namespace Proyecto_AccesoDatos
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
             return salida;
         }

@@ -13,29 +13,9 @@ namespace Proyecto_Negocio
     public class MetodosFormAreaPersonal
     {
         Proyecto_AccesoDatos.CargadoAreaPersonal cargado = new Proyecto_AccesoDatos.CargadoAreaPersonal();
-        public List<double> cargarListaNotasC1T1()
+        public List<double> cargarListaNotas(int curso, int trimestre)
         {
-            return cargado.recogidaNotasC1T1();
-        }
-
-        public List<double> cargarListaNotasC1T2()
-        {
-            return cargado.recogidaNotasC1T2();
-        }
-
-        public List<double> cargarListaNotasC1T3()
-        {
-            return cargado.recogidaNotasT3();
-        }
-
-        public List<double> cargarListaNotasC2T1()
-        {
-            return cargado.recogidaNotasC2T1();
-        }
-
-        public List<double> cargarListaNotasC2T2()
-        {
-            return cargado.recogidaNotasC2T2();
+            return cargado.recogidaNotas(curso, trimestre);
         }
 
         public void cargarCursos(List<string>cursos)

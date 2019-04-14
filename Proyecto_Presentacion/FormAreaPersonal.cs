@@ -35,9 +35,9 @@ namespace Proyecto_Presentacion
             cbCurso.SelectedIndex = 0;
             cbGraficaNotas.SelectedIndex = 0;
 
-            notas1 = met.cargarListaNotasC1T1();
-            notas2 = met.cargarListaNotasC1T2();
-            notas3 = met.cargarListaNotasC1T3();
+            notas1 = met.cargarListaNotas(1,1);
+            notas2 = met.cargarListaNotas(1,2);
+            notas3 = met.cargarListaNotas(1,3);
 
             graficaNotas.AxisY.Clear();
             graficaNotas.Series = new SeriesCollection
@@ -144,8 +144,8 @@ namespace Proyecto_Presentacion
         {
             if(cbGraficaNotas.SelectedIndex == 0)
             {
-                notas1 = met.cargarListaNotasC1T1();
-                notas2 = met.cargarListaNotasC1T2();
+                notas1 = met.cargarListaNotas(1,1);
+                notas2 = met.cargarListaNotas(1,2);
                 graficaNotas.AxisY.Clear();
                 graficaNotas.Series = new SeriesCollection
                 {
@@ -174,8 +174,8 @@ namespace Proyecto_Presentacion
             }
             else
             {
-                notas1 = met.cargarListaNotasC2T1();
-                notas2 = met.cargarListaNotasC2T2();
+                notas1 = met.cargarListaNotas(2,1);
+                notas2 = met.cargarListaNotas(2,2);
                 graficaNotas.AxisY.Clear();
                 graficaNotas.Series = new SeriesCollection
                 {
