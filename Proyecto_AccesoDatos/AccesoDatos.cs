@@ -87,8 +87,8 @@ namespace Proyecto_AccesoDatos
             // Envuelve nuestro JSON dentro de un StringContent que luego puede ser usado por la clase HttpClient
             var httpContent = new StringContent(stringPeticion, Encoding.UTF8, "application/json");
 
-            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(15) })
-            {
+            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(100) }) // Timeout es para el tiempo que se debe esperar a la respuesta
+            {                                                                                 // Para debug poner 100 o mas, para release 15 o 20 como mucho
                 // Ejecuta la solicitud actual y espera la respuesta
                 try
                 {

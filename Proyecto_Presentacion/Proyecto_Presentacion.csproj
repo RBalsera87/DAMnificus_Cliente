@@ -208,6 +208,8 @@
   <ItemGroup>
     <Content Include="Graficas\GraficaBarras.html" />
     <Content Include="Graficas\Grafica3d.html" />
+    <None Include="Resources\salir.png" />
+    <None Include="Resources\refresh.png" />
     <None Include="Resources\ayuda.png" />
     <None Include="Resources\ok.png" />
     <None Include="Resources\problem.gif" />

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Proyecto_Negocio;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Proyecto_Presentacion
 {
@@ -29,8 +30,26 @@ namespace Proyecto_Presentacion
         public FormInicio()
         {
             InitializeComponent();
-            this.DoubleBuffered = true;
-
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+        }
+        private Bitmap renderBmp;
+        public override Image BackgroundImage
+        {
+            set
+            {
+                Image baseImage = value;
+                renderBmp = new Bitmap(Width, Height,
+                    System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                Graphics g = Graphics.FromImage(renderBmp);
+                g.DrawImage(baseImage, 0, 0, Width, Height);
+                g.Dispose();
+            }
+            get
+            {
+                return renderBmp;
+            }
         }
         /*****************
          * Evento onLoad *

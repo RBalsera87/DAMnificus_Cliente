@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Proyecto_Negocio;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Timers;
 
 namespace Proyecto_Presentacion
 {
@@ -29,10 +30,15 @@ namespace Proyecto_Presentacion
         private Point oldPosition;
         // Variable para el efecto sombra del formulario
         private const int CS_DROPSHADOW = 0x20000;
+
+        //System.Timers.Timer timer = new System.Timers.Timer(10);
         public FormPrincipal()
         {
             InitializeComponent();
-            this.DoubleBuffered = true;
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            //this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.barraTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
             this.barraTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
@@ -42,14 +48,19 @@ namespace Proyecto_Presentacion
             this.lblTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
             m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
 
+            //timer.Enabled = false;
+            //timer.AutoReset = true;
+            //timer.Interval = 10;
+            //timer.SynchronizingObject = this;
         }
+        
         /*****************
          * Evento onLoad *
          *****************/
         private async void FormPrincipal_Load(object sender, EventArgs e)
         {
             // Arranca un hilo para comprobar si el servidor esta conectado cada 30s
-            await comprobarConexionServidor(TimeSpan.FromSeconds(30), CancellationToken.None);
+            await comprobarStatusServerDaemon(TimeSpan.FromSeconds(30), CancellationToken.None);
         }
         /****************************
          * Eventos para los botones *
@@ -130,6 +141,32 @@ namespace Proyecto_Presentacion
             
         }
         //Botones del menu lateral
+        private void btnRefreshStatus_Click(object sender, EventArgs e)
+        {
+            this.comprobarStatusServidor();
+        }
+        private void btnMoverMenu_Click(object sender, EventArgs e)
+        {
+            if (menuLateral.Width == 220)
+            {
+                //timer.Elapsed -= new ElapsedEventHandler(mostrarMenuLateral);
+                //timer.Elapsed += new ElapsedEventHandler(ocultarMenuLateral);
+                //this.timer.Enabled = true;
+                this.tmOcultarMenu.Enabled = true;
+                this.lblUsuario.Visible = false;
+                this.lblPass.Visible = false;
+                this.lblConectado.Visible = false;
+                this.tbUsuario.Visible = false;
+                this.tbPass.Visible = false;
+            }
+            else if (menuLateral.Width == 55)
+            {
+                //timer.Elapsed -= new ElapsedEventHandler(ocultarMenuLateral);
+                //timer.Elapsed += new ElapsedEventHandler(mostrarMenuLateral);
+                //this.timer.Enabled = true;
+                this.tmMostrarMenu.Enabled = true;
+            }
+        }
         private void btnPrincipal_Click(object sender, EventArgs e)
         {
             m.restaurarColorBotones(this.menuLateral);
@@ -165,6 +202,12 @@ namespace Proyecto_Presentacion
             m.restaurarColorBotones(this.menuLateral);
             this.btnAyuda.BackColor = Color.FromArgb(73, 55, 34);
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (menuLateral.Width >= 220)
@@ -242,6 +285,36 @@ namespace Proyecto_Presentacion
                 actualizarTamañoPanelContenido();
             }
         }
+        private void ocultarMenuLateral(Object source, ElapsedEventArgs e)
+        {
+            if (this.menuLateral.Width <= 55)
+            {
+                //this.timer.Enabled = false;
+
+            }
+            else
+            {
+                this.menuLateral.Width = menuLateral.Width - 5;
+                actualizarTamañoPanelContenido();
+            }
+        }
+        private void mostrarMenuLateral(Object source, ElapsedEventArgs e)
+        {
+            if (menuLateral.Width >= 220)
+            {
+                //this.timer.Enabled = false;
+                this.lblUsuario.Visible = true;
+                this.lblPass.Visible = true;
+                this.lblConectado.Visible = true;
+                this.tbUsuario.Visible = true;
+                this.tbPass.Visible = true;
+            }
+            else
+            {
+                this.menuLateral.Width = menuLateral.Width + 5;
+                actualizarTamañoPanelContenido();
+            }
+        }
 
         private void tmMostrarMenu_Tick(object sender, EventArgs e)
         {
@@ -265,22 +338,7 @@ namespace Proyecto_Presentacion
 
         private void pbOcultarMenu_Click(object sender, EventArgs e)
         {
-            if (menuLateral.Width == 220)
-            {
-                this.tmOcultarMenu.Enabled = true;
-                this.lblUsuario.Visible = false;
-                this.lblPass.Visible = false;
-                this.lblConectado.Visible = false;
-                this.tbUsuario.Visible = false;
-                this.tbPass.Visible = false;
-                this.lblStatusServer.Visible = false;
-                this.pbStatusServer.Visible = false;
-            }
-            else if (menuLateral.Width == 55)
-            {
-                this.tmMostrarMenu.Enabled = true;
-                             
-            }
+            
         }
         private void tmOcultarLogin_Tick(object sender, EventArgs e)
         {
@@ -465,24 +523,33 @@ namespace Proyecto_Presentacion
             }
             
         }
-        public async Task comprobarConexionServidor(TimeSpan interval, CancellationToken cancellationToken)
+
+        // Crea un hilo demonio para comprobar la conexion con el servidor
+        public async Task comprobarStatusServerDaemon(TimeSpan interval, CancellationToken cancellationToken)
         {
             while (true)
             {
-                if (await m.pedirStatusServidor())
-                {
-                    pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                    lblStatusServer.Text = "Servidor Online";
-                }else
-                {
-                    pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.error;
-                    lblStatusServer.Text = "Servidor Offline";
-                }
+                this.comprobarStatusServidor();
                 await Task.Delay(interval, cancellationToken);
                 if (cancellationToken.IsCancellationRequested) break;
             }
         }
 
+        // Comprueba que el servidor este online
+        private async void comprobarStatusServidor()
+        {
+            if (await m.pedirStatusServidor())
+            {
+                pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                lblStatusServer.Text = "Servidor Online";
+            }
+            else
+            {
+                pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.error;
+                lblStatusServer.Text = "Servidor Offline";
+            }
+        }
 
+        
     }
 }
