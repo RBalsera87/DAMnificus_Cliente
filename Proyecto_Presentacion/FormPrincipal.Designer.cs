@@ -47,7 +47,7 @@
             this.tbPass = new System.Windows.Forms.TextBox();
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnConfiguracion = new System.Windows.Forms.Button();
+            this.btnAyuda = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnComunidad = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -64,12 +64,15 @@
             this.tmOcultarLogin = new System.Windows.Forms.Timer(this.components);
             this.tmMostrarLogin = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lblStatusServer = new System.Windows.Forms.Label();
+            this.pbStatusServer = new System.Windows.Forms.PictureBox();
             this.barraTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.menuLateral.SuspendLayout();
             this.panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOcultarMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStatusServer)).BeginInit();
             this.SuspendLayout();
             // 
             // barraTitulo
@@ -194,12 +197,14 @@
             // menuLateral
             // 
             this.menuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.menuLateral.Controls.Add(this.pbStatusServer);
             this.menuLateral.Controls.Add(this.lblConectado);
+            this.menuLateral.Controls.Add(this.lblStatusServer);
             this.menuLateral.Controls.Add(this.panel7);
             this.menuLateral.Controls.Add(this.btnLogin);
             this.menuLateral.Controls.Add(this.panelLogin);
             this.menuLateral.Controls.Add(this.panel5);
-            this.menuLateral.Controls.Add(this.btnConfiguracion);
+            this.menuLateral.Controls.Add(this.btnAyuda);
             this.menuLateral.Controls.Add(this.panel4);
             this.menuLateral.Controls.Add(this.btnComunidad);
             this.menuLateral.Controls.Add(this.panel3);
@@ -324,25 +329,25 @@
             this.panel5.Size = new System.Drawing.Size(5, 50);
             this.panel5.TabIndex = 12;
             // 
-            // btnConfiguracion
+            // btnAyuda
             // 
-            this.btnConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfiguracion.FlatAppearance.BorderSize = 0;
-            this.btnConfiguracion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnConfiguracion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfiguracion.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfiguracion.ForeColor = System.Drawing.Color.White;
-            this.btnConfiguracion.Image = global::Proyecto_Presentacion.Properties.Resources.producto;
-            this.btnConfiguracion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConfiguracion.Location = new System.Drawing.Point(0, 321);
-            this.btnConfiguracion.Name = "btnConfiguracion";
-            this.btnConfiguracion.Size = new System.Drawing.Size(220, 50);
-            this.btnConfiguracion.TabIndex = 11;
-            this.btnConfiguracion.TabStop = false;
-            this.btnConfiguracion.Text = "Configuración";
-            this.btnConfiguracion.UseVisualStyleBackColor = true;
-            this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
+            this.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAyuda.FlatAppearance.BorderSize = 0;
+            this.btnAyuda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyuda.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAyuda.ForeColor = System.Drawing.Color.White;
+            this.btnAyuda.Image = global::Proyecto_Presentacion.Properties.Resources.ayuda;
+            this.btnAyuda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAyuda.Location = new System.Drawing.Point(0, 321);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(220, 50);
+            this.btnAyuda.TabIndex = 11;
+            this.btnAyuda.TabStop = false;
+            this.btnAyuda.Text = "Ayuda";
+            this.btnAyuda.UseVisualStyleBackColor = true;
+            this.btnAyuda.Click += new System.EventHandler(this.btnConfiguracion_Click);
             // 
             // panel4
             // 
@@ -514,6 +519,27 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // lblStatusServer
+            // 
+            this.lblStatusServer.AutoSize = true;
+            this.lblStatusServer.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatusServer.ForeColor = System.Drawing.Color.White;
+            this.lblStatusServer.Location = new System.Drawing.Point(28, 5);
+            this.lblStatusServer.Name = "lblStatusServer";
+            this.lblStatusServer.Size = new System.Drawing.Size(87, 17);
+            this.lblStatusServer.TabIndex = 18;
+            this.lblStatusServer.Text = "Conectando...";
+            this.lblStatusServer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pbStatusServer
+            // 
+            this.pbStatusServer.Image = global::Proyecto_Presentacion.Properties.Resources.problem;
+            this.pbStatusServer.Location = new System.Drawing.Point(9, 6);
+            this.pbStatusServer.Name = "pbStatusServer";
+            this.pbStatusServer.Size = new System.Drawing.Size(16, 16);
+            this.pbStatusServer.TabIndex = 19;
+            this.pbStatusServer.TabStop = false;
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -530,14 +556,17 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DAMnificus App";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPrincipal_FormClosing);
+            this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.barraTitulo.ResumeLayout(false);
             this.barraTitulo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).EndInit();
             this.menuLateral.ResumeLayout(false);
+            this.menuLateral.PerformLayout();
             this.panelLogin.ResumeLayout(false);
             this.panelLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbOcultarMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStatusServer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -558,7 +587,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnPrincipal;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btnConfiguracion;
+        private System.Windows.Forms.Button btnAyuda;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnComunidad;
         private System.Windows.Forms.Panel panel3;
@@ -579,6 +608,8 @@
         private System.Windows.Forms.Timer tmMostrarLogin;
         private System.Windows.Forms.Button btnDividir;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label lblStatusServer;
+        private System.Windows.Forms.PictureBox pbStatusServer;
     }
 }
 

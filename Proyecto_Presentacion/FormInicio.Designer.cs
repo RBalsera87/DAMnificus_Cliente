@@ -38,7 +38,6 @@
             this.lblToken = new System.Windows.Forms.Label();
             this.tbToken = new System.Windows.Forms.TextBox();
             this.lblIntroduceToken = new System.Windows.Forms.Label();
-            this.panelInicio = new System.Windows.Forms.Panel();
             this.panelRegistro = new System.Windows.Forms.Panel();
             this.pbApell = new System.Windows.Forms.PictureBox();
             this.pbName = new System.Windows.Forms.PictureBox();
@@ -61,14 +60,18 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.lblRegistro = new System.Windows.Forms.Label();
+            this.panelInicio = new System.Windows.Forms.Panel();
             this.btnRegistro = new System.Windows.Forms.Button();
             this.lblPresentacion = new System.Windows.Forms.Label();
             this.lblBienvenido = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panelFinal = new System.Windows.Forms.Panel();
+            this.btnAceptarFinal = new System.Windows.Forms.Button();
+            this.lblFinal = new System.Windows.Forms.Label();
+            this.lblTituloFinal = new System.Windows.Forms.Label();
             this.panelTrasero.SuspendLayout();
             this.panelToken.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbToken)).BeginInit();
-            this.panelInicio.SuspendLayout();
             this.panelRegistro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbApell)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbName)).BeginInit();
@@ -76,13 +79,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPass1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEmail)).BeginInit();
+            this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelFinal.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTrasero
             // 
             this.panelTrasero.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelTrasero.BackColor = System.Drawing.Color.Black;
+            this.panelTrasero.Controls.Add(this.panelFinal);
             this.panelTrasero.Controls.Add(this.panelToken);
             this.panelTrasero.Controls.Add(this.panelRegistro);
             this.panelTrasero.Controls.Add(this.panelInicio);
@@ -202,18 +208,6 @@
             this.lblIntroduceToken.TabIndex = 0;
             this.lblIntroduceToken.Text = "Introduce el token para finalizar";
             this.lblIntroduceToken.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panelInicio
-            // 
-            this.panelInicio.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panelInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panelInicio.Controls.Add(this.btnRegistro);
-            this.panelInicio.Controls.Add(this.lblPresentacion);
-            this.panelInicio.Controls.Add(this.lblBienvenido);
-            this.panelInicio.Location = new System.Drawing.Point(3, 3);
-            this.panelInicio.Name = "panelInicio";
-            this.panelInicio.Size = new System.Drawing.Size(494, 294);
-            this.panelInicio.TabIndex = 1;
             // 
             // panelRegistro
             // 
@@ -487,6 +481,18 @@
             this.lblRegistro.Text = "Introduce tus datos por favor";
             this.lblRegistro.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panelInicio
+            // 
+            this.panelInicio.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.panelInicio.Controls.Add(this.btnRegistro);
+            this.panelInicio.Controls.Add(this.lblPresentacion);
+            this.panelInicio.Controls.Add(this.lblBienvenido);
+            this.panelInicio.Location = new System.Drawing.Point(3, 3);
+            this.panelInicio.Name = "panelInicio";
+            this.panelInicio.Size = new System.Drawing.Size(494, 294);
+            this.panelInicio.TabIndex = 1;
+            // 
             // btnRegistro
             // 
             this.btnRegistro.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -542,6 +548,63 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // panelFinal
+            // 
+            this.panelFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelFinal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.panelFinal.Controls.Add(this.btnAceptarFinal);
+            this.panelFinal.Controls.Add(this.lblFinal);
+            this.panelFinal.Controls.Add(this.lblTituloFinal);
+            this.panelFinal.Location = new System.Drawing.Point(3, 3);
+            this.panelFinal.Name = "panelFinal";
+            this.panelFinal.Size = new System.Drawing.Size(494, 294);
+            this.panelFinal.TabIndex = 5;
+            this.panelFinal.Visible = false;
+            // 
+            // btnAceptarFinal
+            // 
+            this.btnAceptarFinal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptarFinal.FlatAppearance.BorderSize = 0;
+            this.btnAceptarFinal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnAceptarFinal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnAceptarFinal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptarFinal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceptarFinal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnAceptarFinal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAceptarFinal.Location = new System.Drawing.Point(143, 244);
+            this.btnAceptarFinal.Name = "btnAceptarFinal";
+            this.btnAceptarFinal.Size = new System.Drawing.Size(212, 38);
+            this.btnAceptarFinal.TabIndex = 4;
+            this.btnAceptarFinal.TabStop = false;
+            this.btnAceptarFinal.Text = "Aceptar";
+            this.btnAceptarFinal.UseVisualStyleBackColor = true;
+            this.btnAceptarFinal.Click += new System.EventHandler(this.btnAceptarFinal_Click);
+            // 
+            // lblFinal
+            // 
+            this.lblFinal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblFinal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinal.ForeColor = System.Drawing.Color.White;
+            this.lblFinal.Location = new System.Drawing.Point(0, 47);
+            this.lblFinal.Name = "lblFinal";
+            this.lblFinal.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
+            this.lblFinal.Size = new System.Drawing.Size(494, 189);
+            this.lblFinal.TabIndex = 1;
+            this.lblFinal.Text = resources.GetString("lblFinal.Text");
+            this.lblFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTituloFinal
+            // 
+            this.lblTituloFinal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTituloFinal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloFinal.ForeColor = System.Drawing.Color.White;
+            this.lblTituloFinal.Location = new System.Drawing.Point(0, 0);
+            this.lblTituloFinal.Name = "lblTituloFinal";
+            this.lblTituloFinal.Size = new System.Drawing.Size(494, 47);
+            this.lblTituloFinal.TabIndex = 0;
+            this.lblTituloFinal.Text = "¡Registro completado!";
+            this.lblTituloFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -560,8 +623,6 @@
             this.panelToken.ResumeLayout(false);
             this.panelToken.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbToken)).EndInit();
-            this.panelInicio.ResumeLayout(false);
-            this.panelInicio.PerformLayout();
             this.panelRegistro.ResumeLayout(false);
             this.panelRegistro.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbApell)).EndInit();
@@ -570,7 +631,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPass1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEmail)).EndInit();
+            this.panelInicio.ResumeLayout(false);
+            this.panelInicio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelFinal.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -613,5 +677,9 @@
         private System.Windows.Forms.Label lblToken;
         private System.Windows.Forms.TextBox tbToken;
         private System.Windows.Forms.Label lblIntroduceToken;
+        private System.Windows.Forms.Panel panelFinal;
+        private System.Windows.Forms.Button btnAceptarFinal;
+        private System.Windows.Forms.Label lblFinal;
+        private System.Windows.Forms.Label lblTituloFinal;
     }
 }

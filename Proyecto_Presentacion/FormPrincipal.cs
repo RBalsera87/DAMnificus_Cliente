@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Proyecto_Negocio;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Proyecto_Presentacion
 {
@@ -41,11 +43,19 @@ namespace Proyecto_Presentacion
             m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
 
         }
+        /*****************
+         * Evento onLoad *
+         *****************/
+        private async void FormPrincipal_Load(object sender, EventArgs e)
+        {
+            // Arranca un hilo para comprobar si el servidor esta conectado cada 30s
+            await comprobarConexionServidor(TimeSpan.FromSeconds(30), CancellationToken.None);
+        }
         /****************************
          * Eventos para los botones *
          ****************************/
 
-         // Boton cerrar
+        // Boton cerrar
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -153,7 +163,7 @@ namespace Proyecto_Presentacion
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
             m.restaurarColorBotones(this.menuLateral);
-            this.btnConfiguracion.BackColor = Color.FromArgb(73, 55, 34);
+            this.btnAyuda.BackColor = Color.FromArgb(73, 55, 34);
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -243,6 +253,8 @@ namespace Proyecto_Presentacion
                 this.lblConectado.Visible = true;
                 this.tbUsuario.Visible = true;
                 this.tbPass.Visible = true;
+                this.lblStatusServer.Visible = true;
+                this.pbStatusServer.Visible = true;
             }
             else
             {
@@ -261,6 +273,8 @@ namespace Proyecto_Presentacion
                 this.lblConectado.Visible = false;
                 this.tbUsuario.Visible = false;
                 this.tbPass.Visible = false;
+                this.lblStatusServer.Visible = false;
+                this.pbStatusServer.Visible = false;
             }
             else if (menuLateral.Width == 55)
             {
@@ -451,5 +465,24 @@ namespace Proyecto_Presentacion
             }
             
         }
+        public async Task comprobarConexionServidor(TimeSpan interval, CancellationToken cancellationToken)
+        {
+            while (true)
+            {
+                if (await m.pedirStatusServidor())
+                {
+                    pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                    lblStatusServer.Text = "Servidor Online";
+                }else
+                {
+                    pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.error;
+                    lblStatusServer.Text = "Servidor Offline";
+                }
+                await Task.Delay(interval, cancellationToken);
+                if (cancellationToken.IsCancellationRequested) break;
+            }
+        }
+
+
     }
 }

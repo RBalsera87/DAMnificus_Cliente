@@ -23,6 +23,7 @@ namespace Proyecto_Presentacion
         private bool passValido = false;
 
         private Dictionary<string, string> datos = new Dictionary<string, string>();
+        private string usuario, pass;
         private string token = "";
 
         public FormInicio()
@@ -66,8 +67,10 @@ namespace Proyecto_Presentacion
             datos.Add("nombre", tbNombre.Text);
             datos.Add("apellidos", tbApellidos.Text);
             datos.Add("email", tbEmail.Text);
+            usuario = tbUsuario.Text;
+            pass = tbPass.Text;
 
-            string respuesta = await m.enviarEmailparaRegistro(tbUsuario.Text, tbPass.Text, datos);
+            string respuesta = await m.enviarEmailparaRegistro(usuario, datos);
             if (respuesta.Equals("emailNoEnviado")) 
             {
                 MessageBox.Show("Error al enviar el email, ver consola de servidor");
@@ -83,14 +86,24 @@ namespace Proyecto_Presentacion
             }
 
         }
-        private void btnAceptarToken_Click(object sender, EventArgs e)
+        private async void btnAceptarToken_Click(object sender, EventArgs e)
         {
-            this.panelInicio.Visible = true;
             this.panelToken.Visible = false;
-            // Meter al usuario en BBDD
-            this.lblBienvenido.Text = "¡Registrado exitósamente!";
-            this.btnRegistro.Visible = false;
-            // else this.lblBienvenido.Text = "¡Error al registrar usuario";
+            this.panelFinal.Visible = true;
+            if (await m.enviarConfirmacionRegistro(usuario, pass, datos))
+            {
+                this.btnRegistro.Visible = false;
+                this.lblTituloFinal.Text = "¡Registro completado!";
+                this.lblFinal.Text =    "Te damos la bienvenida a nuestra comunidad, esperamos que saques el máximo probecho de sus funciones y te animamos a participar subiendo tus propios enlaces a documentos o videos que puedan ayudar a otros.\n" +
+                                        "También te damos acceso al area personal donde podras hacer un seguimiento de tus notas, links subidos y mucho más.\n" +
+                                        "Pulsa aceptar para volver a la pantalla de inicio.";
+            }else
+            {
+                this.lblTituloFinal.Text = "¡Error al registrar usuario!";
+                this.lblFinal.Text =    "Parece que ha habido un problema al registrar al usuario, puede que el servidor este ocupado y tengas que esperar unos segundos antes de volver ha intentarlo.\n" +
+                                        "Si el problema persiste dirígete a la pestaña de ayuda y pulsa sobre informar de un problema. Nos ocuparemos de arreglarlo cuanto antes.";
+            }
+
         }
 
         private void btnCancelarToken_Click(object sender, EventArgs e)
@@ -98,6 +111,11 @@ namespace Proyecto_Presentacion
             this.panelInicio.Visible = true;
             this.tbToken.Clear();
             this.panelToken.Visible = false;
+        }
+        private void btnAceptarFinal_Click(object sender, EventArgs e)
+        {
+            this.panelFinal.Visible = false;
+            this.panelInicio.Visible = true;
         }
 
         /******************************
@@ -176,9 +194,9 @@ namespace Proyecto_Presentacion
                     this.toolTipEmail.Show("Esta direccion email no parece válida", this.tbEmail, 1000);
                     this.emailValido = false;
                 }
-                activarBotonAceptar();
+                
             }
-            
+            activarBotonAceptar();
         }
 
         private async void tbUsuario_Leave(object sender, EventArgs e)
@@ -307,6 +325,7 @@ namespace Proyecto_Presentacion
             this.tbPass.Clear();
             this.tbPass2.Clear();
         }
+
         private void resetearPictureBoxes()
         {
             this.pbName.Image = null;

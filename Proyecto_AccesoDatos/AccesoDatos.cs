@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -11,7 +12,7 @@ namespace Proyecto_AccesoDatos
 {
     public class AccesoDatos
     {
-        private string loginURL = "http://localhost:8080/";
+        private string urlServidor = "http://localhost:8080/";
         private static string token = "";
         public AccesoDatos()
         {
@@ -40,16 +41,17 @@ namespace Proyecto_AccesoDatos
                     {
                         token = respConToken.token;
                         return "Acceso concedido";
-                    } else
+                    }
+                    else
                     {
                         return "Contraseña no válida";
                     }
-                    
+
                 }
             }
             else
             {
-                //Mensaje por si el servidor esta caido
+                //Mensaje por si el servidor esta caido ---------------------->esto hay que cambiarlo
                 return "Servidor caido";
             }
         }
@@ -60,35 +62,37 @@ namespace Proyecto_AccesoDatos
             string usuarioCifrado = null;
             //try
             //{
-                if (pass != null)
-                {
-                    passCifrado = CifradoJson.Cifrado(pass, pet);
-                }
-                if (token != null)
-                {
-                    tokenCifrado = CifradoJson.Cifrado(token, pet);
-                }
-                if (user != null)
-                {
+            if (pass != null)
+            {
+                passCifrado = CifradoJson.Cifrado(pass, pet);
+            }
+            if (token != null)
+            {
+                tokenCifrado = CifradoJson.Cifrado(token, pet);
+            }
+            if (user != null)
+            {
                 usuarioCifrado = CifradoJson.Cifrado(user, pet);
-                }                
-                var peticionActual = new Peticion
-                {
-                    peticion = pet,
-                    usuario = usuarioCifrado,
-                    clave = passCifrado,
-                    token = tokenCifrado,
-                    datos = registro
-                };
-                // Serializa nuestra clase en una cadena JSON
-                var stringPeticion = await Task.Run(() => JsonConvert.SerializeObject(peticionActual));
-                // Envuelve nuestro JSON dentro de un StringContent que luego puede ser usado por la clase HttpClient
-                var httpContent = new StringContent(stringPeticion, Encoding.UTF8, "application/json");
+            }
+            var peticionActual = new Peticion
+            {
+                peticion = pet,
+                usuario = usuarioCifrado,
+                clave = passCifrado,
+                token = tokenCifrado,
+                datos = registro
+            };
+            // Serializa nuestra clase en una cadena JSON
+            var stringPeticion = await Task.Run(() => JsonConvert.SerializeObject(peticionActual));
+            // Envuelve nuestro JSON dentro de un StringContent que luego puede ser usado por la clase HttpClient
+            var httpContent = new StringContent(stringPeticion, Encoding.UTF8, "application/json");
 
-                using (var httpClient = new HttpClient())
+            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(15) })
+            {
+                // Ejecuta la solicitud actual y espera la respuesta
+                try
                 {
-                    // Ejecuta la solicitud actual y espera la respuesta
-                    var httpResponse = await httpClient.PostAsync(loginURL, httpContent);
+                    var httpResponse = await httpClient.PostAsync(urlServidor, httpContent);
                     if (httpResponse.Content != null)
                     {
                         var responseContent = await httpResponse.Content.ReadAsStringAsync();
@@ -103,15 +107,21 @@ namespace Proyecto_AccesoDatos
                         if (respuesta.token != null)
                         {
                             respuesta.token = CifradoJson.Descifrado(respuesta.token, respuesta.respuesta);
-                        }                        
+                        }
                         return respuesta;
                     }
                     else
                     {
                         return null;
                     }
-                    
                 }
+                catch (Exception)
+                {
+                    return null;
+                }
+
+
+            }
             //}
             //catch (Exception e)
             //{
@@ -134,7 +144,7 @@ namespace Proyecto_AccesoDatos
                     return false;
                 }
             }
-            return true;     
+            return true;
         }
         public async Task<List<Enlaces>> obtenerEnlaces(string usuario)
         {
@@ -142,9 +152,9 @@ namespace Proyecto_AccesoDatos
             Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token, null);
             return respuesta.coleccion;
         }
-        public async Task<string> enviarEmailparaRegistro(string usuario, string pass, Dictionary<string, string> datos)
+        public async Task<string> enviarEmailparaRegistro(string usuario, Dictionary<string, string> datos)
         {
-            Respuesta respuesta = await enviarPeticion("emailRegistro", usuario, pass, null, datos);
+            Respuesta respuesta = await enviarPeticion("emailRegistro", usuario, null, null, datos);
             if (respuesta.respuesta.Equals("emailConTokenEnviado"))
             {
                 return respuesta.token;
@@ -159,7 +169,7 @@ namespace Proyecto_AccesoDatos
             Dictionary<string, string> email = new Dictionary<string, string>();
             email.Add("email", emailABuscar);
             Respuesta respuesta = await enviarPeticion("buscaEmailenBD", null, null, null, email);
-            if (respuesta.respuesta.Equals("duplicado"))
+            if (respuesta.respuesta.Equals("duplicado")) // Hay que controlar el nullreference exception
             {
                 return true;
             }
@@ -171,7 +181,34 @@ namespace Proyecto_AccesoDatos
         public async Task<bool> buscarUsuarioEnBD(string usuarioABuscar)
         {
             Respuesta respuesta = await enviarPeticion("buscaUsuarioenBD", usuarioABuscar, null, null, null);
-            if (respuesta.respuesta.Equals("duplicado"))
+            if (respuesta.respuesta.Equals("duplicado")) // Hay que controlar el nullreference exception
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<bool> enviarConfirmacionRegistro(string usuario, string pass, Dictionary<string, string> datos)
+        {
+            // Se encripta la pass para guardarla en la BD
+            string passEncriptada = Clave.encriptarClaveRegistro(pass);
+            Respuesta respuesta = await enviarPeticion("confirmarRegistro", usuario, passEncriptada, null, datos);
+            if (respuesta.respuesta.Equals("usuarioRegistrado"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<bool> pedirStatusServidor(string usuario)
+        {
+
+            Respuesta respuesta = await enviarPeticion("status", usuario, null, null, null);
+            if (respuesta != null) // Hay que controlar el nullreference exception???
             {
                 return true;
             }

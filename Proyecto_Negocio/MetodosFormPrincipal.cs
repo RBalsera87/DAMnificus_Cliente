@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace Proyecto_Negocio
 {
-   /****************************************
-    * Métodos para el Formulario Principal *
-    ****************************************/
+    /****************************************
+     * Métodos para el Formulario Principal *
+     ****************************************/
     public class MetodosFormPrincipal
     {
         AccesoDatos ad = new AccesoDatos();
@@ -26,6 +26,10 @@ namespace Proyecto_Negocio
             panelContenido.Controls.Add(fh);
             panelContenido.Tag = fh;
             fh.Show();
+        }
+        public async Task<bool> pedirStatusServidor()
+        {
+            return await ad.pedirStatusServidor(UsuarioConectado.nombre);
         }
         public async Task<string> conectarConServidor(string usuario, string pass)
         {
@@ -54,7 +58,7 @@ namespace Proyecto_Negocio
                 {
                     btn.BackColor = Color.FromArgb(32, 32, 32);
                 }
-                
+
             }
         }
 
