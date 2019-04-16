@@ -22,6 +22,9 @@ namespace Proyecto_Presentacion
 
         public FormAreaPersonal()
         {
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
             met.cargarCursos(cursos);
             InitializeComponent();
             DoubleBuffered = true;
@@ -100,7 +103,7 @@ namespace Proyecto_Presentacion
 
         private void cbCurso_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string curso = cbCurso.SelectedItem.ToString();
+            string curso = "1"; //cbCurso.SelectedItem.ToString();
             this.cbAsignatura.Items.Clear();
             this.cbTrimestre.Items.Clear();
             asignaturas.Clear();
