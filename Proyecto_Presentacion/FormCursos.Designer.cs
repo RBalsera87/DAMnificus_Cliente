@@ -43,6 +43,9 @@
             this.listadoEnlaces = new BrightIdeasSoftware.ObjectListView();
             this.columnaTitulo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnaValoracion = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnaTipo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnaUploader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnaActivo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelAsignaturas1 = new System.Windows.Forms.Panel();
             this.panelDinamico1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnBbdd = new System.Windows.Forms.Button();
@@ -63,9 +66,6 @@
             this.tmPanelAsigOcultar2 = new System.Windows.Forms.Timer(this.components);
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.columnaTipo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.columnaUploader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.columnaActivo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.panelCabecera.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -249,10 +249,28 @@
             // 
             // columnaValoracion
             // 
-            this.columnaValoracion.AspectName = "valoracion";
+            this.columnaValoracion.AspectName = "";
             this.columnaValoracion.CellPadding = null;
             this.columnaValoracion.Text = "Valoración";
             this.columnaValoracion.Width = 120;
+            // 
+            // columnaTipo
+            // 
+            this.columnaTipo.AspectName = "tipo";
+            this.columnaTipo.CellPadding = null;
+            this.columnaTipo.Text = "Tipo";
+            // 
+            // columnaUploader
+            // 
+            this.columnaUploader.AspectName = "uploader";
+            this.columnaUploader.CellPadding = null;
+            this.columnaUploader.Text = "Uploader";
+            // 
+            // columnaActivo
+            // 
+            this.columnaActivo.AspectName = "activo";
+            this.columnaActivo.CellPadding = null;
+            this.columnaActivo.Text = "Activo";
             // 
             // panelAsignaturas1
             // 
@@ -519,24 +537,6 @@
             this.imageListLarge.Images.SetKeyName(5, "tick");
             this.imageListLarge.Images.SetKeyName(6, "ball");
             this.imageListLarge.Images.SetKeyName(7, "perros");
-            // 
-            // columnaTipo
-            // 
-            this.columnaTipo.AspectName = "tipo";
-            this.columnaTipo.CellPadding = null;
-            this.columnaTipo.Text = "Tipo";
-            // 
-            // columnaUploader
-            // 
-            this.columnaUploader.AspectName = "uploader";
-            this.columnaUploader.CellPadding = null;
-            this.columnaUploader.Text = "Uploader";
-            // 
-            // columnaActivo
-            // 
-            this.columnaActivo.AspectName = "activo";
-            this.columnaActivo.CellPadding = null;
-            this.columnaActivo.Text = "Activo";
             // 
             // FormCursos
             // 

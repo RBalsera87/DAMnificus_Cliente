@@ -13,7 +13,7 @@ namespace Proyecto_Presentacion
     public partial class FormCursos : Form
     {
         MetodosFormCursos m = new MetodosFormCursos();
-
+        private int cont;
         public FormCursos()
         {
             InitializeComponent();
@@ -202,13 +202,40 @@ namespace Proyecto_Presentacion
         ************************************/
         private List<Enlaces> listaEnlaces;
         private async void InitializeModel() {
-            listaEnlaces = await m.obtenerEnlaces("admin"); // OJO AL PIOJO, ESO HAY QUE CAMBIARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            listaEnlaces = await m.obtenerEnlaces(UsuarioConectado.nombre); // OJO AL PIOJO, ESO HAY QUE CAMBIARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             cargarImagenes();
             listadoEnlaces.RowHeight = 90;
-            this.columnaTitulo.AspectToStringConverter = delegate (object x)
-            {
-                return "";
-            };
+            //columnaValoracion.AspectToStringConverter  = delegate (object x)
+            //{
+
+            //    cont++;
+            //    if(int.Parse(listaEnlaces[cont].valoracion) <= 2)
+            //    {
+            //        columnaValoracion.ImageKey = "1Estrellas";
+            //    }else if(int.Parse(listaEnlaces[cont].valoracion) <= 4){
+            //        columnaValoracion.ImageKey = "2Estrellas";
+            //    }else if (int.Parse(listaEnlaces[cont].valoracion) <= 6)
+            //    {
+            //        columnaValoracion.ImageKey = "3Estrellas";
+            //    }else if (int.Parse(listaEnlaces[cont].valoracion) <= 8)
+            //    {
+            //        columnaValoracion.ImageKey = "4Estrellas";
+            //    }else if (int.Parse(listaEnlaces[cont].valoracion) <= 10)
+            //    {
+            //        columnaValoracion.ImageKey = "5Estrellas";
+            //    }
+            //    if(cont == listaEnlaces.Count - 1)
+            //    {
+            //        cont = 0;
+            //    }
+            //    return "";
+
+            //};
+            //this.columnaTitulo.AspectToStringConverter = delegate (object x)
+            //{
+            //    return "";
+            //};
+            
             this.listadoEnlaces.SetObjects(this.listaEnlaces);
         }
         //Añade a la primera columna la Imagen el Título y la Descripción
@@ -226,6 +253,13 @@ namespace Proyecto_Presentacion
         //Recorre el List que tiene los enlaces, convierte las rutas de images a Images y las añade a imageListLarge
         public void cargarImagenes()
         {
+            imageListSmall.Images.Add("1Estrellas",Proyecto_Presentacion.Properties.Resources.unaEstrellas);
+            imageListSmall.Images.Add("2Estrellas", Proyecto_Presentacion.Properties.Resources.dosEstrellas);
+            imageListSmall.Images.Add("3Estrellas", Proyecto_Presentacion.Properties.Resources.tresEstrellas);
+            imageListSmall.Images.Add("4Estrellas", Proyecto_Presentacion.Properties.Resources.cuatroEstrellas);
+            imageListSmall.Images.Add("5Estrellas", Proyecto_Presentacion.Properties.Resources.cincoEstrellas);
+            listadoEnlaces.SmallImageList = imageListSmall;
+
             Image img = null;
             foreach(Enlaces e in listaEnlaces)
             {
@@ -270,6 +304,16 @@ namespace Proyecto_Presentacion
                 decoration.Description = Enlaces.descripcion;
                 e.SubItem.Decoration = decoration;
             }
+            if(e.ColumnIndex == 1)
+            {
+                Enlaces Enlaces = (Enlaces)e.Model;
+                pintarImagenTituloDesc decoration = new pintarImagenTituloDesc();
+                decoration.ImageList = this.imageListSmall;
+                decoration.Title = null;
+                decoration.ImageName = Enlaces.valoracion;
+                decoration.Description = null;
+                e.SubItem.Decoration = decoration;
+            }
         }
         //Abre link al hacer doble click sobre la Fila
         private void listadoEnlaces_ItemActivate(object sender, EventArgs e)
@@ -296,56 +340,95 @@ namespace Proyecto_Presentacion
         public Size CellPadding = new Size(1, 1);
 
         public override void Draw(BrightIdeasSoftware.ObjectListView olv, Graphics g, Rectangle r) {
+
             Rectangle cellBounds = this.CellBounds;
             cellBounds.Inflate(-this.CellPadding.Width, -this.CellPadding.Height);
             Rectangle textBounds = cellBounds;
 
-            if (this.ImageList != null && !String.IsNullOrEmpty(this.ImageName))
+            if (Title == null && Description == null)
             {
-                //var request = WebRequest.Create("");
-                //Image ima;
-                //using (var response = request.GetResponse())
-                //using (var stream = response.GetResponseStream())
-                //{
-                //    ima = Bitmap.FromStream(stream);
-                //}
-                
-                //Size tamanio = new Size(80, 80);
-                ////Image imagen = Image.FromFile(Application.StartupPath + "/../../images/pildoras.jpg");
-                //Bitmap bitmatImagen = new Bitmap(ima,tamanio);
-                //g.DrawImage(bitmatImagen, cellBounds.Location);
-                //textBounds.X += bitmatImagen.Width;
-                //textBounds.Width -= bitmatImagen.Width;
+                try
+                {
+                    int valoracion = int.Parse(ImageName);
+                               
+                    if(valoracion <= 20)
+                    {
+                        ImageName = "1Estrellas";
+                    }else if(valoracion <= 40)
+                    {
+                        ImageName = "2Estrellas";
+                    }
+                    else if (valoracion <= 60)
+                    {
+                        ImageName = "3Estrellas";
+                    }
+                    else if (valoracion <= 80)
+                    {
+                        ImageName = "4Estrellas";
+                    }
+                    else if (valoracion <= 100)
+                    {
+                        ImageName = "5Estrellas";
+                    }
+                }catch(Exception e){
 
+                }
 
                 g.DrawImage(this.ImageList.Images[this.ImageName], cellBounds.Location);
                 textBounds.X += this.ImageList.ImageSize.Width;
                 textBounds.Width -= this.ImageList.ImageSize.Width;
             }
-
-            //g.DrawRectangle(Pens.Red, textBounds);
-
-            // Draw the title
-            StringFormat fmt = new StringFormat(StringFormatFlags.NoWrap);
-            fmt.Trimming = StringTrimming.EllipsisCharacter;
-            fmt.Alignment = StringAlignment.Near;
-            fmt.LineAlignment = StringAlignment.Near;
-
-            using (SolidBrush b = new SolidBrush(this.TitleColor))
+            else
             {
-                g.DrawString(this.Title, this.TitleFont, b, textBounds, fmt);
+                if (this.ImageList != null && !String.IsNullOrEmpty(this.ImageName))
+                {
+                    //var request = WebRequest.Create("");
+                    //Image ima;
+                    //using (var response = request.GetResponse())
+                    //using (var stream = response.GetResponseStream())
+                    //{
+                    //    ima = Bitmap.FromStream(stream);
+                    //}
+
+                    //Size tamanio = new Size(80, 80);
+                    ////Image imagen = Image.FromFile(Application.StartupPath + "/../../images/pildoras.jpg");
+                    //Bitmap bitmatImagen = new Bitmap(ima,tamanio);
+                    //g.DrawImage(bitmatImagen, cellBounds.Location);
+                    //textBounds.X += bitmatImagen.Width;
+                    //textBounds.Width -= bitmatImagen.Width;
+
+
+                    g.DrawImage(this.ImageList.Images[this.ImageName], cellBounds.Location);
+                    textBounds.X += this.ImageList.ImageSize.Width;
+                    textBounds.Width -= this.ImageList.ImageSize.Width;
+                }
+
+                //g.DrawRectangle(Pens.Red, textBounds);
+
+                // Draw the title
+                StringFormat fmt = new StringFormat(StringFormatFlags.NoWrap);
+                fmt.Trimming = StringTrimming.EllipsisCharacter;
+                fmt.Alignment = StringAlignment.Near;
+                fmt.LineAlignment = StringAlignment.Near;
+
+                using (SolidBrush b = new SolidBrush(this.TitleColor))
+                {
+                    g.DrawString(this.Title, this.TitleFont, b, textBounds, fmt);
+                }
+
+                // Draw the description
+                SizeF size = g.MeasureString(this.Title, this.TitleFont, (int)textBounds.Width, fmt);
+                textBounds.Y += (int)size.Height;
+                textBounds.Height -= (int)size.Height;
+                StringFormat fmt2 = new StringFormat();
+                fmt2.Trimming = StringTrimming.EllipsisCharacter;
+                using (SolidBrush b = new SolidBrush(this.DescriptionColor))
+                {
+                    g.DrawString(this.Description, this.DescripionFont, b, textBounds, fmt2);
+                }
             }
 
-            // Draw the description
-            SizeF size = g.MeasureString(this.Title, this.TitleFont, (int)textBounds.Width, fmt);
-            textBounds.Y += (int)size.Height;
-            textBounds.Height -= (int)size.Height;
-            StringFormat fmt2 = new StringFormat();
-            fmt2.Trimming = StringTrimming.EllipsisCharacter;
-            using (SolidBrush b = new SolidBrush(this.DescriptionColor))
-            {
-                g.DrawString(this.Description, this.DescripionFont, b, textBounds, fmt2);
-            }
+            
         }
 
         

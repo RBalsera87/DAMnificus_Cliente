@@ -73,6 +73,16 @@ namespace Proyecto_Presentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cincoEstrellas {
+            get {
+                object obj = ResourceManager.GetObject("cincoEstrellas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap clientes {
             get {
                 object obj = ResourceManager.GetObject("clientes", resourceCulture);
@@ -83,9 +93,29 @@ namespace Proyecto_Presentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cuatroEstrellas {
+            get {
+                object obj = ResourceManager.GetObject("cuatroEstrellas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cursos {
             get {
                 object obj = ResourceManager.GetObject("cursos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dosEstrellas {
+            get {
+                object obj = ResourceManager.GetObject("dosEstrellas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -276,6 +306,26 @@ namespace Proyecto_Presentacion.Properties {
         internal static System.Drawing.Bitmap titulo {
             get {
                 object obj = ResourceManager.GetObject("titulo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tresEstrellas {
+            get {
+                object obj = ResourceManager.GetObject("tresEstrellas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unaEstrellas {
+            get {
+                object obj = ResourceManager.GetObject("unaEstrellas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
