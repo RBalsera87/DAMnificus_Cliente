@@ -17,7 +17,9 @@ namespace Proyecto_Presentacion
         public FormCursos()
         {
             InitializeComponent();
-            DoubleBuffered = true;
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
         }
 
         private void FormCursos_Load(object sender, System.EventArgs e)
@@ -202,7 +204,7 @@ namespace Proyecto_Presentacion
         ************************************/
         private List<Enlaces> listaEnlaces;
         private async void InitializeModel() {
-            listaEnlaces = await m.obtenerEnlaces(UsuarioConectado.nombre); // OJO AL PIOJO, ESO HAY QUE CAMBIARLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            listaEnlaces = await m.obtenerEnlaces(UsuarioConectado.nombre); 
             cargarImagenes();
             listadoEnlaces.RowHeight = 90;
             //columnaValoracion.AspectToStringConverter  = delegate (object x)

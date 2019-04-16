@@ -31,7 +31,7 @@ namespace Proyecto_Presentacion
         // Variable para el efecto sombra del formulario
         private const int CS_DROPSHADOW = 0x20000;
 
-        //System.Timers.Timer timer = new System.Timers.Timer(10);
+        System.Timers.Timer timer = new System.Timers.Timer(10);
         public FormPrincipal()
         {
             InitializeComponent();
@@ -48,10 +48,10 @@ namespace Proyecto_Presentacion
             this.lblTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
             m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
 
-            //timer.Enabled = false;
-            //timer.AutoReset = true;
-            //timer.Interval = 10;
-            //timer.SynchronizingObject = this;
+            timer.Enabled = false;
+            timer.AutoReset = true;
+            timer.Interval = 10;
+            timer.SynchronizingObject = this;
         }
         
         /*****************
@@ -149,10 +149,10 @@ namespace Proyecto_Presentacion
         {
             if (menuLateral.Width == 220)
             {
-                //timer.Elapsed -= new ElapsedEventHandler(mostrarMenuLateral);
-                //timer.Elapsed += new ElapsedEventHandler(ocultarMenuLateral);
-                //this.timer.Enabled = true;
-                this.tmOcultarMenu.Enabled = true;
+                timer.Elapsed -= new ElapsedEventHandler(mostrarMenuLateral);
+                timer.Elapsed += new ElapsedEventHandler(ocultarMenuLateral);
+                this.timer.Enabled = true;
+                //this.tmOcultarMenu.Enabled = true;
                 this.lblUsuario.Visible = false;
                 this.lblPass.Visible = false;
                 this.lblConectado.Visible = false;
@@ -161,10 +161,10 @@ namespace Proyecto_Presentacion
             }
             else if (menuLateral.Width == 55)
             {
-                //timer.Elapsed -= new ElapsedEventHandler(ocultarMenuLateral);
-                //timer.Elapsed += new ElapsedEventHandler(mostrarMenuLateral);
-                //this.timer.Enabled = true;
-                this.tmMostrarMenu.Enabled = true;
+                timer.Elapsed -= new ElapsedEventHandler(ocultarMenuLateral);
+                timer.Elapsed += new ElapsedEventHandler(mostrarMenuLateral);
+                this.timer.Enabled = true;
+                //this.tmMostrarMenu.Enabled = true;
             }
         }
         private void btnPrincipal_Click(object sender, EventArgs e)
@@ -289,7 +289,7 @@ namespace Proyecto_Presentacion
         {
             if (this.menuLateral.Width <= 55)
             {
-                //this.timer.Enabled = false;
+                this.timer.Enabled = false;
 
             }
             else
@@ -302,7 +302,7 @@ namespace Proyecto_Presentacion
         {
             if (menuLateral.Width >= 220)
             {
-                //this.timer.Enabled = false;
+                this.timer.Enabled = false;
                 this.lblUsuario.Visible = true;
                 this.lblPass.Visible = true;
                 this.lblConectado.Visible = true;

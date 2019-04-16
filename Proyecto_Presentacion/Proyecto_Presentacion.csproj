@@ -154,10 +154,6 @@
     <None Include="Graficas\App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Proyecto_AccesoDatos\Proyecto_AccesoDatos.csproj">
-      <Project>{f1e4f4a3-e3c5-4143-9f24-703be4e080e7}</Project>
-      <Name>Proyecto_AccesoDatos</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Proyecto_Negocio\Proyecto_Negocio.csproj">
       <Project>{7133ec0a-9dce-4edc-9ed1-191f3819e4e9}</Project>
       <Name>Proyecto_Negocio</Name>
