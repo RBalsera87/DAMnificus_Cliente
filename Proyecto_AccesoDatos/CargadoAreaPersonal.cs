@@ -11,11 +11,118 @@ namespace Proyecto_AccesoDatos
     {
 
         private MySqlConnection conexion;
-        public List<double> recogidaNotas(int curso, int trimestre)
+
+        public int sacarCurso(string user)
+        {
+            int salida = 0;
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "SELECT Curso FROM usuarios WHERE Nombre = '" + user + "';";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        salida = reader.GetInt16(0);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontraron datos.");
+                }
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return salida;
+        }
+
+        public int sacarUsuario(string user)
+        {
+            int salida = 0;
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "SELECT Id FROM usuarios WHERE Nombre = '" + user + "';";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        salida = reader.GetInt16(0);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontraron datos.");
+                }
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return salida;
+        }
+
+        public List<string>sacarAsignaturas(int curso)
+        {
+            List<string> salida = new List<string> { };
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "SELECT Nombre FROM asignaturas WHERE curso = "+curso+" ORDER BY Id";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        salida.Add(reader.GetString(0));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontraron datos.");
+                }
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return salida;
+        }
+
+
+
+
+
+        public List<double> recogidaNotas(int curso, int usuario)
         {
             List<double> notas = new List<double> { };
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
-            string query = "SELECT Nota FROM notas n inner join asignaturas a on n.Asignatura = a.Id WHERE a.Curso = "+curso+" AND n.Trimestre = "+trimestre+" AND n.Usuario = 2 order by n.Asignatura asc";
+            string query = "SELECT n.Nota FROM notas n INNER JOIN asignaturas a ON n.Asignatura = a.Id WHERE a.Curso = "+curso+" AND n.Usuario = "+usuario+" ORDER BY a.Id, n.Trimestre";
             MySqlConnection databaseConnection = new MySqlConnection(connectionString);
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader;
