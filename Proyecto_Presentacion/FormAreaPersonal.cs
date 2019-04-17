@@ -18,6 +18,7 @@ namespace Proyecto_Presentacion
         int user, curso;
         List<string> nombresAsignaturas = new List<string> { };
         List<double> todasNotas = new List<double> { };
+        List<double> mediaNotas = new List<double> { };
         List<double> notasAsignatura1 = new List<double> { };
         List<double> notasAsignatura2 = new List<double> { };
         List<double> notasAsignatura3 = new List<double> { };
@@ -36,18 +37,28 @@ namespace Proyecto_Presentacion
 
             curso = met.sacarCurso(usuario);
             user = met.sacarUsuario(usuario);
+            cargaDatos(curso);                        
+            
+        }
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
 
-            if(curso == 1)
+        }
+
+        public void cargaDatos(int curso)
+        {
+            if (curso == 1)
             {
                 nombresAsignaturas = met.sacarAsignaturas(curso);
                 todasNotas = met.recogidaNotas(curso, user);
-                for(int x=0;x<todasNotas.Count;x++)
+                mediaNotas = met.mediaNotas(curso, user);
+                for (int x = 0; x < todasNotas.Count; x++)
                 {
-                    if(x >= 0 && x < 3)
+                    if (x >= 0 && x < 3)
                     {
                         notasAsignatura1.Add(todasNotas[x]);
                     }
-                    else if(x >= 3 && x < 6)
+                    else if (x >= 3 && x < 6)
                     {
                         notasAsignatura2.Add(todasNotas[x]);
                     }
@@ -106,11 +117,55 @@ namespace Proyecto_Presentacion
                 {
                     Labels = new[] { "TRIMESTRE 1", "TRIMESTRE 2", "TRIMESTRE 3" }
                 });
+
+                graficaMedias.Series = new SeriesCollection
+                {
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[0],
+                        Values = new ChartValues<double> {mediaNotas[0] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[1],
+                        Values = new ChartValues<double> {mediaNotas[1] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[2],
+                        Values = new ChartValues<double> {mediaNotas[2] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[3],
+                        Values = new ChartValues<double> {mediaNotas[3] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[4],
+                        Values = new ChartValues<double> {mediaNotas[4] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[5],
+                        Values = new ChartValues<double> {mediaNotas[5] },
+                        DataLabels = true,
+                    }
+                };
+
+
+
             }
             else if (curso == 2)
             {
                 nombresAsignaturas = met.sacarAsignaturas(curso);
                 todasNotas = met.recogidaNotas(curso, user);
+                mediaNotas = met.mediaNotas(curso, user);
                 for (int x = 0; x < todasNotas.Count; x++)
                 {
                     if (x >= 0 && x < 2)
@@ -183,21 +238,60 @@ namespace Proyecto_Presentacion
                 });
                 graficaNotas.AxisX.Add(new Axis
                 {
-                    Labels = new[] { "TRIMESTRE 1", "TRIMESTRE 2"}
+                    Labels = new[] { "TRIMESTRE 1", "TRIMESTRE 2" }
                 });
+
+
+                graficaMedias.Series = new SeriesCollection
+                {
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[0],
+                        Values = new ChartValues<double> {mediaNotas[0] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[1],
+                        Values = new ChartValues<double> {mediaNotas[1] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[2],
+                        Values = new ChartValues<double> {mediaNotas[2] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[3],
+                        Values = new ChartValues<double> {mediaNotas[3] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[4],
+                        Values = new ChartValues<double> {mediaNotas[4] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[5],
+                        Values = new ChartValues<double> {mediaNotas[5] },
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = nombresAsignaturas[6],
+                        Values = new ChartValues<double> {mediaNotas[6] },
+                        DataLabels = true,
+                    }
+                };
             }
-
-
             
 
-
-
+            graficaMedias.LegendLocation = LegendLocation.Bottom;
         }
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         
             
         

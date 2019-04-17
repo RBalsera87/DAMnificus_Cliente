@@ -30,7 +30,7 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.graficaNotas = new LiveCharts.WinForms.CartesianChart();
-            this.graficaValoraciones = new LiveCharts.WinForms.PieChart();
+            this.graficaMedias = new LiveCharts.WinForms.PieChart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
@@ -45,7 +45,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.Controls.Add(this.graficaNotas, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.graficaValoraciones, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.graficaMedias, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -67,14 +67,14 @@
             this.graficaNotas.TabIndex = 0;
             this.graficaNotas.Text = "cartesianChart1";
             // 
-            // graficaValoraciones
+            // graficaMedias
             // 
-            this.graficaValoraciones.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graficaValoraciones.Location = new System.Drawing.Point(3, 427);
-            this.graficaValoraciones.Name = "graficaValoraciones";
-            this.graficaValoraciones.Size = new System.Drawing.Size(369, 341);
-            this.graficaValoraciones.TabIndex = 1;
-            this.graficaValoraciones.Text = "pieChart1";
+            this.graficaMedias.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graficaMedias.Location = new System.Drawing.Point(3, 427);
+            this.graficaMedias.Name = "graficaMedias";
+            this.graficaMedias.Size = new System.Drawing.Size(369, 341);
+            this.graficaMedias.TabIndex = 1;
+            this.graficaMedias.Text = "pieChart1";
             // 
             // groupBox1
             // 
@@ -133,7 +133,7 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private LiveCharts.WinForms.CartesianChart graficaNotas;
-        private LiveCharts.WinForms.PieChart graficaValoraciones;
+        private LiveCharts.WinForms.PieChart graficaMedias;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
     }

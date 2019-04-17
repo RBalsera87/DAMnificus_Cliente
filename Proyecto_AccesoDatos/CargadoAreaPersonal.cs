@@ -152,6 +152,53 @@ namespace Proyecto_AccesoDatos
             return notas;
         }
 
+
+        public List<double> mediaNotas(int curso, int usuario)
+        {
+            List<double> notas = new List<double> { };
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "SELECT CAST( AVG( n.Nota ) AS DECIMAL( 4, 2 ) ) FROM notas n INNER JOIN asignaturas a ON n.Asignatura = a.Id WHERE a.Curso = "+curso+" AND n.Usuario = "+usuario+" GROUP BY n.Asignatura ORDER BY a.Id";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        notas.Add((double)reader.GetDecimal(0));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontraron datos.");
+                }
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return notas;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void cargadoCursos(List<string> cursos)
         {
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";

@@ -34,5 +34,9 @@ namespace Proyecto_Negocio
             return cargado.sacarUsuario(usuario);
         }
 
+        public List<double>mediaNotas(int curso, int usuario)
+        {
+            return cargado.mediaNotas(curso, usuario);
+        }
     }
 }
