@@ -38,6 +38,7 @@
             this.btnMaximizar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.menuLateral = new System.Windows.Forms.Panel();
+            this.btnMoverMenu = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnRefreshStatus = new System.Windows.Forms.Button();
@@ -52,7 +53,7 @@
             this.tbPass = new System.Windows.Forms.TextBox();
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnAyuda = new System.Windows.Forms.Button();
+            this.btnAyudaAdmin = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnComunidad = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -68,7 +69,6 @@
             this.tmOcultarLogin = new System.Windows.Forms.Timer(this.components);
             this.tmMostrarLogin = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnMoverMenu = new System.Windows.Forms.Button();
             this.barraTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcono)).BeginInit();
             this.menuLateral.SuspendLayout();
@@ -210,7 +210,7 @@
             this.menuLateral.Controls.Add(this.btnLogin);
             this.menuLateral.Controls.Add(this.panelLogin);
             this.menuLateral.Controls.Add(this.panel5);
-            this.menuLateral.Controls.Add(this.btnAyuda);
+            this.menuLateral.Controls.Add(this.btnAyudaAdmin);
             this.menuLateral.Controls.Add(this.panel4);
             this.menuLateral.Controls.Add(this.btnComunidad);
             this.menuLateral.Controls.Add(this.panel3);
@@ -225,6 +225,22 @@
             this.menuLateral.Name = "menuLateral";
             this.menuLateral.Size = new System.Drawing.Size(220, 638);
             this.menuLateral.TabIndex = 1;
+            // 
+            // btnMoverMenu
+            // 
+            this.btnMoverMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoverMenu.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Mobile_Menu_Icon;
+            this.btnMoverMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMoverMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMoverMenu.FlatAppearance.BorderSize = 0;
+            this.btnMoverMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoverMenu.Location = new System.Drawing.Point(174, 3);
+            this.btnMoverMenu.Name = "btnMoverMenu";
+            this.btnMoverMenu.Size = new System.Drawing.Size(40, 32);
+            this.btnMoverMenu.TabIndex = 22;
+            this.btnMoverMenu.TabStop = false;
+            this.btnMoverMenu.UseVisualStyleBackColor = true;
+            this.btnMoverMenu.Click += new System.EventHandler(this.btnMoverMenu_Click);
             // 
             // panel6
             // 
@@ -407,25 +423,25 @@
             this.panel5.Size = new System.Drawing.Size(5, 50);
             this.panel5.TabIndex = 12;
             // 
-            // btnAyuda
+            // btnAyudaAdmin
             // 
-            this.btnAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAyuda.FlatAppearance.BorderSize = 0;
-            this.btnAyuda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnAyuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAyuda.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAyuda.ForeColor = System.Drawing.Color.White;
-            this.btnAyuda.Image = global::Proyecto_Presentacion.Properties.Resources.ayuda;
-            this.btnAyuda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAyuda.Location = new System.Drawing.Point(0, 311);
-            this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(220, 50);
-            this.btnAyuda.TabIndex = 11;
-            this.btnAyuda.TabStop = false;
-            this.btnAyuda.Text = "Ayuda";
-            this.btnAyuda.UseVisualStyleBackColor = true;
-            this.btnAyuda.Click += new System.EventHandler(this.btnConfiguracion_Click);
+            this.btnAyudaAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAyudaAdmin.FlatAppearance.BorderSize = 0;
+            this.btnAyudaAdmin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnAyudaAdmin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnAyudaAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyudaAdmin.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAyudaAdmin.ForeColor = System.Drawing.Color.White;
+            this.btnAyudaAdmin.Image = global::Proyecto_Presentacion.Properties.Resources.ayuda;
+            this.btnAyudaAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAyudaAdmin.Location = new System.Drawing.Point(0, 311);
+            this.btnAyudaAdmin.Name = "btnAyudaAdmin";
+            this.btnAyudaAdmin.Size = new System.Drawing.Size(220, 50);
+            this.btnAyudaAdmin.TabIndex = 11;
+            this.btnAyudaAdmin.TabStop = false;
+            this.btnAyudaAdmin.Text = "Ayuda";
+            this.btnAyudaAdmin.UseVisualStyleBackColor = true;
+            this.btnAyudaAdmin.Click += new System.EventHandler(this.btnConfiguracion_Click);
             // 
             // panel4
             // 
@@ -584,22 +600,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // btnMoverMenu
-            // 
-            this.btnMoverMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoverMenu.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.Mobile_Menu_Icon;
-            this.btnMoverMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnMoverMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMoverMenu.FlatAppearance.BorderSize = 0;
-            this.btnMoverMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoverMenu.Location = new System.Drawing.Point(174, 3);
-            this.btnMoverMenu.Name = "btnMoverMenu";
-            this.btnMoverMenu.Size = new System.Drawing.Size(40, 32);
-            this.btnMoverMenu.TabIndex = 22;
-            this.btnMoverMenu.TabStop = false;
-            this.btnMoverMenu.UseVisualStyleBackColor = true;
-            this.btnMoverMenu.Click += new System.EventHandler(this.btnMoverMenu_Click);
-            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -645,7 +645,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnPrincipal;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btnAyuda;
+        private System.Windows.Forms.Button btnAyudaAdmin;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnComunidad;
         private System.Windows.Forms.Panel panel3;

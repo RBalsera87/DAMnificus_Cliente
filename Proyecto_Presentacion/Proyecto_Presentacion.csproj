@@ -87,6 +87,12 @@
     <Compile Include="FormAreaPersonal.Designer.cs">
       <DependentUpon>FormAreaPersonal.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAyuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAyuda.Designer.cs">
+      <DependentUpon>FormAyuda.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCursos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     </Compile>
     <EmbeddedResource Include="FormAreaPersonal.resx">
       <DependentUpon>FormAreaPersonal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAyuda.resx">
+      <DependentUpon>FormAyuda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCursos.resx">
       <DependentUpon>FormCursos.cs</DependentUpon>

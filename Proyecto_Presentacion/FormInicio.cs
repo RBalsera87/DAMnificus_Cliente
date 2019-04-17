@@ -56,9 +56,10 @@ namespace Proyecto_Presentacion
          *****************/
         private void FormInicio_Load(object sender, EventArgs e)
         {
-            if (!UsuarioConectado.nombre.Equals("invitado"))
+            this.btnRegistro.Visible = false;
+            if (UsuarioConectado.nombre.Equals("invitado"))
             {
-                this.btnRegistro.Visible = false;
+                this.btnRegistro.Visible = true;
             }
         }
         /****************************
@@ -191,19 +192,31 @@ namespace Proyecto_Presentacion
 
                 if (m.comprobarEmailValido(emailIntroducido))
                 {
-                    //Aqui se comprueba k no exista ya en la base de datos
-                    if (await m.buscarEnBD("email", emailIntroducido)) // True = duplicado
+                    
+                    try
+                    {   //Aqui se comprueba k no exista ya en la base de datos
+                        if (await m.buscarEnBD("email", emailIntroducido)) // True = duplicado
+                        {
+                            this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.error;
+                            this.toolTipEmail.SetToolTip(pbEmail, "Esta direccion email ya esta registrada");
+                            this.toolTipEmail.Show("Esta direccion email ya esta registrada", this.tbEmail, 1000);
+                            this.emailValido = false;
+                        }
+                        else
+                        {
+                            this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                            this.toolTipEmail.SetToolTip(pbEmail, "Correcto");
+                            this.emailValido = true;
+                        }
+                    }
+                    catch (NullReferenceException)
                     {
                         this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.error;
-                        this.toolTipEmail.SetToolTip(pbEmail, "Esta direccion email ya esta registrada");
-                        this.toolTipEmail.Show("Esta direccion email ya esta registrada", this.tbEmail, 1000);
+                        this.toolTipEmail.SetToolTip(pbEmail, "El servidor no responde");
+                        this.toolTipEmail.Show("El servidor no responde", this.tbEmail, 1000);
                         this.emailValido = false;
-                    }else
-                    {
-                        this.pbEmail.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                        this.toolTipEmail.SetToolTip(pbEmail, "Correcto");
-                        this.emailValido = true;
                     }
+                    
                     
                 }
                 else
@@ -230,20 +243,31 @@ namespace Proyecto_Presentacion
             }
             else
             {
-                //Aqui se comprueba k no exista ya en la base de datos
-                if (await m.buscarEnBD("user", usuarioIntroducido)) // True = duplicado
+                try
+                {
+                    //Aqui se comprueba k no exista ya en la base de datos
+                    if (await m.buscarEnBD("user", usuarioIntroducido)) // True = duplicado
+                    {
+                        this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.error;
+                        this.toolTipUsuario.SetToolTip(pbUser, "Este nombre de usuario ya esta registrado");
+                        this.toolTipUsuario.Show("Este nombre de usuario ya esta registrado", this.pbUser, 1000);
+                        this.emailValido = false;
+                    }
+                    else
+                    {
+                        this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                        this.toolTipUsuario.SetToolTip(pbUser, "Correcto");
+                        this.userValido = true;
+                    }
+                }
+                catch (NullReferenceException)
                 {
                     this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.error;
-                    this.toolTipUsuario.SetToolTip(pbUser, "Este nombre de usuario ya esta registrado");
-                    this.toolTipUsuario.Show("Este nombre de usuario ya esta registrado", this.pbUser, 1000);
+                    this.toolTipUsuario.SetToolTip(pbUser, "El servidor no responde");
+                    this.toolTipUsuario.Show("El servidor no responde", this.pbUser, 1000);
                     this.emailValido = false;
                 }
-                else
-                {
-                    this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                    this.toolTipUsuario.SetToolTip(pbUser, "Correcto");
-                    this.userValido = true;
-                }
+                
                 
             }
             activarBotonAceptar();

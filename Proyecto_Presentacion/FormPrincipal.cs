@@ -200,7 +200,16 @@ namespace Proyecto_Presentacion
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
             m.restaurarColorBotones(this.menuLateral);
-            this.btnAyuda.BackColor = Color.FromArgb(73, 55, 34);
+            this.btnAyudaAdmin.BackColor = Color.FromArgb(73, 55, 34);
+            if (UsuarioConectado.nombre.Equals("admin"))
+            {
+                //Panel administración
+            }
+            else
+            {
+                m.abrirFormEnPanel(new FormAyuda(), this.panelContenido);
+            }
+            
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -494,31 +503,36 @@ namespace Proyecto_Presentacion
                         m.ocultarLogin(this.tmOcultarLogin);
                         tbUsuario.Text = "";
                         tbPass.Text = "";
-
+                        // Cambia el boton ayuda por el boton administración si el usuario es admin
+                        if (usuario.Equals("admin"))
+                        {
+                            btnAyudaAdmin.Text = "Administración";
+                            btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.producto;
+                        }
+                        
                     }
                     else
                     {
-                        MessageBox.Show(respuesta);
+                        MessageBox.Show(respuesta); // Cambiar esto
                         lblConectado.Text = "Conectado como invitado";
-
                     }
 
                 }
                 else
                 {
                     // Borra token y desconecta
-                    if (await m.borrarToken(UsuarioConectado.nombre))
-                    {
-                        btnLogin.BackColor = Color.FromArgb(32, 32, 32);
-                        btnLogin.Text = "Conectarse";
-                        lblConectado.Text = "Conectado como invitado";
-                        m.mostrarLogin(this.tmMostrarLogin);
-                        UsuarioConectado.nombre = "invitado";
-                    }
-                    else
+                    if (!await m.borrarToken(UsuarioConectado.nombre))
                     {
                         MessageBox.Show("Error al borrar token");
                     }
+                    btnAyudaAdmin.Text = "Ayuda";
+                    btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.ayuda;
+                    btnLogin.BackColor = Color.FromArgb(32, 32, 32);
+                    btnLogin.Text = "Conectarse";
+                    lblConectado.Text = "Conectado como invitado";
+                    m.mostrarLogin(this.tmMostrarLogin);
+                    UsuarioConectado.nombre = "invitado";
+                    btnPrincipal.PerformClick();
                 }
             }
             
@@ -542,11 +556,26 @@ namespace Proyecto_Presentacion
             {
                 pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.ok;
                 lblStatusServer.Text = "Servidor Online";
+                UsuarioConectado.status = "online";
+                if (btnPrincipal.BackColor != Color.FromArgb(32, 32, 32))
+                {
+                    btnPrincipal.PerformClick();
+                }
+                //btnCursos.Enabled = btnAreaPersonal.Enabled = btnAyudaAdmin.Enabled = btnComunidad.Enabled = btnLogin.Enabled = true;
+                //panel2.BackColor = panel3.BackColor = panel4.BackColor = panel5.BackColor = panel7.BackColor = Color.FromArgb(255, 153, 39);
             }
             else
             {
                 pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.error;
                 lblStatusServer.Text = "Servidor Offline";
+                UsuarioConectado.status = "offline";
+                if(btnPrincipal.BackColor != Color.FromArgb(32,32,32))
+                {
+                    btnPrincipal.PerformClick();
+                }
+                //btnCursos.Enabled = btnAreaPersonal.Enabled = btnAyudaAdmin.Enabled = btnComunidad.Enabled = btnLogin.Enabled = false;
+                //panel2.BackColor = panel3.BackColor = panel4.BackColor = panel5.BackColor = panel7.BackColor = Color.Red;
+
             }
         }
 

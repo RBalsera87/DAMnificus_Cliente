@@ -9,5 +9,6 @@ namespace Proyecto_Negocio
     public class UsuarioConectado
     {
         public static string nombre = "invitado";
+        public static string status = "offline";
     }
 }
