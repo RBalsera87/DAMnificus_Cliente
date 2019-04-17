@@ -6,199 +6,200 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using Proyecto_Negocio;
 
 namespace Proyecto_Presentacion
 {
     
     public partial class FormAreaPersonal : Form
     {
-        Proyecto_Negocio.MetodosFormAreaPersonal met = new Proyecto_Negocio.MetodosFormAreaPersonal();
-        List<double> notas1 = new List<double> { };
-        List<double> notas2 = new List<double> { };
-        List<double> notas3 = new List<double> { };
-        List<String> cursos = new List<string> { };
-        List<String> asignaturas = new List<string> { };
-        List<String> trimestres = new List<string> { };
+        MetodosFormAreaPersonal met = new MetodosFormAreaPersonal();
+        string usuario = UsuarioConectado.nombre;
+        int user, curso;
+        List<string> nombresAsignaturas = new List<string> { };
+        List<double> todasNotas = new List<double> { };
+        List<double> notasAsignatura1 = new List<double> { };
+        List<double> notasAsignatura2 = new List<double> { };
+        List<double> notasAsignatura3 = new List<double> { };
+        List<double> notasAsignatura4 = new List<double> { };
+        List<double> notasAsignatura5 = new List<double> { };
+        List<double> notasAsignatura6 = new List<double> { };
+        List<double> notasAsignatura7 = new List<double> { };
 
         public FormAreaPersonal()
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
-            met.cargarCursos(cursos);
             InitializeComponent();
             DoubleBuffered = true;
 
-            foreach(string aux in cursos)
+            curso = met.sacarCurso(usuario);
+            user = met.sacarUsuario(usuario);
+
+            if(curso == 1)
             {
-                cbCurso.Items.Add(aux);
-                cbGraficaNotas.Items.Add(aux);
-            }
-            
-            cbCurso.SelectedIndex = 0;
-            cbGraficaNotas.SelectedIndex = 0;
-
-            notas1 = met.cargarListaNotas(1,1);
-            notas2 = met.cargarListaNotas(1,2);
-            notas3 = met.cargarListaNotas(1,3);
-
-            graficaNotas.AxisY.Clear();
-            graficaNotas.Series = new SeriesCollection
+                nombresAsignaturas = met.sacarAsignaturas(curso);
+                todasNotas = met.recogidaNotas(curso, user);
+                for(int x=0;x<todasNotas.Count;x++)
                 {
-                    new StackedRowSeries
+                    if(x >= 0 && x < 3)
                     {
-                        Title = "NOTA TRIMESTRE 1",
-                        
-                        Values = new ChartValues<double> (notas1)
-                    },
-                    new StackedRowSeries
+                        notasAsignatura1.Add(todasNotas[x]);
+                    }
+                    else if(x >= 3 && x < 6)
                     {
-                        Title = "NOTA TRIMESTRE 2",
-                        Values = new ChartValues<double> (notas2)
-                    },
-                    new StackedRowSeries
+                        notasAsignatura2.Add(todasNotas[x]);
+                    }
+                    else if (x >= 6 && x < 9)
                     {
-                        Title = "NOTA TRIMESTRE 3",
-                        Values = new ChartValues<double> (notas3)
+                        notasAsignatura3.Add(todasNotas[x]);
+                    }
+                    else if (x >= 9 && x < 12)
+                    {
+                        notasAsignatura4.Add(todasNotas[x]);
+                    }
+                    else if (x >= 12 && x < 15)
+                    {
+                        notasAsignatura5.Add(todasNotas[x]);
+                    }
+                    else
+                    {
+                        notasAsignatura6.Add(todasNotas[x]);
+                    }
+                }
+
+                graficaNotas.Series = new SeriesCollection
+                {
+                    new ColumnSeries
+                    {
+                        Title = nombresAsignaturas[0],
+                        Values = new ChartValues<double> (notasAsignatura1)
                     }
                 };
-
-            graficaNotas.AxisY.Add(new Axis
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[1],
+                    Values = new ChartValues<double>(notasAsignatura2)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[2],
+                    Values = new ChartValues<double>(notasAsignatura3)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[3],
+                    Values = new ChartValues<double>(notasAsignatura4)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[4],
+                    Values = new ChartValues<double>(notasAsignatura5)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[5],
+                    Values = new ChartValues<double>(notasAsignatura6)
+                });
+                graficaNotas.AxisX.Add(new Axis
+                {
+                    Labels = new[] { "TRIMESTRE 1", "TRIMESTRE 2", "TRIMESTRE 3" }
+                });
+            }
+            else if (curso == 2)
             {
-                Title = "ASIGNATURAS",
-                Labels = new[] { "Programacion", "Bases de Datos", "Entornos de Desarrollo", "Sistemas Informáticos", "Formación y Orientación Laboral", "Lenguaje de Marcas" }
-            });
+                nombresAsignaturas = met.sacarAsignaturas(curso);
+                todasNotas = met.recogidaNotas(curso, user);
+                for (int x = 0; x < todasNotas.Count; x++)
+                {
+                    if (x >= 0 && x < 2)
+                    {
+                        notasAsignatura1.Add(todasNotas[x]);
+                    }
+                    else if (x >= 2 && x < 4)
+                    {
+                        notasAsignatura2.Add(todasNotas[x]);
+                    }
+                    else if (x >= 4 && x < 6)
+                    {
+                        notasAsignatura3.Add(todasNotas[x]);
+                    }
+                    else if (x >= 6 && x < 8)
+                    {
+                        notasAsignatura4.Add(todasNotas[x]);
+                    }
+                    else if (x >= 8 && x < 10)
+                    {
+                        notasAsignatura5.Add(todasNotas[x]);
+                    }
+                    else if (x >= 10 && x < 12)
+                    {
+                        notasAsignatura6.Add(todasNotas[x]);
+                    }
+                    else
+                    {
+                        notasAsignatura7.Add(todasNotas[x]);
+                    }
+                }
 
-            Func<ChartPoint, string> labelPoint = chartPoint =>
-                string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+                graficaNotas.Series = new SeriesCollection
+                {
+                    new ColumnSeries
+                    {
+                        Title = nombresAsignaturas[0],
+                        Values = new ChartValues<double> (notasAsignatura1)
+                    }
+                };
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[1],
+                    Values = new ChartValues<double>(notasAsignatura2)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[2],
+                    Values = new ChartValues<double>(notasAsignatura3)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[3],
+                    Values = new ChartValues<double>(notasAsignatura4)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[4],
+                    Values = new ChartValues<double>(notasAsignatura5)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[5],
+                    Values = new ChartValues<double>(notasAsignatura6)
+                });
+                graficaNotas.Series.Add(new ColumnSeries
+                {
+                    Title = nombresAsignaturas[6],
+                    Values = new ChartValues<double>(notasAsignatura7)
+                });
+                graficaNotas.AxisX.Add(new Axis
+                {
+                    Labels = new[] { "TRIMESTRE 1", "TRIMESTRE 2"}
+                });
+            }
 
-            graficaValoraciones.Value = met.mediaValoraciones();
-            graficaValoraciones.FromValue = 0;
-            graficaValoraciones.ToValue = 100;
-            graficaValoraciones.Base.Foreground = Brushes.White;
-            graficaValoraciones.Base.FontWeight = FontWeights.Bold;
-            graficaValoraciones.Base.FontSize = 16;
-            graficaValoraciones.SectionsInnerRadius = 0.4;
 
-            graficaValoraciones.Sections.Add(new AngularSection
-            {
-                FromValue = 0,
-                ToValue = 50,
-                Fill = new SolidColorBrush(Color.FromRgb(255, 0, 0))
-            });
-            graficaValoraciones.Sections.Add(new AngularSection
-            {
-                FromValue = 50,
-                ToValue = 80,
-                Fill = new SolidColorBrush(Color.FromRgb(255,255, 0))
-            });
-            graficaValoraciones.Sections.Add(new AngularSection
-            {
-                FromValue = 80,
-                ToValue = 100,
-                Fill = new SolidColorBrush(Color.FromRgb(0, 255, 0))
-            });
             
-        }
 
-        private void cbCurso_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string curso = "1"; //cbCurso.SelectedItem.ToString();
-            this.cbAsignatura.Items.Clear();
-            this.cbTrimestre.Items.Clear();
-            asignaturas.Clear();
-            met.cargarAsignaturas(asignaturas, curso);
-            foreach (string aux in asignaturas)
-            {
-                cbAsignatura.Items.Add(aux);
-            }
-            cbAsignatura.SelectedIndex = 0;
-        }
 
-        private void cbAsignatura_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string asignatura = cbAsignatura.SelectedItem.ToString();
-            this.cbTrimestre.Items.Clear();
-            trimestres.Clear();
-            met.cargarTrimestres(trimestres, asignatura);
-            foreach (string aux in trimestres)
-            {
-                cbTrimestre.Items.Add(aux);
-            }
-            cbTrimestre.SelectedIndex = 0;
-        }
 
-        private void btnAgregarNota_Click(object sender, EventArgs e)
-        {
-            string asignatura = cbAsignatura.SelectedItem.ToString();
-            string trimestre = cbTrimestre.SelectedItem.ToString();
-            string nota = this.nota.Value.ToString();
-            nota = nota.Replace(",", ".");
-            met.agregarNota(asignatura, trimestre, nota);
-            System.Windows.Forms.MessageBox.Show("Nota añadida", "ALERTA NOTA", MessageBoxButtons.OK);
         }
-
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void cbGraficaNotas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cbGraficaNotas.SelectedIndex == 0)
-            {
-                notas1 = met.cargarListaNotas(1,1);
-                notas2 = met.cargarListaNotas(1,2);
-                graficaNotas.AxisY.Clear();
-                graficaNotas.Series = new SeriesCollection
-                {
-                    new StackedRowSeries
-                    {
-                        Title = "NOTA TRIMESTRE 1",
-
-                        Values = new ChartValues<double> (notas1)
-                    },
-                    new StackedRowSeries
-                    {
-                        Title = "NOTA TRIMESTRE 2",
-                        Values = new ChartValues<double> (notas2)
-                    },
-                    new StackedRowSeries
-                    {
-                        Title = "NOTA TRIMESTRE 3",
-                        Values = new ChartValues<double> (notas3)
-                    }
-                };
-                graficaNotas.AxisY.Add(new Axis
-                {
-                    Title = "ASIGNATURAS",
-                    Labels = new[] { "Programacion", "Bases de Datos", "Entornos de Desarrollo", "Sistemas Informáticos", "Formación y Orientación Laboral", "Lenguaje de Marcas" }
-                });
-            }
-            else
-            {
-                notas1 = met.cargarListaNotas(2,1);
-                notas2 = met.cargarListaNotas(2,2);
-                graficaNotas.AxisY.Clear();
-                graficaNotas.Series = new SeriesCollection
-                {
-                    new StackedRowSeries
-                    {
-                        Title = "NOTA TRIMESTRE 1",
-                        Values = new ChartValues<double> (notas1)
-                    },
-                    new StackedRowSeries
-                    {
-                        Title = "NOTA TRIMESTRE 2",
-                        Values = new ChartValues<double> (notas2)
-                    }
-                };
-                graficaNotas.AxisY.Add(new Axis
-                {
-                    Title = "ASIGNATURAS",
-                    Labels = new[] { "Acceso a Datos", " Desarrollo de Interfaces", "Programación de Servicios y Procesos", "Programacion Multimedia y Dispositivos Móviles", "Empresa e Iniciativa Emprendedora", "Inglés Técnico", "Sistemas de Gestión Empresarial" }
-                });
-            }
-        }
+        
+            
+        
     }
 }
