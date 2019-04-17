@@ -146,7 +146,7 @@ namespace Proyecto_AccesoDatos
             }
             return true;
         }
-        public async Task<List<Enlaces>> obtenerEnlaces(string usuario)
+        public async Task<Object> obtenerEnlaces(string usuario)
         {
             if (token.Equals("")) { token = null; }
             Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token, null);
