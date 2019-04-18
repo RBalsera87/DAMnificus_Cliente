@@ -32,10 +32,15 @@
             this.graficaNotas = new LiveCharts.WinForms.CartesianChart();
             this.graficaMedias = new LiveCharts.WinForms.PieChart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.notaIntroducir = new System.Windows.Forms.NumericUpDown();
+            this.lbAsignaturas = new System.Windows.Forms.ListBox();
+            this.tbTrimestre = new System.Windows.Forms.TrackBar();
+            this.lblTrimestre = new System.Windows.Forms.Label();
+            this.btnAgregarNota = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notaIntroducir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTrimestre)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -78,7 +83,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.btnAgregarNota);
+            this.groupBox1.Controls.Add(this.lblTrimestre);
+            this.groupBox1.Controls.Add(this.tbTrimestre);
+            this.groupBox1.Controls.Add(this.lbAsignaturas);
+            this.groupBox1.Controls.Add(this.notaIntroducir);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
@@ -89,27 +98,75 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AGREGAR NOTA";
             // 
-            // numericUpDown1
+            // notaIntroducir
             // 
-            this.numericUpDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.numericUpDown1.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown1.Increment = new decimal(new int[] {
+            this.notaIntroducir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.notaIntroducir.DecimalPlaces = 2;
+            this.notaIntroducir.Dock = System.Windows.Forms.DockStyle.Top;
+            this.notaIntroducir.ForeColor = System.Drawing.Color.White;
+            this.notaIntroducir.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.numericUpDown1.Location = new System.Drawing.Point(3, 25);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.notaIntroducir.Location = new System.Drawing.Point(3, 25);
+            this.notaIntroducir.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(365, 29);
-            this.numericUpDown1.TabIndex = 0;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.notaIntroducir.Name = "notaIntroducir";
+            this.notaIntroducir.Size = new System.Drawing.Size(365, 29);
+            this.notaIntroducir.TabIndex = 0;
+            this.notaIntroducir.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbAsignaturas
+            // 
+            this.lbAsignaturas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbAsignaturas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbAsignaturas.ForeColor = System.Drawing.Color.White;
+            this.lbAsignaturas.FormattingEnabled = true;
+            this.lbAsignaturas.ItemHeight = 21;
+            this.lbAsignaturas.Location = new System.Drawing.Point(3, 54);
+            this.lbAsignaturas.Name = "lbAsignaturas";
+            this.lbAsignaturas.Size = new System.Drawing.Size(365, 172);
+            this.lbAsignaturas.TabIndex = 1;
+            // 
+            // tbTrimestre
+            // 
+            this.tbTrimestre.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tbTrimestre.LargeChange = 1;
+            this.tbTrimestre.Location = new System.Drawing.Point(3, 226);
+            this.tbTrimestre.Maximum = 2;
+            this.tbTrimestre.Name = "tbTrimestre";
+            this.tbTrimestre.Size = new System.Drawing.Size(365, 45);
+            this.tbTrimestre.TabIndex = 3;
+            this.tbTrimestre.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.tbTrimestre.Scroll += new System.EventHandler(this.tbTrimestre_Scroll);
+            // 
+            // lblTrimestre
+            // 
+            this.lblTrimestre.AutoSize = true;
+            this.lblTrimestre.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTrimestre.Location = new System.Drawing.Point(3, 271);
+            this.lblTrimestre.Name = "lblTrimestre";
+            this.lblTrimestre.Size = new System.Drawing.Size(49, 21);
+            this.lblTrimestre.TabIndex = 2;
+            this.lblTrimestre.Text = "label1";
+            this.lblTrimestre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnAgregarNota
+            // 
+            this.btnAgregarNota.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.btnAgregarNota.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAgregarNota.ForeColor = System.Drawing.Color.White;
+            this.btnAgregarNota.Location = new System.Drawing.Point(3, 292);
+            this.btnAgregarNota.Name = "btnAgregarNota";
+            this.btnAgregarNota.Size = new System.Drawing.Size(365, 52);
+            this.btnAgregarNota.TabIndex = 4;
+            this.btnAgregarNota.Text = "AGREGAR";
+            this.btnAgregarNota.UseVisualStyleBackColor = false;
+            this.btnAgregarNota.Click += new System.EventHandler(this.btnAgregarNota_Click);
             // 
             // FormAreaPersonal
             // 
@@ -124,7 +181,9 @@
             this.Text = "FormAreaPersonal";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notaIntroducir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTrimestre)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -135,6 +194,10 @@
         private LiveCharts.WinForms.CartesianChart graficaNotas;
         private LiveCharts.WinForms.PieChart graficaMedias;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown notaIntroducir;
+        private System.Windows.Forms.Label lblTrimestre;
+        private System.Windows.Forms.TrackBar tbTrimestre;
+        private System.Windows.Forms.ListBox lbAsignaturas;
+        private System.Windows.Forms.Button btnAgregarNota;
     }
 }

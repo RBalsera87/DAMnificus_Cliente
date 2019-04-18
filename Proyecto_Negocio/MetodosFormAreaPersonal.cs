@@ -38,5 +38,10 @@ namespace Proyecto_Negocio
         {
             return cargado.mediaNotas(curso, usuario);
         }
+
+        public void agregarNota(string nota, int trimestre, string asignatura, int user)
+        {
+            cargado.agregarNota(nota, trimestre, asignatura, user);
+        }
     }
 }

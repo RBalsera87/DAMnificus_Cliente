@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace Proyecto_AccesoDatos
 {
@@ -187,9 +188,68 @@ namespace Proyecto_AccesoDatos
             return notas;
         }
 
+        public void agregarNota(string nota, int trimestre, string asignatura, int user)
+        {
+            if (verSiHayNota(trimestre, asignatura, user))
+            {
+                string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "UPDATE notas SET Nota = @nota WHERE Trimestre = @trimestre AND Asignatura = (SELECT Id FROM asignaturas WHERE Nombre = @asignatura) AND Usuario = @user;";
+                cmd.Parameters.AddWithValue("@nota", nota);
+                cmd.Parameters.AddWithValue("@trimestre", trimestre);
+                cmd.Parameters.AddWithValue("@asignatura", asignatura);
+                cmd.Parameters.AddWithValue("@user", user);
+                conexion = new MySqlConnection(connectionString);
+                conexion.Open();
+                cmd.Connection = conexion;
+                cmd.ExecuteNonQuery();
+            }
+            else MessageBox.Show("Se dejará la nota que estaba", "ALERTA NOTA", MessageBoxButtons.OK);
 
+        }
 
+        public bool verSiHayNota(int trimestre, string asignatura, int user)
+        {
+            bool salida = false;
+            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
+            string query = "SELECT Nota FROM notas WHERE Trimestre = " + trimestre + " AND Asignatura = (SELECT Id FROM asignaturas WHERE Nombre = '" + asignatura + "') AND Usuario = " + user + ";";
+            MySqlConnection databaseConnection = new MySqlConnection(connectionString);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            MySqlDataReader reader;
 
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        double nota = (double)reader.GetDecimal(0);
+                        if (nota > 0)
+                        {
+                            if (MessageBox.Show("Ya hay una nota introducida. ¿Quieres cambiarla?", "AVISO NOTAS", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            {
+                                salida = true;
+                            }
+                            else salida = false;
+                        }
+                    }
+                }
+                else
+                {
+                    salida = true;
+                }
+                reader.Close();
+                databaseConnection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return salida;
+        }
 
 
 
@@ -296,22 +356,9 @@ namespace Proyecto_AccesoDatos
             }
         }
 
-        public void cargarNuevaNota(string asignatura, string trimestre, string nota)
-        {
-            string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "UPDATE notas SET Nota = @nota WHERE Trimestre = @trimestre AND Asignatura = (SELECT Id FROM asignaturas WHERE Nombre = @asignatura) AND Usuario = @user;";
-            cmd.Parameters.AddWithValue("@nota", nota);
-            cmd.Parameters.AddWithValue("@trimestre", trimestre);
-            cmd.Parameters.AddWithValue("@asignatura", asignatura);
-            cmd.Parameters.AddWithValue("@user", 2);
-            conexion = new MySqlConnection(connectionString);
-            conexion.Open();
-            cmd.Connection = conexion;
-            cmd.ExecuteNonQuery();
+        
 
-           
-        }
+        
 
         public double valoraciones()
         {

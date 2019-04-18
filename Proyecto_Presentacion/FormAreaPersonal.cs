@@ -26,6 +26,7 @@ namespace Proyecto_Presentacion
         List<double> notasAsignatura5 = new List<double> { };
         List<double> notasAsignatura6 = new List<double> { };
         List<double> notasAsignatura7 = new List<double> { };
+        
 
         public FormAreaPersonal()
         {
@@ -37,7 +38,9 @@ namespace Proyecto_Presentacion
 
             curso = met.sacarCurso(usuario);
             user = met.sacarUsuario(usuario);
-            cargaDatos(curso);                        
+            cargaComponentes();
+            cargaGraficas(curso);         
+            
             
         }
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -45,13 +48,57 @@ namespace Proyecto_Presentacion
 
         }
 
-        public void cargaDatos(int curso)
+        public void vaciadoListas()
+        {
+            notasAsignatura1.Clear();
+            notasAsignatura2.Clear();
+            notasAsignatura3.Clear();
+            notasAsignatura4.Clear();
+            notasAsignatura5.Clear();
+            notasAsignatura6.Clear();
+            notasAsignatura7.Clear();
+        }
+
+        private void tbTrimestre_Scroll(object sender, EventArgs e)
+        {
+            switch(tbTrimestre.Value)
+            {
+                case 0:lblTrimestre.Text = "TRIMESTRE 1";
+                    break;
+                case 1:lblTrimestre.Text = "TRIMESTRE 2";
+                    break;
+                case 2: lblTrimestre.Text = "TRIMESTRE 3";
+                    break;
+            }
+        }
+
+        public void cargaComponentes()
+        {
+            nombresAsignaturas = met.sacarAsignaturas(curso);
+            todasNotas = met.recogidaNotas(curso, user);
+            mediaNotas = met.mediaNotas(curso, user);
+            lbAsignaturas.DataSource = nombresAsignaturas;
+            lbAsignaturas.SelectedIndex = 0;
+            lblTrimestre.Text = "TRIMESTRE 1";
+        }
+
+        private void btnAgregarNota_Click(object sender, EventArgs e)
+        {
+            int trimestre = tbTrimestre.Value + 1;
+            string nota = notaIntroducir.Value.ToString();
+            nota = nota.Replace(",", ".");
+            string asignatura = lbAsignaturas.SelectedItem.ToString();
+            met.agregarNota(nota, trimestre, asignatura, user);
+            vaciadoListas();
+            cargaComponentes();
+            cargaGraficas(curso);
+        }
+
+        public void cargaGraficas(int curso)
         {
             if (curso == 1)
             {
-                nombresAsignaturas = met.sacarAsignaturas(curso);
-                todasNotas = met.recogidaNotas(curso, user);
-                mediaNotas = met.mediaNotas(curso, user);
+                tbTrimestre.Maximum = 2;
                 for (int x = 0; x < todasNotas.Count; x++)
                 {
                     if (x >= 0 && x < 3)
@@ -79,7 +126,7 @@ namespace Proyecto_Presentacion
                         notasAsignatura6.Add(todasNotas[x]);
                     }
                 }
-
+                graficaNotas.AxisX.Clear();
                 graficaNotas.Series = new SeriesCollection
                 {
                     new ColumnSeries
@@ -163,9 +210,7 @@ namespace Proyecto_Presentacion
             }
             else if (curso == 2)
             {
-                nombresAsignaturas = met.sacarAsignaturas(curso);
-                todasNotas = met.recogidaNotas(curso, user);
-                mediaNotas = met.mediaNotas(curso, user);
+                tbTrimestre.Maximum = 1;
                 for (int x = 0; x < todasNotas.Count; x++)
                 {
                     if (x >= 0 && x < 2)
@@ -197,7 +242,7 @@ namespace Proyecto_Presentacion
                         notasAsignatura7.Add(todasNotas[x]);
                     }
                 }
-
+                graficaNotas.AxisX.Clear();
                 graficaNotas.Series = new SeriesCollection
                 {
                     new ColumnSeries
