@@ -3,9 +3,7 @@ using LiveCharts.Wpf;
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 using Proyecto_Negocio;
 
 namespace Proyecto_Presentacion
@@ -35,11 +33,18 @@ namespace Proyecto_Presentacion
             SetStyle(ControlStyles.DoubleBuffer, true);
             InitializeComponent();
             DoubleBuffered = true;
-
             curso = met.sacarCurso(usuario);
-            user = met.sacarUsuario(usuario);
-            cargaComponentes();
-            cargaGraficas(curso);         
+            if (usuario.Equals("invitado")||curso == 0)
+            {
+                cargarModelo();
+            }
+            else
+            {
+                user = met.sacarUsuario(usuario);
+                cargaComponentes();
+                cargaGraficas(curso);
+            }
+                   
             
             
         }
@@ -84,14 +89,22 @@ namespace Proyecto_Presentacion
 
         private void btnAgregarNota_Click(object sender, EventArgs e)
         {
-            int trimestre = tbTrimestre.Value + 1;
-            string nota = notaIntroducir.Value.ToString();
-            nota = nota.Replace(",", ".");
-            string asignatura = lbAsignaturas.SelectedItem.ToString();
-            met.agregarNota(nota, trimestre, asignatura, user);
-            vaciadoListas();
-            cargaComponentes();
-            cargaGraficas(curso);
+            if (usuario.Equals("invitado") || curso == 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Esto es solo un modelo, con lo que no se podrá interactuar con las notas del area personal.\nRegístrate, inicia sesión o modifica tu curso en el area de AYUDA para disfrutar de todas las características", "CARACTERISTICAS LIMITADAS", MessageBoxButtons.OK);
+            }
+            else
+            {
+                int trimestre = tbTrimestre.Value + 1;
+                string nota = notaIntroducir.Value.ToString();
+                nota = nota.Replace(",", ".");
+                string asignatura = lbAsignaturas.SelectedItem.ToString();
+                met.agregarNota(nota, trimestre, asignatura, user);
+                vaciadoListas();
+                cargaComponentes();
+                cargaGraficas(curso);
+            }
+                
         }
 
         public void cargaGraficas(int curso)
@@ -339,6 +352,96 @@ namespace Proyecto_Presentacion
         }
         
             
-        
+        public void cargarModelo()
+        {
+            graficaNotas.AxisX.Clear();
+            graficaNotas.Series = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "Bases de datos",
+                    Values = new ChartValues<double> { 1, 1, 1 }
+                }
+            };
+            graficaNotas.Series.Add(new ColumnSeries
+            {
+                Title = "Entornos de desarrollo",
+                Values = new ChartValues<double> { 2, 2, 2 }
+            });
+            graficaNotas.Series.Add(new ColumnSeries
+            {
+                Title = "Lenguaje de marcas",
+                Values = new ChartValues<double> { 3, 3, 3 }
+            });
+            graficaNotas.Series.Add(new ColumnSeries
+            {
+                Title = "Programación",
+                Values = new ChartValues<double> { 4, 4, 4 }
+            });
+            graficaNotas.Series.Add(new ColumnSeries
+            {
+                Title = "Sistemas informáticos",
+                Values = new ChartValues<double> { 5, 5, 5 }
+            });
+            graficaNotas.Series.Add(new ColumnSeries
+            {
+                Title = "Formación y orientación laboral",
+                Values = new ChartValues<double> { 6, 6, 6 }
+            });
+            graficaNotas.AxisX.Add(new Axis
+            {
+                Labels = new[] { "TRIMESTRE 1", "TRIMESTRE 2", "TRIMESTRE 3" }
+            });
+
+            graficaMedias.Series = new SeriesCollection
+                {
+                    new PieSeries
+                    {
+                        Title = "Bases de datos",
+                        Values = new ChartValues<double> {1},
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = "Entornos de desarrollo",
+                        Values = new ChartValues<double> {2},
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = "Lenguaje de marcas",
+                        Values = new ChartValues<double> {3},
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = "Programación",
+                        Values = new ChartValues<double> {4},
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = "Sistemas informáticos",
+                        Values = new ChartValues<double> {5},
+                        DataLabels = true,
+                    },
+                    new PieSeries
+                    {
+                        Title = "Formación y orientación laboral",
+                        Values = new ChartValues<double> {6},
+                        DataLabels = true,
+                    }
+                };
+            graficaMedias.LegendLocation = LegendLocation.Bottom;
+
+            lbAsignaturas.Items.Add("Bases de datos");
+            lbAsignaturas.Items.Add("Entornos de desarrollo");
+            lbAsignaturas.Items.Add("Lenguaje de marcas");
+            lbAsignaturas.Items.Add("Programación");
+            lbAsignaturas.Items.Add("Sistemas informáticos");
+            lbAsignaturas.Items.Add("Formación y orientación laboral");
+
+            lblTrimestre.Text = "TRIMESTRE 1";
+        }
     }
 }

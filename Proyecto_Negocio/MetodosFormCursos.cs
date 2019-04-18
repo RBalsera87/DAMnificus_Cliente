@@ -12,6 +12,9 @@ namespace Proyecto_Negocio
         public async Task<List<Enlaces>> obtenerEnlaces(string usuario)
         {
             Object objectoListaEnlaces = await ad.obtenerEnlaces(usuario);
+
+            Console.WriteLine( objectoListaEnlaces.GetType());
+
             List<Enlaces> listaEnlaces = (List<Enlaces>)objectoListaEnlaces;
             return listaEnlaces;
         }
