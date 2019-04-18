@@ -234,6 +234,7 @@ namespace Proyecto_AccesoDatos
                             }
                             else salida = false;
                         }
+                        salida = true;
                     }
                 }
                 else
