@@ -63,6 +63,16 @@ namespace Proyecto_Presentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap accept {
+            get {
+                object obj = ResourceManager.GetObject("accept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ayuda {
             get {
                 object obj = ResourceManager.GetObject("ayuda", resourceCulture);
@@ -216,6 +226,16 @@ namespace Proyecto_Presentacion.Properties {
         internal static System.Drawing.Bitmap Mobile_Menu_Icon {
             get {
                 object obj = ResourceManager.GetObject("Mobile_Menu_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ocultar {
+            get {
+                object obj = ResourceManager.GetObject("ocultar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

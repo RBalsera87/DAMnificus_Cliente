@@ -213,6 +213,8 @@
   <ItemGroup>
     <Content Include="Graficas\GraficaBarras.html" />
     <Content Include="Graficas\Grafica3d.html" />
+    <None Include="Resources\accept.png" />
+    <None Include="Resources\ocultar.png" />
     <None Include="Resources\cuatroEstrellas.png" />
     <None Include="Resources\tresEstrellas.png" />
     <None Include="Resources\dosEstrellas.png" />

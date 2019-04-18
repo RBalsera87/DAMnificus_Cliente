@@ -31,13 +31,15 @@ namespace Proyecto_Presentacion
         // Variable para el efecto sombra del formulario
         private const int CS_DROPSHADOW = 0x20000;
 
-        System.Timers.Timer timer = new System.Timers.Timer(10);
+        //System.Timers.Timer timer = new System.Timers.Timer(10);
+
+        System.Windows.Forms.Timer t1 = new System.Windows.Forms.Timer();
         public FormPrincipal()
         {
             InitializeComponent();
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             //this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.barraTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
@@ -48,10 +50,10 @@ namespace Proyecto_Presentacion
             this.lblTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
             m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
 
-            timer.Enabled = false;
-            timer.AutoReset = true;
-            timer.Interval = 10;
-            timer.SynchronizingObject = this;
+            //timer.Enabled = false;
+            //timer.AutoReset = true;
+            //timer.Interval = 10;
+            //timer.SynchronizingObject = this;
         }
         
         /*****************
@@ -59,9 +61,15 @@ namespace Proyecto_Presentacion
          *****************/
         private async void FormPrincipal_Load(object sender, EventArgs e)
         {
+            Opacity = 0;      // Ponemos la opacidad a 0 para la animación
+            t1.Interval = 10;  // Intervalo para animación
+            t1.Tick += new EventHandler(fadeIn);  // Llama a la función que se ejecutara en el timer
+            t1.Start(); // Arranca el timer de la animación de inicio
+
             // Arranca un hilo para comprobar si el servidor esta conectado cada 30s
             await comprobarStatusServerDaemon(TimeSpan.FromSeconds(30), CancellationToken.None);
         }
+        
         /****************************
          * Eventos para los botones *
          ****************************/
@@ -149,22 +157,20 @@ namespace Proyecto_Presentacion
         {
             if (menuLateral.Width == 220)
             {
-                timer.Elapsed -= new ElapsedEventHandler(mostrarMenuLateral);
-                timer.Elapsed += new ElapsedEventHandler(ocultarMenuLateral);
-                this.timer.Enabled = true;
-                //this.tmOcultarMenu.Enabled = true;
-                this.lblUsuario.Visible = false;
-                this.lblPass.Visible = false;
-                this.lblConectado.Visible = false;
-                this.tbUsuario.Visible = false;
-                this.tbPass.Visible = false;
+                //timer.Elapsed -= new ElapsedEventHandler(mostrarMenuLateral);
+                //timer.Elapsed += new ElapsedEventHandler(ocultarMenuLateral);
+                //this.timer.Enabled = true;
+                this.tmOcultarMenu.Enabled = true;
+                m.ocultarLogin(this.tmOcultarLogin);
             }
             else if (menuLateral.Width == 55)
             {
-                timer.Elapsed -= new ElapsedEventHandler(ocultarMenuLateral);
-                timer.Elapsed += new ElapsedEventHandler(mostrarMenuLateral);
-                this.timer.Enabled = true;
-                //this.tmMostrarMenu.Enabled = true;
+                //timer.Elapsed -= new ElapsedEventHandler(ocultarMenuLateral);
+                //timer.Elapsed += new ElapsedEventHandler(mostrarMenuLateral);
+                //this.timer.Enabled = true;
+                m.mostrarLogin(this.tmMostrarLogin);
+                this.lblConectado.Visible = true;
+                this.tmMostrarMenu.Enabled = true;
             }
         }
         private void btnPrincipal_Click(object sender, EventArgs e)
@@ -227,10 +233,9 @@ namespace Proyecto_Presentacion
             }
             else
             {
-                this.tmMostrarMenu.Enabled = true;
-                this.lblUsuario.Visible = true;
-                this.lblPass.Visible = true;
                 this.lblConectado.Visible = true;
+                this.tmMostrarMenu.Enabled = true;
+                m.mostrarLogin(this.tmMostrarLogin);
             }
             
         }
@@ -286,7 +291,7 @@ namespace Proyecto_Presentacion
             if (menuLateral.Width <= 55)
             {
                 this.tmOcultarMenu.Enabled = false;
-
+                this.lblConectado.Visible = false;
             }
             else
             {
@@ -298,7 +303,7 @@ namespace Proyecto_Presentacion
         {
             if (this.menuLateral.Width <= 55)
             {
-                this.timer.Enabled = false;
+                //this.timer.Enabled = false;
 
             }
             else
@@ -311,7 +316,7 @@ namespace Proyecto_Presentacion
         {
             if (menuLateral.Width >= 220)
             {
-                this.timer.Enabled = false;
+                //this.timer.Enabled = false;
                 this.lblUsuario.Visible = true;
                 this.lblPass.Visible = true;
                 this.lblConectado.Visible = true;
@@ -330,11 +335,6 @@ namespace Proyecto_Presentacion
             if (menuLateral.Width >= 220)
             {
                 this.tmMostrarMenu.Enabled = false;
-                this.lblUsuario.Visible = true;
-                this.lblPass.Visible = true;
-                this.lblConectado.Visible = true;
-                this.tbUsuario.Visible = true;
-                this.tbPass.Visible = true;
                 this.lblStatusServer.Visible = true;
                 this.pbStatusServer.Visible = true;
             }
@@ -343,11 +343,6 @@ namespace Proyecto_Presentacion
                 this.menuLateral.Width = menuLateral.Width + 5;
                 actualizarTamañoPanelContenido();
             }
-        }
-
-        private void pbOcultarMenu_Click(object sender, EventArgs e)
-        {
-            
         }
         private void tmOcultarLogin_Tick(object sender, EventArgs e)
         {
@@ -413,7 +408,24 @@ namespace Proyecto_Presentacion
                 this.Location = p3;
             }
         }
-
+        //Animaciones
+        void fadeIn(object sender, EventArgs e)
+        {
+            if (Opacity >= 1)
+                t1.Stop();   // Paramos el timer cuando el formulario es 100% visible
+            else
+                Opacity += .05;
+        }
+        void fadeOut(object sender, EventArgs e)
+        {
+            if (Opacity <= 0)
+            {
+                t1.Stop();
+                Close();
+            }
+            else
+                Opacity -= 0.05;
+        }
         /*************************************************************
          * Eventos para cambio de tamaño y redibujado del formulario *
          *************************************************************/
@@ -473,6 +485,12 @@ namespace Proyecto_Presentacion
         private async void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
             await m.borrarToken(UsuarioConectado.nombre);
+            // Animacion fadeout cuando se sale
+            e.Cancel = true;    // cancela el cerrado de la aplicación
+            t1.Tick -= new EventHandler(fadeIn);  //quita el eventhandler de la animacion de inicio
+            t1.Tick += new EventHandler(fadeOut);  //y la sustituye por la nueva
+            t1.Start();
+            if (Opacity == 0) e.Cancel = false;   // Cuando ya es completamente transparente se cierra  
         }
 
 
@@ -579,6 +597,6 @@ namespace Proyecto_Presentacion
             }
         }
 
-        
+
     }
 }
