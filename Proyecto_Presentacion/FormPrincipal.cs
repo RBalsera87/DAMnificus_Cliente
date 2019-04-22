@@ -12,7 +12,8 @@ namespace Proyecto_Presentacion
     {
         
         MetodosFormPrincipal m = new MetodosFormPrincipal();
-        
+        // Variable para controlar boton conectar
+        private bool conectando = false;
         // Variables para el movimiento del formulario
         private bool agarrado = false;
         private bool maximizado = false;
@@ -30,10 +31,12 @@ namespace Proyecto_Presentacion
         private Point oldPosition;
         // Variable para el efecto sombra del formulario
         private const int CS_DROPSHADOW = 0x20000;
-
+        // Timer para animación de inicio
+        System.Windows.Forms.Timer fader = new System.Windows.Forms.Timer();
+        // Timer para menu lateral
         //System.Timers.Timer timer = new System.Timers.Timer(10);
 
-        System.Windows.Forms.Timer t1 = new System.Windows.Forms.Timer();
+
         public FormPrincipal()
         {
             InitializeComponent();
@@ -62,9 +65,9 @@ namespace Proyecto_Presentacion
         private async void FormPrincipal_Load(object sender, EventArgs e)
         {
             Opacity = 0;      // Ponemos la opacidad a 0 para la animación
-            t1.Interval = 10;  // Intervalo para animación
-            t1.Tick += new EventHandler(fadeIn);  // Llama a la función que se ejecutara en el timer
-            t1.Start(); // Arranca el timer de la animación de inicio
+            fader.Interval = 10;  // Intervalo para animación
+            fader.Tick += new EventHandler(fadeIn);  // Llama a la función que se ejecutara en el timer
+            fader.Start(); // Arranca el timer de la animación de inicio
 
             // Arranca un hilo para comprobar si el servidor esta conectado cada 30s
             await comprobarStatusServerDaemon(TimeSpan.FromSeconds(30), CancellationToken.None);
@@ -412,7 +415,7 @@ namespace Proyecto_Presentacion
         void fadeIn(object sender, EventArgs e)
         {
             if (Opacity >= 1)
-                t1.Stop();   // Paramos el timer cuando el formulario es 100% visible
+                fader.Stop();   // Paramos el timer cuando el formulario es 100% visible
             else
                 Opacity += .05;
         }
@@ -420,7 +423,7 @@ namespace Proyecto_Presentacion
         {
             if (Opacity <= 0)
             {
-                t1.Stop();
+                fader.Stop();
                 Close();
             }
             else
@@ -487,9 +490,9 @@ namespace Proyecto_Presentacion
             await m.borrarToken(UsuarioConectado.nombre);
             // Animacion fadeout cuando se sale
             e.Cancel = true;    // cancela el cerrado de la aplicación
-            t1.Tick -= new EventHandler(fadeIn);  //quita el eventhandler de la animacion de inicio
-            t1.Tick += new EventHandler(fadeOut);  //y la sustituye por la nueva
-            t1.Start();
+            fader.Tick -= new EventHandler(fadeIn);  //quita el eventhandler de la animacion de inicio
+            fader.Tick += new EventHandler(fadeOut);  //y la sustituye por la nueva
+            fader.Start();
             if (Opacity == 0) e.Cancel = false;   // Cuando ya es completamente transparente se cierra  
         }
 
@@ -497,63 +500,67 @@ namespace Proyecto_Presentacion
 
         private async void accionLogearDesloguear(string usuario, string pass)
         {
-            if (usuario.Equals("") && btnLogin.Text.Equals("Conectarse"))
+            if (!conectando)
             {
-                this.toolTipUsuario.Show("Escribe primero tu nombre de usuario", this.tbUsuario, 1000);
-            }
-            else if (pass.Equals("") && btnLogin.Text.Equals("Conectarse"))
-            {
-                this.toolTipPass.Show("Escribe tambien tu contraseña", this.tbPass, 1000);
-            }
-            else
-            {
-                if (UsuarioConectado.nombre.Equals("invitado"))
+                if (usuario.Equals("") && btnLogin.Text.Equals("Conectarse"))
                 {
-
-                    lblConectado.Text = "Conectando...";
-                    string respuesta = await m.conectarConServidor(usuario, pass);
-                    if (respuesta.Equals("Acceso concedido"))
-                    {
-                        UsuarioConectado.nombre = usuario;
-                        lblConectado.Text = "Conectando como " + usuario;
-                        btnLogin.Text = "Desconectarse";
-                        btnLogin.BackColor = Color.FromArgb(91, 183, 108);
-                        m.ocultarLogin(this.tmOcultarLogin);
-                        tbUsuario.Text = "";
-                        tbPass.Text = "";
-                        // Cambia el boton ayuda por el boton administración si el usuario es admin
-                        if (usuario.Equals("admin"))
-                        {
-                            btnAyudaAdmin.Text = "Administración";
-                            btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.producto;
-                        }
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show(respuesta); // Cambiar esto
-                        lblConectado.Text = "Conectado como invitado";
-                    }
-
+                    this.toolTipUsuario.Show("Escribe primero tu nombre de usuario", this.tbUsuario, 1000);
+                }
+                else if (pass.Equals("") && btnLogin.Text.Equals("Conectarse"))
+                {
+                    this.toolTipPass.Show("Escribe tambien tu contraseña", this.tbPass, 1000);
                 }
                 else
                 {
-                    // Borra token y desconecta
-                    if (!await m.borrarToken(UsuarioConectado.nombre))
+                    if (UsuarioConectado.nombre.Equals("invitado"))
                     {
-                        MessageBox.Show("Error al borrar token");
+                        conectando = true;
+                        lblConectado.Text = "Conectando...";
+                        string respuesta = await m.conectarConServidor(usuario, pass);
+                        if (respuesta.Equals("Acceso concedido"))
+                        {
+                            UsuarioConectado.nombre = usuario;
+                            lblConectado.Text = "Conectando como " + usuario;
+                            btnLogin.Text = "Desconectarse";
+                            btnLogin.BackColor = Color.FromArgb(91, 183, 108);
+                            m.ocultarLogin(this.tmOcultarLogin);
+                            tbUsuario.Text = "";
+                            tbPass.Text = "";
+                            // Cambia el boton ayuda por el boton administración si el usuario es admin
+                            if (usuario.Equals("admin"))
+                            {
+                                btnAyudaAdmin.Text = "Administración";
+                                btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.producto;
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show(respuesta); // Cambiar esto
+                            lblConectado.Text = "Conectado como invitado";
+                        }
+                        conectando = false;
                     }
-                    btnAyudaAdmin.Text = "Ayuda";
-                    btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.ayuda;
-                    btnLogin.BackColor = Color.FromArgb(32, 32, 32);
-                    btnLogin.Text = "Conectarse";
-                    lblConectado.Text = "Conectado como invitado";
-                    m.mostrarLogin(this.tmMostrarLogin);
-                    UsuarioConectado.nombre = "invitado";
-                    btnPrincipal.PerformClick();
+                    else
+                    {
+                        conectando = true;
+                        // Borra token y desconecta
+                        if (!await m.borrarToken(UsuarioConectado.nombre))
+                        {
+                            MessageBox.Show("Error al borrar token");
+                        }
+                        btnAyudaAdmin.Text = "Ayuda";
+                        btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.ayuda;
+                        btnLogin.BackColor = Color.FromArgb(32, 32, 32);
+                        btnLogin.Text = "Conectarse";
+                        lblConectado.Text = "Conectado como invitado";
+                        m.mostrarLogin(this.tmMostrarLogin);
+                        UsuarioConectado.nombre = "invitado";
+                        conectando = false;
+                        btnPrincipal.PerformClick();
+                    }
                 }
-            }
-            
+            }     
         }
 
         // Crea un hilo demonio para comprobar la conexion con el servidor
