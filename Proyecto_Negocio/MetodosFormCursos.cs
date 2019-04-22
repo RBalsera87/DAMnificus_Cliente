@@ -11,9 +11,7 @@ namespace Proyecto_Negocio
         AccesoDatos ad = new AccesoDatos();
         public async Task<List<Enlaces>> obtenerEnlaces(string usuario)
         {
-            Object objectoListaEnlaces = await ad.obtenerEnlaces(usuario);
-            List<Enlaces> listaEnlaces = (List<Enlaces>)objectoListaEnlaces;
-            return listaEnlaces;
+            return await ad.obtenerEnlaces(usuario);
         }
     }
 }

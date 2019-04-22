@@ -18,43 +18,6 @@ namespace Proyecto_AccesoDatos
         {
 
         }
-        public async Task<string> comenzarLogin(string usuario, string clave)
-        {
-            //Peticion para que nos devuelva una respuesta con la sal que necesitamos
-            Respuesta respConSal = await this.enviarPeticion("requestSalt", usuario, null, null, null);
-            //Si al hacer la peticion el servidor esta caido devuelve un null
-            if (respConSal != null)
-            {
-                if (respConSal.respuesta.Equals("noExisteUsuario"))
-                {
-                    return "Usuario no registrado";
-
-                }
-                else // if(respActual.respuesta.Equals("usuarioEncontrado"))
-                {
-                    // Encripta clave con la "sal" recibida
-                    string PassEncriptado = Clave.encriptarClaveConexion(clave, respConSal.salt);
-                    // Petición enviando clave encriptada si es correcta nos devolvera el "Token"
-                    Respuesta respConToken = await this.enviarPeticion("login", usuario, PassEncriptado, null, null);
-                    // Asignamos nuestro token
-                    if (respConToken.respuesta.Equals("passValida"))
-                    {
-                        token = respConToken.token;
-                        return "Acceso concedido";
-                    }
-                    else
-                    {
-                        return "Contraseña no válida";
-                    }
-
-                }
-            }
-            else
-            {
-                //Mensaje por si el servidor esta caido ---------------------->esto hay que cambiarlo
-                return "Servidor caido";
-            }
-        }
         public async Task<Respuesta> enviarPeticion(string pet, string user, string pass, string token, Dictionary<string, string> registro)
         {
             string passCifrado = null;
@@ -129,6 +92,43 @@ namespace Proyecto_AccesoDatos
             //    return null;
             //}
         }
+        public async Task<string> comenzarLogin(string usuario, string clave)
+        {
+            //Peticion para que nos devuelva una respuesta con la sal que necesitamos
+            Respuesta respConSal = await this.enviarPeticion("requestSalt", usuario, null, null, null);
+            //Si al hacer la peticion el servidor esta caido devuelve un null
+            if (respConSal != null)
+            {
+                if (respConSal.respuesta.Equals("noExisteUsuario"))
+                {
+                    return "Usuario no registrado";
+
+                }
+                else // if(respActual.respuesta.Equals("usuarioEncontrado"))
+                {
+                    // Encripta clave con la "sal" recibida
+                    string PassEncriptado = Clave.encriptarClaveConexion(clave, respConSal.salt);
+                    // Petición enviando clave encriptada si es correcta nos devolvera el "Token"
+                    Respuesta respConToken = await this.enviarPeticion("login", usuario, PassEncriptado, null, null);
+                    // Asignamos nuestro token
+                    if (respConToken.respuesta.Equals("passValida"))
+                    {
+                        token = respConToken.token;
+                        return "Acceso concedido";
+                    }
+                    else
+                    {
+                        return "Contraseña no válida";
+                    }
+
+                }
+            }
+            else
+            {
+                //Mensaje por si el servidor esta caido ---------------------->esto hay que cambiarlo
+                return "Servidor caido";
+            }
+        }
         public async Task<bool> borrarToken(string usuario)
         {
             if (token != "")
@@ -146,11 +146,12 @@ namespace Proyecto_AccesoDatos
             }
             return true;
         }
-        public async Task<Object> obtenerEnlaces(string usuario)
+        public async Task<List<Enlaces>> obtenerEnlaces(string usuario)
         {
             if (token.Equals("")) { token = null; }
             Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token, null);
-            return respuesta.coleccion;
+            List<Enlaces> listaEnlaces = respuesta.coleccion.ToObject<List<Enlaces>>();
+            return listaEnlaces;
         }
         public async Task<string> enviarEmailparaRegistro(string usuario, Dictionary<string, string> datos)
         {
@@ -203,6 +204,40 @@ namespace Proyecto_AccesoDatos
             {
                 return false;
             }
+        }
+        public async Task<string> cambiarPass(string usuario, string passActual, string passNueva)
+        {
+            string passActualEncriptada = "";
+            //Peticion para que nos devuelva una respuesta con la sal que necesitamos
+            Respuesta respConSal = await this.enviarPeticion("requestSalt", usuario, null, null, null);
+            //Si al hacer la peticion el servidor esta caido devuelve un null
+            if (respConSal != null)
+            {
+                if (respConSal.respuesta.Equals("usuarioEncontrado"))
+                {
+                    // Encripta clave con la "sal" recibida
+                    passActualEncriptada = Clave.encriptarClaveConexion(passActual, respConSal.salt);
+                    // Se encripta la nueva pass para guardarla en la BD
+                    string passNuevaEncriptada = Clave.encriptarClaveRegistro(passNueva);
+                    // Se envia la petición con las dos pass encriptadas, por eso no hace falta token aquí
+                    Respuesta respuesta = await enviarPeticion("cambiarPass", usuario, passActualEncriptada, passNuevaEncriptada, null);
+                    return respuesta.respuesta;
+                }
+                else
+                {
+                    return "passNoCambiada";
+                }
+            }
+            else
+            {
+                return "servidorOffline";
+            }
+            
+        }
+        public async Task<string> obtenerCurso(string usuario)
+        {            
+            Respuesta respuesta = await enviarPeticion("obtenerCurso", usuario, null, token, null);
+            return respuesta.respuesta;
         }
         public async Task<bool> pedirStatusServidor(string usuario)
         {
