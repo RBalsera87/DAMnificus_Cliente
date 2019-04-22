@@ -13,6 +13,7 @@ namespace Proyecto_Presentacion
 {
     public partial class FormAyuda : Form
     {
+        MetodosFormAyuda m = new MetodosFormAyuda();
         private ToolTip toolTipCambiar1 = new ToolTip();
         private ToolTip toolTipCambiar2 = new ToolTip();
         private ToolTip toolTipCambiar3 = new ToolTip();
@@ -21,6 +22,7 @@ namespace Proyecto_Presentacion
         private ToolTip toolTipEmailToken = new ToolTip();
         private ToolTip toolTipPass1 = new ToolTip();
         private ToolTip toolTipPass2 = new ToolTip();
+        private int numCurso = 0;
         public FormAyuda()
         {
             InitializeComponent();
@@ -29,7 +31,7 @@ namespace Proyecto_Presentacion
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
-        private void FormAyuda_Load(object sender, EventArgs e)
+        private async void FormAyuda_Load(object sender, EventArgs e)
         {
             if (UsuarioConectado.nombre.Equals("invitado"))
             {
@@ -40,6 +42,10 @@ namespace Proyecto_Presentacion
             else
             {
                 //this.panelPassOlvidada.Enabled = false;
+                string curso = await m.obtenerCurso(UsuarioConectado.nombre);
+                if (curso.Equals("curso1")) this.radioButtonPrimero.Checked = true;
+                else if (curso.Equals("curso2")) this.radioButtonSegundo.Checked = true;
+                else this.radioNinguno.Checked = true;               
             }
         }
 
@@ -120,10 +126,29 @@ namespace Proyecto_Presentacion
                 this.toolTipCambiar3.Show("Las contraseñas no coinciden", this.tbCambiar3, 1000);
             }
         }
-        private void btnCambiarPass_Click(object sender, EventArgs e)
+        private async void btnCambiarPass_Click(object sender, EventArgs e)
         {
-            // comprobar password, si coincide se cambia por el nuevo (1peticion)
-
+            string respuesta = await m.cambiarPass(UsuarioConectado.nombre, tbCambiar1.Text, tbCambiar3.Text);
+            if (respuesta.Equals("passCambiada"))
+            {
+                MessageBox.Show("Contraseña cambiada");
+                this.tbCambiar1.Text = "";
+                this.tbCambiar2.Text = "";
+                this.tbCambiar3.Text = "";
+            }
+            else if (respuesta.Equals("passNoCambiada"))
+            {
+                MessageBox.Show("Fallo al guardar nueva contraseña");
+            }
+            else if (respuesta.Equals("passNoValida"))
+            {
+                MessageBox.Show("Contraseña actual incorrecta");
+                this.tbCambiar1.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Servidor caido");
+            }
         }
 
         private void tbTituloRep_TextChanged(object sender, EventArgs e)
@@ -148,6 +173,16 @@ namespace Proyecto_Presentacion
             {
                 btnEnvReporte.Enabled = false;
             }
+        }
+
+        private void btnCurso_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnEnvReporte_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

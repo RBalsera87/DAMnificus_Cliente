@@ -313,6 +313,7 @@
             this.btnEnvReporte.TabStop = false;
             this.btnEnvReporte.Text = "Enviar reporte";
             this.btnEnvReporte.UseVisualStyleBackColor = true;
+            this.btnEnvReporte.Click += new System.EventHandler(this.btnEnvReporte_Click);
             // 
             // label7
             // 
@@ -389,6 +390,7 @@
             this.btnCurso.TabIndex = 33;
             this.btnCurso.TabStop = false;
             this.btnCurso.UseVisualStyleBackColor = true;
+            this.btnCurso.Click += new System.EventHandler(this.btnCurso_Click);
             // 
             // groupBoxCurso
             // 
@@ -658,7 +660,7 @@
             // btnExpandir
             // 
             this.btnExpandir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExpandir.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.ocultar;
+            this.btnExpandir.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.ayuda;
             this.btnExpandir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnExpandir.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExpandir.FlatAppearance.BorderSize = 0;
