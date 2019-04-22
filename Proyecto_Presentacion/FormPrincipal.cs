@@ -43,7 +43,6 @@ namespace Proyecto_Presentacion
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            //this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.barraTitulo.MouseDown += new MouseEventHandler(Titulo_MouseDown);
             this.barraTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
@@ -52,6 +51,7 @@ namespace Proyecto_Presentacion
             this.lblTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
             this.lblTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
             m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
+            
 
             //timer.Enabled = false;
             //timer.AutoReset = true;
@@ -64,7 +64,9 @@ namespace Proyecto_Presentacion
          *****************/
         private async void FormPrincipal_Load(object sender, EventArgs e)
         {
-            Opacity = 0;      // Ponemos la opacidad a 0 para la animación
+            this.Height = 1;
+            this.Width = 1;
+            //Opacity = 0;      // Ponemos la opacidad a 0 para la animación
             fader.Interval = 10;  // Intervalo para animación
             fader.Tick += new EventHandler(fadeIn);  // Llama a la función que se ejecutara en el timer
             fader.Start(); // Arranca el timer de la animación de inicio
@@ -435,10 +437,19 @@ namespace Proyecto_Presentacion
         //Animaciones
         void fadeIn(object sender, EventArgs e)
         {
-            if (Opacity >= 1)
+            if (this.Width >= 1136)
+            {
                 fader.Stop();   // Paramos el timer cuando el formulario es 100% visible
+                this.MinimumSize = new Size(800,600);
+            }
             else
-                Opacity += .05;
+            {
+                if (this.Height <= 670)
+                    this.Height += 30;
+                this.Width += 50;
+            }
+                
+
         }
         void fadeOut(object sender, EventArgs e)
         {

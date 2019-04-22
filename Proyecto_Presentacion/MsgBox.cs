@@ -291,15 +291,15 @@ namespace Proyecto_Presentacion
         private void InitAbortRetryIgnoreButtons()
         {
             Button btnAbort = new Button();
-            btnAbort.Text = "Abort";
+            btnAbort.Text = "Abortar";
             btnAbort.Click += ButtonClick;
 
             Button btnRetry = new Button();
-            btnRetry.Text = "Retry";
+            btnRetry.Text = "Reintentar";
             btnRetry.Click += ButtonClick;
 
             Button btnIgnore = new Button();
-            btnIgnore.Text = "Ignore";
+            btnIgnore.Text = "Ignorar";
             btnIgnore.Click += ButtonClick;
 
             this._buttonCollection.Add(btnAbort);
@@ -310,7 +310,7 @@ namespace Proyecto_Presentacion
         private void InitOKButton()
         {
             Button btnOK = new Button();
-            btnOK.Text = "OK";
+            btnOK.Text = "Aceptar";
             btnOK.Click += ButtonClick;
 
             this._buttonCollection.Add(btnOK);
@@ -319,11 +319,11 @@ namespace Proyecto_Presentacion
         private void InitOKCancelButtons()
         {
             Button btnOK = new Button();
-            btnOK.Text = "OK";
+            btnOK.Text = "Aceptar";
             btnOK.Click += ButtonClick;
 
             Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Cancelar";
             btnCancel.Click += ButtonClick;
 
 
@@ -334,11 +334,11 @@ namespace Proyecto_Presentacion
         private void InitRetryCancelButtons()
         {
             Button btnRetry = new Button();
-            btnRetry.Text = "OK";
+            btnRetry.Text = "Aceptar";
             btnRetry.Click += ButtonClick;
 
             Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Cancelar";
             btnCancel.Click += ButtonClick;
 
 
@@ -349,7 +349,7 @@ namespace Proyecto_Presentacion
         private void InitYesNoButtons()
         {
             Button btnYes = new Button();
-            btnYes.Text = "Yes";
+            btnYes.Text = "Si";
             btnYes.Click += ButtonClick;
 
             Button btnNo = new Button();
@@ -364,15 +364,15 @@ namespace Proyecto_Presentacion
         private void InitYesNoCancelButtons()
         {
             Button btnYes = new Button();
-            btnYes.Text = "Abort";
+            btnYes.Text = "Abortar";
             btnYes.Click += ButtonClick;
 
             Button btnNo = new Button();
-            btnNo.Text = "Retry";
+            btnNo.Text = "Reintentar";
             btnNo.Click += ButtonClick;
 
             Button btnCancel = new Button();
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Cancelar";
             btnCancel.Click += ButtonClick;
 
             this._buttonCollection.Add(btnYes);
@@ -386,27 +386,27 @@ namespace Proyecto_Presentacion
 
             switch (btn.Text)
             {
-                case "Abort":
+                case "Abortar":
                     _buttonResult = DialogResult.Abort;
                     break;
 
-                case "Retry":
+                case "Reintentar":
                     _buttonResult = DialogResult.Retry;
                     break;
 
-                case "Ignore":
+                case "Ignorar":
                     _buttonResult = DialogResult.Ignore;
                     break;
 
-                case "OK":
+                case "Aceptar":
                     _buttonResult = DialogResult.OK;
                     break;
 
-                case "Cancel":
+                case "Cancelar":
                     _buttonResult = DialogResult.Cancel;
                     break;
 
-                case "Yes":
+                case "Si":
                     _buttonResult = DialogResult.Yes;
                     break;
 
@@ -459,7 +459,7 @@ namespace Proyecto_Presentacion
 
             Graphics g = e.Graphics;
             Rectangle rect = new Rectangle(new Point(0, 0), new Size(this.Width - 1, this.Height - 1));
-            Pen pen = new Pen(Color.FromArgb(0, 151, 251));
+            Pen pen = new Pen(Color.FromArgb(255, 153, 39));
 
             g.DrawRectangle(pen, rect);
         }
