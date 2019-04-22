@@ -93,7 +93,7 @@ namespace Proyecto_Presentacion
             string respuesta = await m.enviarEmailparaRegistro(usuario, datos);
             if (respuesta.Equals("emailNoEnviado")) 
             {
-                MessageBox.Show("Error al enviar el email");
+                MsgBox.Show("El correo no se ha podido enviar debido a un error.", "Email no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
             }
             else
             {

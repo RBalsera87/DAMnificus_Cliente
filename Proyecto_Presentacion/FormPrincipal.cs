@@ -163,17 +163,36 @@ namespace Proyecto_Presentacion
                 //timer.Elapsed -= new ElapsedEventHandler(mostrarMenuLateral);
                 //timer.Elapsed += new ElapsedEventHandler(ocultarMenuLateral);
                 //this.timer.Enabled = true;
-                this.tmOcultarMenu.Enabled = true;
-                m.ocultarLogin(this.tmOcultarLogin);
+                if (btnCursos.BackColor != Color.FromArgb(73, 55, 34))
+                {
+                    this.tmOcultarMenu.Enabled = true;
+                }
+                else
+                {
+                    menuLateral.Width = 55;
+                    this.lblConectado.Visible = false;
+                }
+                if (UsuarioConectado.nombre.Equals("invitado"))
+                    m.ocultarLogin(this.tmOcultarLogin);
             }
             else if (menuLateral.Width == 55)
             {
                 //timer.Elapsed -= new ElapsedEventHandler(ocultarMenuLateral);
                 //timer.Elapsed += new ElapsedEventHandler(mostrarMenuLateral);
                 //this.timer.Enabled = true;
-                m.mostrarLogin(this.tmMostrarLogin);
                 this.lblConectado.Visible = true;
-                this.tmMostrarMenu.Enabled = true;
+                if (UsuarioConectado.nombre.Equals("invitado"))
+                    m.mostrarLogin(this.tmMostrarLogin);
+
+                if (btnCursos.BackColor != Color.FromArgb(73, 55, 34))
+                {
+                    this.tmMostrarMenu.Enabled = true;
+                }
+                else
+                {
+                    menuLateral.Width = 220;
+                }
+
             }
         }
         private void btnPrincipal_Click(object sender, EventArgs e)
@@ -237,8 +256,10 @@ namespace Proyecto_Presentacion
             else
             {
                 this.lblConectado.Visible = true;
-                this.tmMostrarMenu.Enabled = true;
-                m.mostrarLogin(this.tmMostrarLogin);
+                if (btnCursos.BackColor != Color.FromArgb(73, 55, 34)) this.tmMostrarMenu.Enabled = true;
+                else menuLateral.Width = 220;
+                if (UsuarioConectado.nombre.Equals("invitado")) m.mostrarLogin(this.tmMostrarLogin);
+
             }
             
         }
@@ -526,6 +547,7 @@ namespace Proyecto_Presentacion
                             m.ocultarLogin(this.tmOcultarLogin);
                             tbUsuario.Text = "";
                             tbPass.Text = "";
+                            btnPrincipal.PerformClick();
                             // Cambia el boton ayuda por el boton administración si el usuario es admin
                             if (usuario.Equals("admin"))
                             {
@@ -536,7 +558,7 @@ namespace Proyecto_Presentacion
                         }
                         else
                         {
-                            MessageBox.Show(respuesta); // Cambiar esto
+                            MsgBox.Show(respuesta, "Conexión", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
                             lblConectado.Text = "Conectado como invitado";
                         }
                         conectando = false;
@@ -547,7 +569,7 @@ namespace Proyecto_Presentacion
                         // Borra token y desconecta
                         if (!await m.borrarToken(UsuarioConectado.nombre))
                         {
-                            MessageBox.Show("Error al borrar token");
+                            MsgBox.Show("Parece que ha habido un error al borrar el token de la base de datos", "Desconexión", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
                         }
                         btnAyudaAdmin.Text = "Ayuda";
                         btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.ayuda;

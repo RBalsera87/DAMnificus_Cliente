@@ -130,27 +130,27 @@ namespace Proyecto_Presentacion
             string respuesta = await m.cambiarPass(UsuarioConectado.nombre, tbCambiar1.Text, tbCambiar3.Text);
             if (respuesta.Equals("passCambiada"))
             {
-                MessageBox.Show("Contraseña cambiada");
+                MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
                 this.tbCambiar1.Clear();
                 this.tbCambiar2.Clear();
                 this.tbCambiar3.Clear();
             }
             else if (respuesta.Equals("passNoCambiada"))
             {
-                MessageBox.Show("Fallo al guardar nueva contraseña");
+                MsgBox.Show("Ha habido un problema al guardar la nueva contraseña.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
             }
             else if (respuesta.Equals("passNoValida"))
             {
-                MessageBox.Show("Contraseña actual incorrecta");
+                MsgBox.Show("La contraseña actual que has introducido es incorrecta.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
                 this.tbCambiar1.Text = "";
             }
             else if (respuesta.Equals("tokenNoValido"))
             {
-                MessageBox.Show("Token del usuario no valido");
+                MsgBox.Show("El token de sesión de tu usuario no parece valido, cierra sesión y vuelve a conectarte.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
             }
             else
             {
-                MessageBox.Show("Servidor caido");
+                MsgBox.Show("El servidor no responde, por favor revisa tu conexión a internet.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
             }
             btnCambiarPass.Enabled = false;
         }
@@ -198,7 +198,7 @@ namespace Proyecto_Presentacion
                 if (curso.Equals("curso0")) mensaje = "Actualmente no tienes un curso asignado";
                 else if(await m.cambiarCurso(UsuarioConectado.nombre, "curso0")) mensaje = "Cambiado a ningun curso";
             }
-            MessageBox.Show(mensaje);            
+            MsgBox.Show(mensaje, "Curso no cambiado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
         }
 
         private async void btnEnvReporte_Click(object sender, EventArgs e)
@@ -209,12 +209,12 @@ namespace Proyecto_Presentacion
             datos.Add("reporte", tbReporte.Text);
             if (await m.enviarEmailReporte(UsuarioConectado.nombre, datos))
             {
-                MessageBox.Show("Reporte enviado satisfactoriamente");
+                MsgBox.Show("El reporte ha sido enviado satisfactoriamente, gracias por tu aportación", "Reporte enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
                 this.tbTituloRep.Clear();
                 this.tbReporte.Clear();
             }else
             {
-                MessageBox.Show("Error al enviar el reporte");
+                MsgBox.Show("El reporte no se ha podido enviar debido a un error", "Reporte no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
                 this.btnEnvReporte.Enabled = true;
             }
         }
@@ -285,11 +285,11 @@ namespace Proyecto_Presentacion
                     string respuesta = await m.enviarEmailPassPerdida(UsuarioConectado.nombre, datos);
                     if (respuesta.Equals("emailNoEnviado"))
                     {
-                        MessageBox.Show("Error al enviar el email");
+                        MsgBox.Show("El correo no se ha podido enviar debido a un error.", "Email no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
                     }
                     else
                     {
-                        MessageBox.Show("Email con token enviado");
+                        MsgBox.Show("El correo se ha mandado satisfactoriamente, revisa tu correo para copiar el token.", "Email enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
                         token = respuesta;
                         this.btnEnviarEmailToken.Text = "Cambiar contraseña";
                         this.lblEmailToken.Text = "Token";
@@ -302,7 +302,8 @@ namespace Proyecto_Presentacion
                 }
                 else
                 {
-                    MessageBox.Show("Ese email no consta en nuestra base de datos");
+                    MsgBox.Show("Esa dirección de correo no esta registrada en nuestra aplicación.", "Email enviado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+
                     this.btnEnviarEmailToken.Enabled = true;
                 }
                 
@@ -311,7 +312,8 @@ namespace Proyecto_Presentacion
             {
                 if (await m.restaurarPass(email, tbPass2.Text))
                 {
-                    MessageBox.Show("Contraseña cambiada satisfactoriamente");
+                    MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+
                     token = email = "";
                     this.tbPass.Clear();
                     this.tbPass2.Clear();
@@ -323,7 +325,7 @@ namespace Proyecto_Presentacion
                 }
                 else
                 {
-                    MessageBox.Show("Error al restaurar la contraseña");
+                    MsgBox.Show("Ha habido un problema al restaurar la contraseña.", "Contraseña no restaurada", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
                     this.btnEnviarEmailToken.Enabled = true;
                 }
             }

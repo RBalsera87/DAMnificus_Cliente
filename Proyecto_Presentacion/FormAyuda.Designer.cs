@@ -592,7 +592,7 @@
             this.tbEmailToken.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEmailToken.ForeColor = System.Drawing.Color.White;
             this.tbEmailToken.Location = new System.Drawing.Point(61, 47);
-            this.tbEmailToken.MaxLength = 89;
+            this.tbEmailToken.MaxLength = 64;
             this.tbEmailToken.Name = "tbEmailToken";
             this.tbEmailToken.Size = new System.Drawing.Size(326, 25);
             this.tbEmailToken.TabIndex = 6;

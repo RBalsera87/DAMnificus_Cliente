@@ -101,7 +101,7 @@ namespace Proyecto_AccesoDatos
             {
                 if (respConSal.respuesta.Equals("noExisteUsuario"))
                 {
-                    return "Usuario no registrado";
+                    return "El nombre de usuario no se encuentra en nuestra base de datos";
 
                 }
                 else // if(respActual.respuesta.Equals("usuarioEncontrado"))
@@ -118,7 +118,7 @@ namespace Proyecto_AccesoDatos
                     }
                     else
                     {
-                        return "Contraseña no válida";
+                        return "La contraseña no parece válida";
                     }
 
                 }
@@ -126,7 +126,7 @@ namespace Proyecto_AccesoDatos
             else
             {
                 //Mensaje por si el servidor esta caido ---------------------->esto hay que cambiarlo
-                return "Servidor caido";
+                return "El servidor no responde, revisa tu conexión a internet";
             }
         }
         public async Task<bool> borrarToken(string usuario)
