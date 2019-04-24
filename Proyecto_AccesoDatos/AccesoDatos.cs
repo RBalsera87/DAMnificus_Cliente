@@ -101,7 +101,7 @@ namespace Proyecto_AccesoDatos
             {
                 if (respConSal.respuesta.Equals("noExisteUsuario"))
                 {
-                    return "Usuario no registrado";
+                    return "El nombre de usuario no se encuentra en nuestra base de datos";
 
                 }
                 else // if(respActual.respuesta.Equals("usuarioEncontrado"))
@@ -118,7 +118,7 @@ namespace Proyecto_AccesoDatos
                     }
                     else
                     {
-                        return "Contraseña no válida";
+                        return "La contraseña no parece válida";
                     }
 
                 }
@@ -126,7 +126,7 @@ namespace Proyecto_AccesoDatos
             else
             {
                 //Mensaje por si el servidor esta caido ---------------------->esto hay que cambiarlo
-                return "Servidor caido";
+                return "El servidor no responde, revisa tu conexión a internet";
             }
         }
         public async Task<bool> borrarToken(string usuario)
@@ -261,6 +261,60 @@ namespace Proyecto_AccesoDatos
         {            
             Respuesta respuesta = await enviarPeticion("obtenerCurso", usuario, null, token, null);
             return respuesta.respuesta;
+        }
+        public async Task<bool> cambiarCurso(string usuario, string curso)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("curso", curso);
+            Respuesta respuesta = await enviarPeticion("cambiarCurso", usuario, null, token, dic);
+            if (respuesta.respuesta.Equals("cursoCambiado"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+        public async Task<bool> enviarEmailReporte(string usuario, Dictionary<string, string> datos)
+        {
+            Respuesta respuesta = await enviarPeticion("emailReporte", usuario, null, token, datos);
+            if (respuesta.respuesta.Equals("emailReporteEnviado"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<string> enviarEmailPassPerdida(string usuario, Dictionary<string, string> datos)
+        {
+            Respuesta respuesta = await enviarPeticion("emailPassPerdida", usuario, null, null, datos);
+            if (respuesta.respuesta.Equals("emailConTokenEnviado"))
+            {
+                return respuesta.token;
+            }
+            else
+            {
+                return "emailNoEnviado";
+            }
+        }
+        public async Task<bool> restaurarPass(string email, string passNueva)
+        {
+            string passNuevaEncriptada = "";
+            passNuevaEncriptada = Clave.encriptarClaveRegistro(passNueva);
+            Respuesta respuesta = await enviarPeticion("restaurarPass", email, passNuevaEncriptada, null, null);
+            if (respuesta.respuesta.Equals("passCambiada"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
         public async Task<bool> pedirStatusServidor(string usuario)
         {

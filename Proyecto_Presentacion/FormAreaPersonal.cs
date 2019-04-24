@@ -91,7 +91,7 @@ namespace Proyecto_Presentacion
         {
             if (usuario.Equals("invitado") || curso == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Esto es solo un modelo, con lo que no se podrá interactuar con las notas del area personal.\nRegístrate, inicia sesión o modifica tu curso en el area de AYUDA para disfrutar de todas las características", "CARACTERISTICAS LIMITADAS", MessageBoxButtons.OK);
+                MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
             }
             else
             {

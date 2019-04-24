@@ -49,7 +49,6 @@
             this.tbTituloRep = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panelCurso = new System.Windows.Forms.Panel();
-            this.pbCurso = new System.Windows.Forms.PictureBox();
             this.btnCurso = new System.Windows.Forms.Button();
             this.groupBoxCurso = new System.Windows.Forms.GroupBox();
             this.radioButtonSegundo = new System.Windows.Forms.RadioButton();
@@ -58,14 +57,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panelPassOlvidada = new System.Windows.Forms.Panel();
             this.pbPass2 = new System.Windows.Forms.PictureBox();
-            this.pbPass1 = new System.Windows.Forms.PictureBox();
+            this.pbPass = new System.Windows.Forms.PictureBox();
             this.pbEmailToken = new System.Windows.Forms.PictureBox();
             this.lblPass2 = new System.Windows.Forms.Label();
             this.tbPass2 = new System.Windows.Forms.TextBox();
             this.lblPass = new System.Windows.Forms.Label();
             this.tbPass = new System.Windows.Forms.TextBox();
             this.btnEnviarEmailToken = new System.Windows.Forms.Button();
-            this.lblCorreo = new System.Windows.Forms.Label();
+            this.lblEmailToken = new System.Windows.Forms.Label();
             this.tbEmailToken = new System.Windows.Forms.TextBox();
             this.lblPassPerdida = new System.Windows.Forms.Label();
             this.panelCambiarPass = new System.Windows.Forms.Panel();
@@ -73,13 +72,13 @@
             this.pbCambiar2 = new System.Windows.Forms.PictureBox();
             this.pbCambiar1 = new System.Windows.Forms.PictureBox();
             this.btnExpandir = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblCambiar3 = new System.Windows.Forms.Label();
             this.tbCambiar1 = new System.Windows.Forms.TextBox();
             this.tbCambiar3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblCambiar2 = new System.Windows.Forms.Label();
             this.tbCambiar2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblCambiar1 = new System.Windows.Forms.Label();
             this.btnCambiarPass = new System.Windows.Forms.Button();
             this.panelCabecera.SuspendLayout();
             this.tablePanel.SuspendLayout();
@@ -88,11 +87,10 @@
             this.panelReportar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbReporte)).BeginInit();
             this.panelCurso.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCurso)).BeginInit();
             this.groupBoxCurso.SuspendLayout();
             this.panelPassOlvidada.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPass2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPass1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEmailToken)).BeginInit();
             this.panelCambiarPass.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCambiar3)).BeginInit();
@@ -353,7 +351,6 @@
             // 
             // panelCurso
             // 
-            this.panelCurso.Controls.Add(this.pbCurso);
             this.panelCurso.Controls.Add(this.btnCurso);
             this.panelCurso.Controls.Add(this.groupBoxCurso);
             this.panelCurso.Controls.Add(this.label5);
@@ -363,32 +360,24 @@
             this.panelCurso.Size = new System.Drawing.Size(543, 40);
             this.panelCurso.TabIndex = 27;
             // 
-            // pbCurso
-            // 
-            this.pbCurso.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbCurso.Location = new System.Drawing.Point(431, 13);
-            this.pbCurso.Name = "pbCurso";
-            this.pbCurso.Size = new System.Drawing.Size(16, 16);
-            this.pbCurso.TabIndex = 37;
-            this.pbCurso.TabStop = false;
-            // 
             // btnCurso
             // 
             this.btnCurso.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCurso.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.accept;
             this.btnCurso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCurso.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCurso.Enabled = false;
             this.btnCurso.FlatAppearance.BorderSize = 0;
             this.btnCurso.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
             this.btnCurso.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
             this.btnCurso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCurso.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCurso.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCurso.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnCurso.Location = new System.Drawing.Point(462, 8);
+            this.btnCurso.Location = new System.Drawing.Point(431, 4);
             this.btnCurso.Name = "btnCurso";
-            this.btnCurso.Size = new System.Drawing.Size(24, 24);
+            this.btnCurso.Size = new System.Drawing.Size(97, 32);
             this.btnCurso.TabIndex = 33;
             this.btnCurso.TabStop = false;
+            this.btnCurso.Text = "Cambiar";
             this.btnCurso.UseVisualStyleBackColor = true;
             this.btnCurso.Click += new System.EventHandler(this.btnCurso_Click);
             // 
@@ -463,14 +452,14 @@
             // 
             this.panelPassOlvidada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panelPassOlvidada.Controls.Add(this.pbPass2);
-            this.panelPassOlvidada.Controls.Add(this.pbPass1);
+            this.panelPassOlvidada.Controls.Add(this.pbPass);
             this.panelPassOlvidada.Controls.Add(this.pbEmailToken);
             this.panelPassOlvidada.Controls.Add(this.lblPass2);
             this.panelPassOlvidada.Controls.Add(this.tbPass2);
             this.panelPassOlvidada.Controls.Add(this.lblPass);
             this.panelPassOlvidada.Controls.Add(this.tbPass);
             this.panelPassOlvidada.Controls.Add(this.btnEnviarEmailToken);
-            this.panelPassOlvidada.Controls.Add(this.lblCorreo);
+            this.panelPassOlvidada.Controls.Add(this.lblEmailToken);
             this.panelPassOlvidada.Controls.Add(this.tbEmailToken);
             this.panelPassOlvidada.Controls.Add(this.lblPassPerdida);
             this.panelPassOlvidada.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -488,14 +477,14 @@
             this.pbPass2.TabIndex = 39;
             this.pbPass2.TabStop = false;
             // 
-            // pbPass1
+            // pbPass
             // 
-            this.pbPass1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbPass1.Location = new System.Drawing.Point(393, 83);
-            this.pbPass1.Name = "pbPass1";
-            this.pbPass1.Size = new System.Drawing.Size(16, 16);
-            this.pbPass1.TabIndex = 38;
-            this.pbPass1.TabStop = false;
+            this.pbPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbPass.Location = new System.Drawing.Point(393, 83);
+            this.pbPass.Name = "pbPass";
+            this.pbPass.Size = new System.Drawing.Size(16, 16);
+            this.pbPass.TabIndex = 38;
+            this.pbPass.TabStop = false;
             // 
             // pbEmailToken
             // 
@@ -509,6 +498,7 @@
             // lblPass2
             // 
             this.lblPass2.AutoSize = true;
+            this.lblPass2.Enabled = false;
             this.lblPass2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPass2.ForeColor = System.Drawing.Color.DarkGray;
             this.lblPass2.Location = new System.Drawing.Point(9, 110);
@@ -522,6 +512,7 @@
             this.tbPass2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPass2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbPass2.Enabled = false;
             this.tbPass2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPass2.ForeColor = System.Drawing.Color.White;
             this.tbPass2.Location = new System.Drawing.Point(148, 109);
@@ -530,10 +521,13 @@
             this.tbPass2.PasswordChar = '●';
             this.tbPass2.Size = new System.Drawing.Size(239, 25);
             this.tbPass2.TabIndex = 8;
+            this.tbPass2.TextChanged += new System.EventHandler(this.tbPass2_TextChanged);
+            this.tbPass2.Leave += new System.EventHandler(this.tbPass2_Leave);
             // 
             // lblPass
             // 
             this.lblPass.AutoSize = true;
+            this.lblPass.Enabled = false;
             this.lblPass.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPass.ForeColor = System.Drawing.Color.DarkGray;
             this.lblPass.Location = new System.Drawing.Point(9, 79);
@@ -547,6 +541,7 @@
             this.tbPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbPass.Enabled = false;
             this.tbPass.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPass.ForeColor = System.Drawing.Color.White;
             this.tbPass.Location = new System.Drawing.Point(148, 79);
@@ -555,11 +550,13 @@
             this.tbPass.PasswordChar = '●';
             this.tbPass.Size = new System.Drawing.Size(239, 25);
             this.tbPass.TabIndex = 7;
+            this.tbPass.Leave += new System.EventHandler(this.tbPass_Leave);
             // 
             // btnEnviarEmailToken
             // 
             this.btnEnviarEmailToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEnviarEmailToken.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEnviarEmailToken.Enabled = false;
             this.btnEnviarEmailToken.FlatAppearance.BorderSize = 0;
             this.btnEnviarEmailToken.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
             this.btnEnviarEmailToken.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
@@ -574,17 +571,18 @@
             this.btnEnviarEmailToken.TabStop = false;
             this.btnEnviarEmailToken.Text = "Enviar email";
             this.btnEnviarEmailToken.UseVisualStyleBackColor = true;
+            this.btnEnviarEmailToken.Click += new System.EventHandler(this.btnEnviarEmailToken_Click);
             // 
-            // lblCorreo
+            // lblEmailToken
             // 
-            this.lblCorreo.AutoSize = true;
-            this.lblCorreo.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorreo.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblCorreo.Location = new System.Drawing.Point(9, 47);
-            this.lblCorreo.Name = "lblCorreo";
-            this.lblCorreo.Size = new System.Drawing.Size(46, 20);
-            this.lblCorreo.TabIndex = 19;
-            this.lblCorreo.Text = "Email";
+            this.lblEmailToken.AutoSize = true;
+            this.lblEmailToken.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmailToken.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblEmailToken.Location = new System.Drawing.Point(9, 47);
+            this.lblEmailToken.Name = "lblEmailToken";
+            this.lblEmailToken.Size = new System.Drawing.Size(46, 20);
+            this.lblEmailToken.TabIndex = 19;
+            this.lblEmailToken.Text = "Email";
             // 
             // tbEmailToken
             // 
@@ -594,10 +592,11 @@
             this.tbEmailToken.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEmailToken.ForeColor = System.Drawing.Color.White;
             this.tbEmailToken.Location = new System.Drawing.Point(61, 47);
-            this.tbEmailToken.MaxLength = 89;
+            this.tbEmailToken.MaxLength = 64;
             this.tbEmailToken.Name = "tbEmailToken";
             this.tbEmailToken.Size = new System.Drawing.Size(326, 25);
             this.tbEmailToken.TabIndex = 6;
+            this.tbEmailToken.TextChanged += new System.EventHandler(this.tbEmailToken_TextChanged);
             // 
             // lblPassPerdida
             // 
@@ -616,13 +615,13 @@
             this.panelCambiarPass.Controls.Add(this.pbCambiar2);
             this.panelCambiarPass.Controls.Add(this.pbCambiar1);
             this.panelCambiarPass.Controls.Add(this.btnExpandir);
-            this.panelCambiarPass.Controls.Add(this.label4);
+            this.panelCambiarPass.Controls.Add(this.lblCambiar3);
             this.panelCambiarPass.Controls.Add(this.tbCambiar1);
             this.panelCambiarPass.Controls.Add(this.tbCambiar3);
             this.panelCambiarPass.Controls.Add(this.label3);
-            this.panelCambiarPass.Controls.Add(this.label1);
+            this.panelCambiarPass.Controls.Add(this.lblCambiar2);
             this.panelCambiarPass.Controls.Add(this.tbCambiar2);
-            this.panelCambiarPass.Controls.Add(this.label2);
+            this.panelCambiarPass.Controls.Add(this.lblCambiar1);
             this.panelCambiarPass.Controls.Add(this.btnCambiarPass);
             this.panelCambiarPass.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCambiarPass.Location = new System.Drawing.Point(0, 0);
@@ -678,16 +677,17 @@
             this.btnExpandir.Visible = false;
             this.btnExpandir.Click += new System.EventHandler(this.btnExpandir_Click);
             // 
-            // label4
+            // lblCambiar3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DarkGray;
-            this.label4.Location = new System.Drawing.Point(9, 111);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 20);
-            this.label4.TabIndex = 26;
-            this.label4.Text = "Escríbela de nuevo";
+            this.lblCambiar3.AutoSize = true;
+            this.lblCambiar3.Enabled = false;
+            this.lblCambiar3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCambiar3.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblCambiar3.Location = new System.Drawing.Point(9, 111);
+            this.lblCambiar3.Name = "lblCambiar3";
+            this.lblCambiar3.Size = new System.Drawing.Size(133, 20);
+            this.lblCambiar3.TabIndex = 26;
+            this.lblCambiar3.Text = "Escríbela de nuevo";
             // 
             // tbCambiar1
             // 
@@ -732,16 +732,17 @@
             this.label3.TabIndex = 25;
             this.label3.Text = "Cambiar contraseña";
             // 
-            // label1
+            // lblCambiar2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkGray;
-            this.label1.Location = new System.Drawing.Point(9, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 20);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "Contraseña nueva";
+            this.lblCambiar2.AutoSize = true;
+            this.lblCambiar2.Enabled = false;
+            this.lblCambiar2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCambiar2.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblCambiar2.Location = new System.Drawing.Point(9, 80);
+            this.lblCambiar2.Name = "lblCambiar2";
+            this.lblCambiar2.Size = new System.Drawing.Size(126, 20);
+            this.lblCambiar2.TabIndex = 30;
+            this.lblCambiar2.Text = "Contraseña nueva";
             // 
             // tbCambiar2
             // 
@@ -759,16 +760,16 @@
             this.tbCambiar2.TabIndex = 1;
             this.tbCambiar2.Leave += new System.EventHandler(this.tbCambiar2_Leave);
             // 
-            // label2
+            // lblCambiar1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DarkGray;
-            this.label2.Location = new System.Drawing.Point(9, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 20);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Contraseña actual";
+            this.lblCambiar1.AutoSize = true;
+            this.lblCambiar1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCambiar1.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblCambiar1.Location = new System.Drawing.Point(9, 49);
+            this.lblCambiar1.Name = "lblCambiar1";
+            this.lblCambiar1.Size = new System.Drawing.Size(127, 20);
+            this.lblCambiar1.TabIndex = 27;
+            this.lblCambiar1.Text = "Contraseña actual";
             // 
             // btnCambiarPass
             // 
@@ -813,12 +814,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbReporte)).EndInit();
             this.panelCurso.ResumeLayout(false);
             this.panelCurso.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCurso)).EndInit();
             this.groupBoxCurso.ResumeLayout(false);
             this.panelPassOlvidada.ResumeLayout(false);
             this.panelPassOlvidada.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPass2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPass1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEmailToken)).EndInit();
             this.panelCambiarPass.ResumeLayout(false);
             this.panelCambiarPass.PerformLayout();
@@ -843,17 +843,17 @@
         private System.Windows.Forms.Label lblPass;
         private System.Windows.Forms.TextBox tbPass;
         private System.Windows.Forms.Button btnEnviarEmailToken;
-        private System.Windows.Forms.Label lblCorreo;
+        private System.Windows.Forms.Label lblEmailToken;
         private System.Windows.Forms.TextBox tbEmailToken;
         private System.Windows.Forms.Label lblPassPerdida;
         private System.Windows.Forms.Panel panelCambiarPass;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblCambiar3;
         private System.Windows.Forms.TextBox tbCambiar1;
         private System.Windows.Forms.TextBox tbCambiar3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCambiar2;
         private System.Windows.Forms.TextBox tbCambiar2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblCambiar1;
         private System.Windows.Forms.Button btnCambiarPass;
         private System.Windows.Forms.Label lblCambiarPassExp;
         private System.Windows.Forms.Panel panelReportar;
@@ -876,9 +876,8 @@
         private System.Windows.Forms.Button btnExpandir;
         private System.Windows.Forms.Button btnCurso;
         private System.Windows.Forms.PictureBox pbReporte;
-        private System.Windows.Forms.PictureBox pbCurso;
         private System.Windows.Forms.PictureBox pbPass2;
-        private System.Windows.Forms.PictureBox pbPass1;
+        private System.Windows.Forms.PictureBox pbPass;
         private System.Windows.Forms.PictureBox pbEmailToken;
         private System.Windows.Forms.PictureBox pbCambiar3;
         private System.Windows.Forms.PictureBox pbCambiar2;
