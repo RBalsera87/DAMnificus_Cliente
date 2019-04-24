@@ -1,4 +1,5 @@
-﻿using EntidadesCompartidas;
+﻿using BrightIdeasSoftware;
+using EntidadesCompartidas;
 using Proyecto_Negocio;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,9 @@ namespace Proyecto_Presentacion
 {
     public partial class FormCursos : Form
     {
+        private Dictionary<string,string> datos = new Dictionary<string,string>();
+
         MetodosFormCursos m = new MetodosFormCursos();
-        private int cont;
         public FormCursos()
         {
             InitializeComponent();
@@ -26,10 +28,9 @@ namespace Proyecto_Presentacion
         {
             panelAsignaturas1.Height = 0;
             panelAsignaturas2.Height = 0;
-            this.InitializeModel();
-            //cargarImagenes();
-            //this.InitializeObjectListView();
-            
+            //Quita los encabezados de la lista
+            listadoEnlaces.HeaderStyle = ColumnHeaderStyle.None;
+            listadoEnlaces.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
         }
 
         /****************************
@@ -79,30 +80,36 @@ namespace Proyecto_Presentacion
         {
             restaurarColorBotones(panelDinamico1);
             this.btnBbdd.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnBbdd.Text);
+
         }
 
         private void btnEntornos_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico1);
             this.btnEntornos.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnEntornos.Text);
         }
 
         private void btnLenguajes_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico1);
             this.btnLenguajes.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnLenguajes.Text);
         }
-
+       
         private void btnProgramacion_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico1);
             this.btnProgramacion.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnProgramacion.Text);
         }
 
         private void btnSistemas_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico1);
             this.btnSistemas.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnSistemas.Text);
         }
         
         // Botones de asignaturas de segundo
@@ -110,31 +117,55 @@ namespace Proyecto_Presentacion
         {
             restaurarColorBotones(panelDinamico2);
             this.btnAccesoDatos.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnAccesoDatos.Text);
         }
 
         private void btnInterfaces_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico2);
             this.btnInterfaces.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnInterfaces.Text);
         }
 
         private void btnGestion_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico2);
             this.btnGestion.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnGestion.Text);
         }
 
         private void btnProcesos_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico2);
             this.btnProcesos.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnProcesos.Text);
         }
 
         private void btnMultimedia_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico2);
             this.btnMultimedia.BackColor = Color.FromArgb(73, 55, 34);
+            pedirEnlaces(btnMultimedia.Text);
         }
+
+
+        private async void pedirEnlaces(string asignatura)
+        {
+            datos.Clear();
+            datos.Add("asignatura", asignatura);
+
+            listaEnlaces = await m.obtenerEnlaces(UsuarioConectado.nombre, datos);
+            if (listaEnlaces != null)
+            {
+
+                iniciarObjectListView();
+            }
+            else
+            {
+                MessageBox.Show("Lo sentimos no hay enlaces para la asignatura " + asignatura);
+            }
+        }
+
 
         /**************************************
          * Timers para animacion de los menus *
@@ -199,52 +230,154 @@ namespace Proyecto_Presentacion
             }
         }
 
-       /************************************
-        * ListView Mostrar videos          *
-        ************************************/
-        private List<Enlaces> listaEnlaces;
-        private async void InitializeModel() {
-            var a = (Object) await m.obtenerEnlaces(UsuarioConectado.nombre);
-            listaEnlaces = (List<Enlaces>)a;
-            cargarImagenes();
-            listadoEnlaces.RowHeight = 90;
-            //columnaValoracion.AspectToStringConverter  = delegate (object x)
-            //{
 
-            //    cont++;
-            //    if(int.Parse(listaEnlaces[cont].valoracion) <= 2)
-            //    {
-            //        columnaValoracion.ImageKey = "1Estrellas";
-            //    }else if(int.Parse(listaEnlaces[cont].valoracion) <= 4){
-            //        columnaValoracion.ImageKey = "2Estrellas";
-            //    }else if (int.Parse(listaEnlaces[cont].valoracion) <= 6)
-            //    {
-            //        columnaValoracion.ImageKey = "3Estrellas";
-            //    }else if (int.Parse(listaEnlaces[cont].valoracion) <= 8)
-            //    {
-            //        columnaValoracion.ImageKey = "4Estrellas";
-            //    }else if (int.Parse(listaEnlaces[cont].valoracion) <= 10)
-            //    {
-            //        columnaValoracion.ImageKey = "5Estrellas";
-            //    }
-            //    if(cont == listaEnlaces.Count - 1)
-            //    {
-            //        cont = 0;
-            //    }
-            //    return "";
 
-            //};
-            //this.columnaTitulo.AspectToStringConverter = delegate (object x)
-            //{
-            //    return "";
-            //};
+
+        //***********************************************
+
+        private List<Enlaces> listaEnlaces = new List<Enlaces>();
+
+        private void iniciarObjectListView()
+        {
             
+            this.InitializeModel();
+            listadoEnlaces.ModelFilter = TextMatchFilter.Contains(listadoEnlaces, "repair");
+            listadoEnlaces.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
+        }
+        public void InitializeModel()
+        {
+            //var a = (Object)await m.obtenerEnlaces(UsuarioConectado.nombre);
+            //listaEnlaces = (List<Enlaces>)a;
+            cargarImagenes();
+
+
+            listadoEnlaces.RowHeight = 90;
+            this.columnaLike.ImageGetter = delegate (object x) {
+                switch (((Enlaces)x).like)
+                {
+                    case true:
+                        return "like+1";
+                    case false:
+
+                        return "like";
+                }
+                return "";
+            };
+            this.columnaDontLike.ImageGetter = delegate (object x) {
+                switch (((Enlaces)x).dontLike)
+                {
+                    case true:
+                        return "dontLike-1";
+                    case false:
+
+                        return "dontLike";
+                }
+                return "";
+            };
+
+
+            this.columnaValoracion.ImageGetter = delegate (object x) {
+                var valoracion = int.Parse(((Enlaces)x).valoracion);
+                //MessageBox.Show(valoracion.ToString());
+                if (valoracion <= 20)
+                {
+                    return "1Estrellas";
+                }
+                else if (valoracion <= 40)
+                {
+                    return "2Estrellas";
+                }
+                else if (valoracion <= 60)
+                {
+                    return "3Estrellas";
+                }
+                else if (valoracion <= 80)
+                {
+                    return "4Estrellas";
+                }
+                else if (valoracion <= 100)
+                {
+                    return "5Estrellas";
+                }
+                else
+                {
+                    return "";
+                }
+
+            };
+
+            this.columnaTitulo.AspectToStringConverter = delegate (object x)
+            {
+                return "";
+            };
             this.listadoEnlaces.SetObjects(this.listaEnlaces);
         }
-        //Añade a la primera columna la Imagen el Título y la Descripción
-        public void InitializeObjectListView() {
-            //Aumenta el tamaño de las filas
+        public void InitializeObjectListView()
+        {
+            MessageBox.Show(listaEnlaces.Count.ToString());
+            this.columnaLike.AspectGetter = delegate (object x)
+            {
+                return ((Enlaces)x).like;
+            };
+            this.columnaLike.AspectToStringConverter = delegate (object x)
+            {
+                return String.Empty;
+            };
             listadoEnlaces.RowHeight = 90;
+            this.columnaLike.ImageGetter = delegate (object x) {
+                switch (((Enlaces)x).like)
+                {
+                    case true:
+                        return "like+1";
+                    case false:
+
+                        return "like";
+                }
+                return "";
+            };
+            this.columnaDontLike.ImageGetter = delegate (object x) {
+                switch (((Enlaces)x).dontLike)
+                {
+                    case true:
+                        return "dontLike-1";
+                    case false:
+
+                        return "dontLike";
+                }
+                return "";
+            };
+
+
+            this.columnaValoracion.ImageGetter = delegate (object x) {
+                var valoracion = int.Parse(((Enlaces)x).valoracion);
+                MessageBox.Show(valoracion.ToString());
+                if (valoracion <= 20)
+                {
+                    return "1Estrellas";
+                }
+                else if (valoracion <= 40)
+                {
+                    return "2Estrellas";
+                }
+                else if (valoracion <= 60)
+                {
+                    return "3Estrellas";
+                }
+                else if (valoracion <= 80)
+                {
+                    return "4Estrellas";
+                }
+                else if (valoracion <= 100)
+                {
+                    return "5Estrellas";
+                }
+                else
+                {
+                    return "";
+                }
+
+            };
+
             this.columnaTitulo.AspectToStringConverter = delegate (object x)
             {
                 return "";
@@ -252,11 +385,81 @@ namespace Proyecto_Presentacion
             this.listadoEnlaces.SetObjects(this.listaEnlaces);
         }
 
-        
-        //Recorre el List que tiene los enlaces, convierte las rutas de images a Images y las añade a imageListLarge
+
+
+        private void objectListView1_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
+        {
+            pintar(e);
+        }
+        private void pintar(BrightIdeasSoftware.FormatCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                Enlaces enlace = (Enlaces)e.Model;
+                pintarImagenTituloDesc decoration = new pintarImagenTituloDesc();
+                decoration.ImageList = this.imageListLarge;
+                decoration.Title = enlace.titulo;
+                decoration.ImageName = enlace.id;
+                decoration.Description = enlace.descripcion;
+                e.SubItem.Decoration = decoration;
+            }
+        }
+        //  CAPTURO EVENTO CLICK CON LA CELDA QUE A CLICKADO Y SI ES LA COLUMNA LIKE
+        //  OBTENGO EL OBJETO Y LE SUMO 1 LIKE
+        private async void listadoEnlaces_CellClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
+        {
+            if (e.Column == columnaLike)
+            {
+                Enlaces enlace = (Enlaces)e.Model;
+                if (!enlace.like)
+                {
+                    //Object linkSeleccionado = objectListView1.SelectedObject;
+                    Dictionary<string, string> datos = new Dictionary<string, string>();
+                    datos.Add("id", enlace.id);
+                    datos.Add("operacion", "sumar");
+                    try
+                    {
+                        bool likeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.nombre, datos);
+                        if (likeCorrecto)
+                        {
+                            enlace.like = true;
+                        }
+                    }
+                    catch (NullReferenceException nre)
+                    {
+                        //¿Dar mensaje?
+                    }
+                    
+                }
+            }
+            if (e.Column == columnaDontLike)
+            {
+                Enlaces enlace = (Enlaces)e.Model;
+                if (!enlace.dontLike)
+                {
+                    Dictionary<string, string> datos = new Dictionary<string, string>();
+                    datos.Add("id", enlace.id);
+                    datos.Add("operacion", "sumar");
+                    bool likeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.nombre, datos);
+                    if (likeCorrecto)
+                    {
+                        enlace.dontLike = true;
+                    }
+                }
+            }
+
+        }
+        //Abre link al hacer doble click sobre la Fila
+        private void listadoEnlaces_ItemActivate(object sender, EventArgs e)
+        {
+            Object linkSeleccionado = listadoEnlaces.SelectedObject;
+            Enlaces URL = (Enlaces)linkSeleccionado;
+            System.Diagnostics.Process.Start(URL.link);
+        }
+
         public void cargarImagenes()
         {
-            imageListSmall.Images.Add("1Estrellas",Proyecto_Presentacion.Properties.Resources.unaEstrellas);
+            imageListSmall.Images.Add("1Estrellas", Proyecto_Presentacion.Properties.Resources.unaEstrellas);
             imageListSmall.Images.Add("2Estrellas", Proyecto_Presentacion.Properties.Resources.dosEstrellas);
             imageListSmall.Images.Add("3Estrellas", Proyecto_Presentacion.Properties.Resources.tresEstrellas);
             imageListSmall.Images.Add("4Estrellas", Proyecto_Presentacion.Properties.Resources.cuatroEstrellas);
@@ -264,9 +467,9 @@ namespace Proyecto_Presentacion
             listadoEnlaces.SmallImageList = imageListSmall;
 
             Image img = null;
-            foreach(Enlaces e in listaEnlaces)
+            foreach (Enlaces e in listaEnlaces)
             {
-                if(e.imagen.Equals("") || e.imagen == null)
+                if (e.imagen.Equals("") || e.imagen == null)
                 {
                     img = Image.FromFile(Application.StartupPath + "/../../Resources/titulo.png");
                 }
@@ -285,7 +488,7 @@ namespace Proyecto_Presentacion
                 }
 
                 imageListLarge.Images.Add(e.id, img);
-                
+
             }
             //Size tamanio = new Size(80, 80);
             ////Image imagen = Image.FromFile(Application.StartupPath + "/../../images/pildoras.jpg");
@@ -295,112 +498,28 @@ namespace Proyecto_Presentacion
             //Image a = Image.FromFile(Application.StartupPath + "/../../images/pildoras.jpg");
             //imageListLarge.Images.Add("/../../images/pildoras.jpg", a);
         }
-        private void listadoEnlaces_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
+
+        public class pintarImagenTituloDesc : BrightIdeasSoftware.AbstractDecoration
         {
-            if (e.ColumnIndex == 0)
+            public ImageList ImageList;
+            public string ImageName;
+            public string Title;
+            public string Description;
+
+            public Font TitleFont = new Font("Segoe UI Semilight", 12, FontStyle.Bold);
+            public Color TitleColor = Color.FromArgb(255, 255, 255);
+            public Font DescripionFont = new Font("Tahoma", 9);
+            public Color DescriptionColor = Color.FromArgb(255, 255, 255);
+            public Size CellPadding = new Size(1, 1);
+
+            public override void Draw(BrightIdeasSoftware.ObjectListView olv, Graphics g, Rectangle r)
             {
-                Enlaces Enlaces = (Enlaces)e.Model;
-                pintarImagenTituloDesc decoration = new pintarImagenTituloDesc();
-                decoration.ImageList = this.imageListLarge;
-                decoration.Title = Enlaces.titulo;
-                decoration.ImageName = Enlaces.id;
-                decoration.Description = Enlaces.descripcion;
-                e.SubItem.Decoration = decoration;
-            }
-            if(e.ColumnIndex == 1)
-            {
-                Enlaces Enlaces = (Enlaces)e.Model;
-                pintarImagenTituloDesc decoration = new pintarImagenTituloDesc();
-                decoration.ImageList = this.imageListSmall;
-                decoration.Title = null;
-                decoration.ImageName = Enlaces.valoracion;
-                decoration.Description = null;
-                e.SubItem.Decoration = decoration;
-            }
-        }
-        //Abre link al hacer doble click sobre la Fila
-        private void listadoEnlaces_ItemActivate(object sender, EventArgs e)
-        {
-            Object linkSeleccionado = listadoEnlaces.SelectedObject;
-            Enlaces URL = (Enlaces)linkSeleccionado;
-            System.Diagnostics.Process.Start(URL.link );
-        }
-    }
+                Rectangle cellBounds = this.CellBounds;
+                cellBounds.Inflate(-this.CellPadding.Width, -this.CellPadding.Height);
+                Rectangle textBounds = cellBounds;
 
-    
-    //Clase que pinta la Imagen el Título y la Descripción en la misma celda
-    public class pintarImagenTituloDesc : BrightIdeasSoftware.AbstractDecoration
-    {
-        public ImageList ImageList;
-        public string ImageName;
-        public string Title;
-        public string Description;
-
-        public Font TitleFont = new Font("Tahoma", 9, FontStyle.Bold);
-        public Color TitleColor = Color.FromArgb(255, 255, 255);
-        public Font DescripionFont = new Font("Tahoma", 9);
-        public Color DescriptionColor = Color.FromArgb(255, 255, 255);
-        public Size CellPadding = new Size(1, 1);
-
-        public override void Draw(BrightIdeasSoftware.ObjectListView olv, Graphics g, Rectangle r) {
-
-            Rectangle cellBounds = this.CellBounds;
-            cellBounds.Inflate(-this.CellPadding.Width, -this.CellPadding.Height);
-            Rectangle textBounds = cellBounds;
-
-            if (Title == null && Description == null)
-            {
-                try
-                {
-                    int valoracion = int.Parse(ImageName);
-                               
-                    if(valoracion <= 20)
-                    {
-                        ImageName = "1Estrellas";
-                    }else if(valoracion <= 40)
-                    {
-                        ImageName = "2Estrellas";
-                    }
-                    else if (valoracion <= 60)
-                    {
-                        ImageName = "3Estrellas";
-                    }
-                    else if (valoracion <= 80)
-                    {
-                        ImageName = "4Estrellas";
-                    }
-                    else if (valoracion <= 100)
-                    {
-                        ImageName = "5Estrellas";
-                    }
-                }catch(Exception e){
-
-                }
-
-                g.DrawImage(this.ImageList.Images[this.ImageName], cellBounds.Location);
-                textBounds.X += this.ImageList.ImageSize.Width;
-                textBounds.Width -= this.ImageList.ImageSize.Width;
-            }
-            else
-            {
                 if (this.ImageList != null && !String.IsNullOrEmpty(this.ImageName))
                 {
-                    //var request = WebRequest.Create("");
-                    //Image ima;
-                    //using (var response = request.GetResponse())
-                    //using (var stream = response.GetResponseStream())
-                    //{
-                    //    ima = Bitmap.FromStream(stream);
-                    //}
-
-                    //Size tamanio = new Size(80, 80);
-                    ////Image imagen = Image.FromFile(Application.StartupPath + "/../../images/pildoras.jpg");
-                    //Bitmap bitmatImagen = new Bitmap(ima,tamanio);
-                    //g.DrawImage(bitmatImagen, cellBounds.Location);
-                    //textBounds.X += bitmatImagen.Width;
-                    //textBounds.Width -= bitmatImagen.Width;
-
-
                     g.DrawImage(this.ImageList.Images[this.ImageName], cellBounds.Location);
                     textBounds.X += this.ImageList.ImageSize.Width;
                     textBounds.Width -= this.ImageList.ImageSize.Width;
@@ -430,10 +549,6 @@ namespace Proyecto_Presentacion
                     g.DrawString(this.Description, this.DescripionFont, b, textBounds, fmt2);
                 }
             }
-
-            
         }
-
-        
     }
 }

@@ -146,12 +146,35 @@ namespace Proyecto_AccesoDatos
             }
             return true;
         }
-        public async Task<List<Enlaces>> obtenerEnlaces(string usuario)
+        public async Task<List<Enlaces>> obtenerEnlaces(string usuario, Dictionary<string,string> datos)
+        {
+            List<Enlaces> listaEnlaces = null;
+            if (token.Equals("")) { token = null; }
+            Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token, datos);
+            try
+            {
+                listaEnlaces = respuesta.coleccion.ToObject<List<Enlaces>>();
+                return listaEnlaces;
+            }
+            catch (NullReferenceException nre)
+            {
+                return listaEnlaces;
+                //¿Dar mensaje?
+            }
+            
+        }
+        public async Task<bool> sumaryRestarValoracion(string usuario,Dictionary<string, string> datos)
         {
             if (token.Equals("")) { token = null; }
-            Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token, null);
-            List<Enlaces> listaEnlaces = respuesta.coleccion.ToObject<List<Enlaces>>();
-            return listaEnlaces;
+            Respuesta respuesta = await enviarPeticion("sumarYRestarValoracion", null, null, token, datos);
+            if (respuesta.respuesta.Equals("correcto"))
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
+           
         }
         public async Task<string> enviarEmailparaRegistro(string usuario, Dictionary<string, string> datos)
         {
