@@ -149,7 +149,9 @@ namespace Proyecto_AccesoDatos
         public async Task<List<Enlaces>> obtenerEnlaces(string usuario, Dictionary<string,string> datos)
         {
             List<Enlaces> listaEnlaces = null;
-            if (token.Equals("")) { token = null; }
+            //PREGUNTAR A RUBEN QUE FUNCION TIENE EL TOKEN COMENTO LINEA PORQUE AL SER USUARIO 
+            //INVITADO LA SEGUNDA VEZ QUE ENTRA PERA AL COMPARAR EL TOKEN IGUAL A "" YA QUE ES NULL
+            
             Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token, datos);
             try
             {
@@ -163,18 +165,43 @@ namespace Proyecto_AccesoDatos
             }
             
         }
-        public async Task<bool> sumaryRestarValoracion(string usuario,Dictionary<string, string> datos)
+        public async Task<string> sumaryRestarValoracion(string usuario,Dictionary<string, string> datos)
         {
+            //PREGUNTAR A RUBEN AÑADO ESTE IF POQUE SI NO PETA AL ENTRAR COMO INVIADO AL 
+            //INTENTAR COMPARAR CON EQUALS EL TOKEN QUE ES NULL
+            if(usuario.Equals("invitado")){
+               
+                return "invitado";
+            }
             if (token.Equals("")) { token = null; }
-            Respuesta respuesta = await enviarPeticion("sumarYRestarValoracion", null, null, token, datos);
+            Respuesta respuesta = await enviarPeticion("sumarYRestarValoracion", usuario, null, token, datos);
             if (respuesta.respuesta.Equals("correcto"))
             {
-                return true;
+                return "true";
             }else
             {
-                return false;
+                return "false";
             }
            
+        }
+        public async Task<string> cambiarActivoRevisionDesactivo(string usuario, Dictionary<string, string> datos)
+        {
+            if (usuario.Equals("invitado"))
+            {
+
+                return "invitado";
+            }
+            if (token.Equals("")) { token = null; }
+            Respuesta respuesta = await enviarPeticion("cambiarActivoRevisionDesactivo", usuario, null, token, datos);
+            if (respuesta.respuesta.Equals("correcto"))
+            {
+                return "true";
+            }
+            else
+            {
+                return "false";
+            }
+
         }
         public async Task<string> enviarEmailparaRegistro(string usuario, Dictionary<string, string> datos)
         {

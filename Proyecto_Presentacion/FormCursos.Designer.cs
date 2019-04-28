@@ -46,7 +46,7 @@
             this.columnaValoracion = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnaLike = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnaDontLike = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.columnaActivo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnaReportarFallo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelAsignaturas1 = new System.Windows.Forms.Panel();
             this.panelDinamico1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnBbdd = new System.Windows.Forms.Button();
@@ -139,6 +139,11 @@
             this.tbBuscar.Name = "tbBuscar";
             this.tbBuscar.Size = new System.Drawing.Size(143, 25);
             this.tbBuscar.TabIndex = 17;
+            this.tbBuscar.Text = " Buscar ";
+            this.tbBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbBuscar.TextChanged += new System.EventHandler(this.tbBuscar_TextChanged);
+            this.tbBuscar.Enter += new System.EventHandler(this.tbBuscar_Enter);
+            this.tbBuscar.Leave += new System.EventHandler(this.tbBuscar_Leave);
             // 
             // panel2
             // 
@@ -212,7 +217,7 @@
             this.listadoEnlaces.AllColumns.Add(this.columnaValoracion);
             this.listadoEnlaces.AllColumns.Add(this.columnaLike);
             this.listadoEnlaces.AllColumns.Add(this.columnaDontLike);
-            this.listadoEnlaces.AllColumns.Add(this.columnaActivo);
+            this.listadoEnlaces.AllColumns.Add(this.columnaReportarFallo);
             this.listadoEnlaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.listadoEnlaces.CellEditUseWholeCell = false;
             this.listadoEnlaces.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -221,7 +226,7 @@
             this.columnaValoracion,
             this.columnaLike,
             this.columnaDontLike,
-            this.columnaActivo});
+            this.columnaReportarFallo});
             this.listadoEnlaces.Cursor = System.Windows.Forms.Cursors.Default;
             this.listadoEnlaces.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listadoEnlaces.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -239,8 +244,10 @@
             this.listadoEnlaces.UnfocusedSelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.listadoEnlaces.UseCellFormatEvents = true;
             this.listadoEnlaces.UseCompatibleStateImageBehavior = false;
+            this.listadoEnlaces.UseFiltering = true;
             this.listadoEnlaces.View = System.Windows.Forms.View.Details;
             this.listadoEnlaces.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.listadoEnlaces_CellClick);
+            this.listadoEnlaces.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.listadoEnlaces_CellToolTipShowing);
             this.listadoEnlaces.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.objectListView1_FormatCell);
             this.listadoEnlaces.ItemActivate += new System.EventHandler(this.listadoEnlaces_ItemActivate);
             // 
@@ -274,9 +281,10 @@
             // 
             this.columnaDontLike.Text = "Dont Like";
             // 
-            // columnaActivo
+            // columnaReportarFallo
             // 
-            this.columnaActivo.Text = "Activo";
+            this.columnaReportarFallo.AspectName = "";
+            this.columnaReportarFallo.Text = "Reportar Fallo";
             // 
             // panelAsignaturas1
             // 
@@ -613,7 +621,7 @@
         private BrightIdeasSoftware.OLVColumn columnaValoracion;
         private BrightIdeasSoftware.OLVColumn columnaLike;
         private BrightIdeasSoftware.OLVColumn columnaDontLike;
-        private BrightIdeasSoftware.OLVColumn columnaActivo;
+        private BrightIdeasSoftware.OLVColumn columnaReportarFallo;
         private System.Windows.Forms.ImageList imageListLarge;
         private System.Windows.Forms.ImageList imageListSmall;
     }

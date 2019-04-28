@@ -13,9 +13,13 @@ namespace Proyecto_Negocio
         {   
             return await ad.obtenerEnlaces(usuario,datos);
         }
-        public async Task<bool> sumarYRestarValoracion(string usuario, Dictionary<string, string> datos)
+        public async Task<string> sumarYRestarValoracion(string usuario, Dictionary<string, string> datos)
         {   
             return await ad.sumaryRestarValoracion(usuario, datos);
+        }
+        public async Task<string> cambiarActivoRevisionDesactivo(string usuario, Dictionary<string, string> datos)
+        {
+            return await ad.cambiarActivoRevisionDesactivo(usuario, datos);
         }
     }
 }
