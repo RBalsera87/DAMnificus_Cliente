@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Windows;
 using Proyecto_Negocio;
+using System.Threading.Tasks;
 
 namespace Proyecto_Presentacion
 {
@@ -13,7 +14,7 @@ namespace Proyecto_Presentacion
     {
         MetodosFormAreaPersonal met = new MetodosFormAreaPersonal();
         string usuario = UsuarioConectado.nombre;
-        int user, curso;
+        int user, curso; 
         List<string> nombresAsignaturas = new List<string> { };
         List<double> todasNotas = new List<double> { };
         List<double> mediaNotas = new List<double> { };
@@ -24,34 +25,74 @@ namespace Proyecto_Presentacion
         List<double> notasAsignatura5 = new List<double> { };
         List<double> notasAsignatura6 = new List<double> { };
         List<double> notasAsignatura7 = new List<double> { };
-        
 
-        public FormAreaPersonal()
+        public FormAreaPersonal() { }
+        public FormAreaPersonal(int curso, List<string>asignaturas, int user)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
+            this.curso = curso;
+            this.nombresAsignaturas = asignaturas;
+            this.user = user;
             InitializeComponent();
             DoubleBuffered = true;
-            curso = met.sacarCurso(usuario);
-            if (usuario.Equals("invitado")||curso == 0)
+            if (usuario.Equals("invitado") || curso == 0)
             {
                 cargarModelo();
             }
             else
             {
-                user = met.sacarUsuario(usuario);
                 cargaComponentes();
                 cargaGraficas(curso);
             }
-                   
-            
-            
         }
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
 
+        //private void FormAreaPersonal_Load(object sender, EventArgs e)
+        //{
+        //    if (usuario.Equals("invitado") || curso == 0)
+        //    {
+        //        cargarModelo();
+        //    }
+        //    else
+        //    {
+        //        sacarUsuario();
+        //        sacarAsignaturas();
+        //        //cargaComponentes();
+        //        //cargaGraficas(curso);
+        //    }
+        //}
+            
+            
+        
+        public async void sacarCurso()
+        {
+            Task<int> cursoTask = met.sacarCurso(usuario);
+            curso = await cursoTask;
+            
         }
+        public async void sacarUsuario()
+        {
+            Task<int> userTask = met.sacarUsuario(usuario);
+            user = await userTask;
+        }
+        public async void sacarAsignaturas()
+        {
+            Task<List<string>> asignaturasTask = met.sacarAsignaturas(curso, usuario);
+            nombresAsignaturas = await asignaturasTask;
+        }
+
+        public void cargaComponentes()
+        {
+            
+            todasNotas = met.recogidaNotas(curso, user);
+            mediaNotas = met.mediaNotas(curso, user);
+            lbAsignaturas.DataSource = nombresAsignaturas;
+            lbAsignaturas.SelectedIndex = 0;
+            lblTrimestre.Text = "TRIMESTRE 1";
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e){ }
 
         public void vaciadoListas()
         {
@@ -77,16 +118,7 @@ namespace Proyecto_Presentacion
             }
         }
 
-        public void cargaComponentes()
-        {
-            nombresAsignaturas = met.sacarAsignaturas(curso);
-            todasNotas = met.recogidaNotas(curso, user);
-            mediaNotas = met.mediaNotas(curso, user);
-            lbAsignaturas.DataSource = nombresAsignaturas;
-            lbAsignaturas.SelectedIndex = 0;
-            lblTrimestre.Text = "TRIMESTRE 1";
-        }
-
+        
         private void btnAgregarNota_Click(object sender, EventArgs e)
         {
             if (usuario.Equals("invitado") || curso == 0)
@@ -443,5 +475,7 @@ namespace Proyecto_Presentacion
 
             lblTrimestre.Text = "TRIMESTRE 1";
         }
+
+
     }
 }

@@ -198,7 +198,7 @@ namespace Proyecto_Presentacion
                 if (curso.Equals("curso0")) mensaje = "Actualmente no tienes un curso asignado";
                 else if(await m.cambiarCurso(UsuarioConectado.nombre, "curso0")) mensaje = "Cambiado a ningun curso";
             }
-            MsgBox.Show(mensaje, "Curso no cambiado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+            MsgBox.Show(mensaje, "Curso cambiado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
         }
 
         private async void btnEnvReporte_Click(object sender, EventArgs e)

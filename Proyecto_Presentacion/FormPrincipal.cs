@@ -5,6 +5,7 @@ using Proyecto_Negocio;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Timers;
+using System.Collections.Generic;
 
 namespace Proyecto_Presentacion
 {
@@ -212,13 +213,16 @@ namespace Proyecto_Presentacion
             m.abrirFormEnPanel(new FormCursos(), this.panelContenido);
         }
 
-        private void btnAreaPersonal_Click(object sender, EventArgs e)
+        private async void btnAreaPersonal_Click(object sender, EventArgs e)
         {
-
+            MetodosFormAreaPersonal met = new MetodosFormAreaPersonal();
+            int curso = await met.sacarCurso(UsuarioConectado.nombre);
+            List<string> asignaturas = await met.sacarAsignaturas(curso, UsuarioConectado.nombre);
+            int user = await met.sacarUsuario(UsuarioConectado.nombre);
             m.restaurarColorBotones(this.menuLateral);
             //if (UsuarioConectado.nombre.Equals("invitado"))
             this.btnAreaPersonal.BackColor = Color.FromArgb(73, 55, 34);
-            m.abrirFormEnPanel(new FormAreaPersonal(), this.panelContenido);
+            m.abrirFormEnPanel(new FormAreaPersonal(curso, asignaturas, user), this.panelContenido);
         }
 
         private void btnComunidad_Click(object sender, EventArgs e)

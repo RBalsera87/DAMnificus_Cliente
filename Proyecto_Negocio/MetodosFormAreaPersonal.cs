@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Proyecto_AccesoDatos;
+using EntidadesCompartidas;
 
 namespace Proyecto_Negocio
 {
@@ -12,16 +13,29 @@ namespace Proyecto_Negocio
     ****************************************/
     public class MetodosFormAreaPersonal
     {
+        AccesoDatos ad = new AccesoDatos();
         CargadoAreaPersonal cargado = new CargadoAreaPersonal();
         
-        public int sacarCurso(string user)
+        public async Task<int> sacarCurso(string user)
         {
-            return cargado.sacarCurso(user);
+            string aux = await ad.obtenerCurso(user);
+            int salida = 0;
+            switch(aux)
+            {
+                case "curso1":salida = 1;
+                    break;
+                case "curso2":salida = 2;
+                    break;
+            }
+            
+            return salida;
         }
 
-        public List<string> sacarAsignaturas(int curso)
+        public async Task<List<string>> sacarAsignaturas(int curso, string user)
         {
-            return cargado.sacarAsignaturas(curso);
+            Dictionary<string, string> datos = new Dictionary<string, string> { };
+            datos.Add("curso", curso.ToString());
+            return await ad.sacarAsignaturas(user, datos);
         }
 
         public List<double>recogidaNotas(int curso, int usuario)
@@ -29,9 +43,11 @@ namespace Proyecto_Negocio
            return cargado.recogidaNotas(curso, usuario);
         }
 
-        public int sacarUsuario(string usuario)
+        public async Task<int> sacarUsuario(string usuario)
         {
-            return cargado.sacarUsuario(usuario);
+            Dictionary<string, string> datos = new Dictionary<string, string> { };
+            datos.Add("usuario", usuario);
+            return await ad.sacarUsuario(usuario, datos);
         }
 
         public List<double>mediaNotas(int curso, int usuario)
