@@ -27,7 +27,7 @@ namespace Proyecto_Presentacion
         List<double> notasAsignatura7 = new List<double> { };
 
         public FormAreaPersonal() { }
-        public FormAreaPersonal(int curso, List<string>asignaturas, int user)
+        public FormAreaPersonal(int curso, List<string>asignaturas, int user, List<double> todasNotas, List<double> notasMedias)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -35,6 +35,8 @@ namespace Proyecto_Presentacion
             this.curso = curso;
             this.nombresAsignaturas = asignaturas;
             this.user = user;
+            this.todasNotas = todasNotas;
+            this.mediaNotas = notasMedias;
             InitializeComponent();
             DoubleBuffered = true;
             if (usuario.Equals("invitado") || curso == 0)
@@ -48,45 +50,9 @@ namespace Proyecto_Presentacion
             }
         }
 
-        //private void FormAreaPersonal_Load(object sender, EventArgs e)
-        //{
-        //    if (usuario.Equals("invitado") || curso == 0)
-        //    {
-        //        cargarModelo();
-        //    }
-        //    else
-        //    {
-        //        sacarUsuario();
-        //        sacarAsignaturas();
-        //        //cargaComponentes();
-        //        //cargaGraficas(curso);
-        //    }
-        //}
-            
-            
-        
-        public async void sacarCurso()
-        {
-            Task<int> cursoTask = met.sacarCurso(usuario);
-            curso = await cursoTask;
-            
-        }
-        public async void sacarUsuario()
-        {
-            Task<int> userTask = met.sacarUsuario(usuario);
-            user = await userTask;
-        }
-        public async void sacarAsignaturas()
-        {
-            Task<List<string>> asignaturasTask = met.sacarAsignaturas(curso, usuario);
-            nombresAsignaturas = await asignaturasTask;
-        }
-
         public void cargaComponentes()
         {
             
-            todasNotas = met.recogidaNotas(curso, user);
-            mediaNotas = met.mediaNotas(curso, user);
             lbAsignaturas.DataSource = nombresAsignaturas;
             lbAsignaturas.SelectedIndex = 0;
             lblTrimestre.Text = "TRIMESTRE 1";
@@ -119,7 +85,7 @@ namespace Proyecto_Presentacion
         }
 
         
-        private void btnAgregarNota_Click(object sender, EventArgs e)
+        private async void btnAgregarNota_Click(object sender, EventArgs e)
         {
             if (usuario.Equals("invitado") || curso == 0)
             {
@@ -133,6 +99,8 @@ namespace Proyecto_Presentacion
                 string asignatura = lbAsignaturas.SelectedItem.ToString();
                 met.agregarNota(nota, trimestre, asignatura, user);
                 vaciadoListas();
+                todasNotas = await met.recogidaNotas(curso, user, usuario);
+                mediaNotas = await met.mediaNotas(curso, user, usuario);
                 cargaComponentes();
                 cargaGraficas(curso);
             }
@@ -380,7 +348,7 @@ namespace Proyecto_Presentacion
             }
             
 
-            graficaMedias.LegendLocation = LegendLocation.Bottom;
+            graficaNotas.LegendLocation = LegendLocation.Bottom;
         }
         
             
@@ -464,7 +432,7 @@ namespace Proyecto_Presentacion
                         DataLabels = true,
                     }
                 };
-            graficaMedias.LegendLocation = LegendLocation.Bottom;
+            graficaNotas.LegendLocation = LegendLocation.Bottom;
 
             lbAsignaturas.Items.Add("Bases de datos");
             lbAsignaturas.Items.Add("Entornos de desarrollo");

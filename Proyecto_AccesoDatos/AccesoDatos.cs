@@ -310,6 +310,38 @@ namespace Proyecto_AccesoDatos
             return respuesta.respuesta;
         }
 
+        public async Task<List<double>> recogidaNotas(string usuario, Dictionary<string, string> datos)
+        {
+            List<Double> listaNotas = new List<double> { };
+            Respuesta respuesta = await enviarPeticion("recogidaNotas", usuario, null, token, datos);
+            try
+            {
+                listaNotas = respuesta.coleccion.ToObject<List<double>>();
+                return listaNotas;
+            }
+            catch (NullReferenceException nre)
+            {
+                return listaNotas;
+                //¿Dar mensaje?
+            }
+        }
+
+        public async Task<List<double>> mediaNotas(string usuario, Dictionary<string, string> datos)
+        {
+            List<Double> listaNotas = new List<double> { };
+            Respuesta respuesta = await enviarPeticion("mediaNotas", usuario, null, token, datos);
+            try
+            {
+                listaNotas = respuesta.coleccion.ToObject<List<double>>();
+                return listaNotas;
+            }
+            catch (NullReferenceException nre)
+            {
+                return listaNotas;
+                //¿Dar mensaje?
+            }
+        }
+
         public async Task<int> sacarUsuario(string usuario, Dictionary<string,string>datos)
         {
             Respuesta respuesta = await enviarPeticion("sacarUsuario", usuario, null, token, datos);

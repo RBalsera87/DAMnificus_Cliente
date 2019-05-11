@@ -216,13 +216,32 @@ namespace Proyecto_Presentacion
         private async void btnAreaPersonal_Click(object sender, EventArgs e)
         {
             MetodosFormAreaPersonal met = new MetodosFormAreaPersonal();
-            int curso = await met.sacarCurso(UsuarioConectado.nombre);
-            List<string> asignaturas = await met.sacarAsignaturas(curso, UsuarioConectado.nombre);
-            int user = await met.sacarUsuario(UsuarioConectado.nombre);
+            int curso;
+            List<string> asignaturas;
+            int user;
+            List<Double> todasNotas;
+            List<Double> notasMedias;
+            if (UsuarioConectado.nombre.Equals("invitado"))
+            {
+                curso = 0;
+                asignaturas = null;
+                user = -1;
+                todasNotas = null;
+                notasMedias = null;
+            }
+            else
+            {
+                curso = await met.sacarCurso(UsuarioConectado.nombre);
+                asignaturas = await met.sacarAsignaturas(curso, UsuarioConectado.nombre);
+                user = await met.sacarUsuario(UsuarioConectado.nombre);
+                todasNotas = await met.recogidaNotas(curso, user, UsuarioConectado.nombre);
+                notasMedias = await met.recogidaNotas(curso, user, UsuarioConectado.nombre);
+            }
+            
             m.restaurarColorBotones(this.menuLateral);
             //if (UsuarioConectado.nombre.Equals("invitado"))
             this.btnAreaPersonal.BackColor = Color.FromArgb(73, 55, 34);
-            m.abrirFormEnPanel(new FormAreaPersonal(curso, asignaturas, user), this.panelContenido);
+            m.abrirFormEnPanel(new FormAreaPersonal(curso, asignaturas, user, todasNotas, notasMedias), this.panelContenido);
         }
 
         private void btnComunidad_Click(object sender, EventArgs e)

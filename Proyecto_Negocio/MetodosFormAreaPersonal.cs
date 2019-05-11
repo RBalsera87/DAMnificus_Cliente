@@ -38,9 +38,12 @@ namespace Proyecto_Negocio
             return await ad.sacarAsignaturas(user, datos);
         }
 
-        public List<double>recogidaNotas(int curso, int usuario)
+        public async Task<List<double>>recogidaNotas(int curso, int usuario, string user)
         {
-           return cargado.recogidaNotas(curso, usuario);
+            Dictionary<string, string> datos = new Dictionary<string, string> { };
+            datos.Add("curso", curso.ToString());
+            datos.Add("usuario", usuario.ToString());
+            return await ad.recogidaNotas(user, datos);
         }
 
         public async Task<int> sacarUsuario(string usuario)
@@ -50,9 +53,12 @@ namespace Proyecto_Negocio
             return await ad.sacarUsuario(usuario, datos);
         }
 
-        public List<double>mediaNotas(int curso, int usuario)
+        public async Task<List<double>> mediaNotas(int curso, int usuario, string user)
         {
-            return cargado.mediaNotas(curso, usuario);
+            Dictionary<string, string> datos = new Dictionary<string, string> { };
+            datos.Add("curso", curso.ToString());
+            datos.Add("usuario", usuario.ToString());
+            return await ad.recogidaNotas(user, datos);
         }
 
         public void agregarNota(string nota, int trimestre, string asignatura, int user)
