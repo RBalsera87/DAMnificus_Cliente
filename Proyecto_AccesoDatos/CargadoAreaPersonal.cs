@@ -154,7 +154,7 @@ namespace Proyecto_AccesoDatos
         }
 
 
-        public List<double> mediaNotas(int curso, int usuario)
+        public List<double> mediaNotas(int curso, int usuario, string user)
         {
             List<double> notas = new List<double> { };
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=damnificus_enlaces;";

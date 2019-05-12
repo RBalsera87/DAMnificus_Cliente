@@ -165,6 +165,26 @@ namespace Proyecto_AccesoDatos
             }
             
         }
+
+        public async Task<List<string>> sacarAsignaturas(string usuario, Dictionary<string, string> datos)
+        {
+            List<string> listaAsignaturas = null;
+            //PREGUNTAR A RUBEN QUE FUNCION TIENE EL TOKEN COMENTO LINEA PORQUE AL SER USUARIO 
+            //INVITADO LA SEGUNDA VEZ QUE ENTRA PERA AL COMPARAR EL TOKEN IGUAL A "" YA QUE ES NULL
+
+            Respuesta respuesta = await enviarPeticion("obtenerNombreAsignaturas", usuario, null, token, datos);
+            try
+            {
+                listaAsignaturas = respuesta.coleccion.ToObject<List<string>>();
+                return listaAsignaturas;
+            }
+            catch (NullReferenceException nre)
+            {
+                return listaAsignaturas;
+                //¿Dar mensaje?
+            }
+
+        }
         public async Task<string> sumaryRestarValoracion(string usuario,Dictionary<string, string> datos)
         {
             //PREGUNTAR A RUBEN AÑADO ESTE IF POQUE SI NO PETA AL ENTRAR COMO INVIADO AL 
@@ -289,6 +309,44 @@ namespace Proyecto_AccesoDatos
             Respuesta respuesta = await enviarPeticion("obtenerCurso", usuario, null, token, null);
             return respuesta.respuesta;
         }
+
+        public async Task<List<double>> recogidaNotas(string usuario, Dictionary<string, string> datos)
+        {
+            List<Double> listaNotas = new List<double> { };
+            Respuesta respuesta = await enviarPeticion("recogidaNotas", usuario, null, token, datos);
+            try
+            {
+                listaNotas = respuesta.coleccion.ToObject<List<double>>();
+                return listaNotas;
+            }
+            catch (NullReferenceException nre)
+            {
+                return listaNotas;
+                //¿Dar mensaje?
+            }
+        }
+
+        public async Task<List<double>> mediaNotas(string usuario, Dictionary<string, string> datos)
+        {
+            List<Double> listaNotas = new List<double> { };
+            Respuesta respuesta = await enviarPeticion("mediaNotas", usuario, null, token, datos);
+            try
+            {
+                listaNotas = respuesta.coleccion.ToObject<List<double>>();
+                return listaNotas;
+            }
+            catch (NullReferenceException nre)
+            {
+                return listaNotas;
+                //¿Dar mensaje?
+            }
+        }
+
+        public async Task<int> sacarUsuario(string usuario, Dictionary<string,string>datos)
+        {
+            Respuesta respuesta = await enviarPeticion("sacarUsuario", usuario, null, token, datos);
+            return Convert.ToInt32(respuesta.respuesta);
+        }
         public async Task<bool> cambiarCurso(string usuario, string curso)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -356,5 +414,7 @@ namespace Proyecto_AccesoDatos
                 return false;
             }
         }
+
+        
     }
 }

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Windows;
 using Proyecto_Negocio;
+using System.Threading.Tasks;
 
 namespace Proyecto_Presentacion
 {
@@ -13,7 +14,7 @@ namespace Proyecto_Presentacion
     {
         MetodosFormAreaPersonal met = new MetodosFormAreaPersonal();
         string usuario = UsuarioConectado.nombre;
-        int user, curso;
+        int user, curso; 
         List<string> nombresAsignaturas = new List<string> { };
         List<double> todasNotas = new List<double> { };
         List<double> mediaNotas = new List<double> { };
@@ -24,34 +25,40 @@ namespace Proyecto_Presentacion
         List<double> notasAsignatura5 = new List<double> { };
         List<double> notasAsignatura6 = new List<double> { };
         List<double> notasAsignatura7 = new List<double> { };
-        
 
-        public FormAreaPersonal()
+        public FormAreaPersonal() { }
+        public FormAreaPersonal(int curso, List<string>asignaturas, int user, List<double> todasNotas, List<double> notasMedias)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
+            this.curso = curso;
+            this.nombresAsignaturas = asignaturas;
+            this.user = user;
+            this.todasNotas = todasNotas;
+            this.mediaNotas = notasMedias;
             InitializeComponent();
             DoubleBuffered = true;
-            curso = met.sacarCurso(usuario);
-            if (usuario.Equals("invitado")||curso == 0)
+            if (usuario.Equals("invitado") || curso == 0)
             {
                 cargarModelo();
             }
             else
             {
-                user = met.sacarUsuario(usuario);
                 cargaComponentes();
                 cargaGraficas(curso);
             }
-                   
-            
-            
         }
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
 
+        public void cargaComponentes()
+        {
+            
+            lbAsignaturas.DataSource = nombresAsignaturas;
+            lbAsignaturas.SelectedIndex = 0;
+            lblTrimestre.Text = "TRIMESTRE 1";
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e){ }
 
         public void vaciadoListas()
         {
@@ -77,17 +84,8 @@ namespace Proyecto_Presentacion
             }
         }
 
-        public void cargaComponentes()
-        {
-            nombresAsignaturas = met.sacarAsignaturas(curso);
-            todasNotas = met.recogidaNotas(curso, user);
-            mediaNotas = met.mediaNotas(curso, user);
-            lbAsignaturas.DataSource = nombresAsignaturas;
-            lbAsignaturas.SelectedIndex = 0;
-            lblTrimestre.Text = "TRIMESTRE 1";
-        }
-
-        private void btnAgregarNota_Click(object sender, EventArgs e)
+        
+        private async void btnAgregarNota_Click(object sender, EventArgs e)
         {
             if (usuario.Equals("invitado") || curso == 0)
             {
@@ -101,6 +99,8 @@ namespace Proyecto_Presentacion
                 string asignatura = lbAsignaturas.SelectedItem.ToString();
                 met.agregarNota(nota, trimestre, asignatura, user);
                 vaciadoListas();
+                todasNotas = await met.recogidaNotas(curso, user, usuario);
+                mediaNotas = await met.mediaNotas(curso, user, usuario);
                 cargaComponentes();
                 cargaGraficas(curso);
             }
@@ -348,7 +348,7 @@ namespace Proyecto_Presentacion
             }
             
 
-            graficaMedias.LegendLocation = LegendLocation.Bottom;
+            graficaNotas.LegendLocation = LegendLocation.Bottom;
         }
         
             
@@ -432,7 +432,7 @@ namespace Proyecto_Presentacion
                         DataLabels = true,
                     }
                 };
-            graficaMedias.LegendLocation = LegendLocation.Bottom;
+            graficaNotas.LegendLocation = LegendLocation.Bottom;
 
             lbAsignaturas.Items.Add("Bases de datos");
             lbAsignaturas.Items.Add("Entornos de desarrollo");
@@ -443,5 +443,7 @@ namespace Proyecto_Presentacion
 
             lblTrimestre.Text = "TRIMESTRE 1";
         }
+
+
     }
 }
