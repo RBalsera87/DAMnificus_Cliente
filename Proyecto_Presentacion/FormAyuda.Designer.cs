@@ -101,8 +101,10 @@
             // panelCabecera
             // 
             this.panelCabecera.BackColor = System.Drawing.Color.Black;
+            this.panelCabecera.Controls.Add(this.btnContraer);
             this.panelCabecera.Controls.Add(this.panel1);
             this.panelCabecera.Controls.Add(this.lblAyuda);
+            this.panelCabecera.Controls.Add(this.btnExpandir);
             this.panelCabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCabecera.Location = new System.Drawing.Point(0, 0);
             this.panelCabecera.Name = "panelCabecera";
@@ -147,7 +149,6 @@
             // panelTexto
             // 
             this.panelTexto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panelTexto.Controls.Add(this.btnContraer);
             this.panelTexto.Controls.Add(this.label9);
             this.panelTexto.Controls.Add(this.lblCambiarcurso);
             this.panelTexto.Controls.Add(this.lblCambiarPassExp);
@@ -160,6 +161,7 @@
             // 
             // btnContraer
             // 
+            this.btnContraer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnContraer.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.ocultar;
             this.btnContraer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnContraer.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -169,7 +171,7 @@
             this.btnContraer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContraer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnContraer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnContraer.Location = new System.Drawing.Point(0, -3);
+            this.btnContraer.Location = new System.Drawing.Point(877, 6);
             this.btnContraer.Name = "btnContraer";
             this.btnContraer.Size = new System.Drawing.Size(29, 29);
             this.btnContraer.TabIndex = 26;
@@ -614,7 +616,6 @@
             this.panelCambiarPass.Controls.Add(this.pbCambiar3);
             this.panelCambiarPass.Controls.Add(this.pbCambiar2);
             this.panelCambiarPass.Controls.Add(this.pbCambiar1);
-            this.panelCambiarPass.Controls.Add(this.btnExpandir);
             this.panelCambiarPass.Controls.Add(this.lblCambiar3);
             this.panelCambiarPass.Controls.Add(this.tbCambiar1);
             this.panelCambiarPass.Controls.Add(this.tbCambiar3);
@@ -668,7 +669,7 @@
             this.btnExpandir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExpandir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExpandir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnExpandir.Location = new System.Drawing.Point(511, -3);
+            this.btnExpandir.Location = new System.Drawing.Point(877, 6);
             this.btnExpandir.Name = "btnExpandir";
             this.btnExpandir.Size = new System.Drawing.Size(29, 29);
             this.btnExpandir.TabIndex = 27;

@@ -53,6 +53,7 @@ namespace Proyecto_Presentacion
             tablePanel.ColumnStyles[1].SizeType = SizeType.Absolute;
             tablePanel.ColumnStyles[1].Width = 0;
             this.btnExpandir.Visible = true;
+            this.btnContraer.Visible = false;
         }
 
         private void btnExpandir_Click(object sender, EventArgs e)
@@ -60,6 +61,7 @@ namespace Proyecto_Presentacion
             tablePanel.ColumnStyles[1].SizeType = SizeType.Percent;
             tablePanel.ColumnStyles[1].Width = 40;
             this.btnExpandir.Visible = false;
+            this.btnContraer.Visible = true;
         }
 
         private void tbCambiar1_TextChanged(object sender, EventArgs e)

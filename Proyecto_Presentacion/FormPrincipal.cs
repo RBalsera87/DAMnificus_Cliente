@@ -82,7 +82,7 @@ namespace Proyecto_Presentacion
         // Boton cerrar
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if(mostrarMensajeSalida()) this.Close();
         }
         // Boton maximizar
         private void btnMaximizar_Click(object sender, EventArgs e)
@@ -173,6 +173,7 @@ namespace Proyecto_Presentacion
                 {
                     menuLateral.Width = 55;
                     this.lblConectado.Visible = false;
+                    actualizarTamañoPanelContenido();
                 }
                 if (UsuarioConectado.nombre.Equals("invitado"))
                     m.ocultarLogin(this.tmOcultarLogin);
@@ -193,6 +194,7 @@ namespace Proyecto_Presentacion
                 else
                 {
                     menuLateral.Width = 220;
+                    actualizarTamañoPanelContenido();
                 }
 
             }
@@ -224,7 +226,7 @@ namespace Proyecto_Presentacion
         private void btnComunidad_Click(object sender, EventArgs e)
         {
             m.restaurarColorBotones(this.menuLateral);
-            this.btnComunidad.BackColor = Color.FromArgb(73, 55, 34);
+            this.btnSubida.BackColor = Color.FromArgb(73, 55, 34);
         }
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
@@ -244,7 +246,7 @@ namespace Proyecto_Presentacion
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (mostrarMensajeSalida()) this.Close();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -528,8 +530,9 @@ namespace Proyecto_Presentacion
             if (Opacity == 0) e.Cancel = false;   // Cuando ya es completamente transparente se cierra  
         }
 
-
-
+        /***********************************
+         * Métodos internos del formulario *
+         ***********************************/
         private async void accionLogearDesloguear(string usuario, string pass)
         {
             if (!conectando)
@@ -560,7 +563,7 @@ namespace Proyecto_Presentacion
                             tbPass.Text = "";
                             btnPrincipal.PerformClick();
                             // Cambia el boton ayuda por el boton administración si el usuario es admin
-                            if (usuario.Equals("admin"))
+                            if (usuario.Equals("admin")) // Hay que cambiar esto por una comprobacion de credenciales en la BD!!!
                             {
                                 btnAyudaAdmin.Text = "Administración";
                                 btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.producto;
@@ -580,7 +583,8 @@ namespace Proyecto_Presentacion
                         // Borra token y desconecta
                         if (!await m.borrarToken(UsuarioConectado.nombre))
                         {
-                            MsgBox.Show("Parece que ha habido un error al borrar el token de la base de datos", "Desconexión", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
+                            MsgBox.Show("Parece que ha habido un error al borrar el token de la base de datos", "Desconexión", 
+                                MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
                         }
                         btnAyudaAdmin.Text = "Ayuda";
                         btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.ayuda;
@@ -615,10 +619,10 @@ namespace Proyecto_Presentacion
                 pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.ok;
                 lblStatusServer.Text = "Servidor Online";
                 UsuarioConectado.status = "online";
-                if (btnPrincipal.BackColor != Color.FromArgb(32, 32, 32))
-                {
-                    btnPrincipal.PerformClick();
-                }
+                //if (btnPrincipal.BackColor != Color.FromArgb(32, 32, 32))
+                //{
+                //    btnPrincipal.PerformClick();
+                //}
                 //btnCursos.Enabled = btnAreaPersonal.Enabled = btnAyudaAdmin.Enabled = btnComunidad.Enabled = btnLogin.Enabled = true;
                 //panel2.BackColor = panel3.BackColor = panel4.BackColor = panel5.BackColor = panel7.BackColor = Color.FromArgb(255, 153, 39);
             }
@@ -627,16 +631,33 @@ namespace Proyecto_Presentacion
                 pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.error;
                 lblStatusServer.Text = "Servidor Offline";
                 UsuarioConectado.status = "offline";
-                if(btnPrincipal.BackColor != Color.FromArgb(32,32,32))
-                {
-                    btnPrincipal.PerformClick();
-                }
+                //if(btnPrincipal.BackColor != Color.FromArgb(32,32,32))
+                //{
+                //    btnPrincipal.PerformClick();
+                //}
                 //btnCursos.Enabled = btnAreaPersonal.Enabled = btnAyudaAdmin.Enabled = btnComunidad.Enabled = btnLogin.Enabled = false;
                 //panel2.BackColor = panel3.BackColor = panel4.BackColor = panel5.BackColor = panel7.BackColor = Color.Red;
 
             }
         }
+        private bool mostrarMensajeSalida()
+        {
+            DialogResult respuesta = MsgBox.Show("¿Está seguro de que desea salir de la aplicación?", "Salir",
+                                MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
+            switch (respuesta)
+            {
+                //case DialogResult.OK:
+                case DialogResult.Yes:
+                    return true;
 
+                case DialogResult.No:
+                    //case DialogResult.Abort:
+                    return false;
+
+                default:
+                    throw new ApplicationException("Resultado de dialogo inesperado");
+            }
+        }
 
     }
 }
