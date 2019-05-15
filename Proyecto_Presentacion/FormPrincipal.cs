@@ -250,6 +250,7 @@ namespace Proyecto_Presentacion
         {
             m.restaurarColorBotones(this.menuLateral);
             this.btnSubida.BackColor = Color.FromArgb(73, 55, 34);
+            m.abrirFormEnPanel(new FormSubida(), this.panelContenido);
         }
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
