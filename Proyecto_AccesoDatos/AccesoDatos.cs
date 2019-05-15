@@ -126,7 +126,7 @@ namespace Proyecto_AccesoDatos
             else
             {
                 //Mensaje por si el servidor esta caido ---------------------->esto hay que cambiarlo
-                return "El servidor no responde, revisa tu conexión a internet";
+                return "El servidor no responde, revisa que tengas una conexión a internet";
             }
         }
         public async Task<bool> borrarToken(string usuario)
@@ -185,6 +185,22 @@ namespace Proyecto_AccesoDatos
             }
 
         }
+        public async Task<List<string>> obtenerNombreTemas(string usuario, Dictionary<string, string> datos)
+        {
+            List<string> listaTemas = null;
+            Respuesta respuesta = await enviarPeticion("obtenerNombreTemas", usuario, null, token, datos);
+            try
+            {
+                listaTemas = respuesta.coleccion.ToObject<List<string>>();
+                return listaTemas;
+            }
+            catch (NullReferenceException)
+            {
+                return null;
+            }
+
+        }
+
         public async Task<string> sumaryRestarValoracion(string usuario,Dictionary<string, string> datos)
         {
             //PREGUNTAR A RUBEN AÑADO ESTE IF POQUE SI NO PETA AL ENTRAR COMO INVIADO AL 
@@ -381,6 +397,18 @@ namespace Proyecto_AccesoDatos
                 return false;
             }
             
+        }
+        public async Task<bool> enviarNuevoEnlace(string usuario, Dictionary<string, string> datos)
+        {
+            Respuesta respuesta = await enviarPeticion("subirEnlace", usuario, null, token, datos);
+            if (respuesta.respuesta.Equals("enlaceInsertado"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public async Task<bool> enviarEmailReporte(string usuario, Dictionary<string, string> datos)
         {

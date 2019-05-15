@@ -71,6 +71,7 @@
     <Compile Include="MetodosFormCursos.cs" />
     <Compile Include="MetodosFormInicio.cs" />
     <Compile Include="MetodosFormPrincipal.cs" />
+    <Compile Include="MetodosFormSubida.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioConectado.cs" />
   </ItemGroup>

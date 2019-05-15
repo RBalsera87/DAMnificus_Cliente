@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblCambiarcurso.Text" xml:space="preserve">
-    <value>Ten en cuenta que el contenido será revisado, y si en algun momento detectamos contenido ilegal, pornografía u otros contenidos no directamente relacionados con la aplicación tu cuenta será suspendida indefinidamente.</value>
-  </data>
   <data name="lblCambiarPassExp.Text" xml:space="preserve">
     <value>Para ello debes rellenar los campos que se situan a la izquierda:
 
@@ -127,6 +124,9 @@
 ◉ Imagen (opcional): Si quieres puedes añadir la URL a una imagen personalizada a tu enlace.
 ◉ Descripción: Agrega una descripción de no más de un par o tres de líneas.
 ◉ Enlace: Introduce la URL completa (con el http://) del enlace que vas a subir. </value>
+  </data>
+  <data name="lblCambiarcurso.Text" xml:space="preserve">
+    <value>Ten en cuenta que el contenido será revisado, y si en algun momento detectamos contenido ilegal, pornografía u otros contenidos no directamente relacionados con la aplicación tu cuenta será suspendida indefinidamente.</value>
   </data>
   <data name="labelPassExp.Text" xml:space="preserve">
     <value>Finalmente selecciona el curso, asignatura y el tema que se adecue al enlace que vas a subir, una vez rellenos todos los campos obligatorios se activará el botón de "Subir enlace" y podrás verlo en la aplicación cuando un administrador lo revise.</value>
