@@ -97,7 +97,19 @@ namespace Proyecto_Presentacion
                 string nota = notaIntroducir.Value.ToString();
                 nota = nota.Replace(",", ".");
                 string asignatura = lbAsignaturas.SelectedItem.ToString();
-                met.agregarNota(nota, trimestre, asignatura, user);
+                bool aux = await met.hayNota(trimestre, asignatura, user, usuario);
+                if(aux)
+                {
+                     if(MsgBox.Show("Ya hay una nota asociada a esa asignatura en ese trimestre. ¿Quieres sobreescribirla?", "Conflicto entre notas", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
+                     {
+                        await met.agregarNota(nota, trimestre, asignatura, user, usuario);
+                        MsgBox.Show("Nota cambiada satisfactoriamente", "Conflicto resuelto", MsgBox.Buttons.OK, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
+                    }
+                    else
+                    {
+                        MsgBox.Show("Se dejará la nota ya existente", "Conflicto resuelto", MsgBox.Buttons.OK, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
+                    }
+                }
                 vaciadoListas();
                 todasNotas = await met.recogidaNotas(curso, user, usuario);
                 mediaNotas = await met.mediaNotas(curso, user, usuario);
