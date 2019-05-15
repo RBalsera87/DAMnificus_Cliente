@@ -237,7 +237,7 @@ namespace Proyecto_Presentacion
                 asignaturas = await met.sacarAsignaturas(curso, UsuarioConectado.nombre);
                 user = await met.sacarUsuario(UsuarioConectado.nombre);
                 todasNotas = await met.recogidaNotas(curso, user, UsuarioConectado.nombre);
-                notasMedias = await met.recogidaNotas(curso, user, UsuarioConectado.nombre);
+                notasMedias = await met.mediaNotas(curso, user, UsuarioConectado.nombre);
             }
             
             m.restaurarColorBotones(this.menuLateral);

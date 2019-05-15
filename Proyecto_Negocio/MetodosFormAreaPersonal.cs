@@ -57,7 +57,7 @@ namespace Proyecto_Negocio
             Dictionary<string, string> datos = new Dictionary<string, string> { };
             datos.Add("curso", curso.ToString());
             datos.Add("usuario", usuario.ToString());
-            return await ad.recogidaNotas(user, datos);
+            return await ad.mediaNotas(user, datos);
         }
 
         public async Task<bool> hayNota(int trimestre, string asignatura, int user, string usuario)
