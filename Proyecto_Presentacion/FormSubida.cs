@@ -32,7 +32,7 @@ namespace Proyecto_Presentacion
         private void btnExpandir_Click(object sender, EventArgs e)
         {
             tablePanel.ColumnStyles[1].SizeType = SizeType.Percent;
-            tablePanel.ColumnStyles[1].Width = 40;
+            tablePanel.ColumnStyles[1].Width = 30;
             this.btnExpandir.Visible = false;
             this.btnContraer.Visible = true;
         }
