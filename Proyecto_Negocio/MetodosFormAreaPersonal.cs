@@ -14,7 +14,6 @@ namespace Proyecto_Negocio
     public class MetodosFormAreaPersonal
     {
         AccesoDatos ad = new AccesoDatos();
-        CargadoAreaPersonal cargado = new CargadoAreaPersonal();
         
         public async Task<int> sacarCurso(string user)
         {
@@ -61,9 +60,23 @@ namespace Proyecto_Negocio
             return await ad.recogidaNotas(user, datos);
         }
 
-        public void agregarNota(string nota, int trimestre, string asignatura, int user)
+        public async Task<bool> hayNota(int trimestre, string asignatura, int user, string usuario)
         {
-            cargado.agregarNota(nota, trimestre, asignatura, user);
+            Dictionary<string, string> datos = new Dictionary<string, string> { };
+            datos.Add("trimestre", trimestre.ToString());
+            datos.Add("asignatura", asignatura);
+            datos.Add("usuario", user.ToString());
+            return await ad.hayNota(usuario, datos);
+        }
+
+        public async Task agregarNota(string nota, int trimestre, string asignatura, int user, string usuario)
+        {
+            Dictionary<string, string> datos = new Dictionary<string, string> { };
+            datos.Add("nota", nota);
+            datos.Add("trimestre", trimestre.ToString());
+            datos.Add("asignatura", asignatura);
+            datos.Add("usuario", user.ToString());
+            await ad.agregarNota(usuario, datos);
         }
     }
 }

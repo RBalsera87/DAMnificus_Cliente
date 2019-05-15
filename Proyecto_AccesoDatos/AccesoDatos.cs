@@ -347,6 +347,26 @@ namespace Proyecto_AccesoDatos
             Respuesta respuesta = await enviarPeticion("sacarUsuario", usuario, null, token, datos);
             return Convert.ToInt32(respuesta.respuesta);
         }
+
+        public async Task<bool> hayNota (string usuario, Dictionary<string,string>datos)
+        {
+            Respuesta respuesta = await enviarPeticion("hayNota", usuario, null, token, datos);
+            if (respuesta.respuesta.Equals("si"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task agregarNota(string usuario, Dictionary<string, string> datos)
+        {
+            Respuesta respuesta = await enviarPeticion("agregarNota", usuario, null, token, datos);
+            
+        }
+
         public async Task<bool> cambiarCurso(string usuario, string curso)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
