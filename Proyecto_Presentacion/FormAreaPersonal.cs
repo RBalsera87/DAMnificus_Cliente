@@ -110,6 +110,10 @@ namespace Proyecto_Presentacion
                         MsgBox.Show("Se dejará la nota ya existente", "Conflicto resuelto", MsgBox.Buttons.OK, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
                     }
                 }
+                else
+                {
+                    await met.agregarNota(nota, trimestre, asignatura, user, usuario);
+                }
                 vaciadoListas();
                 todasNotas = await met.recogidaNotas(curso, user, usuario);
                 mediaNotas = await met.mediaNotas(curso, user, usuario);
