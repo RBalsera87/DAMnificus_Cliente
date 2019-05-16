@@ -11,7 +11,6 @@ namespace Proyecto_Presentacion
     {
         MetodosFormSubida m = new MetodosFormSubida();
         private bool tituloOk = false;
-        private bool imagenOk = false;
         private bool enlaceOk = false;
         private bool descripcionOk = false;
         private bool temaOk = false;
@@ -20,6 +19,10 @@ namespace Proyecto_Presentacion
         public FormSubida()
         {
             InitializeComponent();
+        }
+        private void FormSubida_Load(object sender, EventArgs e)
+        {
+            
         }
         private void btnContraer_Click(object sender, EventArgs e)
         {
@@ -43,18 +46,30 @@ namespace Proyecto_Presentacion
             if (tbImagen.Text.Trim().Length > 0)
                 datos.Add("imagen", tbImagen.Text.Trim());
             else
-                datos.Add("imagen", "default");
+                datos.Add("imagen", "");
             datos.Add("descripcion", tbDescripcion.Text.Trim());
             datos.Add("enlace", tbEnlace.Text.Trim());
             var tipoSeleccionado = groupBoxTipo.Controls.OfType<RadioButton>()
                                       .FirstOrDefault(r => r.Checked);
             datos.Add("tipo", tipoSeleccionado.Text);
             datos.Add("tema", lbTema.GetItemText(lbTema.SelectedItem));
-            if (await m.enviarNuevoEnlace(UsuarioConectado.nombre, datos))           
-                MsgBox.Show("El enlace ha sido subido satisfactoriamente a la base de datos. Por el momento no será visible hasta que un administrador lo revise y lo active si todo es correcto.",
-                    "Enlace subido", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);           
+            if (await m.enviarNuevoEnlace(UsuarioConectado.nombre, datos))
+            {
+                MsgBox.Show("El enlace ha sido subido satisfactoriamente a la base de datos. Por el momento no será visible " +
+                    "hasta que un administrador lo revise y lo active si todo es correcto.",
+                    "Enlace subido", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                tbTitulo.Clear();
+                tbImagen.Clear();
+                tbDescripcion.Clear();
+                tbEnlace.Clear();
+                lbAsignatura.Items.Clear();
+                lbTema.Items.Clear();
+                radioButtonPrimero.Checked = radioButtonSegundo.Checked = false;
+                btnSubirEnlace.Enabled = false;
+            }                                 
             else
-                MsgBox.Show("Error al subir el enlace en la base de datos, comprueba que los campos esten correctamente rellenos.", "Enlace no subido", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
+                MsgBox.Show("Error al subir el enlace en la base de datos, comprueba que los campos esten correctamente rellenos.", 
+                    "Enlace no subido", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
         }
         private void tbTitulo_TextChanged(object sender, EventArgs e)
         {

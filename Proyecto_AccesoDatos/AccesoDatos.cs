@@ -12,7 +12,7 @@ namespace Proyecto_AccesoDatos
 {
     public class AccesoDatos
     {
-        private string urlServidor = "http://localhost:8080/";
+        private string urlServidor = "http://localhost:8080/damnificus/";
         private static string token = "";
         public AccesoDatos()
         {
@@ -448,6 +448,18 @@ namespace Proyecto_AccesoDatos
                 return false;
             }
 
+        }
+        public async Task<string> obtenerCredenciales(string usuario)
+        {
+            if (usuario != "invitado")
+            {
+                Respuesta respuesta = await enviarPeticion("obtenerCredenciales", usuario, null, token, null);
+                return respuesta.respuesta;
+            }
+            else
+            {
+                return "invitado";
+            }
         }
         public async Task<bool> pedirStatusServidor(string usuario)
         {

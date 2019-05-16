@@ -37,6 +37,11 @@
             this.labelPassExp = new System.Windows.Forms.Label();
             this.panelTrasero = new System.Windows.Forms.Panel();
             this.panelDescEnl = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBoxTipo = new System.Windows.Forms.GroupBox();
+            this.radioVideo = new System.Windows.Forms.RadioButton();
+            this.radioDoc = new System.Windows.Forms.RadioButton();
+            this.radioWeb = new System.Windows.Forms.RadioButton();
             this.pbEnlace = new System.Windows.Forms.PictureBox();
             this.pbDescripcion = new System.Windows.Forms.PictureBox();
             this.tbEnlace = new System.Windows.Forms.TextBox();
@@ -69,15 +74,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblSubida = new System.Windows.Forms.Label();
             this.btnExpandir = new System.Windows.Forms.Button();
-            this.groupBoxTipo = new System.Windows.Forms.GroupBox();
-            this.radioVideo = new System.Windows.Forms.RadioButton();
-            this.radioDoc = new System.Windows.Forms.RadioButton();
-            this.radioWeb = new System.Windows.Forms.RadioButton();
-            this.label10 = new System.Windows.Forms.Label();
             this.tablePanel.SuspendLayout();
             this.panelTexto.SuspendLayout();
             this.panelTrasero.SuspendLayout();
             this.panelDescEnl.SuspendLayout();
+            this.groupBoxTipo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbEnlace)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDescripcion)).BeginInit();
             this.panelCurso.SuspendLayout();
@@ -90,7 +91,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).BeginInit();
             this.panelCabecera.SuspendLayout();
-            this.groupBoxTipo.SuspendLayout();
             this.SuspendLayout();
             // 
             // tablePanel
@@ -196,6 +196,76 @@
             this.panelDescEnl.Name = "panelDescEnl";
             this.panelDescEnl.Size = new System.Drawing.Size(625, 264);
             this.panelDescEnl.TabIndex = 27;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.DarkGray;
+            this.label10.Location = new System.Drawing.Point(9, 227);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 20);
+            this.label10.TabIndex = 40;
+            this.label10.Text = "Tipo";
+            // 
+            // groupBoxTipo
+            // 
+            this.groupBoxTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxTipo.Controls.Add(this.radioVideo);
+            this.groupBoxTipo.Controls.Add(this.radioDoc);
+            this.groupBoxTipo.Controls.Add(this.radioWeb);
+            this.groupBoxTipo.ForeColor = System.Drawing.Color.Black;
+            this.groupBoxTipo.Location = new System.Drawing.Point(74, 213);
+            this.groupBoxTipo.Name = "groupBoxTipo";
+            this.groupBoxTipo.Size = new System.Drawing.Size(538, 45);
+            this.groupBoxTipo.TabIndex = 42;
+            this.groupBoxTipo.TabStop = false;
+            // 
+            // radioVideo
+            // 
+            this.radioVideo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.radioVideo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioVideo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioVideo.ForeColor = System.Drawing.Color.DarkGray;
+            this.radioVideo.Location = new System.Drawing.Point(340, 8);
+            this.radioVideo.Name = "radioVideo";
+            this.radioVideo.Size = new System.Drawing.Size(69, 33);
+            this.radioVideo.TabIndex = 2;
+            this.radioVideo.Text = "Video";
+            this.radioVideo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioVideo.UseVisualStyleBackColor = true;
+            // 
+            // radioDoc
+            // 
+            this.radioDoc.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.radioDoc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioDoc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioDoc.ForeColor = System.Drawing.Color.DarkGray;
+            this.radioDoc.Location = new System.Drawing.Point(211, 8);
+            this.radioDoc.Name = "radioDoc";
+            this.radioDoc.Size = new System.Drawing.Size(98, 33);
+            this.radioDoc.TabIndex = 1;
+            this.radioDoc.Text = "Documento";
+            this.radioDoc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioDoc.UseVisualStyleBackColor = true;
+            // 
+            // radioWeb
+            // 
+            this.radioWeb.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.radioWeb.Checked = true;
+            this.radioWeb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioWeb.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioWeb.ForeColor = System.Drawing.Color.DarkGray;
+            this.radioWeb.Location = new System.Drawing.Point(118, 8);
+            this.radioWeb.Name = "radioWeb";
+            this.radioWeb.Size = new System.Drawing.Size(61, 33);
+            this.radioWeb.TabIndex = 0;
+            this.radioWeb.TabStop = true;
+            this.radioWeb.Text = "Web";
+            this.radioWeb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioWeb.UseVisualStyleBackColor = true;
             // 
             // pbEnlace
             // 
@@ -629,76 +699,6 @@
             this.btnExpandir.Visible = false;
             this.btnExpandir.Click += new System.EventHandler(this.btnExpandir_Click);
             // 
-            // groupBoxTipo
-            // 
-            this.groupBoxTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxTipo.Controls.Add(this.radioVideo);
-            this.groupBoxTipo.Controls.Add(this.radioDoc);
-            this.groupBoxTipo.Controls.Add(this.radioWeb);
-            this.groupBoxTipo.ForeColor = System.Drawing.Color.Black;
-            this.groupBoxTipo.Location = new System.Drawing.Point(74, 213);
-            this.groupBoxTipo.Name = "groupBoxTipo";
-            this.groupBoxTipo.Size = new System.Drawing.Size(538, 45);
-            this.groupBoxTipo.TabIndex = 42;
-            this.groupBoxTipo.TabStop = false;
-            // 
-            // radioVideo
-            // 
-            this.radioVideo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.radioVideo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.radioVideo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioVideo.ForeColor = System.Drawing.Color.DarkGray;
-            this.radioVideo.Location = new System.Drawing.Point(340, 8);
-            this.radioVideo.Name = "radioVideo";
-            this.radioVideo.Size = new System.Drawing.Size(69, 33);
-            this.radioVideo.TabIndex = 2;
-            this.radioVideo.Text = "Video";
-            this.radioVideo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioVideo.UseVisualStyleBackColor = true;
-            // 
-            // radioDoc
-            // 
-            this.radioDoc.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.radioDoc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.radioDoc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioDoc.ForeColor = System.Drawing.Color.DarkGray;
-            this.radioDoc.Location = new System.Drawing.Point(211, 8);
-            this.radioDoc.Name = "radioDoc";
-            this.radioDoc.Size = new System.Drawing.Size(98, 33);
-            this.radioDoc.TabIndex = 1;
-            this.radioDoc.Text = "Documento";
-            this.radioDoc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioDoc.UseVisualStyleBackColor = true;
-            // 
-            // radioWeb
-            // 
-            this.radioWeb.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.radioWeb.Checked = true;
-            this.radioWeb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.radioWeb.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioWeb.ForeColor = System.Drawing.Color.DarkGray;
-            this.radioWeb.Location = new System.Drawing.Point(118, 8);
-            this.radioWeb.Name = "radioWeb";
-            this.radioWeb.Size = new System.Drawing.Size(61, 33);
-            this.radioWeb.TabIndex = 0;
-            this.radioWeb.TabStop = true;
-            this.radioWeb.Text = "Web";
-            this.radioWeb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioWeb.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.DarkGray;
-            this.label10.Location = new System.Drawing.Point(9, 227);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(39, 20);
-            this.label10.TabIndex = 40;
-            this.label10.Text = "Tipo";
-            // 
             // FormSubida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -710,11 +710,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormSubida";
             this.Text = "FormSubida";
+            this.Load += new System.EventHandler(this.FormSubida_Load);
             this.tablePanel.ResumeLayout(false);
             this.panelTexto.ResumeLayout(false);
             this.panelTrasero.ResumeLayout(false);
             this.panelDescEnl.ResumeLayout(false);
             this.panelDescEnl.PerformLayout();
+            this.groupBoxTipo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbEnlace)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDescripcion)).EndInit();
             this.panelCurso.ResumeLayout(false);
@@ -732,7 +734,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbTitulo)).EndInit();
             this.panelCabecera.ResumeLayout(false);
             this.panelCabecera.PerformLayout();
-            this.groupBoxTipo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

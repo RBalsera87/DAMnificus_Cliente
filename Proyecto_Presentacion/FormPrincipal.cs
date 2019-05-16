@@ -250,14 +250,30 @@ namespace Proyecto_Presentacion
         {
             m.restaurarColorBotones(this.menuLateral);
             this.btnSubida.BackColor = Color.FromArgb(73, 55, 34);
-            m.abrirFormEnPanel(new FormSubida(), this.panelContenido);
+            if (UsuarioConectado.nombre == "invitado")
+            {
+                m.abrirFormEnPanel(new FormSubida(), this.panelContenido);
+                MsgBox.Show("Solo los usuarios registrados pueden subir enlaces a la aplicación, si quieres compartir" +
+                    "algun documento de interés con la comunidad puedes registrarte gratuitamente en la pantalla principal" +
+                    "de la aplicación. Pulsa en aceptar para ser redirigido a la pantalla principal y poder acceder al registro.",
+                    "Característica para usuarios registrados", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
+                m.restaurarColorBotones(this.menuLateral);
+                this.btnPrincipal.BackColor = Color.FromArgb(73, 55, 34);
+            }
+            else
+            {
+                m.abrirFormEnPanel(new FormSubida(), this.panelContenido);
+            }
+            
         }
 
-        private void btnConfiguracion_Click(object sender, EventArgs e)
+        private async void btnConfiguracion_Click(object sender, EventArgs e)
         {
             m.restaurarColorBotones(this.menuLateral);
             this.btnAyudaAdmin.BackColor = Color.FromArgb(73, 55, 34);
-            if (UsuarioConectado.nombre.Equals("admin"))
+            string rango = await m.obtenerCredenciales(UsuarioConectado.nombre);
+            if (rango.Equals("admin"))
             {
                 //Panel administración
             }
@@ -587,12 +603,12 @@ namespace Proyecto_Presentacion
                             tbPass.Text = "";
                             btnPrincipal.PerformClick();
                             // Cambia el boton ayuda por el boton administración si el usuario es admin
-                            if (usuario.Equals("admin")) // Hay que cambiar esto por una comprobacion de credenciales en la BD!!!
+                            string rango = await m.obtenerCredenciales(UsuarioConectado.nombre);
+                            if (rango.Equals("admin"))
                             {
                                 btnAyudaAdmin.Text = "Administración";
                                 btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.producto;
                             }
-
                         }
                         else
                         {
