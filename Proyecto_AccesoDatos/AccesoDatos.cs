@@ -12,7 +12,8 @@ namespace Proyecto_AccesoDatos
 {
     public class AccesoDatos
     {
-        private string urlServidor = "http://localhost:8080/";
+        //private string urlServidor = "http://192.168.104.162:8080/damnificus/";
+        private string urlServidor = "http://localhost:8080/damnificus/";
         private static string token = "";
         public AccesoDatos()
         {
@@ -164,6 +165,20 @@ namespace Proyecto_AccesoDatos
                 //¿Dar mensaje?
             }
             
+        }
+
+        public async Task<bool> borrarEnlace(string usuario, Dictionary<string, string> datos)
+        {
+            Respuesta respuesta = await enviarPeticion("borrarEnlace", usuario, null, token, datos);
+
+            if (respuesta.respuesta.Equals("correcto"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<List<string>> sacarAsignaturas(string usuario, Dictionary<string, string> datos)

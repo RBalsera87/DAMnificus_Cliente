@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCursos));
-            this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
             this.panelCabecera = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -47,6 +46,7 @@
             this.columnaLike = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnaDontLike = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnaReportarFallo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.panelAsignaturas1 = new System.Windows.Forms.Panel();
             this.panelDinamico1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnBbdd = new System.Windows.Forms.Button();
@@ -66,8 +66,6 @@
             this.tmPanelAsigOcultar1 = new System.Windows.Forms.Timer(this.components);
             this.tmPanelAsigOcultar2 = new System.Windows.Forms.Timer(this.components);
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.panelCabecera.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panelListado.SuspendLayout();
@@ -77,17 +75,6 @@
             this.panelAsignaturas2.SuspendLayout();
             this.panelDinamico2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // objectListView1
-            // 
-            this.objectListView1.CellEditUseWholeCell = false;
-            this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.objectListView1.Location = new System.Drawing.Point(0, 0);
-            this.objectListView1.Name = "objectListView1";
-            this.objectListView1.Size = new System.Drawing.Size(121, 97);
-            this.objectListView1.TabIndex = 0;
-            this.objectListView1.UseCompatibleStateImageBehavior = false;
-            this.objectListView1.View = System.Windows.Forms.View.Details;
             // 
             // panelCabecera
             // 
@@ -219,7 +206,6 @@
             this.listadoEnlaces.AllColumns.Add(this.columnaDontLike);
             this.listadoEnlaces.AllColumns.Add(this.columnaReportarFallo);
             this.listadoEnlaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.listadoEnlaces.CellEditUseWholeCell = false;
             this.listadoEnlaces.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnaTitulo,
             this.columnaTipo,
@@ -229,7 +215,7 @@
             this.columnaReportarFallo});
             this.listadoEnlaces.Cursor = System.Windows.Forms.Cursors.Default;
             this.listadoEnlaces.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listadoEnlaces.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listadoEnlaces.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F);
             this.listadoEnlaces.ForeColor = System.Drawing.Color.White;
             this.listadoEnlaces.FullRowSelect = true;
             this.listadoEnlaces.Location = new System.Drawing.Point(0, 0);
@@ -238,8 +224,8 @@
             this.listadoEnlaces.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.listadoEnlaces.ShowGroups = false;
             this.listadoEnlaces.ShowImagesOnSubItems = true;
-            this.listadoEnlaces.ShowItemToolTips = true;
             this.listadoEnlaces.Size = new System.Drawing.Size(959, 524);
+            this.listadoEnlaces.SmallImageList = this.imageListSmall;
             this.listadoEnlaces.TabIndex = 1;
             this.listadoEnlaces.UnfocusedSelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.listadoEnlaces.UseCellFormatEvents = true;
@@ -248,22 +234,22 @@
             this.listadoEnlaces.View = System.Windows.Forms.View.Details;
             this.listadoEnlaces.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(this.listadoEnlaces_CellClick);
             this.listadoEnlaces.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.listadoEnlaces_CellToolTipShowing);
-            this.listadoEnlaces.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.objectListView1_FormatCell);
+            this.listadoEnlaces.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.listadoEnlaces_FormatCell);
             this.listadoEnlaces.ItemActivate += new System.EventHandler(this.listadoEnlaces_ItemActivate);
             // 
             // columnaTitulo
             // 
             this.columnaTitulo.AspectName = "titulo";
             this.columnaTitulo.FillsFreeSpace = true;
-            this.columnaTitulo.HeaderImageKey = "";
             this.columnaTitulo.ImageAspectName = "FeatureIcon";
-            this.columnaTitulo.MinimumWidth = 50;
             this.columnaTitulo.Text = "Título y descripción";
-            this.columnaTitulo.ToolTipText = "";
+            this.columnaTitulo.Width = 150;
+            this.columnaTitulo.WordWrap = true;
             // 
             // columnaTipo
             // 
             this.columnaTipo.AspectName = "tipo";
+            this.columnaTipo.ImageAspectName = "ProgressIcon";
             this.columnaTipo.Text = "Tipo";
             // 
             // columnaValoracion
@@ -273,9 +259,7 @@
             // 
             // columnaLike
             // 
-            this.columnaLike.ImageAspectName = "";
             this.columnaLike.Text = "Like";
-            this.columnaLike.ToolTipText = "";
             // 
             // columnaDontLike
             // 
@@ -283,8 +267,18 @@
             // 
             // columnaReportarFallo
             // 
-            this.columnaReportarFallo.AspectName = "";
             this.columnaReportarFallo.Text = "Reportar Fallo";
+            // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSmall.Images.SetKeyName(0, "ball");
+            this.imageListSmall.Images.SetKeyName(1, "tick");
+            this.imageListSmall.Images.SetKeyName(2, "like");
+            this.imageListSmall.Images.SetKeyName(3, "like+1");
+            this.imageListSmall.Images.SetKeyName(4, "dontLike");
+            this.imageListSmall.Images.SetKeyName(5, "dontLike-1");
             // 
             // panelAsignaturas1
             // 
@@ -545,17 +539,6 @@
             this.imageListLarge.Images.SetKeyName(6, "ball");
             this.imageListLarge.Images.SetKeyName(7, "perros");
             // 
-            // imageListSmall
-            // 
-            this.imageListSmall.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSmall.ImageStream")));
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListSmall.Images.SetKeyName(0, "ball");
-            this.imageListSmall.Images.SetKeyName(1, "tick");
-            this.imageListSmall.Images.SetKeyName(2, "like");
-            this.imageListSmall.Images.SetKeyName(3, "like+1");
-            this.imageListSmall.Images.SetKeyName(4, "dontLike");
-            this.imageListSmall.Images.SetKeyName(5, "dontLike-1");
-            // 
             // FormCursos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -571,7 +554,6 @@
             this.Name = "FormCursos";
             this.Text = "FormCursos";
             this.Load += new System.EventHandler(this.FormCursos_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
             this.panelCabecera.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -586,8 +568,6 @@
         }
 
         #endregion
-
-        private BrightIdeasSoftware.ObjectListView objectListView1;
         private System.Windows.Forms.Panel panelCabecera;
         private System.Windows.Forms.Panel panelListado;
         private System.Windows.Forms.Panel panelAsignaturas1;
@@ -615,6 +595,8 @@
         private System.Windows.Forms.Timer tmPanelAsig2;
         private System.Windows.Forms.Timer tmPanelAsigOcultar1;
         private System.Windows.Forms.Timer tmPanelAsigOcultar2;
+        private System.Windows.Forms.ImageList imageListLarge;
+        private System.Windows.Forms.ImageList imageListSmall;
         private BrightIdeasSoftware.ObjectListView listadoEnlaces;
         private BrightIdeasSoftware.OLVColumn columnaTitulo;
         private BrightIdeasSoftware.OLVColumn columnaTipo;
@@ -622,7 +604,5 @@
         private BrightIdeasSoftware.OLVColumn columnaLike;
         private BrightIdeasSoftware.OLVColumn columnaDontLike;
         private BrightIdeasSoftware.OLVColumn columnaReportarFallo;
-        private System.Windows.Forms.ImageList imageListLarge;
-        private System.Windows.Forms.ImageList imageListSmall;
     }
 }

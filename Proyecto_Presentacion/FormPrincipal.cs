@@ -259,7 +259,7 @@ namespace Proyecto_Presentacion
             this.btnAyudaAdmin.BackColor = Color.FromArgb(73, 55, 34);
             if (UsuarioConectado.nombre.Equals("admin"))
             {
-                //Panel administración
+                m.abrirFormEnPanel(new FormAdministracion(), this.panelContenido);
             }
             else
             {

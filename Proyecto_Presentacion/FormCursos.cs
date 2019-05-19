@@ -104,6 +104,7 @@ namespace Proyecto_Presentacion
             restaurarColorBotones(panelDinamico1);
             this.btnProgramacion.BackColor = Color.FromArgb(73, 55, 34);
             pedirEnlaces(btnProgramacion.Text);
+            tbBuscar.Text = " Buscar ";
         }
 
         private void btnSistemas_Click(object sender, System.EventArgs e)
@@ -243,7 +244,6 @@ namespace Proyecto_Presentacion
             //listadoEnlaces.ModelFilter = TextMatchFilter.Contains(listadoEnlaces, "repair");
             listadoEnlaces.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
             listadoEnlaces.CellToolTip.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
-            listadoEnlaces.CellToolTip.ForeColor = Color.Red;
             
         }
         public void InitializeModel()
@@ -261,9 +261,9 @@ namespace Proyecto_Presentacion
                     case 0:
                         return "error";
                     case 1:
-                        return "ok";
-                    case 2:
                         return "problem";
+                    case 2:
+                        return "error";
                 }
                 return "";
             };
@@ -326,14 +326,14 @@ namespace Proyecto_Presentacion
             };
             this.listadoEnlaces.SetObjects(this.listaEnlaces);
         }
-       
 
-        private void objectListView1_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
+        private void listadoEnlaces_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
                 Enlaces enlace = (Enlaces)e.Model;
-                pintarImagenTituloDesc decoration = new pintarImagenTituloDesc();
+                MetodosFormCursos.pintarImagenTituloDesc decoration = new Proyecto_Negocio.MetodosFormCursos.pintarImagenTituloDesc();
+
                 decoration.ImageList = this.imageListLarge;
                 decoration.Title = enlace.titulo;
                 decoration.ImageName = enlace.id;
@@ -341,7 +341,6 @@ namespace Proyecto_Presentacion
                 e.SubItem.Decoration = decoration;
             }
         }
-        
         //  CAPTURO EVENTO CLICK CON LA CELDA QUE A CLICKADO Y SI ES LA COLUMNA LIKE
         //  OBTENGO EL OBJETO Y LE SUMO 1 LIKE
         private async void listadoEnlaces_CellClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
@@ -445,87 +444,14 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("ok", Proyecto_Presentacion.Properties.Resources.ok);
             imageListSmall.Images.Add("problem", Proyecto_Presentacion.Properties.Resources.problem);
             imageListSmall.Images.Add("error", Proyecto_Presentacion.Properties.Resources.error);
-
-
+            imageListSmall.Images.Add("like", Proyecto_Presentacion.Properties.Resources.like);
+            imageListSmall.Images.Add("like+1", Proyecto_Presentacion.Properties.Resources.like_1);
+            imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dontLike);
+            imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dontLike_1);
 
             listadoEnlaces.SmallImageList = imageListSmall;
+            imageListLarge = m.cargarImageListLargeEnlaces(listaEnlaces, Application.StartupPath);
 
-            Image img = null;
-            foreach (Enlaces e in listaEnlaces)
-            {
-                if (e.imagen.Equals("") || e.imagen == null)
-                {
-                    img = Image.FromFile(Application.StartupPath + "/../../Resources/titulo.png");
-                }
-                else if (!e.imagen.Contains("localhost"))
-                {   //Convierte imagen de un URL a Image
-                    var request = WebRequest.Create(e.imagen);
-                    using (var response = request.GetResponse())
-                    using (var stream = response.GetResponseStream())
-                    {
-                        img = Bitmap.FromStream(stream);
-                    }
-                }
-                else
-                {
-                    img = Image.FromFile(Application.StartupPath + e.imagen);
-                }
-
-                imageListLarge.Images.Add(e.id, img);
-
-            }
-        }
-
-        public class pintarImagenTituloDesc : BrightIdeasSoftware.AbstractDecoration
-        {
-            public ImageList ImageList;
-            public string ImageName;
-            public string Title;
-            public string Description;
-
-            public Font TitleFont = new Font("Segoe UI Semilight", 12, FontStyle.Bold);
-            public Color TitleColor = Color.FromArgb(255, 255, 255);
-            public Font DescripionFont = new Font("Tahoma", 9);
-            public Color DescriptionColor = Color.FromArgb(255, 255, 255);
-            public Size CellPadding = new Size(1, 1);
-
-            public override void Draw(BrightIdeasSoftware.ObjectListView olv, Graphics g, Rectangle r)
-            {
-                Rectangle cellBounds = this.CellBounds;
-                cellBounds.Inflate(-this.CellPadding.Width, -this.CellPadding.Height);
-                Rectangle textBounds = cellBounds;
-
-                if (this.ImageList != null && !String.IsNullOrEmpty(this.ImageName))
-                {
-                    g.DrawImage(this.ImageList.Images[this.ImageName], cellBounds.Location);
-                    textBounds.X += this.ImageList.ImageSize.Width;
-                    textBounds.Width -= this.ImageList.ImageSize.Width;
-                }
-
-                //g.DrawRectangle(Pens.Red, textBounds);
-
-                // Draw the title
-                StringFormat fmt = new StringFormat(StringFormatFlags.NoWrap);
-                fmt.Trimming = StringTrimming.EllipsisCharacter;
-                fmt.Alignment = StringAlignment.Near;
-                fmt.LineAlignment = StringAlignment.Near;
-
-                using (SolidBrush b = new SolidBrush(this.TitleColor))
-                {
-                    g.DrawString(this.Title, this.TitleFont, b, textBounds, fmt);
-                }
-
-                // Draw the description
-                SizeF size = g.MeasureString(this.Title, this.TitleFont, (int)textBounds.Width, fmt);
-                textBounds.Y += (int)size.Height;
-                textBounds.Height -= (int)size.Height;
-                StringFormat fmt2 = new StringFormat();
-                fmt2.Trimming = StringTrimming.EllipsisCharacter;
-                using (SolidBrush b = new SolidBrush(this.DescriptionColor))
-                {
-                    g.DrawString(this.Description, this.DescripionFont, b, textBounds, fmt2);
-                }
-            }
         }
         public bool containsIgnoreMayusMin(string source, string value, StringComparison comparisonType)
         {
@@ -540,15 +466,21 @@ namespace Proyecto_Presentacion
         }
         private void tbBuscar_TextChanged(object sender, EventArgs e)
         {
+            
             if (tbBuscar.Text != " Buscar ")
             {
                 this.listadoEnlaces.ModelFilter = new ModelFilter(delegate (object x)
                 {
-                    var enla = x as Enlaces;
-                    string tituloSinAcentos = quitarAcentos(enla.titulo);
-                    string tbBuscarSinAcentos = quitarAcentos(tbBuscar.Text);
+                    if (tbBuscar.Text != " Buscar " && tbBuscar.Text != "")
+                    {
+                        var enla = x as Enlaces;
+                        string tituloSinAcentos = quitarAcentos(enla.titulo);
+                        string tbBuscarSinAcentos = quitarAcentos(tbBuscar.Text);
 
-                    return x != null && (containsIgnoreMayusMin(tituloSinAcentos,tbBuscarSinAcentos, StringComparison.InvariantCultureIgnoreCase));
+                        return x != null && (containsIgnoreMayusMin(tituloSinAcentos, tbBuscarSinAcentos, StringComparison.InvariantCultureIgnoreCase));
+
+                    }
+                    return true;
                 });
             }
            
@@ -561,6 +493,7 @@ namespace Proyecto_Presentacion
             if(tbBuscar.Text == "")
             {
                 tbBuscar.Text = " Buscar ";
+                listadoEnlaces.BuildList();
             }
         }
         //Limpia el texto Buscar del tbBuscar
