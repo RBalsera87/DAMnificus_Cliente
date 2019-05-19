@@ -239,18 +239,17 @@
   <ItemGroup>
     <Content Include="Graficas\GraficaBarras.html" />
     <Content Include="Graficas\Grafica3d.html" />
-    <None Include="Resources\papelera.png" />
-    <None Include="Resources\like.jpg" />
-    <None Include="Resources\dontLike-1.png" />
-    <None Include="Resources\dontLike.png" />
-    <None Include="Resources\like+1.jpg" />
+    <None Include="Resources\unaEstrellas.png" />
+    <None Include="Resources\dosEstrellas.png" />
+    <None Include="Resources\tresEstrellas.png" />
+    <None Include="Resources\cincoEstrellas.png" />
+    <None Include="Resources\cuatroEstrellas.png" />
+    <None Include="Resources\dislike.png" />
+    <None Include="Resources\revision.png" />
+    <None Include="Resources\reporte.png" />
+    <None Include="Resources\like.png" />
     <None Include="Resources\accept.png" />
     <None Include="Resources\ocultar.png" />
-    <None Include="Resources\cuatroEstrellas.png" />
-    <None Include="Resources\tresEstrellas.png" />
-    <None Include="Resources\dosEstrellas.png" />
-    <None Include="Resources\unaEstrellas.png" />
-    <None Include="Resources\cincoEstrellas.png" />
     <None Include="Resources\unaEstrella.bmp" />
     <None Include="Resources\salir.png" />
     <None Include="Resources\refresh.png" />

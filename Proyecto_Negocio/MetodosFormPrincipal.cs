@@ -41,6 +41,10 @@ namespace Proyecto_Negocio
             bool respuesta = await ad.borrarToken(usuario);
             return respuesta;
         }
+        public async Task<string> obtenerCredenciales(string usuario)
+        {
+            return await ad.obtenerCredenciales(usuario);
+        }
         public void ocultarLogin(Timer tmOcultarLogin)
         {
             tmOcultarLogin.Enabled = true;
