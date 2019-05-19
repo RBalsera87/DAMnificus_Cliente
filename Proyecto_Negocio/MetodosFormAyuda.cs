@@ -51,5 +51,12 @@ namespace Proyecto_Negocio
              return await ad.buscarEmailEnBD(email);
         }
 
+        public async Task borrarNotas(string usuario, string curso)
+        {
+            Dictionary<string, string> datos = new Dictionary<string, string> { };
+            datos.Add("curso", curso);
+            await ad.borrarNotas(usuario, datos);
+        }
+
     }
 }
