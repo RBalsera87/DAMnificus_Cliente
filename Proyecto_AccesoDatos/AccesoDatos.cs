@@ -12,7 +12,6 @@ namespace Proyecto_AccesoDatos
 {
     public class AccesoDatos
     {
-        //private string urlServidor = "http://192.168.104.162:8080/damnificus/";
         private string urlServidor = "http://localhost:8080/damnificus/";
         private static string token = "";
         public AccesoDatos()
