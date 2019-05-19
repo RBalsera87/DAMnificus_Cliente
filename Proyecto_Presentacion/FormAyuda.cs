@@ -185,6 +185,13 @@ namespace Proyecto_Presentacion
         {
             curso = await m.obtenerCurso(UsuarioConectado.nombre);
             string mensaje = "Error al cambiar el curso";
+            if(curso.Equals("curso1")||curso.Equals("curso2"))
+            {
+                if(MsgBox.Show("Tienes notas de tu curso guardadas en la base de datos. ¿Ahora con el cambio quieres borrarlas?","¿Que es lo que quieres que hagamos?", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
+                {
+                    await m.borrarNotas(UsuarioConectado.nombre, curso);
+                }
+            }
             if (this.radioButtonPrimero.Checked)
             {
                 if (curso.Equals("curso1")) mensaje = "Ya tienes primero como curso actual";

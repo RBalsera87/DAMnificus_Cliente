@@ -39,6 +39,7 @@ namespace Proyecto_Presentacion
             this.mediaNotas = notasMedias;
             InitializeComponent();
             DoubleBuffered = true;
+            lblTrimestre.Text = "TRIMESTRE 1";
             if (usuario.Equals("invitado") || curso == 0)
             {
                 cargarModelo();
@@ -55,7 +56,7 @@ namespace Proyecto_Presentacion
             
             lbAsignaturas.DataSource = nombresAsignaturas;
             lbAsignaturas.SelectedIndex = 0;
-            lblTrimestre.Text = "TRIMESTRE 1";
+            
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e){ }

@@ -489,6 +489,11 @@ namespace Proyecto_AccesoDatos
             }
         }
 
+        public async Task borrarNotas(string usuario, Dictionary<string,string>datos)
+        {
+            Respuesta respuesta = await enviarPeticion("borrarNotas", usuario, null, token, datos);
+        }
+
         
     }
 }
