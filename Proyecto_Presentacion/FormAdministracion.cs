@@ -271,7 +271,7 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("error", Proyecto_Presentacion.Properties.Resources.error);
             imageListSmall.Images.Add("like", Proyecto_Presentacion.Properties.Resources.like);
             imageListSmall.Images.Add("like+1", Proyecto_Presentacion.Properties.Resources.like_1);
-            imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dontLike);
+            imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dislike);
             imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dontLike_1);
             imageListSmall.Images.Add("papelera", Proyecto_Presentacion.Properties.Resources.papelera);
 

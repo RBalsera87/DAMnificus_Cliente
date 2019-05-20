@@ -604,7 +604,7 @@ namespace Proyecto_Presentacion
                             btnPrincipal.PerformClick();
                             // Cambia el boton ayuda por el boton administración si el usuario es admin
                             string rango = await m.obtenerCredenciales(UsuarioConectado.nombre);
-                            if (rango.Equals("admin"))
+                            if (usuario.Equals("admin"))
                             {
                                 btnAyudaAdmin.Text = "Administración";
                                 btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.producto;

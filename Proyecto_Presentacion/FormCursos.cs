@@ -442,11 +442,11 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("4Estrellas", Proyecto_Presentacion.Properties.Resources.cuatroEstrellas);
             imageListSmall.Images.Add("5Estrellas", Proyecto_Presentacion.Properties.Resources.cincoEstrellas);
             imageListSmall.Images.Add("ok", Proyecto_Presentacion.Properties.Resources.ok);
-            imageListSmall.Images.Add("problem", Proyecto_Presentacion.Properties.Resources.problem);
-            imageListSmall.Images.Add("error", Proyecto_Presentacion.Properties.Resources.error);
+            imageListSmall.Images.Add("problem", Proyecto_Presentacion.Properties.Resources.reportar);
+            imageListSmall.Images.Add("error", Proyecto_Presentacion.Properties.Resources.revision);
             imageListSmall.Images.Add("like", Proyecto_Presentacion.Properties.Resources.like);
             imageListSmall.Images.Add("like+1", Proyecto_Presentacion.Properties.Resources.like_1);
-            imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dontLike);
+            imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dislike);
             imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dontLike_1);
 
             listadoEnlaces.SmallImageList = imageListSmall;
