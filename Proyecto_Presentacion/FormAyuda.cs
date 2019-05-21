@@ -68,7 +68,7 @@ namespace Proyecto_Presentacion
         {
             if (tbCambiar1.Text.Length > 0)
             {
-                lblCambiar2.Enabled = lblCambiar3.Enabled =  tbCambiar2.Enabled = tbCambiar3.Enabled = true;
+                lblCambiar2.Enabled = lblCambiar3.Enabled = tbCambiar2.Enabled = tbCambiar3.Enabled = true;
                 this.pbCambiar1.Image = Proyecto_Presentacion.Properties.Resources.ok;
                 this.toolTipCambiar1.SetToolTip(tbCambiar1, "Correcto");
             }
@@ -185,9 +185,9 @@ namespace Proyecto_Presentacion
         {
             curso = await m.obtenerCurso(UsuarioConectado.nombre);
             string mensaje = "Error al cambiar el curso";
-            if(curso.Equals("curso1")||curso.Equals("curso2"))
+            if (curso.Equals("curso1") || curso.Equals("curso2"))
             {
-                if(MsgBox.Show("Tienes notas de tu curso guardadas en la base de datos. ¿Ahora con el cambio quieres borrarlas?","¿Que es lo que quieres que hagamos?", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
+                if (MsgBox.Show("Tienes notas de tu curso guardadas en la base de datos. ¿Ahora con el cambio quieres borrarlas?", "¿Que es lo que quieres que hagamos?", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
                 {
                     await m.borrarNotas(UsuarioConectado.nombre, curso);
                 }
@@ -200,12 +200,12 @@ namespace Proyecto_Presentacion
             else if (this.radioButtonSegundo.Checked)
             {
                 if (curso.Equals("curso2")) mensaje = "Ya tienes segundo como curso actual";
-                else if(await m.cambiarCurso(UsuarioConectado.nombre, "curso2")) mensaje = "Cambiado a segundo curso";
+                else if (await m.cambiarCurso(UsuarioConectado.nombre, "curso2")) mensaje = "Cambiado a segundo curso";
             }
             else
             {
                 if (curso.Equals("curso0")) mensaje = "Actualmente no tienes un curso asignado";
-                else if(await m.cambiarCurso(UsuarioConectado.nombre, "curso0")) mensaje = "Cambiado a ningun curso";
+                else if (await m.cambiarCurso(UsuarioConectado.nombre, "curso0")) mensaje = "Cambiado a ningun curso";
             }
             MsgBox.Show(mensaje, "Curso cambiado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
         }
@@ -221,7 +221,8 @@ namespace Proyecto_Presentacion
                 MsgBox.Show("El reporte ha sido enviado satisfactoriamente, gracias por tu aportación", "Reporte enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
                 this.tbTituloRep.Clear();
                 this.tbReporte.Clear();
-            }else
+            }
+            else
             {
                 MsgBox.Show("El reporte no se ha podido enviar debido a un error", "Reporte no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
                 this.btnEnvReporte.Enabled = true;
@@ -244,13 +245,14 @@ namespace Proyecto_Presentacion
                         this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
                         this.toolTipEmailToken.SetToolTip(tbEmailToken, "Correcto");
                         this.btnEnviarEmailToken.Enabled = true;
-                    }else
+                    }
+                    else
                     {
                         this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
                         this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce un email válido");
                         this.btnEnviarEmailToken.Enabled = false;
                     }
-                    
+
                 }
                 else
                 {
@@ -267,7 +269,7 @@ namespace Proyecto_Presentacion
                     this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
                     this.toolTipEmailToken.SetToolTip(tbEmailToken, "Correcto");
                     this.lblPass.Enabled = this.lblPass2.Enabled = this.tbPass.Enabled = this.tbPass2.Enabled = true;
-                    
+
                 }
                 else
                 {
@@ -277,8 +279,8 @@ namespace Proyecto_Presentacion
                     this.lblPass.Enabled = this.lblPass2.Enabled = this.tbPass.Enabled = this.tbPass2.Enabled = false;
                 }
             }
-                
-            
+
+
         }
 
         private async void btnEnviarEmailToken_Click(object sender, EventArgs e)
@@ -286,7 +288,7 @@ namespace Proyecto_Presentacion
             this.btnEnviarEmailToken.Enabled = false;
             if (lblEmailToken.Text.Equals("Email"))
             {
-                email = tbEmailToken.Text;    
+                email = tbEmailToken.Text;
                 if (await m.buscarEmailEnBD(email))
                 {
                     datos.Clear();
@@ -306,7 +308,7 @@ namespace Proyecto_Presentacion
                         this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
                         this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce el token");
                         this.toolTipEmailToken.Show("Introduce el token", this.tbEmailToken, 1000);
-                        
+
                     }
                 }
                 else
@@ -315,7 +317,7 @@ namespace Proyecto_Presentacion
 
                     this.btnEnviarEmailToken.Enabled = true;
                 }
-                
+
             }
             else
             {

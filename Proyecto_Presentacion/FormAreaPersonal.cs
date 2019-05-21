@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Presentacion
 {
-    
+
     public partial class FormAreaPersonal : Form
     {
         MetodosFormAreaPersonal met = new MetodosFormAreaPersonal();
         string usuario = UsuarioConectado.nombre;
-        int user, curso; 
+        int user, curso;
         List<string> nombresAsignaturas = new List<string> { };
         List<double> todasNotas = new List<double> { };
         List<double> mediaNotas = new List<double> { };
@@ -27,7 +27,7 @@ namespace Proyecto_Presentacion
         List<double> notasAsignatura7 = new List<double> { };
 
         public FormAreaPersonal() { }
-        public FormAreaPersonal(int curso, List<string>asignaturas, int user, List<double> todasNotas, List<double> notasMedias)
+        public FormAreaPersonal(int curso, List<string> asignaturas, int user, List<double> todasNotas, List<double> notasMedias)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -53,13 +53,13 @@ namespace Proyecto_Presentacion
 
         public void cargaComponentes()
         {
-            
+
             lbAsignaturas.DataSource = nombresAsignaturas;
             lbAsignaturas.SelectedIndex = 0;
-            
+
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e){ }
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
 
         public void vaciadoListas()
         {
@@ -74,18 +74,21 @@ namespace Proyecto_Presentacion
 
         private void tbTrimestre_Scroll(object sender, EventArgs e)
         {
-            switch(tbTrimestre.Value)
+            switch (tbTrimestre.Value)
             {
-                case 0:lblTrimestre.Text = "TRIMESTRE 1";
+                case 0:
+                    lblTrimestre.Text = "TRIMESTRE 1";
                     break;
-                case 1:lblTrimestre.Text = "TRIMESTRE 2";
+                case 1:
+                    lblTrimestre.Text = "TRIMESTRE 2";
                     break;
-                case 2: lblTrimestre.Text = "TRIMESTRE 3";
+                case 2:
+                    lblTrimestre.Text = "TRIMESTRE 3";
                     break;
             }
         }
 
-        
+
         private async void btnAgregarNota_Click(object sender, EventArgs e)
         {
             if (usuario.Equals("invitado") || curso == 0)
@@ -99,10 +102,10 @@ namespace Proyecto_Presentacion
                 nota = nota.Replace(",", ".");
                 string asignatura = lbAsignaturas.SelectedItem.ToString();
                 bool aux = await met.hayNota(trimestre, asignatura, user, usuario);
-                if(aux)
+                if (aux)
                 {
-                     if(MsgBox.Show("Ya hay una nota asociada a esa asignatura en ese trimestre. ¿Quieres sobreescribirla?", "Conflicto entre notas", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
-                     {
+                    if (MsgBox.Show("Ya hay una nota asociada a esa asignatura en ese trimestre. ¿Quieres sobreescribirla?", "Conflicto entre notas", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
+                    {
                         await met.agregarNota(nota, trimestre, asignatura, user, usuario);
                         MsgBox.Show("Nota cambiada satisfactoriamente", "Conflicto resuelto", MsgBox.Buttons.OK, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
                     }
@@ -121,7 +124,7 @@ namespace Proyecto_Presentacion
                 cargaComponentes();
                 cargaGraficas(curso);
             }
-                
+
         }
 
         public void cargaGraficas(int curso)
@@ -363,12 +366,12 @@ namespace Proyecto_Presentacion
                     }
                 };
             }
-            
+
 
             graficaNotas.LegendLocation = LegendLocation.Bottom;
         }
-        
-            
+
+
         public void cargarModelo()
         {
             graficaNotas.AxisX.Clear();

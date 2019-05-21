@@ -48,7 +48,7 @@ namespace Proyecto_Negocio
         }
         public async Task<bool> buscarEmailEnBD(string email)
         {
-             return await ad.buscarEmailEnBD(email);
+            return await ad.buscarEmailEnBD(email);
         }
 
         public async Task borrarNotas(string usuario, string curso)
