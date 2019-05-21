@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdministracion));
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
@@ -47,6 +46,7 @@
             this.Column5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.Column6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.Column7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.Column8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel3.SuspendLayout();
             this.panelCabecera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
@@ -54,21 +54,14 @@
             // 
             // imageListLarge
             // 
-            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageListLarge.ImageSize = new System.Drawing.Size(80, 80);
             this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "entire_network");
-            this.imageListLarge.Images.SetKeyName(1, "scheduled_tasks");
-            this.imageListLarge.Images.SetKeyName(2, "search");
-            this.imageListLarge.Images.SetKeyName(3, "workgroup");
-            this.imageListLarge.Images.SetKeyName(4, "write_document");
-            this.imageListLarge.Images.SetKeyName(5, "tick");
-            this.imageListLarge.Images.SetKeyName(6, "ball");
-            this.imageListLarge.Images.SetKeyName(7, "perros");
             // 
             // imageListSmall
             // 
             this.imageListSmall.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageListSmall.ImageSize = new System.Drawing.Size(50, 50);
+            this.imageListSmall.ImageSize = new System.Drawing.Size(35, 35);
             this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // panel1
@@ -173,6 +166,7 @@
             this.objectListView1.AllColumns.Add(this.Column5);
             this.objectListView1.AllColumns.Add(this.Column6);
             this.objectListView1.AllColumns.Add(this.Column7);
+            this.objectListView1.AllColumns.Add(this.Column8);
             this.objectListView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Column1,
@@ -181,10 +175,11 @@
             this.Column4,
             this.Column5,
             this.Column6,
-            this.Column7});
+            this.Column7,
+            this.Column8});
             this.objectListView1.Cursor = System.Windows.Forms.Cursors.Default;
             this.objectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objectListView1.Font = new System.Drawing.Font("Segoe MDL2 Assets", 10F, System.Drawing.FontStyle.Bold);
+            this.objectListView1.Font = new System.Drawing.Font("Segoe MDL2 Assets", 8F, System.Drawing.FontStyle.Bold);
             this.objectListView1.ForeColor = System.Drawing.Color.White;
             this.objectListView1.FullRowSelect = true;
             this.objectListView1.Location = new System.Drawing.Point(0, 40);
@@ -207,7 +202,6 @@
             // Column1
             // 
             this.Column1.AspectName = "Column1";
-            this.Column1.FillsFreeSpace = true;
             this.Column1.ImageAspectName = "FeatureIcon";
             this.Column1.Text = "Column1";
             this.Column1.WordWrap = true;
@@ -242,6 +236,11 @@
             // 
             this.Column7.AspectName = "Column7";
             this.Column7.Text = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.AspectName = "Column8";
+            this.Column8.Text = "Column8";
             // 
             // FormAdministracion
             // 
@@ -279,5 +278,6 @@
         private BrightIdeasSoftware.OLVColumn Column5;
         private BrightIdeasSoftware.OLVColumn Column6;
         private BrightIdeasSoftware.OLVColumn Column7;
+        private BrightIdeasSoftware.OLVColumn Column8;
     }
 }

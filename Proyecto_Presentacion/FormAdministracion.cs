@@ -26,8 +26,8 @@ namespace Proyecto_Presentacion
         private void FormAdministracion_Load(object sender, EventArgs e)
         {
             objectListView1.HeaderStyle = ColumnHeaderStyle.None;
-            objectListView1.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
-            objectListView1.CellToolTip.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
+            objectListView1.Font = new Font("Segoe UI Semilight", 9, FontStyle.Bold);
+            objectListView1.CellToolTip.Font = new Font("Segoe UI Semilight",10, FontStyle.Bold);
         }
         private async void pedirEnlaces(string asignatura)
         {
@@ -71,14 +71,14 @@ namespace Proyecto_Presentacion
             //Inicializa los tooltip
             objectListView1.CellToolTipShowing += new EventHandler<ToolTipShowingEventArgs>(objectListView1_CellToolTipShowing);
             //Asigna tamaño del ancho de la fila
-            objectListView1.RowHeight = 90;
-            this.Column7.ImageGetter = delegate (object x)
+            objectListView1.RowHeight = 80;
+            this.Column8.ImageGetter = delegate (object x)
             {
                
                 return "papelera";
                 
             };
-            this.Column6.ImageGetter = delegate (object x)
+            this.Column7.ImageGetter = delegate (object x)
             {
                 switch (((Enlaces)x).reportarFallo)
                 {
@@ -151,20 +151,20 @@ namespace Proyecto_Presentacion
             this.objectListView1.SetObjects(this.listaEnlaces);
         }
 
-        //private void objectListView1_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
-        //{
-        //    if (e.ColumnIndex == 0)
-        //    {
-        //        Enlaces enlace = (Enlaces)e.Model;
-        //        MetodosFormCursos.pintarImagenTituloDesc decoration = new Proyecto_Negocio.MetodosFormCursos.pintarImagenTituloDesc();
+        private void objectListView1_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
+        {
+            if (e.Column == Column1)
+            {
+                Enlaces enlace = (Enlaces)e.Model;
+                MetodosFormCursos.pintarImagenTituloDesc decoration = new Proyecto_Negocio.MetodosFormCursos.pintarImagenTituloDesc();
 
-        //        decoration.ImageList = this.imageListLarge;
-        //        decoration.Title = enlace.titulo;
-        //        decoration.ImageName = enlace.id;
-        //        decoration.Description = enlace.descripcion;
-        //        e.SubItem.Decoration = decoration;
-        //    }
-        //}
+                decoration.ImageList = this.imageListLarge;
+                decoration.Title = enlace.asignatura;
+                decoration.ImageName = null;
+                decoration.Description = enlace.tema;
+                e.SubItem.Decoration = decoration;
+            }
+        }
         //  CAPTURO EVENTO CLICK CON LA CELDA QUE A CLICKADO Y SI ES LA COLUMNA LIKE
         //  OBTENGO EL OBJETO Y LE SUMO 1 LIKE
         private async void objectListView1_CellClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
@@ -222,7 +222,7 @@ namespace Proyecto_Presentacion
             //        }
             //    }
             //}
-            if (e.Column == Column7)
+            if (e.Column == Column8)
             {
                 Enlaces enlace = (Enlaces)e.Model;
 
@@ -267,12 +267,12 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("4Estrellas", Proyecto_Presentacion.Properties.Resources.cuatroEstrellas);
             imageListSmall.Images.Add("5Estrellas", Proyecto_Presentacion.Properties.Resources.cincoEstrellas);
             imageListSmall.Images.Add("ok", Proyecto_Presentacion.Properties.Resources.ok);
-            imageListSmall.Images.Add("problem", Proyecto_Presentacion.Properties.Resources.problem);
-            imageListSmall.Images.Add("error", Proyecto_Presentacion.Properties.Resources.error);
+            imageListSmall.Images.Add("problem", Proyecto_Presentacion.Properties.Resources.revision);
+            imageListSmall.Images.Add("error", Proyecto_Presentacion.Properties.Resources.reportar);
             imageListSmall.Images.Add("like", Proyecto_Presentacion.Properties.Resources.like);
             imageListSmall.Images.Add("like+1", Proyecto_Presentacion.Properties.Resources.like_1);
             imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dislike);
-            imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dontLike_1);
+            imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dislike_1);
             imageListSmall.Images.Add("papelera", Proyecto_Presentacion.Properties.Resources.papelera);
 
             objectListView1.SmallImageList = imageListSmall;
@@ -333,7 +333,7 @@ namespace Proyecto_Presentacion
         {
             e.ToolTipControl.IsBalloon = true;
             
-            if (e.Column == Column6)
+            if (e.Column == Column7)
             {
                 Enlaces enlace = (Enlaces)e.Model;
                 if (enlace.reportarFallo == 1)
@@ -349,7 +349,7 @@ namespace Proyecto_Presentacion
                 }
 
             }
-            if (e.Column == Column7)
+            if (e.Column == Column8)
             { 
                     e.Text = "Eliminar";
             }
@@ -361,50 +361,54 @@ namespace Proyecto_Presentacion
             btnSegundo.Enabled = false;
             objectListView1.Focus();
             //Ocupa el espacio libre
-            Column1.FillsFreeSpace = false;
-            Column5.FillsFreeSpace = true;
+            //Column1.FillsFreeSpace = false;
+            Column2.FillsFreeSpace = true;
 
             //Centrar
-            Column2.TextAlign = HorizontalAlignment.Center;
             Column3.TextAlign = HorizontalAlignment.Center;
             Column4.TextAlign = HorizontalAlignment.Center;
-            Column6.TextAlign = HorizontalAlignment.Center;
+            Column5.TextAlign = HorizontalAlignment.Center;
             Column7.TextAlign = HorizontalAlignment.Center;
+            Column8.TextAlign = HorizontalAlignment.Center;
 
             //Ancho culumnas
-            Column1.Width = 200;
+            Column1.Width = 130;
             Column2.MinimumWidth = 60;
-            Column2.Width = 60;
-            Column3.MinimumWidth = 90;
-            Column3.Width = 90;
-            Column4.MinimumWidth = 60;
-            Column4.Width = 60;
-            Column5.MinimumWidth = 200;
-            Column5.Width = 200;
-            Column6.MinimumWidth = 70;
-            Column6.Width = 70;
-            Column7.MinimumWidth = 80;
-            Column7.Width = 80;
+            Column2.Width = 200;
+            Column3.MinimumWidth = 60;
+            Column3.Width = 60;
+            Column4.MinimumWidth = 80;
+            Column4.Width = 80;
+            Column5.MinimumWidth = 60;
+            Column5.Width = 60;
+            Column6.MinimumWidth = 200;
+            Column6.Width = 300;
+            Column7.MinimumWidth = 70;
+            Column7.Width = 70;
+            Column8.MinimumWidth = 80;
+            Column8.Width = 80;
 
             //Texto de la cabecera
-            Column1.Text = "Titulo";
-            Column2.Text = "Id";
-            Column3.Text = "Valoracion";
-            Column4.Text = "Tipo";
-            Column5.Text = "Tema";
-            Column6.Text = "Estado";
-            Column7.Text = "Eliminar";
+            Column1.Text = "Asignatura";
+            Column2.Text = "Tema";
+            Column3.Text = "Id";
+            Column4.Text = "Valoracion";
+            Column5.Text = "Tipo";
+            Column6.Text = "Título";
+            Column7.Text = "Estado";
+            Column8.Text = "Eliminar";
 
-            Column1.AspectName = "titulo";
-            Column2.AspectName = "id";
-            Column3.AspectName = "valoracion";
-            Column4.AspectName = "tipo";
-            Column5.AspectName = "tema";
+            Column1.AspectName = "asignatura";
+            Column2.AspectName = "tema";
+            Column3.AspectName = "id";
+            Column4.AspectName = "valoracion";
+            Column5.AspectName = "tipo";
+            Column6.AspectName = "titulo";
 
 
             this.btnPrimero.BackColor = Color.FromArgb(32, 32, 32);
             this.btnSegundo.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces("Programacion");
+            pedirEnlaces("todas");
         }
 
        

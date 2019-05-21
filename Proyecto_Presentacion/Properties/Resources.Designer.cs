@@ -133,9 +133,9 @@ namespace Proyecto_Presentacion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dontLike_1 {
+        internal static System.Drawing.Bitmap dislike_1 {
             get {
-                object obj = ResourceManager.GetObject("dontLike_1", resourceCulture);
+                object obj = ResourceManager.GetObject("dislike_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

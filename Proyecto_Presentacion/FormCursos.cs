@@ -403,23 +403,31 @@ namespace Proyecto_Presentacion
                 Enlaces enlace = (Enlaces)e.Model;
                 if (enlace.reportarFallo != 2)
                 {
-                    Dictionary<string, string> datos = new Dictionary<string, string>();
-                    datos.Add("id", enlace.id);
+                    DialogResult respuesta = MsgBox.Show("¿Seguro que quieres reportar que el link esta caído?", "Reportar link",
+                                MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
 
-                    string estadoCorrecto = await m.cambiarActivoRevisionDesactivo(UsuarioConectado.nombre, datos);
-                    if (estadoCorrecto.Equals("invitado"))
+
+                    if (respuesta == DialogResult.Yes)
                     {
-                        MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                        Dictionary<string, string> datos = new Dictionary<string, string>();
+                        datos.Add("id", enlace.id);
+
+                        string estadoCorrecto = await m.cambiarActivoRevisionDesactivo(UsuarioConectado.nombre, datos);
+                        if (estadoCorrecto.Equals("invitado"))
+                        {
+                            MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                        }
+                        else if (estadoCorrecto.Equals("true"))
+                        {
+                            enlace.reportarFallo = 2;
+                            listadoEnlaces.RefreshObject(enlace);
+                        }
+                        else
+                        {
+                            //¿¿MENSAJE??
+                        }
                     }
-                    else if (estadoCorrecto.Equals("true"))
-                    {
-                        enlace.reportarFallo = 2;
-                        listadoEnlaces.RefreshObject(enlace);
-                    }
-                    else
-                    {
-                        //¿¿MENSAJE??
-                    }
+                    
                 }
             }
 
@@ -447,7 +455,7 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("like", Proyecto_Presentacion.Properties.Resources.like);
             imageListSmall.Images.Add("like+1", Proyecto_Presentacion.Properties.Resources.like_1);
             imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dislike);
-            imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dontLike_1);
+            imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dislike_1);
 
             listadoEnlaces.SmallImageList = imageListSmall;
             imageListLarge = m.cargarImageListLargeEnlaces(listaEnlaces, Application.StartupPath);
