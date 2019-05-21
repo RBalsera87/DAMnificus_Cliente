@@ -10,5 +10,6 @@ namespace Proyecto_Negocio
     {
         public static string nombre = "invitado";
         public static string status = "offline";
+        public static string credenciales = "invitado";
     }
 }

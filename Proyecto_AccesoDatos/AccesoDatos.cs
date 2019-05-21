@@ -234,24 +234,16 @@ namespace Proyecto_AccesoDatos
             }
            
         }
-        public async Task<string> cambiarActivoRevisionDesactivo(string usuario, Dictionary<string, string> datos)
+        public async Task<int> cambiarActivoRevisionDesactivo(string usuario, Dictionary<string, string> datos)
         {
             if (usuario.Equals("invitado"))
             {
-
-                return "invitado";
+                return -2;
             }
             if (token.Equals("")) { token = null; }
             Respuesta respuesta = await enviarPeticion("cambiarActivoRevisionDesactivo", usuario, null, token, datos);
-            if (respuesta.respuesta.Equals("correcto"))
-            {
-                return "true";
-            }
-            else
-            {
-                return "false";
-            }
-
+            var estado = int.Parse(respuesta.respuesta);
+            return estado;
         }
         public async Task<string> enviarEmailparaRegistro(string usuario, Dictionary<string, string> datos)
         {

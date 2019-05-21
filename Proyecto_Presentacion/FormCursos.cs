@@ -225,7 +225,7 @@ namespace Proyecto_Presentacion
             datos.Clear();
             datos.Add("asignatura", asignatura);
 
-            listaEnlaces = await m.obtenerEnlaces(UsuarioConectado.nombre, datos);
+            listaEnlaces = await m.obtenerEnlaces(UsuarioConectado.credenciales, datos);
             if (listaEnlaces != null)
             {
                 iniciarObjectListView();
@@ -256,15 +256,31 @@ namespace Proyecto_Presentacion
             listadoEnlaces.RowHeight = 90;
             this.columnaReportarFallo.ImageGetter = delegate (object x)
             {
-                switch (((Enlaces)x).reportarFallo)
+                if (UsuarioConectado.credenciales == "admin")
                 {
-                    case 0:
-                        return "error";
-                    case 1:
-                        return "problem";
-                    case 2:
-                        return "error";
+                    switch (((Enlaces)x).reportarFallo)
+                    {
+                        case 0:
+                            return "reportar";
+                        case 1:
+                            return "ok";
+                        case 2:
+                            return "revision";
+                    }
                 }
+                else
+                {
+                    switch (((Enlaces)x).reportarFallo)
+                    {
+                        case 0:
+                            return "reportar";
+                        case 1:
+                            return "reportar";
+                        case 2:
+                            return "revision";
+                    }
+                }
+                
                 return "";
             };
             this.columnaLike.ImageGetter = delegate (object x) {
@@ -345,81 +361,46 @@ namespace Proyecto_Presentacion
         //  OBTENGO EL OBJETO Y LE SUMO 1 LIKE
         private async void listadoEnlaces_CellClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
         {
-            if (e.Column == columnaLike)
+            if (UsuarioConectado.credenciales.Equals("invitado"))
             {
-                Enlaces enlace = (Enlaces)e.Model;
-                if (!enlace.like)
-                {
-                    //Object linkSeleccionado = objectListView1.SelectedObject;
-                    Dictionary<string, string> datos = new Dictionary<string, string>();
-                    datos.Add("id", enlace.id);
-                    datos.Add("operacion", "sumar");
-                        string likeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.nombre, datos);
-                        if (likeCorrecto.Equals("invitado"))
-                        {
-                            MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-
-                        }
-                        else if (likeCorrecto.Equals("true"))
-                            {
-                                 enlace.like = true;
-                                listadoEnlaces.RefreshObject(enlace);
-
-                            }
-                            else
-                            {
-                                //¿¿MENSAJE??
-                            } 
-                    
-                }
+                MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
             }
-            if (e.Column == columnaDontLike)
+            else
             {
-                Enlaces enlace = (Enlaces)e.Model;
-                if (!enlace.dontLike)
+                if (e.Column == columnaLike)
                 {
-                    Dictionary<string, string> datos = new Dictionary<string, string>();
-                    datos.Add("id", enlace.id);
-                    datos.Add("operacion", "restar");
-
-                    string dontlikeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.nombre, datos);
-                    if (dontlikeCorrecto.Equals("invitado"))
+                    Enlaces enlace = (Enlaces)e.Model;
+                    if (!enlace.like)
                     {
-                        MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-                    }
-                    else if (dontlikeCorrecto.Equals("true"))
+                        //Object linkSeleccionado = objectListView1.SelectedObject;
+                        Dictionary<string, string> datos = new Dictionary<string, string>();
+                        datos.Add("id", enlace.id);
+                        datos.Add("operacion", "sumar");
+                        string likeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.credenciales, datos);
+                        if (likeCorrecto.Equals("true"))
                         {
-                            enlace.dontLike = true;
-                        listadoEnlaces.RefreshObject(enlace);
+                            enlace.like = true;
+                            listadoEnlaces.RefreshObject(enlace);
                         }
                         else
                         {
                             //¿¿MENSAJE??
                         }
+                    }
                 }
-            }
-            if (e.Column == columnaReportarFallo)
-            {
-                Enlaces enlace = (Enlaces)e.Model;
-                if (enlace.reportarFallo != 2)
+                else if (e.Column == columnaDontLike)
                 {
-                    DialogResult respuesta = MsgBox.Show("¿Seguro que quieres reportar que el link esta caído?", "Reportar link",
-                                MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
-
-
-                    if (respuesta == DialogResult.Yes)
+                    Enlaces enlace = (Enlaces)e.Model;
+                    if (!enlace.dontLike)
                     {
                         Dictionary<string, string> datos = new Dictionary<string, string>();
                         datos.Add("id", enlace.id);
+                        datos.Add("operacion", "restar");
 
-                        string estadoCorrecto = await m.cambiarActivoRevisionDesactivo(UsuarioConectado.nombre, datos);
-                        if (estadoCorrecto.Equals("invitado"))
+                        string dontlikeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.credenciales, datos);
+                        if (dontlikeCorrecto.Equals("true"))
                         {
-                            MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-                        }
-                        else if (estadoCorrecto.Equals("true"))
-                        {
-                            enlace.reportarFallo = 2;
+                            enlace.dontLike = true;
                             listadoEnlaces.RefreshObject(enlace);
                         }
                         else
@@ -429,9 +410,35 @@ namespace Proyecto_Presentacion
                     }
                     
                 }
+                else if (e.Column == columnaReportarFallo)
+                {
+                    Enlaces enlace = (Enlaces)e.Model;
+                    if (enlace.reportarFallo == 1)
+                    {
+                        DialogResult respuesta = MsgBox.Show("¿Seguro que quieres reportar que el link esta caído?", "Reportar link",
+                                    MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
+
+
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            Dictionary<string, string> datos = new Dictionary<string, string>();
+                            datos.Add("id", enlace.id);
+
+                            int estadoCorrecto = await m.cambiarActivoRevisionDesactivo(UsuarioConectado.nombre, datos);
+
+                            if (estadoCorrecto != -1)
+                            {
+                                enlace.reportarFallo = estadoCorrecto;
+                                listadoEnlaces.RefreshObject(enlace);
+                            }
+                            else
+                            {
+                                //¿¿MENSAJE??
+                            }
+                        }
+                    }
+                }
             }
-
-
         }
 
         //Abre link al hacer doble click sobre la Fila
@@ -450,8 +457,8 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("4Estrellas", Proyecto_Presentacion.Properties.Resources.cuatroEstrellas);
             imageListSmall.Images.Add("5Estrellas", Proyecto_Presentacion.Properties.Resources.cincoEstrellas);
             imageListSmall.Images.Add("ok", Proyecto_Presentacion.Properties.Resources.ok);
-            imageListSmall.Images.Add("problem", Proyecto_Presentacion.Properties.Resources.reportar);
-            imageListSmall.Images.Add("error", Proyecto_Presentacion.Properties.Resources.revision);
+            imageListSmall.Images.Add("reportar", Proyecto_Presentacion.Properties.Resources.reportar);
+            imageListSmall.Images.Add("revision", Proyecto_Presentacion.Properties.Resources.revision);
             imageListSmall.Images.Add("like", Proyecto_Presentacion.Properties.Resources.like);
             imageListSmall.Images.Add("like+1", Proyecto_Presentacion.Properties.Resources.like_1);
             imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dislike);
@@ -529,13 +536,29 @@ namespace Proyecto_Presentacion
             if (e.Column == columnaReportarFallo)
             {
                 Enlaces enlace = (Enlaces)e.Model;
-                if (enlace.reportarFallo == 1)
+                if(UsuarioConectado.credenciales == "admin")
                 {
-                    e.Text = "Reportar link caído";
-                }
-                else
+                    if (enlace.reportarFallo == 1)
+                    {
+                        e.Text = "Activo";
+                    }
+                    else if(enlace.reportarFallo == 2)
+                    {
+                        e.Text = "Revisar";
+                    }else
+                    {
+                        e.Text = "Caido";
+                    }
+                }else
                 {
-                    e.Text = "Enlace en revisión";
+                    if (enlace.reportarFallo == 1)
+                    {
+                        e.Text = "Reportar link caído";
+                    }
+                    else
+                    {
+                        e.Text = "Enlace en revisión";
+                    }
                 }
                 
             }

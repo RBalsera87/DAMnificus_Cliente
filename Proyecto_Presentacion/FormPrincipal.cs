@@ -268,12 +268,12 @@ namespace Proyecto_Presentacion
             
         }
 
-        private async void btnConfiguracion_Click(object sender, EventArgs e)
+        private void btnConfiguracion_Click(object sender, EventArgs e)
         {
             m.restaurarColorBotones(this.menuLateral);
             this.btnAyudaAdmin.BackColor = Color.FromArgb(73, 55, 34);
-            string rango = await m.obtenerCredenciales(UsuarioConectado.nombre);
-            if (rango.Equals("admin"))
+            //string rango = await m.obtenerCredenciales(UsuarioConectado.nombre);
+            if (UsuarioConectado.credenciales.Equals("admin"))
             {
                 m.abrirFormEnPanel(new FormAdministracion(), this.panelContenido);
             }
@@ -604,7 +604,8 @@ namespace Proyecto_Presentacion
                             btnPrincipal.PerformClick();
                             // Cambia el boton ayuda por el boton administración si el usuario es admin
                             string rango = await m.obtenerCredenciales(UsuarioConectado.nombre);
-                            if (usuario.Equals("admin"))
+                            UsuarioConectado.credenciales = rango;
+                            if (UsuarioConectado.credenciales.Equals("admin"))
                             {
                                 btnAyudaAdmin.Text = "Administración";
                                 btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.producto;

@@ -34,7 +34,7 @@ namespace Proyecto_Presentacion
             datos.Clear();
             datos.Add("asignatura", asignatura);
 
-            listaEnlaces = await mfc.obtenerEnlaces(UsuarioConectado.nombre, datos);
+            listaEnlaces = await mfc.obtenerEnlaces(UsuarioConectado.credenciales, datos);
             if (listaEnlaces != null)
             {
                 iniciarObjectListView();              
@@ -74,9 +74,7 @@ namespace Proyecto_Presentacion
             objectListView1.RowHeight = 80;
             this.Column8.ImageGetter = delegate (object x)
             {
-               
                 return "papelera";
-                
             };
             this.Column7.ImageGetter = delegate (object x)
             {
@@ -151,20 +149,20 @@ namespace Proyecto_Presentacion
             this.objectListView1.SetObjects(this.listaEnlaces);
         }
 
-        private void objectListView1_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
-        {
-            if (e.Column == Column1)
-            {
-                Enlaces enlace = (Enlaces)e.Model;
-                MetodosFormCursos.pintarImagenTituloDesc decoration = new Proyecto_Negocio.MetodosFormCursos.pintarImagenTituloDesc();
+        //private void objectListView1_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
+        //{
+        //    if (e.Column == Column1)
+        //    {
+        //        Enlaces enlace = (Enlaces)e.Model;
+        //        MetodosFormCursos.pintarImagenTituloDesc decoration = new Proyecto_Negocio.MetodosFormCursos.pintarImagenTituloDesc();
 
-                decoration.ImageList = this.imageListLarge;
-                decoration.Title = enlace.asignatura;
-                decoration.ImageName = null;
-                decoration.Description = enlace.tema;
-                e.SubItem.Decoration = decoration;
-            }
-        }
+        //        decoration.ImageList = this.imageListLarge;
+        //        decoration.Title = enlace.asignatura;
+        //        decoration.ImageName = null;
+        //        decoration.Description = enlace.tema;
+        //        e.SubItem.Decoration = decoration;
+        //    }
+        //}
         //  CAPTURO EVENTO CLICK CON LA CELDA QUE A CLICKADO Y SI ES LA COLUMNA LIKE
         //  OBTENGO EL OBJETO Y LE SUMO 1 LIKE
         private async void objectListView1_CellClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
@@ -222,6 +220,23 @@ namespace Proyecto_Presentacion
             //        }
             //    }
             //}
+            if (e.Column == Column7)
+            {
+                Enlaces enlace = (Enlaces)e.Model;               
+                        Dictionary<string, string> datos = new Dictionary<string, string>();
+                        datos.Add("id", enlace.id);
+
+                        int estadoCorrecto = await mfc.cambiarActivoRevisionDesactivo(UsuarioConectado.credenciales, datos);
+                        if (estadoCorrecto != -1)
+                        {
+                            enlace.reportarFallo = estadoCorrecto;
+                            objectListView1.RefreshObject(enlace);
+                        }
+                        else
+                        {
+                        MsgBox.Show("Ha ocurrido un error al actualizar la Base de datos","ATENCIÓN", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                        }
+            }
             if (e.Column == Column8)
             {
                 Enlaces enlace = (Enlaces)e.Model;
@@ -332,10 +347,18 @@ namespace Proyecto_Presentacion
         private void objectListView1_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
         {
             e.ToolTipControl.IsBalloon = true;
-            
+            Enlaces enlace = (Enlaces)e.Model;
+
+            if (e.Column == Column3)
+            {
+                e.Text = enlace.tema;
+            }
+            if (e.Column == Column6)
+            {
+                e.Text = enlace.titulo;
+            }
             if (e.Column == Column7)
             {
-                Enlaces enlace = (Enlaces)e.Model;
                 if (enlace.reportarFallo == 1)
                 {
                     e.Text = "Activo";
@@ -347,7 +370,6 @@ namespace Proyecto_Presentacion
                 {
                     e.Text = "Caido";
                 }
-
             }
             if (e.Column == Column8)
             { 
@@ -362,21 +384,21 @@ namespace Proyecto_Presentacion
             objectListView1.Focus();
             //Ocupa el espacio libre
             //Column1.FillsFreeSpace = false;
-            Column2.FillsFreeSpace = true;
+            Column3.FillsFreeSpace = true;
 
             //Centrar
-            Column3.TextAlign = HorizontalAlignment.Center;
+            Column1.TextAlign = HorizontalAlignment.Center;
             Column4.TextAlign = HorizontalAlignment.Center;
             Column5.TextAlign = HorizontalAlignment.Center;
             Column7.TextAlign = HorizontalAlignment.Center;
             Column8.TextAlign = HorizontalAlignment.Center;
 
             //Ancho culumnas
-            Column1.Width = 130;
-            Column2.MinimumWidth = 60;
-            Column2.Width = 200;
+            Column1.MinimumWidth = 30;
+            Column1.Width = 20;
+            Column2.Width = 130;
             Column3.MinimumWidth = 60;
-            Column3.Width = 60;
+            Column3.Width = 200;           
             Column4.MinimumWidth = 80;
             Column4.Width = 80;
             Column5.MinimumWidth = 60;
@@ -389,18 +411,18 @@ namespace Proyecto_Presentacion
             Column8.Width = 80;
 
             //Texto de la cabecera
-            Column1.Text = "Asignatura";
-            Column2.Text = "Tema";
-            Column3.Text = "Id";
+            Column1.Text = "Id";
+            Column2.Text = "Asignatura";
+            Column3.Text = "Tema";
             Column4.Text = "Valoracion";
             Column5.Text = "Tipo";
             Column6.Text = "Título";
             Column7.Text = "Estado";
             Column8.Text = "Eliminar";
 
-            Column1.AspectName = "asignatura";
-            Column2.AspectName = "tema";
-            Column3.AspectName = "id";
+            Column1.AspectName = "id";
+            Column2.AspectName = "asignatura";
+            Column3.AspectName = "tema";            
             Column4.AspectName = "valoracion";
             Column5.AspectName = "tipo";
             Column6.AspectName = "titulo";

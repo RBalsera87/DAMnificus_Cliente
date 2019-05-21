@@ -21,7 +21,7 @@ namespace Proyecto_Negocio
         {
             return await ad.sumaryRestarValoracion(usuario, datos);
         }
-        public async Task<string> cambiarActivoRevisionDesactivo(string usuario, Dictionary<string, string> datos)
+        public async Task<int> cambiarActivoRevisionDesactivo(string usuario, Dictionary<string, string> datos)
         {
             return await ad.cambiarActivoRevisionDesactivo(usuario, datos);
         }
