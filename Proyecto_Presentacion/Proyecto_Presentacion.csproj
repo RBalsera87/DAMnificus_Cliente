@@ -40,7 +40,8 @@
     <StartupObject>Proyecto_Presentacion.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntidadesCompartidas">
+    <Reference Include="EntidadesCompartidas, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DAMnificus_Compartido\EntidadesCompartidas\bin\Debug\EntidadesCompartidas.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
@@ -60,7 +61,8 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ObjectListView, Version=2.9.2.0, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
-      <HintPath>..\packages\ObjectListView.ClientProfile.2.9.5\lib\net40-Client\ObjectListView.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DAMnificus_Cliente\Proyecto_Presentacion\bin\Debug\ObjectListView.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -156,6 +158,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSubida.resx">
       <DependentUpon>FormSubida.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -237,6 +240,7 @@
   <ItemGroup>
     <Content Include="Graficas\GraficaBarras.html" />
     <Content Include="Graficas\Grafica3d.html" />
+    <None Include="Resources\activo.png" />
     <None Include="Resources\revision.png" />
     <None Include="Resources\like_1.png" />
     <None Include="Resources\dislike_1.png" />

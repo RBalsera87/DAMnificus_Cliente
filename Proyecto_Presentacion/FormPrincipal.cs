@@ -286,7 +286,15 @@ namespace Proyecto_Presentacion
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            if (mostrarMensajeSalida()) this.Close();
+            try
+            {
+                if (mostrarMensajeSalida()) this.Close();
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -318,6 +326,7 @@ namespace Proyecto_Presentacion
                 {
                     accionLogearDesloguear(tbUsuario.Text, tbPass.Text);
                 }
+                e.Handled = true;
 
             }
             else if (Char.IsLetterOrDigit(e.KeyChar)|| e.KeyChar == '\b') // Permitimos BackSpace
@@ -337,8 +346,8 @@ namespace Proyecto_Presentacion
                 if (UsuarioConectado.nombre.Equals("invitado"))
                 {
                     accionLogearDesloguear(tbUsuario.Text, tbPass.Text);
+                    e.Handled = true; //Quita el sonido "beep" de windows al dar enter
                 }
-
             }
             else if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
             {
@@ -346,9 +355,11 @@ namespace Proyecto_Presentacion
             }
             else
             {
+                System.Media.SystemSounds.Beep.Play(); //Sonido "beep" de windows
                 e.Handled = true;
                 this.toolTipPass.Show("Caracter no permitido, solo letras y numeros", this.tbPass, 1000);
             }
+
         }
 
         /********************************

@@ -17,52 +17,80 @@ namespace Proyecto_Presentacion
     {
         private MetodosFormAdministracion mfa = new MetodosFormAdministracion();
         private MetodosFormCursos mfc = new MetodosFormCursos();
-        private List<Enlaces> listaEnlaces = new List<Enlaces>();
+        private List<Enlaces> listadoEnlaces = new List<Enlaces>();
+        private List<Usuario> listadoUsuarios = new List<Usuario>();
         private Dictionary<string, string> datos = new Dictionary<string, string>();
+        private string listaAMostrar = "";
         public FormAdministracion()
         {
             InitializeComponent();
         }
         private void FormAdministracion_Load(object sender, EventArgs e)
         {
-            objectListView1.HeaderStyle = ColumnHeaderStyle.None;
-            objectListView1.Font = new Font("Segoe UI Semilight", 9, FontStyle.Bold);
-            objectListView1.CellToolTip.Font = new Font("Segoe UI Semilight",10, FontStyle.Bold);
+            iniciarObjectListView();
+            InitializeEmptyListMsgOverlay();
         }
-        private async void pedirEnlaces(string asignatura)
+        private async void obtenerEnlaces()
         {
-            datos.Clear();
-            datos.Add("asignatura", asignatura);
-
-            listaEnlaces = await mfc.obtenerEnlaces(UsuarioConectado.credenciales, datos);
-            if (listaEnlaces != null)
+            if (UsuarioConectado.credenciales.Equals("admin"))
             {
-                iniciarObjectListView();              
-                if (btnPrimero.Enabled == false)
-                {
-                    btnPrimero.Enabled = true;
-                }
-                else if (btnSegundo.Enabled == false)
-                {
-                    btnSegundo.Enabled = true;
-                }
+                datos.Clear();
+                datos.Add("asignatura", "todas");
+                datos.Add("credenciales", UsuarioConectado.credenciales);
 
+                listadoEnlaces = await mfc.obtenerEnlaces(UsuarioConectado.nombre, datos);
+
+                if (listadoEnlaces != null)
+                {
+                    InitializeModel();
+                }
+                else
+                {
+                    objectListView1.EmptyListMsg = "No hay enlaces";
+                }
             }
-            else
-            {
-                this.objectListView1.SetObjects(new List<Enlaces>());
-                MsgBox.Show("Lo sentimos no hay enlaces para la asignatura " + asignatura + ". Intentaremos agregarlos lo antes posible.", "No hay enlaces", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-            }
+            else { MsgBox.Show("No tienes permiso para acceder", "ATENCIÓN", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn); }
+            btnEnlaces.Enabled = true;
+        }
+
+        private async void ObtenerUsuarios()
+        {
+            if(UsuarioConectado.credenciales.Equals("admin")){
+                
+                datos.Clear();
+                datos.Add("credenciales", UsuarioConectado.credenciales);//Nunca pasaría si no es admin pero aun así tambien compruebo en el servidor
+ 
+                listadoUsuarios = await mfa.obtenerUsuarios(UsuarioConectado.nombre, datos);
+
+                if (listadoUsuarios != null)
+                {
+                    InitializeModel();       
+                }
+                else
+                {
+                    objectListView1.EmptyListMsg = "No hay Usuarios";
+                }
+            }else { MsgBox.Show("No tienes permiso para acceder", "ATENCIÓN", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn); }
+            objectListView1.EmptyListMsg = "No hay coincidencias";
+            btnUsuarios.Enabled = true;
         }
 
         private void iniciarObjectListView()
         {
 
-            this.InitializeModel();
-            //objectListView1.ModelFilter = TextMatchFilter.Contains(objectListView1, "repair");
-            objectListView1.CellToolTip.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
+            objectListView1.HeaderStyle = ColumnHeaderStyle.None;
+            objectListView1.Font = new Font("Segoe UI Semilight", 9, FontStyle.Bold);
+            objectListView1.CellToolTip.Font = new Font("Segoe UI Semilight",10, FontStyle.Bold);
             objectListView1.CellToolTip.ForeColor = Color.Red;
 
+        }
+        protected virtual void InitializeEmptyListMsgOverlay()
+        {
+            TextOverlay textOverlay = this.objectListView1.EmptyListMsgOverlay as TextOverlay;
+            textOverlay.TextColor = Color.FromArgb(231, 120, 0);
+            textOverlay.BackColor = Color.FromArgb(32, 32, 32);
+            textOverlay.BorderWidth = 0.0f;
+            textOverlay.Font = new Font("Segoe UI Semilight", 22);
         }
         public void InitializeModel()
         {
@@ -74,192 +102,166 @@ namespace Proyecto_Presentacion
             objectListView1.RowHeight = 80;
             this.Column8.ImageGetter = delegate (object x)
             {
+                if (listaAMostrar.Equals("usuarios"))
+                {
+                    if(!UsuarioConectado.nombre.Equals("admin") && ((Usuario)x).Credenciales.Equals("admin"))
+                    {
+                        return "";
+                    }
+                }
                 return "papelera";
             };
             this.Column7.ImageGetter = delegate (object x)
             {
-                switch (((Enlaces)x).reportarFallo)
+                if (listaAMostrar.Equals("enlaces"))
                 {
-                    case 0:
-                        return "error";
-                    case 1:
-                        return "ok";
-                    case 2:
-                        return "problem";
+                    switch (((Enlaces)x).reportarFallo)
+                    {
+                        case 0:
+                            return "error";
+                        case 1:
+                            return "ok";
+                        case 2:
+                            return "problem";
+                    }
                 }
                 return "";
             };
-            //this.Column4.ImageGetter = delegate (object x) {
-            //    switch (((Enlaces)x).like)
-            //    {
-            //        case true:
-            //            return "like+1";
-            //        case false:
 
-            //            return "like";
-            //    }
-            //    return "";
-            //};
-            //this.Column5.ImageGetter = delegate (object x) {
-            //    switch (((Enlaces)x).dontLike)
-            //    {
-            //        case true:
-            //            return "dontLike-1";
-            //        case false:
-
-            //            return "dontLike";
-            //    }
-            //    return "";
-            //};
-
-
-            //this.Column3.ImageGetter = delegate (object x) {
-            //    var valoracion = int.Parse(((Enlaces)x).valoracion);
-            //    if (valoracion <= 20)
-            //    {
-            //        return "1Estrellas";
-            //    }
-            //    else if (valoracion <= 40)
-            //    {
-            //        return "2Estrellas";
-            //    }
-            //    else if (valoracion <= 60)
-            //    {
-            //        return "3Estrellas";
-            //    }
-            //    else if (valoracion <= 80)
-            //    {
-            //        return "4Estrellas";
-            //    }
-            //    else if (valoracion <= 100)
-            //    {
-            //        return "5Estrellas";
-            //    }
-            //    else
-            //    {
-            //        return "";
-            //    }
-
-            //};
-
-            //this.Column1.AspectToStringConverter = delegate (object x)
-            //{
-            //    return "";
-            //};
-            this.objectListView1.SetObjects(this.listaEnlaces);
+            if (listaAMostrar.Equals("enlaces"))
+            {
+                this.objectListView1.SetObjects(this.listadoEnlaces);
+            }
+            else
+            {
+                this.objectListView1.SetObjects(this.listadoUsuarios);
+            }
         }
 
-        //private void objectListView1_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
-        //{
-        //    if (e.Column == Column1)
-        //    {
-        //        Enlaces enlace = (Enlaces)e.Model;
-        //        MetodosFormCursos.pintarImagenTituloDesc decoration = new Proyecto_Negocio.MetodosFormCursos.pintarImagenTituloDesc();
-
-        //        decoration.ImageList = this.imageListLarge;
-        //        decoration.Title = enlace.asignatura;
-        //        decoration.ImageName = null;
-        //        decoration.Description = enlace.tema;
-        //        e.SubItem.Decoration = decoration;
-        //    }
-        //}
+        
         //  CAPTURO EVENTO CLICK CON LA CELDA QUE A CLICKADO Y SI ES LA COLUMNA LIKE
         //  OBTENGO EL OBJETO Y LE SUMO 1 LIKE
         private async void objectListView1_CellClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
         {
-            //if (e.Column == Column4)
-            //{
-            //    Enlaces enlace = (Enlaces)e.Model;
-            //    if (!enlace.like)
-            //    {
-            //        //Object linkSeleccionado = objectListView1.SelectedObject;
-            //        Dictionary<string, string> datos = new Dictionary<string, string>();
-            //        datos.Add("id", enlace.id);
-            //        datos.Add("operacion", "sumar");
-            //        string likeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.nombre, datos);
-            //        if (likeCorrecto.Equals("invitado"))
-            //        {
-            //            MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-
-            //        }
-            //        else if (likeCorrecto.Equals("true"))
-            //        {
-            //            enlace.like = true;
-            //            objectListView1.RefreshObject(enlace);
-
-            //        }
-            //        else
-            //        {
-            //            //¿¿MENSAJE??
-            //        }
-
-            //    }
-            //}
-            //if (e.Column == Column5)
-            //{
-            //    Enlaces enlace = (Enlaces)e.Model;
-            //    if (!enlace.dontLike)
-            //    {
-            //        Dictionary<string, string> datos = new Dictionary<string, string>();
-            //        datos.Add("id", enlace.id);
-            //        datos.Add("operacion", "restar");
-
-            //        string dontlikeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.nombre, datos);
-            //        if (dontlikeCorrecto.Equals("invitado"))
-            //        {
-            //            MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-            //        }
-            //        else if (dontlikeCorrecto.Equals("true"))
-            //        {
-            //            enlace.dontLike = true;
-            //            objectListView1.RefreshObject(enlace);
-            //        }
-            //        else
-            //        {
-            //            //¿¿MENSAJE??
-            //        }
-            //    }
-            //}
+            datos.Clear();
             if (e.Column == Column7)
             {
-                Enlaces enlace = (Enlaces)e.Model;               
-                        Dictionary<string, string> datos = new Dictionary<string, string>();
-                        datos.Add("id", enlace.id);
-
-                        int estadoCorrecto = await mfc.cambiarActivoRevisionDesactivo(UsuarioConectado.credenciales, datos);
-                        if (estadoCorrecto != -1)
-                        {
-                            enlace.reportarFallo = estadoCorrecto;
-                            objectListView1.RefreshObject(enlace);
-                        }
-                        else
-                        {
-                        MsgBox.Show("Ha ocurrido un error al actualizar la Base de datos","ATENCIÓN", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-                        }
-            }
-            if (e.Column == Column8)
-            {
-                Enlaces enlace = (Enlaces)e.Model;
-
-                DialogResult respuesta = MsgBox.Show("¿Está seguro de que desea eliminar el enlace con id " + enlace.id + "?", "Eliminar",
-                                MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
-
-
-                if (respuesta == DialogResult.Yes)
+                if (listaAMostrar.Equals("enlaces"))
                 {
+                    Enlaces enlace = (Enlaces)e.Model;
                     Dictionary<string, string> datos = new Dictionary<string, string>();
                     datos.Add("id", enlace.id);
-
-                    bool correcto = await mfa.borrarEnlace(UsuarioConectado.nombre, datos);
-                    if (correcto)
+                    datos.Add("credenciales", UsuarioConectado.credenciales);
+                    int estadoCorrecto = await mfc.cambiarActivoRevisionDesactivo(UsuarioConectado.nombre, datos);
+                    if (estadoCorrecto != -1)
                     {
-                        objectListView1.RemoveObject(enlace);
-                        objectListView1.BuildList();
+                        enlace.reportarFallo = estadoCorrecto;
+                        objectListView1.RefreshObject(enlace);
                     }
                     else
                     {
-                        MsgBox.Show("Ha ocurrido un error al borrar el enlace", "Error al borrar", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                        MsgBox.Show("Ha ocurrido un error al actualizar la Base de datos", "ATENCIÓN", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
                     }
+                }
+            }
+            else if (e.Column == Column6)
+            {
+                if (listaAMostrar.Equals("usuarios"))
+                {
+                    Usuario usuario = (Usuario)e.Model;
+                    if (usuario.Credenciales.Equals("admin") && !UsuarioConectado.nombre.Equals("admin"))
+                    {
+
+                    }
+                    else
+                    {
+                        bool cambiar = false;
+                        string newRango;
+                        if (usuario.Credenciales.Equals("normal")) { newRango = "admin"; }
+                        else { newRango = "normal"; }
+
+                        datos.Add("id", usuario.Id);
+                        datos.Add("nombre", usuario.Nombre);
+                        datos.Add("newRango", newRango);
+
+                        if (UsuarioConectado.nombre.Equals("admin"))
+                        {
+                            cambiar = true;
+                        }
+                        else
+                        {
+                            DialogResult respuesta = MsgBox.Show("¿Está seguro de que desea conceder privilegios de Admin al usuario " + usuario.User +
+                                "? Una vez tenga privilegios de Admin no podrá quitarselos usted, tendrá que mandar un correo al administrador para que los quite.", "Conceder privilegios", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
+                            if (respuesta == DialogResult.Yes) { cambiar = true; }
+                        }
+                        if (cambiar)
+                        {
+                            if (await mfa.cambiarRango(UsuarioConectado.nombre, datos))
+                            {
+                                usuario.Credenciales = newRango;
+                                objectListView1.RefreshObject(usuario);
+                            }
+                            else
+                            {
+                                MsgBox.Show("Ha ocurrido un error al actualizar la Base de datos", "ATENCIÓN", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                            }
+                        }
+                    }
+                }
+                
+            }
+            else if (e.Column == Column8)
+            {
+                if (listaAMostrar.Equals("enlaces"))
+                {
+                    Enlaces enlace = (Enlaces)e.Model;
+
+                    DialogResult respuesta = MsgBox.Show("¿Está seguro de que desea eliminar el enlace con id " + enlace.id + "?", "Eliminar", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
+
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        Dictionary<string, string> datos = new Dictionary<string, string>();
+                        datos.Add("id", enlace.id);
+
+                        bool correcto = await mfa.borrarEnlace(UsuarioConectado.nombre, datos);
+                        if (correcto)
+                        {
+                            objectListView1.RemoveObject(enlace);
+                            objectListView1.BuildList();
+                        }
+                        else
+                        {
+                            MsgBox.Show("Ha ocurrido un error al borrar el enlace", "Error al borrar", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                        }
+                    }
+                }else
+                {
+                    Usuario usuario = (Usuario)e.Model;
+                    if(usuario.Credenciales.Equals("admin") && !UsuarioConectado.nombre.Equals("admin"))
+                    {
+                        
+                    }else
+                    {
+                        DialogResult respuesta = MsgBox.Show("¿Está seguro de que desea eliminar al usuario " + usuario.User + "?", "Eliminar", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn);
+
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            Dictionary<string, string> datos = new Dictionary<string, string>();
+                            datos.Add("credenciales", UsuarioConectado.credenciales);
+                            datos.Add("idBorrar", usuario.Id);
+                            bool correcto = await mfa.borrarUsuario(UsuarioConectado.nombre, datos);
+                            if (correcto)
+                            {
+                                objectListView1.RemoveObject(usuario);
+                                objectListView1.BuildList();
+                            }
+                            else
+                            {
+                                MsgBox.Show("Ha ocurrido un error al borrar al Usuario", "Error al borrar", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                            }
+                        }
+                    }
+                    
                 }
             }
 
@@ -269,29 +271,30 @@ namespace Proyecto_Presentacion
         //Abre link al hacer doble click sobre la Fila
         private void objectListView1_ItemActivate(object sender, EventArgs e)
         {
-            Object linkSeleccionado = objectListView1.SelectedObject;
-            Enlaces URL = (Enlaces)linkSeleccionado;
-            System.Diagnostics.Process.Start(URL.link);
+            if (listaAMostrar.Equals("enlaces"))
+            {
+                try
+                {
+                    Object enlaceSeleccionado = objectListView1.SelectedObject;
+                    Enlaces enlace = (Enlaces)enlaceSeleccionado;
+                    System.Diagnostics.Process.Start(enlace.link);
+                }catch(Exception)
+                {
+                    MsgBox.Show("Ha ocurrido un error abrir el enlace", "Error enlace", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                }
+
+            }
+            
         }
 
         public void cargarImagenes()
         {
-            imageListSmall.Images.Add("1Estrellas", Proyecto_Presentacion.Properties.Resources.unaEstrellas);
-            imageListSmall.Images.Add("2Estrellas", Proyecto_Presentacion.Properties.Resources.dosEstrellas);
-            imageListSmall.Images.Add("3Estrellas", Proyecto_Presentacion.Properties.Resources.tresEstrellas);
-            imageListSmall.Images.Add("4Estrellas", Proyecto_Presentacion.Properties.Resources.cuatroEstrellas);
-            imageListSmall.Images.Add("5Estrellas", Proyecto_Presentacion.Properties.Resources.cincoEstrellas);
-            imageListSmall.Images.Add("ok", Proyecto_Presentacion.Properties.Resources.ok);
+            imageListSmall.Images.Add("ok", Proyecto_Presentacion.Properties.Resources.activo);
             imageListSmall.Images.Add("problem", Proyecto_Presentacion.Properties.Resources.revision);
             imageListSmall.Images.Add("error", Proyecto_Presentacion.Properties.Resources.reportar);
-            imageListSmall.Images.Add("like", Proyecto_Presentacion.Properties.Resources.like);
-            imageListSmall.Images.Add("like+1", Proyecto_Presentacion.Properties.Resources.like_1);
-            imageListSmall.Images.Add("dontLike", Proyecto_Presentacion.Properties.Resources.dislike);
-            imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dislike_1);
             imageListSmall.Images.Add("papelera", Proyecto_Presentacion.Properties.Resources.papelera);
 
             objectListView1.SmallImageList = imageListSmall;
-            imageListLarge = mfc.cargarImageListLargeEnlaces(listaEnlaces, Application.StartupPath);
 
         }
         public bool containsIgnoreMayusMin(string source, string value, StringComparison comparisonType)
@@ -309,19 +312,26 @@ namespace Proyecto_Presentacion
 
         private void tbBuscar_TextChanged(object sender, EventArgs e)
         {
+            InitializeEmptyListMsgOverlay();
+            objectListView1.EmptyListMsg = "No hay coincidencias";
             if (tbBuscar.Text != " Buscar ")
             {
-                
                 this.objectListView1.ModelFilter = new ModelFilter(delegate (object x)
                 {
-                    if(tbBuscar.Text != " Buscar " && tbBuscar.Text != "")
+                    if (tbBuscar.Text != " Buscar " && tbBuscar.Text != "")
                     {
-                        var enla = x as Enlaces;
-                        string tituloSinAcentos = quitarAcentos(enla.id);
-                        string tbBuscarSinAcentos = quitarAcentos(tbBuscar.Text);
-
-                        return x != null && (containsIgnoreMayusMin(tituloSinAcentos, tbBuscarSinAcentos, StringComparison.InvariantCultureIgnoreCase));
-
+                        if (listaAMostrar.Equals("enlaces"))
+                        {
+                            var enlace = x as Enlaces;
+                            return x != null && (enlace.id.Equals(tbBuscar.Text));
+                        }
+                        else
+                        {
+                            var usuario = x as Usuario;
+                            string tituloSinAcentos = quitarAcentos(usuario.User);
+                            string tbBuscarSinAcentos = quitarAcentos(tbBuscar.Text);
+                            return x != null && (containsIgnoreMayusMin(tituloSinAcentos, tbBuscarSinAcentos, StringComparison.InvariantCultureIgnoreCase));
+                        }
                     }
                     return true;
                 });
@@ -347,45 +357,88 @@ namespace Proyecto_Presentacion
         private void objectListView1_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
         {
             e.ToolTipControl.IsBalloon = true;
-            Enlaces enlace = (Enlaces)e.Model;
+            if (listaAMostrar.Equals("enlaces"))
+            {
+                Enlaces enlace = (Enlaces)e.Model;
 
-            if (e.Column == Column3)
-            {
-                e.Text = enlace.tema;
-            }
-            if (e.Column == Column6)
-            {
-                e.Text = enlace.titulo;
-            }
-            if (e.Column == Column7)
-            {
-                if (enlace.reportarFallo == 1)
+                if (e.Column == Column5)
                 {
-                    e.Text = "Activo";
+                    e.Text = enlace.tema;
                 }
-                else if(enlace.reportarFallo == 2)
+                else if (e.Column == Column3)
                 {
-                    e.Text = "Revisar";
+                    e.Text = enlace.titulo;
+                }
+                else if (e.Column == Column7)
+                {
+                    if (enlace.reportarFallo == 1)
+                    {
+                        e.Text = "Activo";
+                    }
+                    else if (enlace.reportarFallo == 2)
+                    {
+                        e.Text = "Revisar";
+                    }
+                    else
+                    {
+                        e.Text = "Caido";
+                    }
+                }
+            }
+            else
+            {
+                Usuario usuario = (Usuario)e.Model;
+                if(e.Column == Column6)
+                {
+                    if (UsuarioConectado.nombre.Equals("admin"))
+                    {
+                        if (usuario.Credenciales.Equals("admin"))
+                        {
+                            e.Text = "Quitar privilegios de admin";
+                        }
+                    }
+                    if (usuario.Credenciales.Equals("normal"))
+                    {
+                        e.Text = "Conceder privilegios de admin";
+                    }
+                }
+            }
+            
+            if (e.Column == Column8)
+            {
+                if (listaAMostrar.Equals("usuarios"))
+                {
+                    Usuario usuario = (Usuario)e.Model;
+                    if (usuario.Credenciales.Equals("admin") && !UsuarioConectado.nombre.Equals("admin")){ }
+                    else
+                    {
+                        e.Text = "Eliminar";
+                    }
                 }else
                 {
-                    e.Text = "Caido";
-                }
-            }
-            if (e.Column == Column8)
-            { 
                     e.Text = "Eliminar";
+                }
+                
+                
             }
         }
 
-        private void btnSegundo_Click(object sender, EventArgs e)
-        {          
+        private void btnEnlaces_Click(object sender, EventArgs e)
+        {
+            listaAMostrar = "enlaces";
+            this.btnUsuarios.BackColor = Color.FromArgb(32, 32, 32);
+            this.btnEnlaces.BackColor = Color.FromArgb(73, 55, 34);
+            objectListView1.ClearObjects();
+            objectListView1.EmptyListMsg = "Cargando...";
+            //Muestro columna 7
+            Column7.IsVisible = true;
+            objectListView1.RebuildColumns();
+            //Muestro cabezera columnas
             objectListView1.HeaderStyle = ColumnHeaderStyle.Clickable;
-            btnSegundo.Enabled = false;
+            //btnEnlaces.Enabled = false; REVISARRRRRRRRR
             objectListView1.Focus();
-            //Ocupa el espacio libre
-            //Column1.FillsFreeSpace = false;
-            Column3.FillsFreeSpace = true;
-
+            //Ocupa el espacio libre           
+            Column5.FillsFreeSpace = true;
             //Centrar
             Column1.TextAlign = HorizontalAlignment.Center;
             Column4.TextAlign = HorizontalAlignment.Center;
@@ -396,15 +449,16 @@ namespace Proyecto_Presentacion
             //Ancho culumnas
             Column1.MinimumWidth = 30;
             Column1.Width = 20;
-            Column2.Width = 130;
-            Column3.MinimumWidth = 60;
-            Column3.Width = 200;           
+            Column2.Width = 150;
+            Column3.MinimumWidth = 200;
+            Column3.Width = 300;
             Column4.MinimumWidth = 80;
             Column4.Width = 80;
             Column5.MinimumWidth = 60;
-            Column5.Width = 60;
-            Column6.MinimumWidth = 200;
-            Column6.Width = 300;
+            Column5.Width = 100;
+            Column6.MinimumWidth = 80;
+            Column6.MaximumWidth = 80;
+            Column6.Width = 80;
             Column7.MinimumWidth = 70;
             Column7.Width = 70;
             Column8.MinimumWidth = 80;
@@ -413,27 +467,85 @@ namespace Proyecto_Presentacion
             //Texto de la cabecera
             Column1.Text = "Id";
             Column2.Text = "Asignatura";
-            Column3.Text = "Tema";
-            Column4.Text = "Valoracion";
-            Column5.Text = "Tipo";
-            Column6.Text = "Título";
+            Column3.Text = "Título";
+            Column4.Text = "Valoración";
+            Column5.Text = "Tema";
+            Column6.Text = "Tipo";
             Column7.Text = "Estado";
-            Column8.Text = "Eliminar";
+            Column8.Text = "Eliminar";            
 
             Column1.AspectName = "id";
             Column2.AspectName = "asignatura";
-            Column3.AspectName = "tema";            
+            Column3.AspectName = "titulo";
             Column4.AspectName = "valoracion";
-            Column5.AspectName = "tipo";
-            Column6.AspectName = "titulo";
-
-
-            this.btnPrimero.BackColor = Color.FromArgb(32, 32, 32);
-            this.btnSegundo.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces("todas");
+            Column5.AspectName = "tema";     
+            Column6.AspectName = "tipo";
+           
+            objectListView1.RebuildColumns();
+            obtenerEnlaces();
         }
 
-       
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            listaAMostrar = "usuarios";
+            this.btnEnlaces.BackColor = Color.FromArgb(32, 32, 32);
+            this.btnUsuarios.BackColor = Color.FromArgb(73, 55, 34);
+            objectListView1.ClearObjects();
+            objectListView1.EmptyListMsg = "Cargando...";
+            //Oculto columna 7
+            Column7.IsVisible = false;
+            objectListView1.RebuildColumns();
+            //Muestro cabezera columnas
+            objectListView1.HeaderStyle = ColumnHeaderStyle.Clickable;
+            btnUsuarios.Enabled = false;
+            objectListView1.Focus();
+            //Ocupar el espacio libre
+            //Column1.FillsFreeSpace = false;
+            Column5.FillsFreeSpace = true;
+            //Centrar
+            Column1.TextAlign = HorizontalAlignment.Center;
+            Column2.TextAlign = HorizontalAlignment.Center;
+            Column3.TextAlign = HorizontalAlignment.Center;
+            Column4.TextAlign = HorizontalAlignment.Center;
+            Column5.TextAlign = HorizontalAlignment.Center;
+            Column6.TextAlign = HorizontalAlignment.Center;
+            Column8.TextAlign = HorizontalAlignment.Center;
+
+            //Ancho culumnas
+            Column1.MinimumWidth = 60;
+            Column1.Width = 60;
+            Column2.Width = 150;
+            Column3.MinimumWidth = 60;
+            Column3.Width = 100;
+            Column4.MinimumWidth = 80;
+            Column4.Width = 120;
+            Column5.MinimumWidth = 100;
+            Column5.Width = 140;
+            Column6.MinimumWidth = 90;
+            Column6.Width = 80;
+            Column8.MinimumWidth = 80;
+            Column8.Width = 80;
+
+            //Texto de la cabecera
+            Column1.Text = "Id";
+            Column2.Text = "Usuario";
+            Column3.Text = "Nombre";
+            Column4.Text = "Apellidos";
+            Column5.Text = "Email";
+            Column6.Text = "Credenciales";
+            Column8.Text = "Eliminar";
+
+            Column1.AspectName = "Id";
+            Column2.AspectName = "User";
+            Column3.AspectName = "Nombre";
+            Column4.AspectName = "Apellidos";
+            Column5.AspectName = "Email";
+            Column6.AspectName = "Credenciales";
+
+            objectListView1.RebuildColumns();
+
+            ObtenerUsuarios();
+        }
     }
 }
 

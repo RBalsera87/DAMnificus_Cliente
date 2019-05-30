@@ -25,10 +25,10 @@ namespace Proyecto_Negocio
         {
             return await ad.cambiarActivoRevisionDesactivo(usuario, datos);
         }
-        public ImageList cargarImageListLargeEnlaces(List<Enlaces> listaEnlaces, String ruta)
+        public ImageList cargarImageListLargeEnlaces(List<Enlaces> listaEnlaces, String ruta, int tamanio)
         {
             ImageList imageListLarge = new ImageList();
-            imageListLarge.ImageSize = new Size(80, 80);
+            imageListLarge.ImageSize = new Size(tamanio, tamanio);
             imageListLarge.TransparentColor = Color.Transparent;
             imageListLarge.ColorDepth = ColorDepth.Depth32Bit;
             Image img = null;
@@ -64,10 +64,11 @@ namespace Proyecto_Negocio
             public string ImageName;
             public string Title;
             public string Description;
-
-            public Font TitleFont = new Font("Segoe UI Semilight", 12, FontStyle.Bold);
+            public int titleSize;
+            public int descriptionSize;
+            //Font TitleFont = new Font("Segoe UI Semilight", 12, FontStyle.Bold);
             public Color TitleColor = Color.FromArgb(255, 255, 255);
-            public Font DescripionFont = new Font("Tahoma", 9);
+            public Font DescripionFont = new Font("Segoe UI Semilight", 10);
             public Color DescriptionColor = Color.FromArgb(255, 255, 255);
             public Size CellPadding = new Size(1, 1);
 
@@ -91,21 +92,22 @@ namespace Proyecto_Negocio
                 fmt.Trimming = StringTrimming.EllipsisCharacter;
                 fmt.Alignment = StringAlignment.Near;
                 fmt.LineAlignment = StringAlignment.Near;
-
+                Font titleFont = new Font("Segoe UI Semilight", titleSize, FontStyle.Bold);
                 using (SolidBrush b = new SolidBrush(this.TitleColor))
                 {
-                    g.DrawString(this.Title, this.TitleFont, b, textBounds, fmt);
+                    g.DrawString(this.Title, titleFont, b, textBounds, fmt);
                 }
 
                 // Draw the description
-                SizeF size = g.MeasureString(this.Title, this.TitleFont, (int)textBounds.Width, fmt);
+                SizeF size = g.MeasureString(this.Title, titleFont, (int)textBounds.Width, fmt);
                 textBounds.Y += (int)size.Height;
                 textBounds.Height -= (int)size.Height;
                 StringFormat fmt2 = new StringFormat();
                 fmt2.Trimming = StringTrimming.EllipsisCharacter;
+                Font descriptionFont = new Font("Segoe UI Semilight", descriptionSize);
                 using (SolidBrush b = new SolidBrush(this.DescriptionColor))
                 {
-                    g.DrawString(this.Description, this.DescripionFont, b, textBounds, fmt2);
+                    g.DrawString(this.Description, descriptionFont, b, textBounds, fmt2);
                 }
             }
         }

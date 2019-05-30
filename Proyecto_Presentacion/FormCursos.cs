@@ -31,7 +31,7 @@ namespace Proyecto_Presentacion
             panelAsignaturas2.Height = 0;
             //Quita los encabezados de la lista
             listadoEnlaces.HeaderStyle = ColumnHeaderStyle.None;
-            listadoEnlaces.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
+            listadoEnlaces.Font = new Font("Segoe UI Semilight", 9, FontStyle.Bold);
         }
 
         /****************************
@@ -81,37 +81,35 @@ namespace Proyecto_Presentacion
         {
             restaurarColorBotones(panelDinamico1);
             this.btnBbdd.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnBbdd.Text);
-
+            botones("Bases de datos", sender);
         }
 
         private void btnEntornos_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico1);
             this.btnEntornos.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnEntornos.Text);
+            botones("Entornos de desarrollo", sender);
         }
 
         private void btnLenguajes_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico1);
             this.btnLenguajes.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnLenguajes.Text);
+            botones("Lenguajes de marcas", sender);
         }
        
         private void btnProgramacion_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico1);
             this.btnProgramacion.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnProgramacion.Text);
-            tbBuscar.Text = " Buscar ";
+            botones("Programación", sender);
         }
 
         private void btnSistemas_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico1);
             this.btnSistemas.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnSistemas.Text);
+            botones("Sistemas informáticos", sender);
         }
         
         // Botones de asignaturas de segundo
@@ -119,35 +117,35 @@ namespace Proyecto_Presentacion
         {
             restaurarColorBotones(panelDinamico2);
             this.btnAccesoDatos.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnAccesoDatos.Text);
+            botones("Acceso a datos", sender);
         }
 
         private void btnInterfaces_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico2);
             this.btnInterfaces.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnInterfaces.Text);
+            botones("Desarrollo de interfaces", sender);
         }
 
         private void btnGestion_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico2);
             this.btnGestion.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnGestion.Text);
+            botones("Sistemas de gestión empresarial", sender);
         }
 
         private void btnProcesos_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico2);
             this.btnProcesos.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnProcesos.Text);
+            botones("Programación de servicios y procesos", sender);
         }
 
         private void btnMultimedia_Click(object sender, System.EventArgs e)
         {
             restaurarColorBotones(panelDinamico2);
             this.btnMultimedia.BackColor = Color.FromArgb(73, 55, 34);
-            pedirEnlaces(btnMultimedia.Text);
+            botones("Programación multimedia y dispositivos móviles", sender);
         }
 
         /**************************************
@@ -220,31 +218,62 @@ namespace Proyecto_Presentacion
 
         private List<Enlaces> listaEnlaces = new List<Enlaces>();
 
-        private async void pedirEnlaces(string asignatura)
+        private async void obtenerEnlaces(string asignatura)
         {
             datos.Clear();
             datos.Add("asignatura", asignatura);
+            datos.Add("credenciales", UsuarioConectado.credenciales);
 
-            listaEnlaces = await m.obtenerEnlaces(UsuarioConectado.credenciales, datos);
+            listaEnlaces = await m.obtenerEnlaces(UsuarioConectado.nombre, datos);
             if (listaEnlaces != null)
             {
                 iniciarObjectListView();
             }
             else
             {
-                this.listadoEnlaces.SetObjects(new List<Enlaces>());
-                MsgBox.Show("Lo sentimos no hay enlaces para la asignatura " + asignatura + ". Intentaremos agregarlos lo antes posible.", "No hay enlaces", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                listadoEnlaces.EmptyListMsg = "Lo sentimos no hay enlaces para la asignatura " + asignatura + ". Intentaremos agregarlos lo antes posible.";
             }
+            
+            activarBotones();
         }
-
+        private void botones(string asignatura, object sender)
+        {
+            tbBuscar.Text = " Buscar ";
+            listadoEnlaces.ClearObjects();
+            InitializeEmptyListMsgOverlay();
+            listadoEnlaces.EmptyListMsg = "Cargando...";
+            Button boton = (Button)sender;
+            boton.Enabled = false;
+            obtenerEnlaces(asignatura);
+        }
+        private void activarBotones()
+        {
+            btnBbdd.Enabled = true;
+            btnEntornos.Enabled = true;
+            btnLenguajes.Enabled = true;
+            btnProgramacion.Enabled = true;
+            btnSistemas.Enabled = true;
+            btnAccesoDatos.Enabled = true;
+            btnInterfaces.Enabled = true;
+            btnGestion.Enabled = true;
+            btnProgramacion.Enabled = true;
+            btnMultimedia.Enabled = true;
+        }
+        //Crea mensaje cuando el objectlistview esta vacio
+        private void InitializeEmptyListMsgOverlay()
+        {
+            TextOverlay textOverlay = this.listadoEnlaces.EmptyListMsgOverlay as TextOverlay;
+            textOverlay.TextColor = Color.FromArgb(231, 120, 0);
+            textOverlay.BackColor = Color.FromArgb(32, 32, 32);
+            textOverlay.BorderWidth = 0.0f;
+            textOverlay.Font = new Font("Segoe UI Semilight", 22);
+        }
         private void iniciarObjectListView()
         {
-            
             this.InitializeModel();
-            //listadoEnlaces.ModelFilter = TextMatchFilter.Contains(listadoEnlaces, "repair");
-            listadoEnlaces.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
+            listadoEnlaces.Font = new Font("Segoe UI Semilight", 9, FontStyle.Bold);
             listadoEnlaces.CellToolTip.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
-            
+            listadoEnlaces.EmptyListMsgFont = new Font("Segoe UI Semilight", 12, FontStyle.Bold);
         }
         public void InitializeModel()
         {
@@ -354,6 +383,8 @@ namespace Proyecto_Presentacion
                 decoration.Title = enlace.titulo;
                 decoration.ImageName = enlace.id;
                 decoration.Description = enlace.descripcion;
+                decoration.titleSize = 11;
+                decoration.descriptionSize = 9;
                 e.SubItem.Decoration = decoration;
             }
         }
@@ -361,13 +392,13 @@ namespace Proyecto_Presentacion
         //  OBTENGO EL OBJETO Y LE SUMO 1 LIKE
         private async void listadoEnlaces_CellClick(object sender, BrightIdeasSoftware.CellClickEventArgs e)
         {
-            if (UsuarioConectado.credenciales.Equals("invitado"))
+            
+            if (e.Column == columnaLike)
             {
-                MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-            }
-            else
-            {
-                if (e.Column == columnaLike)
+                if (UsuarioConectado.credenciales.Equals("invitado"))
+                {
+                    MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                }else
                 {
                     Enlaces enlace = (Enlaces)e.Model;
                     if (!enlace.like)
@@ -376,7 +407,7 @@ namespace Proyecto_Presentacion
                         Dictionary<string, string> datos = new Dictionary<string, string>();
                         datos.Add("id", enlace.id);
                         datos.Add("operacion", "sumar");
-                        string likeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.credenciales, datos);
+                        string likeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.nombre, datos);
                         if (likeCorrecto.Equals("true"))
                         {
                             enlace.like = true;
@@ -388,7 +419,14 @@ namespace Proyecto_Presentacion
                         }
                     }
                 }
-                else if (e.Column == columnaDontLike)
+                
+            }
+            else if (e.Column == columnaDontLike)
+            {
+                if (UsuarioConectado.credenciales.Equals("invitado"))
+                {
+                    MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                }else
                 {
                     Enlaces enlace = (Enlaces)e.Model;
                     if (!enlace.dontLike)
@@ -397,7 +435,7 @@ namespace Proyecto_Presentacion
                         datos.Add("id", enlace.id);
                         datos.Add("operacion", "restar");
 
-                        string dontlikeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.credenciales, datos);
+                        string dontlikeCorrecto = await m.sumarYRestarValoracion(UsuarioConectado.nombre, datos);
                         if (dontlikeCorrecto.Equals("true"))
                         {
                             enlace.dontLike = true;
@@ -408,9 +446,14 @@ namespace Proyecto_Presentacion
                             //¿¿MENSAJE??
                         }
                     }
-                    
-                }
-                else if (e.Column == columnaReportarFallo)
+                }  
+            }
+            else if (e.Column == columnaReportarFallo)
+            {
+                if (UsuarioConectado.credenciales.Equals("invitado"))
+                {
+                    MsgBox.Show("Estas funciones solo estan disponibles para usuarios registrados, por favor regístrate o logueate para disfrutar de estas ventajas", "Funciones solo para usuarios", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                }else
                 {
                     Enlaces enlace = (Enlaces)e.Model;
                     if (enlace.reportarFallo == 1)
@@ -423,7 +466,7 @@ namespace Proyecto_Presentacion
                         {
                             Dictionary<string, string> datos = new Dictionary<string, string>();
                             datos.Add("id", enlace.id);
-
+                            datos.Add("credenciales", UsuarioConectado.credenciales);
                             int estadoCorrecto = await m.cambiarActivoRevisionDesactivo(UsuarioConectado.nombre, datos);
 
                             if (estadoCorrecto != -1)
@@ -444,9 +487,16 @@ namespace Proyecto_Presentacion
         //Abre link al hacer doble click sobre la Fila
         private void listadoEnlaces_ItemActivate(object sender, EventArgs e)
         {
-            Object linkSeleccionado = listadoEnlaces.SelectedObject;
-            Enlaces URL = (Enlaces)linkSeleccionado;
-            System.Diagnostics.Process.Start(URL.link);
+            try
+            {
+                Object enlaceSeleccionado = listadoEnlaces.SelectedObject;
+                Enlaces enlace = (Enlaces)enlaceSeleccionado;
+                System.Diagnostics.Process.Start(enlace.link);
+            }
+            catch (Exception)
+            {
+                MsgBox.Show("Ha ocurrido un error abrir el enlace", "Error enlace", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+            }
         }
 
         public void cargarImagenes()
@@ -456,7 +506,7 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("3Estrellas", Proyecto_Presentacion.Properties.Resources.tresEstrellas);
             imageListSmall.Images.Add("4Estrellas", Proyecto_Presentacion.Properties.Resources.cuatroEstrellas);
             imageListSmall.Images.Add("5Estrellas", Proyecto_Presentacion.Properties.Resources.cincoEstrellas);
-            imageListSmall.Images.Add("ok", Proyecto_Presentacion.Properties.Resources.ok);
+            imageListSmall.Images.Add("ok", Proyecto_Presentacion.Properties.Resources.activo);
             imageListSmall.Images.Add("reportar", Proyecto_Presentacion.Properties.Resources.reportar);
             imageListSmall.Images.Add("revision", Proyecto_Presentacion.Properties.Resources.revision);
             imageListSmall.Images.Add("like", Proyecto_Presentacion.Properties.Resources.like);
@@ -465,7 +515,7 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dislike_1);
 
             listadoEnlaces.SmallImageList = imageListSmall;
-            imageListLarge = m.cargarImageListLargeEnlaces(listaEnlaces, Application.StartupPath);
+            imageListLarge = m.cargarImageListLargeEnlaces(listaEnlaces, Application.StartupPath, 80);
 
         }
         public bool containsIgnoreMayusMin(string source, string value, StringComparison comparisonType)
@@ -481,7 +531,8 @@ namespace Proyecto_Presentacion
         }
         private void tbBuscar_TextChanged(object sender, EventArgs e)
         {
-            
+            InitializeEmptyListMsgOverlay();
+            listadoEnlaces.EmptyListMsg = "No hay coincidencias";
             if (tbBuscar.Text != " Buscar ")
             {
                 this.listadoEnlaces.ModelFilter = new ModelFilter(delegate (object x)
@@ -498,7 +549,6 @@ namespace Proyecto_Presentacion
                     return true;
                 });
             }
-           
         }
 
         
@@ -521,21 +571,17 @@ namespace Proyecto_Presentacion
         private void listadoEnlaces_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
         {
             e.ToolTipControl.IsBalloon = true;
-            
-            //if (Control.ModifierKeys == Keys.Control)
+            Enlaces enlace = (Enlaces)e.Model;
+
             if (e.Column == columnaLike)
             {
-                Enlaces enlace = (Enlaces)e.Model;
                 e.Text = "Voto positivo";
-            }
-            if (e.Column == columnaDontLike)
+            }else if (e.Column == columnaDontLike)
             {
-                Enlaces enlace = (Enlaces)e.Model;
+                
                 e.Text = "Voto negativo";
-            }
-            if (e.Column == columnaReportarFallo)
+            }else if (e.Column == columnaReportarFallo)
             {
-                Enlaces enlace = (Enlaces)e.Model;
                 if(UsuarioConectado.credenciales == "admin")
                 {
                     if (enlace.reportarFallo == 1)
@@ -561,6 +607,9 @@ namespace Proyecto_Presentacion
                     }
                 }
                 
+            }else if(e.Column == columnaTema)
+            {
+                e.Text = enlace.tema;
             }
         }
     }

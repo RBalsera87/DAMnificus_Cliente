@@ -5,6 +5,10 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Windows;
 using Proyecto_Negocio;
+using BrightIdeasSoftware;
+using EntidadesCompartidas;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Proyecto_Presentacion
@@ -50,7 +54,21 @@ namespace Proyecto_Presentacion
                 cargaGraficas(curso);
             }
         }
+        private void FormAreaPersonal_Load(object sender, EventArgs e)
+        {
+            listadoEnlaces.HeaderStyle = ColumnHeaderStyle.None;
+            listadoEnlaces.Font = new Font("Segoe UI Semilight", 9, System.Drawing.FontStyle.Bold);
 
+            if (UsuarioConectado.nombre.Equals("invitado"))
+            {
+                obtenerEnlaces("todas");
+            }else
+            {
+                obtenerEnlaces("personal");
+            }
+            
+
+        }
         public void cargaComponentes()
         {
 
@@ -464,6 +482,159 @@ namespace Proyecto_Presentacion
             lblTrimestre.Text = "TRIMESTRE 1";
         }
 
+        //***************************************************************
+        //************************OBJECTLISTVIEW*************************
+        private List<Enlaces> listaEnlaces = new List<Enlaces>();
+        private Dictionary<string, string> datos = new Dictionary<string, string>();
+        MetodosFormCursos mfc = new MetodosFormCursos();
+        private async void obtenerEnlaces(string asignatura)
+        {
+            datos.Clear();
+            datos.Add("asignatura", asignatura);
+            datos.Add("credenciales", UsuarioConectado.credenciales);
+            listaEnlaces = await mfc.obtenerEnlaces(UsuarioConectado.nombre, datos);
+            if (listaEnlaces != null)
+            {
+                iniciarObjectListView();
+            }
+            else
+            {
+                this.listadoEnlaces.SetObjects(new List<Enlaces>());
+                MsgBox.Show("Lo sentimos no hay enlaces para la asignatura " + asignatura + ". Intentaremos agregarlos lo antes posible.", "No hay enlaces", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+            }
+        }
 
+        private void iniciarObjectListView()
+        {
+
+            this.InitializeModel();
+            //listadoEnlaces.ModelFilter = TextMatchFilter.Contains(listadoEnlaces, "repair");
+            listadoEnlaces.Font = new Font("Segoe UI Semilight", 9, System.Drawing.FontStyle.Bold);
+            listadoEnlaces.CellToolTip.Font = new Font("Segoe UI Semilight", 10, System.Drawing.FontStyle.Bold);
+
+        }
+        public void InitializeModel()
+        {
+            cargarImagenes();
+
+            //Inicializa los tooltip
+            listadoEnlaces.CellToolTipShowing += new EventHandler<ToolTipShowingEventArgs>(listadoEnlaces_CellToolTipShowing);
+            //Asigna tamaño del ancho de la fila
+            listadoEnlaces.RowHeight = 90;
+            
+            this.columnaTema.ImageGetter = delegate (object x) {
+                switch (((Enlaces)x).like)
+                {
+                    case true:
+                        return "like+1";
+                    case false:
+
+                        return "like";
+                }
+                return "";
+            };
+            this.columnaValoracion.ImageGetter = delegate (object x) {
+                var valoracion = int.Parse(((Enlaces)x).valoracion);
+                if (valoracion <= 20)
+                {
+                    return "1Estrellas";
+                }
+                else if (valoracion <= 40)
+                {
+                    return "2Estrellas";
+                }
+                else if (valoracion <= 60)
+                {
+                    return "3Estrellas";
+                }
+                else if (valoracion <= 80)
+                {
+                    return "4Estrellas";
+                }
+                else if (valoracion <= 100)
+                {
+                    return "5Estrellas";
+                }
+                else
+                {
+                    return "";
+                }
+
+            };
+
+            this.columnaTitulo.AspectToStringConverter = delegate (object x)
+            {
+                return "";
+            };
+            this.listadoEnlaces.SetObjects(this.listaEnlaces);
+        }
+
+        private void listadoEnlaces_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                Enlaces enlace = (Enlaces)e.Model;
+                MetodosFormCursos.pintarImagenTituloDesc decoration = new Proyecto_Negocio.MetodosFormCursos.pintarImagenTituloDesc();
+
+                decoration.ImageList = this.imageListLarge;
+                decoration.Title = enlace.titulo;
+                decoration.ImageName = enlace.id;
+                decoration.Description = enlace.descripcion;
+                decoration.titleSize = 10;
+                decoration.descriptionSize = 9;
+                e.SubItem.Decoration = decoration;
+            }
+        }
+        //Abre link al hacer doble click sobre la Fila
+        private void listadoEnlaces_ItemActivate(object sender, EventArgs e)
+        {
+            try
+            {
+                Object enlaceSeleccionado = listadoEnlaces.SelectedObject;
+                Enlaces enlace = (Enlaces)enlaceSeleccionado;
+                System.Diagnostics.Process.Start(enlace.link);
+            }
+            catch (Exception)
+            {
+                MsgBox.Show("Ha ocurrido un error abrir el enlace", "Error enlace", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+            }
+        }
+
+        public void cargarImagenes()
+        {
+            imageListSmall.Images.Add("1Estrellas", Proyecto_Presentacion.Properties.Resources.unaEstrellas);
+            imageListSmall.Images.Add("2Estrellas", Proyecto_Presentacion.Properties.Resources.dosEstrellas);
+            imageListSmall.Images.Add("3Estrellas", Proyecto_Presentacion.Properties.Resources.tresEstrellas);
+            imageListSmall.Images.Add("4Estrellas", Proyecto_Presentacion.Properties.Resources.cuatroEstrellas);
+            imageListSmall.Images.Add("5Estrellas", Proyecto_Presentacion.Properties.Resources.cincoEstrellas);
+
+            listadoEnlaces.SmallImageList = imageListSmall;
+            imageListLarge = mfc.cargarImageListLargeEnlaces(listaEnlaces, System.Windows.Forms.Application.StartupPath, 70);
+
+        }
+        public bool containsIgnoreMayusMin(string source, string value, StringComparison comparisonType)
+        {
+            return source?.IndexOf(value, comparisonType) >= 0;
+        }
+        private string quitarAcentos(string texto)
+        {
+            byte[] tempBytes;
+            tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(texto);
+            string textoSinAcentos = System.Text.Encoding.UTF8.GetString(tempBytes);
+            return textoSinAcentos;
+        }
+
+        //Método para poner los tooltip
+        private void listadoEnlaces_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
+        {
+            e.ToolTipControl.IsBalloon = true;
+            
+            if (e.Column == columnaTema)
+            {
+                Enlaces enlace = (Enlaces)e.Model;
+                e.Text = enlace.tema;
+            }
+            
+        }
     }
 }

@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCursos));
             this.panelCabecera = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.tbBuscar = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnSegundo = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPrimero = new System.Windows.Forms.Button();
             this.panelListado = new System.Windows.Forms.Panel();
             this.listadoEnlaces = new BrightIdeasSoftware.ObjectListView();
             this.columnaTitulo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnaTema = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnaTipo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnaValoracion = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnaLike = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -64,8 +65,6 @@
             this.tmPanelAsigOcultar1 = new System.Windows.Forms.Timer(this.components);
             this.tmPanelAsigOcultar2 = new System.Windows.Forms.Timer(this.components);
             this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.btnSegundo = new System.Windows.Forms.Button();
-            this.btnPrimero = new System.Windows.Forms.Button();
             this.panelCabecera.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panelListado.SuspendLayout();
@@ -93,29 +92,11 @@
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.btnBuscar);
             this.panel3.Controls.Add(this.tbBuscar);
             this.panel3.Location = new System.Drawing.Point(698, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(261, 40);
             this.panel3.TabIndex = 22;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBuscar.FlatAppearance.BorderSize = 0;
-            this.btnBuscar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnBuscar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.ForeColor = System.Drawing.Color.White;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(185, 0);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(76, 40);
-            this.btnBuscar.TabIndex = 28;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
             // 
             // tbBuscar
             // 
@@ -124,7 +105,7 @@
             this.tbBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
             this.tbBuscar.Location = new System.Drawing.Point(36, 7);
             this.tbBuscar.Name = "tbBuscar";
-            this.tbBuscar.Size = new System.Drawing.Size(143, 25);
+            this.tbBuscar.Size = new System.Drawing.Size(193, 25);
             this.tbBuscar.TabIndex = 17;
             this.tbBuscar.Text = " Buscar ";
             this.tbBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -140,6 +121,26 @@
             this.panel2.Size = new System.Drawing.Size(5, 40);
             this.panel2.TabIndex = 21;
             // 
+            // btnSegundo
+            // 
+            this.btnSegundo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSegundo.FlatAppearance.BorderSize = 0;
+            this.btnSegundo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnSegundo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnSegundo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSegundo.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSegundo.ForeColor = System.Drawing.Color.White;
+            this.btnSegundo.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
+            this.btnSegundo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSegundo.Location = new System.Drawing.Point(152, 0);
+            this.btnSegundo.Name = "btnSegundo";
+            this.btnSegundo.Size = new System.Drawing.Size(170, 40);
+            this.btnSegundo.TabIndex = 20;
+            this.btnSegundo.Text = "Segundo curso";
+            this.btnSegundo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSegundo.UseVisualStyleBackColor = true;
+            this.btnSegundo.Click += new System.EventHandler(this.btnSegundo_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
@@ -147,6 +148,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(5, 40);
             this.panel1.TabIndex = 19;
+            // 
+            // btnPrimero
+            // 
+            this.btnPrimero.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrimero.FlatAppearance.BorderSize = 0;
+            this.btnPrimero.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnPrimero.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnPrimero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrimero.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrimero.ForeColor = System.Drawing.Color.White;
+            this.btnPrimero.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
+            this.btnPrimero.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrimero.Location = new System.Drawing.Point(0, 0);
+            this.btnPrimero.Name = "btnPrimero";
+            this.btnPrimero.Size = new System.Drawing.Size(152, 40);
+            this.btnPrimero.TabIndex = 18;
+            this.btnPrimero.Text = "Primer curso";
+            this.btnPrimero.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrimero.UseVisualStyleBackColor = true;
+            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
             // 
             // panelListado
             // 
@@ -160,6 +181,7 @@
             // listadoEnlaces
             // 
             this.listadoEnlaces.AllColumns.Add(this.columnaTitulo);
+            this.listadoEnlaces.AllColumns.Add(this.columnaTema);
             this.listadoEnlaces.AllColumns.Add(this.columnaTipo);
             this.listadoEnlaces.AllColumns.Add(this.columnaValoracion);
             this.listadoEnlaces.AllColumns.Add(this.columnaLike);
@@ -168,6 +190,7 @@
             this.listadoEnlaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.listadoEnlaces.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnaTitulo,
+            this.columnaTema,
             this.columnaTipo,
             this.columnaValoracion,
             this.columnaLike,
@@ -186,7 +209,7 @@
             this.listadoEnlaces.ShowImagesOnSubItems = true;
             this.listadoEnlaces.Size = new System.Drawing.Size(959, 524);
             this.listadoEnlaces.SmallImageList = this.imageListSmall;
-            this.listadoEnlaces.TabIndex = 1;
+            this.listadoEnlaces.TabIndex = 17;
             this.listadoEnlaces.UnfocusedSelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.listadoEnlaces.UseCellFormatEvents = true;
             this.listadoEnlaces.UseCompatibleStateImageBehavior = false;
@@ -206,33 +229,45 @@
             this.columnaTitulo.Width = 150;
             this.columnaTitulo.WordWrap = true;
             // 
+            // columnaTema
+            // 
+            this.columnaTema.AspectName = "tema";
+            this.columnaTema.MinimumWidth = 200;
+            this.columnaTema.Text = "Tema";
+            this.columnaTema.Width = 300;
+            // 
             // columnaTipo
             // 
             this.columnaTipo.AspectName = "tipo";
-            this.columnaTipo.ImageAspectName = "ProgressIcon";
+            this.columnaTipo.MinimumWidth = 100;
             this.columnaTipo.Text = "Tipo";
+            this.columnaTipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnaTipo.Width = 100;
             // 
             // columnaValoracion
             // 
-            this.columnaValoracion.AspectName = "";
             this.columnaValoracion.Text = "Valoración";
+            this.columnaValoracion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // columnaLike
             // 
             this.columnaLike.Text = "Like";
+            this.columnaLike.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // columnaDontLike
             // 
             this.columnaDontLike.Text = "Dont Like";
+            this.columnaDontLike.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // columnaReportarFallo
             // 
-            this.columnaReportarFallo.Text = "Reportar Fallo";
+            this.columnaReportarFallo.Text = "ReportarFallo";
+            this.columnaReportarFallo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // imageListSmall
             // 
-            this.imageListSmall.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageListSmall.ImageSize = new System.Drawing.Size(50, 50);
+            this.imageListSmall.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageListSmall.ImageSize = new System.Drawing.Size(40, 40);
             this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // panelAsignaturas1
@@ -483,56 +518,9 @@
             // 
             // imageListLarge
             // 
-            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageListLarge.ImageSize = new System.Drawing.Size(80, 80);
             this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListLarge.Images.SetKeyName(0, "entire_network");
-            this.imageListLarge.Images.SetKeyName(1, "scheduled_tasks");
-            this.imageListLarge.Images.SetKeyName(2, "search");
-            this.imageListLarge.Images.SetKeyName(3, "workgroup");
-            this.imageListLarge.Images.SetKeyName(4, "write_document");
-            this.imageListLarge.Images.SetKeyName(5, "tick");
-            this.imageListLarge.Images.SetKeyName(6, "ball");
-            this.imageListLarge.Images.SetKeyName(7, "perros");
-            // 
-            // btnSegundo
-            // 
-            this.btnSegundo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSegundo.FlatAppearance.BorderSize = 0;
-            this.btnSegundo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnSegundo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnSegundo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSegundo.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSegundo.ForeColor = System.Drawing.Color.White;
-            this.btnSegundo.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnSegundo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSegundo.Location = new System.Drawing.Point(152, 0);
-            this.btnSegundo.Name = "btnSegundo";
-            this.btnSegundo.Size = new System.Drawing.Size(170, 40);
-            this.btnSegundo.TabIndex = 20;
-            this.btnSegundo.Text = "Segundo curso";
-            this.btnSegundo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSegundo.UseVisualStyleBackColor = true;
-            this.btnSegundo.Click += new System.EventHandler(this.btnSegundo_Click);
-            // 
-            // btnPrimero
-            // 
-            this.btnPrimero.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrimero.FlatAppearance.BorderSize = 0;
-            this.btnPrimero.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnPrimero.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnPrimero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrimero.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrimero.ForeColor = System.Drawing.Color.White;
-            this.btnPrimero.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnPrimero.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrimero.Location = new System.Drawing.Point(0, 0);
-            this.btnPrimero.Name = "btnPrimero";
-            this.btnPrimero.Size = new System.Drawing.Size(152, 40);
-            this.btnPrimero.TabIndex = 18;
-            this.btnPrimero.Text = "Primer curso";
-            this.btnPrimero.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrimero.UseVisualStyleBackColor = true;
-            this.btnPrimero.Click += new System.EventHandler(this.btnPrimero_Click);
             // 
             // FormCursos
             // 
@@ -573,7 +561,6 @@
         private System.Windows.Forms.Button btnSegundo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnSistemas;
         private System.Windows.Forms.Button btnProgramacion;
         private System.Windows.Forms.Button btnLenguajes;
@@ -594,6 +581,7 @@
         private System.Windows.Forms.ImageList imageListSmall;
         private BrightIdeasSoftware.ObjectListView listadoEnlaces;
         private BrightIdeasSoftware.OLVColumn columnaTitulo;
+        private BrightIdeasSoftware.OLVColumn columnaTema;
         private BrightIdeasSoftware.OLVColumn columnaTipo;
         private BrightIdeasSoftware.OLVColumn columnaValoracion;
         private BrightIdeasSoftware.OLVColumn columnaLike;

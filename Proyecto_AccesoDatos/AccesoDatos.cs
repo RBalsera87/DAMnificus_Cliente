@@ -161,14 +161,58 @@ namespace Proyecto_AccesoDatos
             catch (NullReferenceException nre)
             {
                 return listaEnlaces;
-                //¿Dar mensaje?
             }
             
         }
 
+        public async Task<List<Usuario>> obtenerColeccionUsuarios(string usuario, Dictionary<string, string> datos)
+        {
+            List<Usuario> listaUsuarios = null;
+            //PREGUNTAR A RUBEN QUE FUNCION TIENE EL TOKEN COMENTO LINEA PORQUE AL SER USUARIO 
+            //INVITADO LA SEGUNDA VEZ QUE ENTRA PERA AL COMPARAR EL TOKEN IGUAL A "" YA QUE ES NULL
+
+            Respuesta respuesta = await enviarPeticion("obtenerColeccionUsuarios", usuario, null, token, datos);
+            try
+            {
+                listaUsuarios = respuesta.coleccion.ToObject<List<Usuario>>();
+                return listaUsuarios;
+            }
+            catch (NullReferenceException nre)
+            {
+                return listaUsuarios;
+            }
+
+        }
+        public async Task<bool> borrarUsuario(string usuario, Dictionary<string, string> datos)
+        {
+            Respuesta respuesta = await enviarPeticion("borrarUsuario", usuario, null, token, datos);
+
+            if (respuesta.respuesta.Equals("correcto"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public async Task<bool> borrarEnlace(string usuario, Dictionary<string, string> datos)
         {
             Respuesta respuesta = await enviarPeticion("borrarEnlace", usuario, null, token, datos);
+
+            if (respuesta.respuesta.Equals("correcto"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> cambiarRango(string usuario, Dictionary<string, string> datos)
+        {
+            Respuesta respuesta = await enviarPeticion("cambiarRango", usuario, null, token, datos);
 
             if (respuesta.respuesta.Equals("correcto"))
             {

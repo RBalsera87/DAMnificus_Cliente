@@ -29,6 +29,8 @@ namespace Proyecto_Presentacion
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAreaPersonal));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.graficaNotas = new LiveCharts.WinForms.CartesianChart();
             this.graficaMedias = new LiveCharts.WinForms.PieChart();
@@ -38,10 +40,18 @@ namespace Proyecto_Presentacion
             this.tbTrimestre = new System.Windows.Forms.TrackBar();
             this.lbAsignaturas = new System.Windows.Forms.ListBox();
             this.notaIntroducir = new System.Windows.Forms.NumericUpDown();
+            this.listadoEnlaces = new BrightIdeasSoftware.ObjectListView();
+            this.columnaTitulo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnaTema = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnaTipo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.columnaValoracion = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTrimestre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notaIntroducir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listadoEnlaces)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -53,6 +63,7 @@ namespace Proyecto_Presentacion
             this.tableLayoutPanel1.Controls.Add(this.graficaNotas, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.graficaMedias, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listadoEnlaces, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -169,6 +180,87 @@ namespace Proyecto_Presentacion
             this.notaIntroducir.TabIndex = 0;
             this.notaIntroducir.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // listadoEnlaces
+            // 
+            this.listadoEnlaces.AllColumns.Add(this.columnaTitulo);
+            this.listadoEnlaces.AllColumns.Add(this.columnaTema);
+            this.listadoEnlaces.AllColumns.Add(this.columnaTipo);
+            this.listadoEnlaces.AllColumns.Add(this.columnaValoracion);
+            this.listadoEnlaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.listadoEnlaces.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnaTitulo,
+            this.columnaTema,
+            this.columnaTipo,
+            this.columnaValoracion});
+            this.tableLayoutPanel1.SetColumnSpan(this.listadoEnlaces, 2);
+            this.listadoEnlaces.Cursor = System.Windows.Forms.Cursors.Default;
+            this.listadoEnlaces.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listadoEnlaces.Font = new System.Drawing.Font("Segoe MDL2 Assets", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listadoEnlaces.ForeColor = System.Drawing.Color.White;
+            this.listadoEnlaces.FullRowSelect = true;
+            this.listadoEnlaces.Location = new System.Drawing.Point(378, 427);
+            this.listadoEnlaces.Name = "listadoEnlaces";
+            this.listadoEnlaces.RowHeight = 48;
+            this.listadoEnlaces.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.listadoEnlaces.ShowGroups = false;
+            this.listadoEnlaces.ShowImagesOnSubItems = true;
+            this.listadoEnlaces.Size = new System.Drawing.Size(746, 341);
+            this.listadoEnlaces.TabIndex = 3;
+            this.listadoEnlaces.UnfocusedSelectedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.listadoEnlaces.UseCellFormatEvents = true;
+            this.listadoEnlaces.UseCompatibleStateImageBehavior = false;
+            this.listadoEnlaces.UseFiltering = true;
+            this.listadoEnlaces.View = System.Windows.Forms.View.Details;
+            this.listadoEnlaces.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.listadoEnlaces_FormatCell);
+            this.listadoEnlaces.ItemActivate += new System.EventHandler(this.listadoEnlaces_ItemActivate);
+            // 
+            // columnaTitulo
+            // 
+            this.columnaTitulo.AspectName = "titulo";
+            this.columnaTitulo.FillsFreeSpace = true;
+            this.columnaTitulo.ImageAspectName = "FeatureIcon";
+            this.columnaTitulo.MinimumWidth = 120;
+            this.columnaTitulo.Text = "Título y descripción";
+            this.columnaTitulo.Width = 150;
+            this.columnaTitulo.WordWrap = true;
+            // 
+            // columnaTema
+            // 
+            this.columnaTema.AspectName = "tema";
+            this.columnaTema.Text = "Tema";
+            this.columnaTema.Width = 200;
+            // 
+            // columnaTipo
+            // 
+            this.columnaTipo.AspectName = "tipo";
+            this.columnaTipo.Text = "Tipo";
+            this.columnaTipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnaTipo.Width = 80;
+            // 
+            // columnaValoracion
+            // 
+            this.columnaValoracion.Text = "Valoracion";
+            this.columnaValoracion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // imageListSmall
+            // 
+            this.imageListSmall.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageListSmall.ImageSize = new System.Drawing.Size(40, 40);
+            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // imageListLarge
+            // 
+            this.imageListLarge.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListLarge.ImageStream")));
+            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListLarge.Images.SetKeyName(0, "entire_network");
+            this.imageListLarge.Images.SetKeyName(1, "scheduled_tasks");
+            this.imageListLarge.Images.SetKeyName(2, "search");
+            this.imageListLarge.Images.SetKeyName(3, "workgroup");
+            this.imageListLarge.Images.SetKeyName(4, "write_document");
+            this.imageListLarge.Images.SetKeyName(5, "tick");
+            this.imageListLarge.Images.SetKeyName(6, "ball");
+            this.imageListLarge.Images.SetKeyName(7, "perros");
+            // 
             // FormAreaPersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,11 +272,13 @@ namespace Proyecto_Presentacion
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAreaPersonal";
             this.Text = "FormAreaPersonal";
+            this.Load += new System.EventHandler(this.FormAreaPersonal_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTrimestre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notaIntroducir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listadoEnlaces)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -200,5 +294,12 @@ namespace Proyecto_Presentacion
         private System.Windows.Forms.TrackBar tbTrimestre;
         private System.Windows.Forms.ListBox lbAsignaturas;
         private System.Windows.Forms.Button btnAgregarNota;
+        private BrightIdeasSoftware.ObjectListView listadoEnlaces;
+        private BrightIdeasSoftware.OLVColumn columnaTitulo;
+        private System.Windows.Forms.ImageList imageListSmall;
+        private System.Windows.Forms.ImageList imageListLarge;
+        private BrightIdeasSoftware.OLVColumn columnaTema;
+        private BrightIdeasSoftware.OLVColumn columnaTipo;
+        private BrightIdeasSoftware.OLVColumn columnaValoracion;
     }
 }

@@ -114,8 +114,8 @@ namespace Proyecto_Presentacion
             {
                 this.btnRegistro.Visible = false;
                 this.lblTituloFinal.Text = "¡Registro completado!";
-                this.lblFinal.Text =    "Te damos la bienvenida a nuestra comunidad, esperamos que saques el máximo probecho de sus funciones y te animamos a participar subiendo tus propios enlaces a documentos o videos que puedan ayudar a otros.\n" +
-                                        "También te damos acceso al area personal donde podras hacer un seguimiento de tus notas, links subidos y mucho más.\n" +
+                this.lblFinal.Text =    "Te damos la bienvenida a nuestra comunidad, esperamos que saques el máximo provecho de sus funciones y te animamos a participar subiendo tus propios enlaces a documentos o videos que puedan ayudar a otros.\n" +
+                                        "También te damos acceso al area personal donde podrás hacer un seguimiento de tus notas, links subidos y mucho más.\n" +
                                         "Pulsa aceptar para volver a la pantalla de inicio.";
             }else
             {
