@@ -29,6 +29,7 @@ namespace Proyecto_Presentacion
         {
             iniciarObjectListView();
             InitializeEmptyListMsgOverlay();
+            tbBuscar.TabStop = false;
         }
         private async void obtenerEnlaces()
         {
@@ -435,7 +436,7 @@ namespace Proyecto_Presentacion
             objectListView1.RebuildColumns();
             //Muestro cabezera columnas
             objectListView1.HeaderStyle = ColumnHeaderStyle.Clickable;
-            //btnEnlaces.Enabled = false; REVISARRRRRRRRR
+            btnEnlaces.Enabled = false; 
             objectListView1.Focus();
             //Ocupa el espacio libre           
             Column5.FillsFreeSpace = true;
