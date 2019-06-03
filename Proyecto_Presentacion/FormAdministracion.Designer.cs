@@ -36,8 +36,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tbBuscar = new System.Windows.Forms.TextBox();
             this.panelCabecera = new System.Windows.Forms.Panel();
-            this.btnEnlaces = new System.Windows.Forms.Button();
-            this.btnUsuarios = new System.Windows.Forms.Button();
             this.objectListView1 = new BrightIdeasSoftware.ObjectListView();
             this.Column1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.Column2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -47,6 +45,8 @@
             this.Column6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.Column7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.Column8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.btnEnlaces = new System.Windows.Forms.Button();
+            this.btnUsuarios = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panelCabecera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
@@ -75,7 +75,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.panel2.Location = new System.Drawing.Point(125, 0);
+            this.panel2.Location = new System.Drawing.Point(128, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(5, 40);
             this.panel2.TabIndex = 21;
@@ -117,46 +117,6 @@
             this.panelCabecera.Name = "panelCabecera";
             this.panelCabecera.Size = new System.Drawing.Size(943, 40);
             this.panelCabecera.TabIndex = 2;
-            // 
-            // btnEnlaces
-            // 
-            this.btnEnlaces.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEnlaces.FlatAppearance.BorderSize = 0;
-            this.btnEnlaces.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnEnlaces.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnEnlaces.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEnlaces.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnlaces.ForeColor = System.Drawing.Color.White;
-            this.btnEnlaces.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnEnlaces.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEnlaces.Location = new System.Drawing.Point(128, 0);
-            this.btnEnlaces.Name = "btnEnlaces";
-            this.btnEnlaces.Size = new System.Drawing.Size(122, 40);
-            this.btnEnlaces.TabIndex = 2;
-            this.btnEnlaces.Text = "Enlaces";
-            this.btnEnlaces.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEnlaces.UseVisualStyleBackColor = true;
-            this.btnEnlaces.Click += new System.EventHandler(this.btnEnlaces_Click);
-            // 
-            // btnUsuarios
-            // 
-            this.btnUsuarios.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUsuarios.FlatAppearance.BorderSize = 0;
-            this.btnUsuarios.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnUsuarios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsuarios.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUsuarios.ForeColor = System.Drawing.Color.White;
-            this.btnUsuarios.Image = global::Proyecto_Presentacion.Properties.Resources.iconocurso;
-            this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsuarios.Location = new System.Drawing.Point(0, 0);
-            this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(130, 40);
-            this.btnUsuarios.TabIndex = 1;
-            this.btnUsuarios.Text = "Usuarios";
-            this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUsuarios.UseVisualStyleBackColor = true;
-            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
             // objectListView1
             // 
@@ -242,6 +202,46 @@
             // 
             this.Column8.AspectName = "Column8";
             this.Column8.Text = "Column8";
+            // 
+            // btnEnlaces
+            // 
+            this.btnEnlaces.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEnlaces.FlatAppearance.BorderSize = 0;
+            this.btnEnlaces.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnEnlaces.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnEnlaces.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEnlaces.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnlaces.ForeColor = System.Drawing.Color.White;
+            this.btnEnlaces.Image = global::Proyecto_Presentacion.Properties.Resources.enlace;
+            this.btnEnlaces.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEnlaces.Location = new System.Drawing.Point(128, 0);
+            this.btnEnlaces.Name = "btnEnlaces";
+            this.btnEnlaces.Size = new System.Drawing.Size(115, 40);
+            this.btnEnlaces.TabIndex = 2;
+            this.btnEnlaces.Text = "Enlaces";
+            this.btnEnlaces.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEnlaces.UseVisualStyleBackColor = true;
+            this.btnEnlaces.Click += new System.EventHandler(this.btnEnlaces_Click);
+            // 
+            // btnUsuarios
+            // 
+            this.btnUsuarios.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUsuarios.FlatAppearance.BorderSize = 0;
+            this.btnUsuarios.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnUsuarios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUsuarios.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsuarios.ForeColor = System.Drawing.Color.White;
+            this.btnUsuarios.Image = global::Proyecto_Presentacion.Properties.Resources.clientes;
+            this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUsuarios.Location = new System.Drawing.Point(0, 0);
+            this.btnUsuarios.Name = "btnUsuarios";
+            this.btnUsuarios.Size = new System.Drawing.Size(130, 40);
+            this.btnUsuarios.TabIndex = 1;
+            this.btnUsuarios.Text = "Usuarios";
+            this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUsuarios.UseVisualStyleBackColor = true;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
             // FormAdministracion
             // 
