@@ -3,6 +3,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -11,12 +12,13 @@ using EntidadesCompartidas;
 namespace Proyecto_AccesoDatos
 {
     public class AccesoDatos
-    {
-        private string urlServidor = "http://localhost:8080/damnificus/";
+    {       
+        private string urlServidor; 
         private static string token = "";
         public AccesoDatos()
         {
-
+            string ip = ConfigurationManager.AppSettings["serverIp"];
+            urlServidor = "http://" + ip + ":8080/damnificus/";
         }
         public async Task<Respuesta> enviarPeticion(string pet, string user, string pass, string token, Dictionary<string, string> registro)
         {
