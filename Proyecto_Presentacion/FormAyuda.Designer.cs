@@ -30,11 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAyuda));
             this.panelCabecera = new System.Windows.Forms.Panel();
+            this.btnContraer = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblAyuda = new System.Windows.Forms.Label();
+            this.btnExpandir = new System.Windows.Forms.Button();
             this.tablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.panelTexto = new System.Windows.Forms.Panel();
-            this.btnContraer = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.lblCambiarcurso = new System.Windows.Forms.Label();
             this.lblCambiarPassExp = new System.Windows.Forms.Label();
@@ -71,7 +72,6 @@
             this.pbCambiar3 = new System.Windows.Forms.PictureBox();
             this.pbCambiar2 = new System.Windows.Forms.PictureBox();
             this.pbCambiar1 = new System.Windows.Forms.PictureBox();
-            this.btnExpandir = new System.Windows.Forms.Button();
             this.lblCambiar3 = new System.Windows.Forms.Label();
             this.tbCambiar1 = new System.Windows.Forms.TextBox();
             this.tbCambiar3 = new System.Windows.Forms.TextBox();
@@ -111,6 +111,26 @@
             this.panelCabecera.Size = new System.Drawing.Size(915, 40);
             this.panelCabecera.TabIndex = 0;
             // 
+            // btnContraer
+            // 
+            this.btnContraer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnContraer.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.ocultar;
+            this.btnContraer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnContraer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnContraer.FlatAppearance.BorderSize = 0;
+            this.btnContraer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnContraer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnContraer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContraer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnContraer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnContraer.Location = new System.Drawing.Point(877, 6);
+            this.btnContraer.Name = "btnContraer";
+            this.btnContraer.Size = new System.Drawing.Size(29, 29);
+            this.btnContraer.TabIndex = 26;
+            this.btnContraer.TabStop = false;
+            this.btnContraer.UseVisualStyleBackColor = true;
+            this.btnContraer.Click += new System.EventHandler(this.btnContraer_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
@@ -129,6 +149,27 @@
             this.lblAyuda.Size = new System.Drawing.Size(65, 25);
             this.lblAyuda.TabIndex = 17;
             this.lblAyuda.Text = "Ayuda";
+            // 
+            // btnExpandir
+            // 
+            this.btnExpandir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExpandir.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.ayuda;
+            this.btnExpandir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExpandir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExpandir.FlatAppearance.BorderSize = 0;
+            this.btnExpandir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnExpandir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnExpandir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExpandir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExpandir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnExpandir.Location = new System.Drawing.Point(877, 6);
+            this.btnExpandir.Name = "btnExpandir";
+            this.btnExpandir.Size = new System.Drawing.Size(29, 29);
+            this.btnExpandir.TabIndex = 27;
+            this.btnExpandir.TabStop = false;
+            this.btnExpandir.UseVisualStyleBackColor = true;
+            this.btnExpandir.Visible = false;
+            this.btnExpandir.Click += new System.EventHandler(this.btnExpandir_Click);
             // 
             // tablePanel
             // 
@@ -158,26 +199,6 @@
             this.panelTexto.Name = "panelTexto";
             this.panelTexto.Size = new System.Drawing.Size(360, 565);
             this.panelTexto.TabIndex = 1;
-            // 
-            // btnContraer
-            // 
-            this.btnContraer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnContraer.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.ocultar;
-            this.btnContraer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnContraer.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnContraer.FlatAppearance.BorderSize = 0;
-            this.btnContraer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnContraer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnContraer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContraer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContraer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnContraer.Location = new System.Drawing.Point(877, 6);
-            this.btnContraer.Name = "btnContraer";
-            this.btnContraer.Size = new System.Drawing.Size(29, 29);
-            this.btnContraer.TabIndex = 26;
-            this.btnContraer.TabStop = false;
-            this.btnContraer.UseVisualStyleBackColor = true;
-            this.btnContraer.Click += new System.EventHandler(this.btnContraer_Click);
             // 
             // label9
             // 
@@ -524,6 +545,7 @@
             this.tbPass2.Size = new System.Drawing.Size(239, 25);
             this.tbPass2.TabIndex = 8;
             this.tbPass2.TextChanged += new System.EventHandler(this.tbPass2_TextChanged);
+            this.tbPass2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPass_KeyPress);
             this.tbPass2.Leave += new System.EventHandler(this.tbPass2_Leave);
             // 
             // lblPass
@@ -552,6 +574,7 @@
             this.tbPass.PasswordChar = '●';
             this.tbPass.Size = new System.Drawing.Size(239, 25);
             this.tbPass.TabIndex = 7;
+            this.tbPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPass_KeyPress);
             this.tbPass.Leave += new System.EventHandler(this.tbPass_Leave);
             // 
             // btnEnviarEmailToken
@@ -657,27 +680,6 @@
             this.pbCambiar1.TabIndex = 33;
             this.pbCambiar1.TabStop = false;
             // 
-            // btnExpandir
-            // 
-            this.btnExpandir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExpandir.BackgroundImage = global::Proyecto_Presentacion.Properties.Resources.ayuda;
-            this.btnExpandir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnExpandir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExpandir.FlatAppearance.BorderSize = 0;
-            this.btnExpandir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnExpandir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnExpandir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExpandir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExpandir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnExpandir.Location = new System.Drawing.Point(877, 6);
-            this.btnExpandir.Name = "btnExpandir";
-            this.btnExpandir.Size = new System.Drawing.Size(29, 29);
-            this.btnExpandir.TabIndex = 27;
-            this.btnExpandir.TabStop = false;
-            this.btnExpandir.UseVisualStyleBackColor = true;
-            this.btnExpandir.Visible = false;
-            this.btnExpandir.Click += new System.EventHandler(this.btnExpandir_Click);
-            // 
             // lblCambiar3
             // 
             this.lblCambiar3.AutoSize = true;
@@ -720,6 +722,7 @@
             this.tbCambiar3.Size = new System.Drawing.Size(239, 25);
             this.tbCambiar3.TabIndex = 2;
             this.tbCambiar3.TextChanged += new System.EventHandler(this.tbCambiar3_TextChanged);
+            this.tbCambiar3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCambiar2_KeyPress);
             this.tbCambiar3.Leave += new System.EventHandler(this.tbCambiar3_Leave);
             // 
             // label3
@@ -759,6 +762,7 @@
             this.tbCambiar2.PasswordChar = '●';
             this.tbCambiar2.Size = new System.Drawing.Size(239, 25);
             this.tbCambiar2.TabIndex = 1;
+            this.tbCambiar2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCambiar2_KeyPress);
             this.tbCambiar2.Leave += new System.EventHandler(this.tbCambiar2_Leave);
             // 
             // lblCambiar1

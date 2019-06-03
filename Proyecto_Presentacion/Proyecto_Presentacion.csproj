@@ -39,6 +39,9 @@
   <PropertyGroup>
     <StartupObject>Proyecto_Presentacion.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconodam.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntidadesCompartidas, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -62,7 +65,7 @@
     </Reference>
     <Reference Include="ObjectListView, Version=2.9.2.0, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DAMnificus_Cliente\Proyecto_Presentacion\bin\Debug\ObjectListView.dll</HintPath>
+      <HintPath>..\packages\ObjectListView.ClientProfile.2.9.5\lib\net40-Client\ObjectListView.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -174,7 +177,6 @@
       <DependentUpon>FormWidget.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Graficas\packages.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -185,9 +187,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Graficas\App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Proyecto_Negocio\Proyecto_Negocio.csproj">
@@ -238,8 +237,6 @@
     <None Include="Resources\Icono dividir.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Graficas\GraficaBarras.html" />
-    <Content Include="Graficas\Grafica3d.html" />
     <None Include="Resources\activo.png" />
     <None Include="Resources\revision.png" />
     <None Include="Resources\like_1.png" />
@@ -268,7 +265,8 @@
     <None Include="Resources\iconocurso.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Graficas\code\" />
+    <Content Include="iconodam.ico" />
+    <None Include="Resources\imagenLink.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

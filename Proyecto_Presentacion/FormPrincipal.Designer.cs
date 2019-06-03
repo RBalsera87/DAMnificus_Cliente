@@ -564,6 +564,7 @@
             this.pbTitulo.Size = new System.Drawing.Size(220, 40);
             this.pbTitulo.TabIndex = 0;
             this.pbTitulo.TabStop = false;
+            this.pbTitulo.DoubleClick += new System.EventHandler(this.pbTitulo_DoubleClick);
             // 
             // panelContenido
             // 

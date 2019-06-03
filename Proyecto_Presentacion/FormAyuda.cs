@@ -390,5 +390,33 @@ namespace Proyecto_Presentacion
                 this.toolTipPass2.Show("Las contraseñas no coinciden", this.tbPass2, 1000);
             }
         }
+
+        private void tbCambiar2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play(); //Sonido "beep" de windows
+                e.Handled = true;
+                this.toolTipCambiar2.Show("Caracter no permitido, solo letras y numeros", this.tbCambiar2, 1000);
+            }
+        }
+
+        private void tbPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play(); //Sonido "beep" de windows
+                e.Handled = true;
+                this.toolTipPass1.Show("Caracter no permitido, solo letras y numeros", this.tbPass, 1000);
+            }
+        }
     }
 }

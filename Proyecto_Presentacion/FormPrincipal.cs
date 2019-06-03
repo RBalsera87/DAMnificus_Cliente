@@ -315,9 +315,9 @@ namespace Proyecto_Presentacion
             }
             
         }
-        /********************************
-         * Eventos para el menu lateral *
-         ********************************/
+        /**********************************************
+         * Eventos de validación para el menu lateral *
+         **********************************************/
         private void tbUsuario_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -459,8 +459,13 @@ namespace Proyecto_Presentacion
                      this.panelLogin.Location.Y - 5);
             }
         }
+        private void pbTitulo_DoubleClick(object sender, EventArgs e)
+        {
+            MsgBox.Show("Aplicación DAMníficus\r\rCreada como proyecto final para el curso de Desarrollo de " +
+                "Aplicaciones Multiplataforma 2018/19 del IES Gaspar Melchor de Jovellanos por:\r\r" +
+                "Rubén Balsera, Antonio Illarramendi y Valentín Sanchez.", "Sobre la app", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+        }
 
-        
 
         /******************************************
          * Eventos para movimiento del formulario *
@@ -584,7 +589,7 @@ namespace Proyecto_Presentacion
         /***********************************
          * Métodos internos del formulario *
          ***********************************/
-        private async void accionLogearDesloguear(string usuario, string pass)
+        public async void accionLogearDesloguear(string usuario, string pass)
         {
             if (!conectando)
             {
@@ -703,13 +708,12 @@ namespace Proyecto_Presentacion
                     return true;
 
                 case DialogResult.No:
-                    //case DialogResult.Abort:
+                //case DialogResult.Abort:
                     return false;
 
                 default:
                     throw new ApplicationException("Resultado de dialogo inesperado");
             }
         }
-
     }
 }

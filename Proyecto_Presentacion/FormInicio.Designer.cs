@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicio));
             this.panelTrasero = new System.Windows.Forms.Panel();
+            this.panelFinal = new System.Windows.Forms.Panel();
+            this.btnAceptarFinal = new System.Windows.Forms.Button();
+            this.lblFinal = new System.Windows.Forms.Label();
+            this.lblTituloFinal = new System.Windows.Forms.Label();
             this.panelToken = new System.Windows.Forms.Panel();
             this.btnCancelarToken = new System.Windows.Forms.Button();
             this.btnAceptarToken = new System.Windows.Forms.Button();
@@ -65,11 +69,8 @@
             this.lblPresentacion = new System.Windows.Forms.Label();
             this.lblBienvenido = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panelFinal = new System.Windows.Forms.Panel();
-            this.btnAceptarFinal = new System.Windows.Forms.Button();
-            this.lblFinal = new System.Windows.Forms.Label();
-            this.lblTituloFinal = new System.Windows.Forms.Label();
             this.panelTrasero.SuspendLayout();
+            this.panelFinal.SuspendLayout();
             this.panelToken.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbToken)).BeginInit();
             this.panelRegistro.SuspendLayout();
@@ -81,7 +82,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbEmail)).BeginInit();
             this.panelInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panelFinal.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTrasero
@@ -96,6 +96,63 @@
             this.panelTrasero.Name = "panelTrasero";
             this.panelTrasero.Size = new System.Drawing.Size(500, 300);
             this.panelTrasero.TabIndex = 0;
+            // 
+            // panelFinal
+            // 
+            this.panelFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelFinal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.panelFinal.Controls.Add(this.btnAceptarFinal);
+            this.panelFinal.Controls.Add(this.lblFinal);
+            this.panelFinal.Controls.Add(this.lblTituloFinal);
+            this.panelFinal.Location = new System.Drawing.Point(3, 3);
+            this.panelFinal.Name = "panelFinal";
+            this.panelFinal.Size = new System.Drawing.Size(494, 294);
+            this.panelFinal.TabIndex = 5;
+            this.panelFinal.Visible = false;
+            // 
+            // btnAceptarFinal
+            // 
+            this.btnAceptarFinal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptarFinal.FlatAppearance.BorderSize = 0;
+            this.btnAceptarFinal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
+            this.btnAceptarFinal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
+            this.btnAceptarFinal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptarFinal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceptarFinal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnAceptarFinal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAceptarFinal.Location = new System.Drawing.Point(143, 244);
+            this.btnAceptarFinal.Name = "btnAceptarFinal";
+            this.btnAceptarFinal.Size = new System.Drawing.Size(212, 38);
+            this.btnAceptarFinal.TabIndex = 4;
+            this.btnAceptarFinal.TabStop = false;
+            this.btnAceptarFinal.Text = "Aceptar";
+            this.btnAceptarFinal.UseVisualStyleBackColor = true;
+            this.btnAceptarFinal.Click += new System.EventHandler(this.btnAceptarFinal_Click);
+            // 
+            // lblFinal
+            // 
+            this.lblFinal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblFinal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinal.ForeColor = System.Drawing.Color.White;
+            this.lblFinal.Location = new System.Drawing.Point(0, 47);
+            this.lblFinal.Name = "lblFinal";
+            this.lblFinal.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
+            this.lblFinal.Size = new System.Drawing.Size(494, 189);
+            this.lblFinal.TabIndex = 1;
+            this.lblFinal.Text = resources.GetString("lblFinal.Text");
+            this.lblFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTituloFinal
+            // 
+            this.lblTituloFinal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTituloFinal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTituloFinal.ForeColor = System.Drawing.Color.White;
+            this.lblTituloFinal.Location = new System.Drawing.Point(0, 0);
+            this.lblTituloFinal.Name = "lblTituloFinal";
+            this.lblTituloFinal.Size = new System.Drawing.Size(494, 47);
+            this.lblTituloFinal.TabIndex = 0;
+            this.lblTituloFinal.Text = "¡Registro completado!";
+            this.lblTituloFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelToken
             // 
@@ -323,6 +380,7 @@
             this.tbPass2.Size = new System.Drawing.Size(191, 25);
             this.tbPass2.TabIndex = 6;
             this.tbPass2.TextChanged += new System.EventHandler(this.tbPass2_TextChanged);
+            this.tbPass2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPass_KeyPress);
             this.tbPass2.Leave += new System.EventHandler(this.tbPass2_Leave);
             // 
             // lblPass2
@@ -347,6 +405,7 @@
             this.tbPass.PasswordChar = '●';
             this.tbPass.Size = new System.Drawing.Size(191, 25);
             this.tbPass.TabIndex = 5;
+            this.tbPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPass_KeyPress);
             this.tbPass.Leave += new System.EventHandler(this.tbPass_Leave);
             // 
             // lblPass1
@@ -548,63 +607,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // panelFinal
-            // 
-            this.panelFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panelFinal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panelFinal.Controls.Add(this.btnAceptarFinal);
-            this.panelFinal.Controls.Add(this.lblFinal);
-            this.panelFinal.Controls.Add(this.lblTituloFinal);
-            this.panelFinal.Location = new System.Drawing.Point(3, 3);
-            this.panelFinal.Name = "panelFinal";
-            this.panelFinal.Size = new System.Drawing.Size(494, 294);
-            this.panelFinal.TabIndex = 5;
-            this.panelFinal.Visible = false;
-            // 
-            // btnAceptarFinal
-            // 
-            this.btnAceptarFinal.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAceptarFinal.FlatAppearance.BorderSize = 0;
-            this.btnAceptarFinal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(39)))));
-            this.btnAceptarFinal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(55)))), ((int)(((byte)(34)))));
-            this.btnAceptarFinal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAceptarFinal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptarFinal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnAceptarFinal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptarFinal.Location = new System.Drawing.Point(143, 244);
-            this.btnAceptarFinal.Name = "btnAceptarFinal";
-            this.btnAceptarFinal.Size = new System.Drawing.Size(212, 38);
-            this.btnAceptarFinal.TabIndex = 4;
-            this.btnAceptarFinal.TabStop = false;
-            this.btnAceptarFinal.Text = "Aceptar";
-            this.btnAceptarFinal.UseVisualStyleBackColor = true;
-            this.btnAceptarFinal.Click += new System.EventHandler(this.btnAceptarFinal_Click);
-            // 
-            // lblFinal
-            // 
-            this.lblFinal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblFinal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinal.ForeColor = System.Drawing.Color.White;
-            this.lblFinal.Location = new System.Drawing.Point(0, 47);
-            this.lblFinal.Name = "lblFinal";
-            this.lblFinal.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
-            this.lblFinal.Size = new System.Drawing.Size(494, 189);
-            this.lblFinal.TabIndex = 1;
-            this.lblFinal.Text = resources.GetString("lblFinal.Text");
-            this.lblFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTituloFinal
-            // 
-            this.lblTituloFinal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTituloFinal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloFinal.ForeColor = System.Drawing.Color.White;
-            this.lblTituloFinal.Location = new System.Drawing.Point(0, 0);
-            this.lblTituloFinal.Name = "lblTituloFinal";
-            this.lblTituloFinal.Size = new System.Drawing.Size(494, 47);
-            this.lblTituloFinal.TabIndex = 0;
-            this.lblTituloFinal.Text = "¡Registro completado!";
-            this.lblTituloFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // FormInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -620,6 +622,7 @@
             this.Text = "FormInicio";
             this.Load += new System.EventHandler(this.FormInicio_Load);
             this.panelTrasero.ResumeLayout(false);
+            this.panelFinal.ResumeLayout(false);
             this.panelToken.ResumeLayout(false);
             this.panelToken.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbToken)).EndInit();
@@ -634,7 +637,6 @@
             this.panelInicio.ResumeLayout(false);
             this.panelInicio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panelFinal.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

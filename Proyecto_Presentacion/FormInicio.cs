@@ -33,7 +33,7 @@ namespace Proyecto_Presentacion
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
-        }
+    }
         private Bitmap renderBmp;
         public override Image BackgroundImage
         {
@@ -134,6 +134,11 @@ namespace Proyecto_Presentacion
         }
         private void btnAceptarFinal_Click(object sender, EventArgs e)
         {
+            if (!this.btnRegistro.Visible)
+            {
+                FormPrincipal frm = (FormPrincipal)Application.OpenForms["FormPrincipal"];
+                frm.accionLogearDesloguear(usuario, pass);
+            }
             this.panelFinal.Visible = false;
             this.panelInicio.Visible = true;
         }
@@ -251,7 +256,7 @@ namespace Proyecto_Presentacion
                         this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.error;
                         this.toolTipUsuario.SetToolTip(pbUser, "Este nombre de usuario ya esta registrado");
                         this.toolTipUsuario.Show("Este nombre de usuario ya esta registrado", this.pbUser, 1000);
-                        this.emailValido = false;
+                        this.userValido = false;
                     }
                     else
                     {
@@ -265,7 +270,7 @@ namespace Proyecto_Presentacion
                     this.pbUser.Image = Proyecto_Presentacion.Properties.Resources.error;
                     this.toolTipUsuario.SetToolTip(pbUser, "El servidor no responde");
                     this.toolTipUsuario.Show("El servidor no responde", this.pbUser, 1000);
-                    this.emailValido = false;
+                    this.userValido = false;
                 }
                 
                 
@@ -334,6 +339,20 @@ namespace Proyecto_Presentacion
                 this.toolTipToken.Show("El token no parece válido", this.tbToken, 1000);
                 btnAceptarToken.Enabled = false;
             }
+        }
+        private void tbPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play(); //Sonido "beep" de windows
+                e.Handled = true;
+                this.toolTipPass1.Show("Caracter no permitido, solo letras y numeros", this.tbPass, 1000);
+            }
+
         }
 
         /**********************************************

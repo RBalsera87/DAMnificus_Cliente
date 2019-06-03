@@ -55,9 +55,18 @@ namespace Proyecto_Presentacion
             datos.Add("tema", lbTema.GetItemText(lbTema.SelectedItem));
             if (await m.enviarNuevoEnlace(UsuarioConectado.nombre, datos))
             {
-                MsgBox.Show("El enlace ha sido subido satisfactoriamente a la base de datos. Por el momento no será visible " +
+                if (UsuarioConectado.credenciales != "admin")
+                {
+                    MsgBox.Show("El enlace ha sido subido satisfactoriamente a la base de datos. Por el momento no será visible " +
                     "hasta que un administrador lo revise y lo active si todo es correcto.",
                     "Enlace subido", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                }
+                else
+                {
+                    MsgBox.Show("El enlace ha sido subido satisfactoriamente a la base de datos. Como tienes privilegios de " +
+                        "admin, el enlace ya esta visible para todos los usuarios.",
+                    "Enlace subido", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                }                
                 tbTitulo.Clear();
                 tbImagen.Clear();
                 tbDescripcion.Clear();
