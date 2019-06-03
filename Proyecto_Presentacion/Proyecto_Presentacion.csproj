@@ -240,6 +240,9 @@
   <ItemGroup>
     <Content Include="Graficas\GraficaBarras.html" />
     <Content Include="Graficas\Grafica3d.html" />
+    <None Include="Resources\enlace.png" />
+    <None Include="Resources\employee.png" />
+    <None Include="Resources\link.png" />
     <None Include="Resources\activo.png" />
     <None Include="Resources\revision.png" />
     <None Include="Resources\like_1.png" />

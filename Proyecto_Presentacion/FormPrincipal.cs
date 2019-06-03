@@ -304,6 +304,7 @@ namespace Proyecto_Presentacion
                 string usuario = tbUsuario.Text;
                 string pass = tbPass.Text;
                 accionLogearDesloguear(usuario, pass);
+                UsuarioConectado.resetearUsuarioConectado();
             }
             else
             {
