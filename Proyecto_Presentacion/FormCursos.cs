@@ -231,7 +231,7 @@ namespace Proyecto_Presentacion
             }
             else
             {
-                listadoEnlaces.EmptyListMsg = "Lo sentimos no hay enlaces para la asignatura " + asignatura + ". Intentaremos agregarlos lo antes posible.";
+                listadoEnlaces.EmptyListMsg = "Lo sentimos no hay enlaces para la asignatura " + asignatura + ". \nIntentaremos agregarlos lo antes posible.";
             }
             
             activarBotones();
@@ -256,8 +256,8 @@ namespace Proyecto_Presentacion
             btnAccesoDatos.Enabled = true;
             btnInterfaces.Enabled = true;
             btnGestion.Enabled = true;
-            btnProgramacion.Enabled = true;
             btnMultimedia.Enabled = true;
+            btnProcesos.Enabled = true;
         }
         //Crea mensaje cuando el objectlistview esta vacio
         private void InitializeEmptyListMsgOverlay()

@@ -58,7 +58,8 @@ namespace Proyecto_Presentacion
         {
             listadoEnlaces.HeaderStyle = ColumnHeaderStyle.None;
             listadoEnlaces.Font = new Font("Segoe UI Semilight", 9, System.Drawing.FontStyle.Bold);
-
+            InitializeEmptyListMsgOverlay();
+            listadoEnlaces.EmptyListMsg = "Cargando...";
             if (UsuarioConectado.nombre.Equals("invitado"))
             {
                 obtenerEnlaces("todas");
@@ -499,9 +500,17 @@ namespace Proyecto_Presentacion
             }
             else
             {
-                this.listadoEnlaces.SetObjects(new List<Enlaces>());
-                MsgBox.Show("Lo sentimos no hay enlaces para la asignatura " + asignatura + ". Intentaremos agregarlos lo antes posible.", "No hay enlaces", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                listadoEnlaces.EmptyListMsg = "Aún no has subido ningún enlace. \nAnímate a participar.";
             }
+        }
+
+        protected virtual void InitializeEmptyListMsgOverlay()
+        {
+            TextOverlay textOverlay = this.listadoEnlaces.EmptyListMsgOverlay as TextOverlay;
+            textOverlay.TextColor = Color.FromArgb(231, 120, 0);
+            textOverlay.BackColor = Color.FromArgb(32, 32, 32);
+            textOverlay.BorderWidth = 0.0f;
+            textOverlay.Font = new Font("Segoe UI Semilight", 22);
         }
 
         private void iniciarObjectListView()

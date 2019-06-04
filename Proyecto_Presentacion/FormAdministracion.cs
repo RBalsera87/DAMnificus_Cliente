@@ -72,7 +72,6 @@ namespace Proyecto_Presentacion
                     objectListView1.EmptyListMsg = "No hay Usuarios";
                 }
             }else { MsgBox.Show("No tienes permiso para acceder", "ATENCIÓN", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn); }
-            objectListView1.EmptyListMsg = "No hay coincidencias";
             btnUsuarios.Enabled = true;
         }
 
@@ -426,6 +425,7 @@ namespace Proyecto_Presentacion
 
         private void btnEnlaces_Click(object sender, EventArgs e)
         {
+            tbBuscar.Text = " Buscar ";
             listaAMostrar = "enlaces";
             this.btnUsuarios.BackColor = Color.FromArgb(32, 32, 32);
             this.btnEnlaces.BackColor = Color.FromArgb(73, 55, 34);
@@ -488,6 +488,7 @@ namespace Proyecto_Presentacion
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
+            tbBuscar.Text = " Buscar ";
             listaAMostrar = "usuarios";
             this.btnEnlaces.BackColor = Color.FromArgb(32, 32, 32);
             this.btnUsuarios.BackColor = Color.FromArgb(73, 55, 34);
