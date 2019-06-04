@@ -645,5 +645,33 @@ namespace Proyecto_Presentacion
             }
             
         }
+        private void listBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            bool seleccionado = false;
+            string listBox = lbAsignaturas.Items[e.Index].ToString();
+            // Si se selecciona un elemento, cambia el color de fondo.
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                seleccionado = true;
+                e = new DrawItemEventArgs(e.Graphics,
+                                         e.Font,
+                                         e.Bounds,
+                                         e.Index,
+                                         e.State ^ DrawItemState.Selected,
+                                         e.ForeColor,
+                                         Color.FromArgb(255, 153, 39));// Color seleccionado
+            }
+
+            // Dibuja el fondo del control ListBox para cada elemento.
+            e.DrawBackground();
+            // Dibuja el texto del elemento actual
+            if (seleccionado)
+                e.Graphics.DrawString(listBox, e.Font, Brushes.Black, e.Bounds, StringFormat.GenericDefault);
+            else
+                e.Graphics.DrawString(listBox, e.Font, Brushes.DarkGray, e.Bounds, StringFormat.GenericDefault);
+            // Si el cuadro de lista tiene el foco, dibuja un rectángulo alrededor del elemento seleccionado.
+            e.DrawFocusRectangle();
+        }
     }
 }

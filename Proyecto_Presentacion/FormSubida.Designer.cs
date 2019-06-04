@@ -292,7 +292,7 @@
             this.tbEnlace.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEnlace.ForeColor = System.Drawing.Color.White;
             this.tbEnlace.Location = new System.Drawing.Point(13, 125);
-            this.tbEnlace.MaxLength = 1000;
+            this.tbEnlace.MaxLength = 512;
             this.tbEnlace.Multiline = true;
             this.tbEnlace.Name = "tbEnlace";
             this.tbEnlace.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -333,7 +333,7 @@
             this.tbDescripcion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDescripcion.ForeColor = System.Drawing.Color.White;
             this.tbDescripcion.Location = new System.Drawing.Point(13, 26);
-            this.tbDescripcion.MaxLength = 1000;
+            this.tbDescripcion.MaxLength = 256;
             this.tbDescripcion.Multiline = true;
             this.tbDescripcion.Name = "tbDescripcion";
             this.tbDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -585,7 +585,7 @@
             this.tbImagen.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbImagen.ForeColor = System.Drawing.Color.White;
             this.tbImagen.Location = new System.Drawing.Point(74, 40);
-            this.tbImagen.MaxLength = 89;
+            this.tbImagen.MaxLength = 512;
             this.tbImagen.Name = "tbImagen";
             this.tbImagen.Size = new System.Drawing.Size(511, 25);
             this.tbImagen.TabIndex = 37;
@@ -710,7 +710,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormSubida";
             this.Text = "FormSubida";
-            this.Load += new System.EventHandler(this.FormSubida_Load);
             this.tablePanel.ResumeLayout(false);
             this.panelTexto.ResumeLayout(false);
             this.panelTrasero.ResumeLayout(false);

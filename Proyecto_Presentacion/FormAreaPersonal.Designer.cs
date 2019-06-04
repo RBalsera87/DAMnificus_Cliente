@@ -153,6 +153,7 @@ namespace Proyecto_Presentacion
             // 
             this.lbAsignaturas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.lbAsignaturas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbAsignaturas.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbAsignaturas.ForeColor = System.Drawing.Color.White;
             this.lbAsignaturas.FormattingEnabled = true;
             this.lbAsignaturas.ItemHeight = 21;
@@ -160,6 +161,7 @@ namespace Proyecto_Presentacion
             this.lbAsignaturas.Name = "lbAsignaturas";
             this.lbAsignaturas.Size = new System.Drawing.Size(365, 361);
             this.lbAsignaturas.TabIndex = 1;
+            this.lbAsignaturas.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_DrawItem);
             // 
             // notaIntroducir
             // 

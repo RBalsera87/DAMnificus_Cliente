@@ -11,22 +11,31 @@ using EntidadesCompartidas;
 
 namespace Proyecto_AccesoDatos
 {
+
+    /************************
+     * CLASE ACCESO A DATOS *
+     ************************/
     public class AccesoDatos
     {       
         private string urlServidor; 
         private static string token = "";
+
+        /***************
+         * Constructor *
+         ***************/
         public AccesoDatos()
         {
             string ip = ConfigurationManager.AppSettings["serverIp"];
             urlServidor = "http://" + ip + ":8080/damnificus/";
         }
+
+        // Método que se usa para codificar la petición y enviarla al servidor
         public async Task<Respuesta> enviarPeticion(string pet, string user, string pass, string token, Dictionary<string, string> registro)
         {
             string passCifrado = null;
             string tokenCifrado = null;
             string usuarioCifrado = null;
-            //try
-            //{
+
             if (pass != null)
             {
                 passCifrado = CifradoJson.Cifrado(pass, pet);
@@ -53,7 +62,7 @@ namespace Proyecto_AccesoDatos
             var httpContent = new StringContent(stringPeticion, Encoding.UTF8, "application/json");
 
             using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(100) }) // Timeout es para el tiempo que se debe esperar a la respuesta
-            {                                                                                 // Para debug poner 100 o mas, para release 15 o 20 como mucho
+            {                                                                                 // Para debug poner 100 o mas, para release 5 o 10 como mucho
                 // Ejecuta la solicitud actual y espera la respuesta
                 try
                 {
@@ -87,13 +96,14 @@ namespace Proyecto_AccesoDatos
 
 
             }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine("Exception: {0}", e);
-            //    return null;
-            //}
+
         }
+
+        /**************************
+         * Peticiones del cliente *
+         **************************/
+
+        // Este método se encarga de loguear al usuario en la app
         public async Task<string> comenzarLogin(string usuario, string clave)
         {
             //Peticion para que nos devuelva una respuesta con la sal que necesitamos
@@ -134,6 +144,8 @@ namespace Proyecto_AccesoDatos
                 return "El servidor no responde, revisa que tengas una conexión a internet";
             }
         }
+
+        // Borra el token del usuario especificado
         public async Task<bool> borrarToken(string usuario)
         {
             if (token != "")
@@ -151,43 +163,41 @@ namespace Proyecto_AccesoDatos
             }
             return true;
         }
+
+        // Obtiene una colección de los enlaces alojados del servidor
         public async Task<List<Enlaces>> obtenerEnlaces(string usuario, Dictionary<string,string> datos)
         {
             List<Enlaces> listaEnlaces = null;
-            //PREGUNTAR A RUBEN QUE FUNCION TIENE EL TOKEN COMENTO LINEA PORQUE AL SER USUARIO 
-            //INVITADO LA SEGUNDA VEZ QUE ENTRA PERA AL COMPARAR EL TOKEN IGUAL A "" YA QUE ES NULL
-            
             Respuesta respuesta = await enviarPeticion("obtenerColeccionEnlaces", usuario, null, token, datos);
             try
             {
                 listaEnlaces = respuesta.coleccion.ToObject<List<Enlaces>>();
                 return listaEnlaces;
             }
-            catch (NullReferenceException nre)
+            catch (NullReferenceException)
             {
                 return listaEnlaces;
             }
             
         }
 
+        // Obtiene una colección de los usuarios registrados en el servidor
         public async Task<List<Usuario>> obtenerColeccionUsuarios(string usuario, Dictionary<string, string> datos)
         {
             List<Usuario> listaUsuarios = null;
-            //PREGUNTAR A RUBEN QUE FUNCION TIENE EL TOKEN COMENTO LINEA PORQUE AL SER USUARIO 
-            //INVITADO LA SEGUNDA VEZ QUE ENTRA PERA AL COMPARAR EL TOKEN IGUAL A "" YA QUE ES NULL
-
             Respuesta respuesta = await enviarPeticion("obtenerColeccionUsuarios", usuario, null, token, datos);
             try
             {
                 listaUsuarios = respuesta.coleccion.ToObject<List<Usuario>>();
                 return listaUsuarios;
             }
-            catch (NullReferenceException nre)
+            catch (NullReferenceException)
             {
                 return listaUsuarios;
             }
 
         }
+
         public async Task<bool> borrarUsuario(string usuario, Dictionary<string, string> datos)
         {
             Respuesta respuesta = await enviarPeticion("borrarUsuario", usuario, null, token, datos);
@@ -201,6 +211,7 @@ namespace Proyecto_AccesoDatos
                 return false;
             }
         }
+
         public async Task<bool> borrarEnlace(string usuario, Dictionary<string, string> datos)
         {
             Respuesta respuesta = await enviarPeticion("borrarEnlace", usuario, null, token, datos);
@@ -232,16 +243,13 @@ namespace Proyecto_AccesoDatos
         public async Task<List<string>> sacarAsignaturas(string usuario, Dictionary<string, string> datos)
         {
             List<string> listaAsignaturas = null;
-            //PREGUNTAR A RUBEN QUE FUNCION TIENE EL TOKEN COMENTO LINEA PORQUE AL SER USUARIO 
-            //INVITADO LA SEGUNDA VEZ QUE ENTRA PERA AL COMPARAR EL TOKEN IGUAL A "" YA QUE ES NULL
-
             Respuesta respuesta = await enviarPeticion("obtenerNombreAsignaturas", usuario, null, token, datos);
             try
             {
                 listaAsignaturas = respuesta.coleccion.ToObject<List<string>>();
                 return listaAsignaturas;
             }
-            catch (NullReferenceException nre)
+            catch (NullReferenceException)
             {
                 return listaAsignaturas;
                 //¿Dar mensaje?
@@ -266,8 +274,6 @@ namespace Proyecto_AccesoDatos
 
         public async Task<string> sumaryRestarValoracion(string usuario,Dictionary<string, string> datos)
         {
-            //PREGUNTAR A RUBEN AÑADO ESTE IF POQUE SI NO PETA AL ENTRAR COMO INVIADO AL 
-            //INTENTAR COMPARAR CON EQUALS EL TOKEN QUE ES NULL
             if(usuario.Equals("invitado")){
                
                 return "invitado";
@@ -390,7 +396,7 @@ namespace Proyecto_AccesoDatos
                 listaNotas = respuesta.coleccion.ToObject<List<double>>();
                 return listaNotas;
             }
-            catch (NullReferenceException nre)
+            catch (NullReferenceException)
             {
                 return listaNotas;
                 //¿Dar mensaje?
@@ -406,7 +412,7 @@ namespace Proyecto_AccesoDatos
                 listaNotas = respuesta.coleccion.ToObject<List<double>>();
                 return listaNotas;
             }
-            catch (NullReferenceException nre)
+            catch (NullReferenceException)
             {
                 return listaNotas;
                 //¿Dar mensaje?

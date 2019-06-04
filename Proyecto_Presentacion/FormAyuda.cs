@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace Proyecto_Presentacion
 {
+    /************************************
+     * INTERFAZ DEL FORMULARIO DE AYUDA *
+     ************************************/
     public partial class FormAyuda : Form
     {
         MetodosFormAyuda m = new MetodosFormAyuda();
@@ -19,6 +22,10 @@ namespace Proyecto_Presentacion
         private string curso;
         private string token = "";
         private string email = "";
+
+        /***************
+         * Constructor *
+         ***************/
         public FormAyuda()
         {
             InitializeComponent();
@@ -27,6 +34,9 @@ namespace Proyecto_Presentacion
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
+        /*****************
+         * Evento onLoad *
+         *****************/
         private async void FormAyuda_Load(object sender, EventArgs e)
         {
             if (UsuarioConectado.nombre.Equals("invitado"))
@@ -48,6 +58,9 @@ namespace Proyecto_Presentacion
             }
         }
 
+        /****************************
+         * Eventos para los botones *
+         ****************************/
         private void btnContraer_Click(object sender, EventArgs e)
         {
             tablePanel.ColumnStyles[1].SizeType = SizeType.Absolute;
@@ -63,7 +76,144 @@ namespace Proyecto_Presentacion
             this.btnExpandir.Visible = false;
             this.btnContraer.Visible = true;
         }
+        private async void btnCambiarPass_Click(object sender, EventArgs e)
+        {
+            string respuesta = await m.cambiarPass(UsuarioConectado.nombre, tbCambiar1.Text, tbCambiar3.Text);
+            if (respuesta.Equals("passCambiada"))
+            {
+                MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                this.tbCambiar1.Clear();
+                this.tbCambiar2.Clear();
+                this.tbCambiar3.Clear();
+            }
+            else if (respuesta.Equals("passNoCambiada"))
+            {
+                MsgBox.Show("Ha habido un problema al guardar la nueva contraseña.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+            }
+            else if (respuesta.Equals("passNoValida"))
+            {
+                MsgBox.Show("La contraseña actual que has introducido es incorrecta.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+                this.tbCambiar1.Text = "";
+            }
+            else if (respuesta.Equals("tokenNoValido"))
+            {
+                MsgBox.Show("El token de sesión de tu usuario no parece valido, cierra sesión y vuelve a conectarte.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
+            }
+            else
+            {
+                MsgBox.Show("El servidor no responde, por favor revisa tu conexión a internet.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
+            }
+            btnCambiarPass.Enabled = false;
+        }
+        private async void btnCurso_Click(object sender, EventArgs e)
+        {
+            curso = await m.obtenerCurso(UsuarioConectado.nombre);
+            string mensaje = "Error al cambiar el curso";
+            if (curso.Equals("curso1") || curso.Equals("curso2"))
+            {
+                if (MsgBox.Show("Tienes notas de tu curso guardadas en la base de datos. ¿Ahora con el cambio quieres borrarlas?", "¿Que es lo que quieres que hagamos?", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
+                {
+                    await m.borrarNotas(UsuarioConectado.nombre, curso);
+                }
+            }
+            if (this.radioButtonPrimero.Checked)
+            {
+                if (curso.Equals("curso1")) mensaje = "Ya tienes primero como curso actual";
+                else if (await m.cambiarCurso(UsuarioConectado.nombre, "curso1")) mensaje = "Cambiado a primer curso";
+            }
+            else if (this.radioButtonSegundo.Checked)
+            {
+                if (curso.Equals("curso2")) mensaje = "Ya tienes segundo como curso actual";
+                else if (await m.cambiarCurso(UsuarioConectado.nombre, "curso2")) mensaje = "Cambiado a segundo curso";
+            }
+            else
+            {
+                if (curso.Equals("curso0")) mensaje = "Actualmente no tienes un curso asignado";
+                else if (await m.cambiarCurso(UsuarioConectado.nombre, "curso0")) mensaje = "Cambiado a ningun curso";
+            }
+            MsgBox.Show(mensaje, "Curso cambiado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+        }
 
+        private async void btnEnvReporte_Click(object sender, EventArgs e)
+        {
+            this.btnEnvReporte.Enabled = false;
+            datos.Clear();
+            datos.Add("titulo", tbTituloRep.Text);
+            datos.Add("reporte", tbReporte.Text);
+            if (await m.enviarEmailReporte(UsuarioConectado.nombre, datos))
+            {
+                MsgBox.Show("El reporte ha sido enviado satisfactoriamente, gracias por tu aportación", "Reporte enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                this.tbTituloRep.Clear();
+                this.tbReporte.Clear();
+            }
+            else
+            {
+                MsgBox.Show("El reporte no se ha podido enviar debido a un error", "Reporte no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                this.btnEnvReporte.Enabled = true;
+            }
+        }
+        private async void btnEnviarEmailToken_Click(object sender, EventArgs e)
+        {
+            this.btnEnviarEmailToken.Enabled = false;
+            if (lblEmailToken.Text.Equals("Email"))
+            {
+                email = tbEmailToken.Text;
+                if (await m.buscarEmailEnBD(email))
+                {
+                    datos.Clear();
+                    datos.Add("email", email);
+                    string respuesta = await m.enviarEmailPassPerdida(UsuarioConectado.nombre, datos);
+                    if (respuesta.Equals("emailNoEnviado"))
+                    {
+                        MsgBox.Show("El correo no se ha podido enviar debido a un error.", "Email no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                    }
+                    else
+                    {
+                        MsgBox.Show("El correo se ha mandado satisfactoriamente, revisa tu correo para copiar el token.", "Email enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                        token = respuesta;
+                        this.btnEnviarEmailToken.Text = "Cambiar contraseña";
+                        this.lblEmailToken.Text = "Token";
+                        this.tbEmailToken.Clear();
+                        this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                        this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce el token");
+                        this.toolTipEmailToken.Show("Introduce el token", this.tbEmailToken, 1000);
+
+                    }
+                }
+                else
+                {
+                    MsgBox.Show("Esa dirección de correo no esta registrada en nuestra aplicación.", "Email enviado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+
+                    this.btnEnviarEmailToken.Enabled = true;
+                }
+
+            }
+            else
+            {
+                if (await m.restaurarPass(email, tbPass2.Text))
+                {
+                    MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+
+                    token = email = "";
+                    this.tbPass.Clear();
+                    this.tbPass2.Clear();
+                    this.tbEmailToken.Clear();
+                    this.pbEmailToken.Visible = false;
+                    this.pbPass.Visible = false;
+                    this.pbPass2.Visible = false;
+                    this.panelPassOlvidada.Enabled = false;
+                }
+                else
+                {
+                    MsgBox.Show("Ha habido un problema al restaurar la contraseña.", "Contraseña no restaurada", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                    this.btnEnviarEmailToken.Enabled = true;
+                }
+            }
+        }
+
+        /******************************
+         * Eventos para los textBoxes *
+         ******************************/
         private void tbCambiar1_TextChanged(object sender, EventArgs e)
         {
             if (tbCambiar1.Text.Length > 0)
@@ -127,35 +277,7 @@ namespace Proyecto_Presentacion
                 this.toolTipCambiar3.Show("Las contraseñas no coinciden", this.tbCambiar3, 1000);
             }
         }
-        private async void btnCambiarPass_Click(object sender, EventArgs e)
-        {
-            string respuesta = await m.cambiarPass(UsuarioConectado.nombre, tbCambiar1.Text, tbCambiar3.Text);
-            if (respuesta.Equals("passCambiada"))
-            {
-                MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
-                this.tbCambiar1.Clear();
-                this.tbCambiar2.Clear();
-                this.tbCambiar3.Clear();
-            }
-            else if (respuesta.Equals("passNoCambiada"))
-            {
-                MsgBox.Show("Ha habido un problema al guardar la nueva contraseña.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-            }
-            else if (respuesta.Equals("passNoValida"))
-            {
-                MsgBox.Show("La contraseña actual que has introducido es incorrecta.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
-                this.tbCambiar1.Text = "";
-            }
-            else if (respuesta.Equals("tokenNoValido"))
-            {
-                MsgBox.Show("El token de sesión de tu usuario no parece valido, cierra sesión y vuelve a conectarte.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
-            }
-            else
-            {
-                MsgBox.Show("El servidor no responde, por favor revisa tu conexión a internet.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
-            }
-            btnCambiarPass.Enabled = false;
-        }
+        
 
         private void tbTituloRep_TextChanged(object sender, EventArgs e)
         {
@@ -180,168 +302,6 @@ namespace Proyecto_Presentacion
                 btnEnvReporte.Enabled = false;
             }
         }
-
-        private async void btnCurso_Click(object sender, EventArgs e)
-        {
-            curso = await m.obtenerCurso(UsuarioConectado.nombre);
-            string mensaje = "Error al cambiar el curso";
-            if (curso.Equals("curso1") || curso.Equals("curso2"))
-            {
-                if (MsgBox.Show("Tienes notas de tu curso guardadas en la base de datos. ¿Ahora con el cambio quieres borrarlas?", "¿Que es lo que quieres que hagamos?", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
-                {
-                    await m.borrarNotas(UsuarioConectado.nombre, curso);
-                }
-            }
-            if (this.radioButtonPrimero.Checked)
-            {
-                if (curso.Equals("curso1")) mensaje = "Ya tienes primero como curso actual";
-                else if (await m.cambiarCurso(UsuarioConectado.nombre, "curso1")) mensaje = "Cambiado a primer curso";
-            }
-            else if (this.radioButtonSegundo.Checked)
-            {
-                if (curso.Equals("curso2")) mensaje = "Ya tienes segundo como curso actual";
-                else if (await m.cambiarCurso(UsuarioConectado.nombre, "curso2")) mensaje = "Cambiado a segundo curso";
-            }
-            else
-            {
-                if (curso.Equals("curso0")) mensaje = "Actualmente no tienes un curso asignado";
-                else if (await m.cambiarCurso(UsuarioConectado.nombre, "curso0")) mensaje = "Cambiado a ningun curso";
-            }
-            MsgBox.Show(mensaje, "Curso cambiado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
-        }
-
-        private async void btnEnvReporte_Click(object sender, EventArgs e)
-        {
-            this.btnEnvReporte.Enabled = false;
-            datos.Clear();
-            datos.Add("titulo", tbTituloRep.Text);
-            datos.Add("reporte", tbReporte.Text);
-            if (await m.enviarEmailReporte(UsuarioConectado.nombre, datos))
-            {
-                MsgBox.Show("El reporte ha sido enviado satisfactoriamente, gracias por tu aportación", "Reporte enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
-                this.tbTituloRep.Clear();
-                this.tbReporte.Clear();
-            }
-            else
-            {
-                MsgBox.Show("El reporte no se ha podido enviar debido a un error", "Reporte no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-                this.btnEnvReporte.Enabled = true;
-            }
-        }
-
-        private void radioButtons_CheckedChanged(object sender, EventArgs e)
-        {
-            this.btnCurso.Enabled = true;
-        }
-
-        private void tbEmailToken_TextChanged(object sender, EventArgs e)
-        {
-            if (this.lblEmailToken.Text.Equals("Email"))
-            {
-                if (tbEmailToken.Text.Length > 0)
-                {
-                    if (m.comprobarEmailValido(tbEmailToken.Text))
-                    {
-                        this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                        this.toolTipEmailToken.SetToolTip(tbEmailToken, "Correcto");
-                        this.btnEnviarEmailToken.Enabled = true;
-                    }
-                    else
-                    {
-                        this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                        this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce un email válido");
-                        this.btnEnviarEmailToken.Enabled = false;
-                    }
-
-                }
-                else
-                {
-                    this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                    this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce tu email");
-                    this.toolTipEmailToken.Show("Introduce tu email", this.tbEmailToken, 1000);
-                    this.btnEnviarEmailToken.Enabled = false;
-                }
-            }
-            else
-            {
-                if (tbEmailToken.Text.Length > 0 && tbEmailToken.Text.Equals(token))
-                {
-                    this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                    this.toolTipEmailToken.SetToolTip(tbEmailToken, "Correcto");
-                    this.lblPass.Enabled = this.lblPass2.Enabled = this.tbPass.Enabled = this.tbPass2.Enabled = true;
-
-                }
-                else
-                {
-                    this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.error;
-                    this.toolTipEmailToken.SetToolTip(pbEmailToken, "El token no parece válido");
-                    this.toolTipEmailToken.Show("El token no parece válido", this.pbEmailToken, 1000);
-                    this.lblPass.Enabled = this.lblPass2.Enabled = this.tbPass.Enabled = this.tbPass2.Enabled = false;
-                }
-            }
-
-
-        }
-
-        private async void btnEnviarEmailToken_Click(object sender, EventArgs e)
-        {
-            this.btnEnviarEmailToken.Enabled = false;
-            if (lblEmailToken.Text.Equals("Email"))
-            {
-                email = tbEmailToken.Text;
-                if (await m.buscarEmailEnBD(email))
-                {
-                    datos.Clear();
-                    datos.Add("email", email);
-                    string respuesta = await m.enviarEmailPassPerdida(UsuarioConectado.nombre, datos);
-                    if (respuesta.Equals("emailNoEnviado"))
-                    {
-                        MsgBox.Show("El correo no se ha podido enviar debido a un error.", "Email no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-                    }
-                    else
-                    {
-                        MsgBox.Show("El correo se ha mandado satisfactoriamente, revisa tu correo para copiar el token.", "Email enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
-                        token = respuesta;
-                        this.btnEnviarEmailToken.Text = "Cambiar contraseña";
-                        this.lblEmailToken.Text = "Token";
-                        this.tbEmailToken.Clear();
-                        this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                        this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce el token");
-                        this.toolTipEmailToken.Show("Introduce el token", this.tbEmailToken, 1000);
-
-                    }
-                }
-                else
-                {
-                    MsgBox.Show("Esa dirección de correo no esta registrada en nuestra aplicación.", "Email enviado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
-
-                    this.btnEnviarEmailToken.Enabled = true;
-                }
-
-            }
-            else
-            {
-                if (await m.restaurarPass(email, tbPass2.Text))
-                {
-                    MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
-
-                    token = email = "";
-                    this.tbPass.Clear();
-                    this.tbPass2.Clear();
-                    this.tbEmailToken.Clear();
-                    this.pbEmailToken.Visible = false;
-                    this.pbPass.Visible = false;
-                    this.pbPass2.Visible = false;
-                    this.panelPassOlvidada.Enabled = false;
-                }
-                else
-                {
-                    MsgBox.Show("Ha habido un problema al restaurar la contraseña.", "Contraseña no restaurada", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-                    this.btnEnviarEmailToken.Enabled = true;
-                }
-            }
-        }
-
         private void tbPass_Leave(object sender, EventArgs e)
         {
             if (tbPass.Text.Length > 0)
@@ -418,5 +378,63 @@ namespace Proyecto_Presentacion
                 this.toolTipPass1.Show("Caracter no permitido, solo letras y numeros", this.tbPass, 1000);
             }
         }
+
+        /*************************************
+         * Eventos para los botones de radio *
+         *************************************/
+        private void radioButtons_CheckedChanged(object sender, EventArgs e)
+        {
+            this.btnCurso.Enabled = true;
+        }
+
+        private void tbEmailToken_TextChanged(object sender, EventArgs e)
+        {
+            if (this.lblEmailToken.Text.Equals("Email"))
+            {
+                if (tbEmailToken.Text.Length > 0)
+                {
+                    if (m.comprobarEmailValido(tbEmailToken.Text))
+                    {
+                        this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                        this.toolTipEmailToken.SetToolTip(tbEmailToken, "Correcto");
+                        this.btnEnviarEmailToken.Enabled = true;
+                    }
+                    else
+                    {
+                        this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                        this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce un email válido");
+                        this.btnEnviarEmailToken.Enabled = false;
+                    }
+
+                }
+                else
+                {
+                    this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                    this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce tu email");
+                    this.toolTipEmailToken.Show("Introduce tu email", this.tbEmailToken, 1000);
+                    this.btnEnviarEmailToken.Enabled = false;
+                }
+            }
+            else
+            {
+                if (tbEmailToken.Text.Length > 0 && tbEmailToken.Text.Equals(token))
+                {
+                    this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                    this.toolTipEmailToken.SetToolTip(tbEmailToken, "Correcto");
+                    this.lblPass.Enabled = this.lblPass2.Enabled = this.tbPass.Enabled = this.tbPass2.Enabled = true;
+
+                }
+                else
+                {
+                    this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.error;
+                    this.toolTipEmailToken.SetToolTip(pbEmailToken, "El token no parece válido");
+                    this.toolTipEmailToken.Show("El token no parece válido", this.pbEmailToken, 1000);
+                    this.lblPass.Enabled = this.lblPass2.Enabled = this.tbPass.Enabled = this.tbPass2.Enabled = false;
+                }
+            }
+
+
+        }
+
     }
 }

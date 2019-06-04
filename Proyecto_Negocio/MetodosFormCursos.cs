@@ -47,7 +47,7 @@ namespace Proyecto_Negocio
                         using (var stream = response.GetResponseStream())
                             img = Bitmap.FromStream(stream);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         img = Image.FromFile(ruta + "/../../Resources/imagenLink.png");
                     }
