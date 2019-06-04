@@ -36,7 +36,7 @@ namespace Proyecto_Negocio
             {
                 if (e.imagen.Equals("") || e.imagen == null)
                 {
-                    img = Image.FromFile(ruta + "/../../Resources/titulo.png");
+                    img = Image.FromFile(ruta + "/../../Resources/imagenLink.png");
                 }
                 else if (!e.imagen.Contains("localhost"))
                 {   //Convierte imagen de un URL a Image
@@ -49,7 +49,7 @@ namespace Proyecto_Negocio
                     }
                     catch (Exception ex)
                     {
-                        img = Image.FromFile(ruta + "/../../Resources/titulo.png");
+                        img = Image.FromFile(ruta + "/../../Resources/imagenLink.png");
                     }
 
                 }

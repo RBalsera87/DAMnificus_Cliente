@@ -237,10 +237,7 @@
     <None Include="Resources\Icono dividir.png" />
   </ItemGroup>
   <ItemGroup>
-
     <None Include="Resources\enlace.png" />
-    <None Include="Resources\employee.png" />
-    <None Include="Resources\link.png" />
     <None Include="Resources\activo.png" />
     <None Include="Resources\revision.png" />
     <None Include="Resources\like_1.png" />
@@ -254,8 +251,6 @@
     <None Include="Resources\dislike.png" />
     <None Include="Resources\cuatroEstrellas.png" />
     <None Include="Resources\cincoEstrellas.png" />
-    <None Include="Resources\like+1.jpg" />
-    <None Include="Resources\dontLike-1.png" />
     <None Include="Resources\accept.png" />
     <None Include="Resources\ocultar.png" />
     <None Include="Resources\unaEstrella.bmp" />
