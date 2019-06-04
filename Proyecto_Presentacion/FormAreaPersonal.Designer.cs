@@ -35,9 +35,9 @@ namespace Proyecto_Presentacion
             this.graficaNotas = new LiveCharts.WinForms.CartesianChart();
             this.graficaMedias = new LiveCharts.WinForms.PieChart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAgregarNota = new System.Windows.Forms.Button();
-            this.lblTrimestre = new System.Windows.Forms.Label();
             this.tbTrimestre = new System.Windows.Forms.TrackBar();
+            this.lblTrimestre = new System.Windows.Forms.Label();
+            this.btnAgregarNota = new System.Windows.Forms.Button();
             this.lbAsignaturas = new System.Windows.Forms.ListBox();
             this.notaIntroducir = new System.Windows.Forms.NumericUpDown();
             this.listadoEnlaces = new BrightIdeasSoftware.ObjectListView();
@@ -78,6 +78,7 @@ namespace Proyecto_Presentacion
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.graficaNotas, 2);
             this.graficaNotas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graficaNotas.ForeColor = System.Drawing.Color.White;
             this.graficaNotas.Location = new System.Drawing.Point(3, 3);
             this.graficaNotas.Name = "graficaNotas";
             this.graficaNotas.Size = new System.Drawing.Size(744, 418);
@@ -95,9 +96,9 @@ namespace Proyecto_Presentacion
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnAgregarNota);
-            this.groupBox1.Controls.Add(this.lblTrimestre);
             this.groupBox1.Controls.Add(this.tbTrimestre);
+            this.groupBox1.Controls.Add(this.lblTrimestre);
+            this.groupBox1.Controls.Add(this.btnAgregarNota);
             this.groupBox1.Controls.Add(this.lbAsignaturas);
             this.groupBox1.Controls.Add(this.notaIntroducir);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -108,37 +109,13 @@ namespace Proyecto_Presentacion
             this.groupBox1.Size = new System.Drawing.Size(371, 418);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "AGREGAR NOTA";
-            // 
-            // btnAgregarNota
-            // 
-            this.btnAgregarNota.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-            this.btnAgregarNota.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAgregarNota.ForeColor = System.Drawing.Color.White;
-            this.btnAgregarNota.Location = new System.Drawing.Point(3, 292);
-            this.btnAgregarNota.Name = "btnAgregarNota";
-            this.btnAgregarNota.Size = new System.Drawing.Size(365, 52);
-            this.btnAgregarNota.TabIndex = 4;
-            this.btnAgregarNota.Text = "AGREGAR";
-            this.btnAgregarNota.UseVisualStyleBackColor = false;
-            this.btnAgregarNota.Click += new System.EventHandler(this.btnAgregarNota_Click);
-            // 
-            // lblTrimestre
-            // 
-            this.lblTrimestre.AutoSize = true;
-            this.lblTrimestre.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTrimestre.Location = new System.Drawing.Point(3, 271);
-            this.lblTrimestre.Name = "lblTrimestre";
-            this.lblTrimestre.Size = new System.Drawing.Size(49, 21);
-            this.lblTrimestre.TabIndex = 2;
-            this.lblTrimestre.Text = "label1";
-            this.lblTrimestre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox1.Text = "Agregar notra";
             // 
             // tbTrimestre
             // 
-            this.tbTrimestre.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tbTrimestre.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tbTrimestre.LargeChange = 1;
-            this.tbTrimestre.Location = new System.Drawing.Point(3, 226);
+            this.tbTrimestre.Location = new System.Drawing.Point(3, 297);
             this.tbTrimestre.Maximum = 2;
             this.tbTrimestre.Name = "tbTrimestre";
             this.tbTrimestre.Size = new System.Drawing.Size(365, 45);
@@ -146,21 +123,47 @@ namespace Proyecto_Presentacion
             this.tbTrimestre.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tbTrimestre.Scroll += new System.EventHandler(this.tbTrimestre_Scroll);
             // 
+            // lblTrimestre
+            // 
+            this.lblTrimestre.AutoSize = true;
+            this.lblTrimestre.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblTrimestre.Location = new System.Drawing.Point(3, 342);
+            this.lblTrimestre.Name = "lblTrimestre";
+            this.lblTrimestre.Size = new System.Drawing.Size(49, 21);
+            this.lblTrimestre.TabIndex = 2;
+            this.lblTrimestre.Text = "label1";
+            this.lblTrimestre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnAgregarNota
+            // 
+            this.btnAgregarNota.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.btnAgregarNota.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregarNota.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnAgregarNota.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarNota.ForeColor = System.Drawing.Color.White;
+            this.btnAgregarNota.Location = new System.Drawing.Point(3, 363);
+            this.btnAgregarNota.Name = "btnAgregarNota";
+            this.btnAgregarNota.Size = new System.Drawing.Size(365, 52);
+            this.btnAgregarNota.TabIndex = 4;
+            this.btnAgregarNota.Text = "Agregar";
+            this.btnAgregarNota.UseVisualStyleBackColor = false;
+            this.btnAgregarNota.Click += new System.EventHandler(this.btnAgregarNota_Click);
+            // 
             // lbAsignaturas
             // 
-            this.lbAsignaturas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbAsignaturas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbAsignaturas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.lbAsignaturas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbAsignaturas.ForeColor = System.Drawing.Color.White;
             this.lbAsignaturas.FormattingEnabled = true;
             this.lbAsignaturas.ItemHeight = 21;
             this.lbAsignaturas.Location = new System.Drawing.Point(3, 54);
             this.lbAsignaturas.Name = "lbAsignaturas";
-            this.lbAsignaturas.Size = new System.Drawing.Size(365, 172);
+            this.lbAsignaturas.Size = new System.Drawing.Size(365, 361);
             this.lbAsignaturas.TabIndex = 1;
             // 
             // notaIntroducir
             // 
-            this.notaIntroducir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.notaIntroducir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.notaIntroducir.DecimalPlaces = 2;
             this.notaIntroducir.Dock = System.Windows.Forms.DockStyle.Top;
             this.notaIntroducir.ForeColor = System.Drawing.Color.White;
@@ -265,7 +268,7 @@ namespace Proyecto_Presentacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(1127, 771);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;

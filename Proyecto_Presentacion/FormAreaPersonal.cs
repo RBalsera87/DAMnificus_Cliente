@@ -43,7 +43,7 @@ namespace Proyecto_Presentacion
             this.mediaNotas = notasMedias;
             InitializeComponent();
             DoubleBuffered = true;
-            lblTrimestre.Text = "TRIMESTRE 1";
+            lblTrimestre.Text = "Trimestre 1";
             if (usuario.Equals("invitado") || curso == 0)
             {
                 cargarModelo();
@@ -95,13 +95,13 @@ namespace Proyecto_Presentacion
             switch (tbTrimestre.Value)
             {
                 case 0:
-                    lblTrimestre.Text = "TRIMESTRE 1";
+                    lblTrimestre.Text = "Trimestre 1";
                     break;
                 case 1:
-                    lblTrimestre.Text = "TRIMESTRE 2";
+                    lblTrimestre.Text = "Trimestre 2";
                     break;
                 case 2:
-                    lblTrimestre.Text = "TRIMESTRE 3";
+                    lblTrimestre.Text = "Trimestre 3";
                     break;
             }
         }
@@ -213,7 +213,7 @@ namespace Proyecto_Presentacion
                 });
                 graficaNotas.AxisX.Add(new Axis
                 {
-                    Labels = new[] { "TRIMESTRE 1", "TRIMESTRE 2", "TRIMESTRE 3" }
+                    Labels = new[] { "Trimestre 1", "Trimestre 2", "Trimestre 3" }
                 });
 
                 graficaMedias.Series = new SeriesCollection
@@ -334,7 +334,7 @@ namespace Proyecto_Presentacion
                 });
                 graficaNotas.AxisX.Add(new Axis
                 {
-                    Labels = new[] { "TRIMESTRE 1", "TRIMESTRE 2" }
+                    Labels = new[] { "Trimestre 1", "Trimestre 2" }
                 });
 
 
@@ -479,7 +479,7 @@ namespace Proyecto_Presentacion
             lbAsignaturas.Items.Add("Sistemas informáticos");
             lbAsignaturas.Items.Add("Formación y orientación laboral");
 
-            lblTrimestre.Text = "TRIMESTRE 1";
+            lblTrimestre.Text = "Trimestre 1";
         }
 
         //***************************************************************
