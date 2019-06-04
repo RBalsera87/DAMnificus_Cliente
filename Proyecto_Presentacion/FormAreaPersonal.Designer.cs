@@ -189,7 +189,7 @@ namespace Proyecto_Presentacion
             this.listadoEnlaces.AllColumns.Add(this.columnaTema);
             this.listadoEnlaces.AllColumns.Add(this.columnaTipo);
             this.listadoEnlaces.AllColumns.Add(this.columnaValoracion);
-            this.listadoEnlaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.listadoEnlaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.listadoEnlaces.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnaTitulo,
             this.columnaTema,
