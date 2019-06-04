@@ -628,6 +628,11 @@ namespace Proyecto_Presentacion
                                 btnAyudaAdmin.Image = Proyecto_Presentacion.Properties.Resources.producto;
                             }
                         }
+                        else if (respuesta.Equals("usuarioYaConectado"))
+                        {
+                            MsgBox.Show("Usuario ya conectado, por favor cierre la otra instancia para poder conectarse desde ésta.", "Conexión", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+                            lblConectado.Text = "Conectado como invitado";
+                        }
                         else
                         {
                             MsgBox.Show(respuesta, "Conexión", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
