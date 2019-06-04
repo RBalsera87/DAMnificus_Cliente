@@ -117,6 +117,9 @@ namespace Proyecto_AccesoDatos
                     {
                         token = respConToken.token;
                         return "Acceso concedido";
+                    }else if (respConToken.respuesta.Equals("usuarioYaConectado"))
+                    {
+                        return "usuarioYaConectado";
                     }
                     else
                     {
