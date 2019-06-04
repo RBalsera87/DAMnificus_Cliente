@@ -274,6 +274,7 @@ namespace Proyecto_Presentacion
             listadoEnlaces.Font = new Font("Segoe UI Semilight", 9, FontStyle.Bold);
             listadoEnlaces.CellToolTip.Font = new Font("Segoe UI Semilight", 10, FontStyle.Bold);
             listadoEnlaces.EmptyListMsgFont = new Font("Segoe UI Semilight", 12, FontStyle.Bold);
+            listadoEnlaces.Sort(columnaTema, SortOrder.Ascending); //Ordena los enlaces por la columna tema
         }
         public void InitializeModel()
         {
@@ -401,7 +402,7 @@ namespace Proyecto_Presentacion
                 }else
                 {
                     Enlaces enlace = (Enlaces)e.Model;
-                    if (!enlace.like)
+                    if (!enlace.like && !enlace.dontLike)
                     {
                         //Object linkSeleccionado = objectListView1.SelectedObject;
                         Dictionary<string, string> datos = new Dictionary<string, string>();
@@ -429,7 +430,7 @@ namespace Proyecto_Presentacion
                 }else
                 {
                     Enlaces enlace = (Enlaces)e.Model;
-                    if (!enlace.dontLike)
+                    if (!enlace.dontLike && !enlace.like)
                     {
                         Dictionary<string, string> datos = new Dictionary<string, string>();
                         datos.Add("id", enlace.id);
