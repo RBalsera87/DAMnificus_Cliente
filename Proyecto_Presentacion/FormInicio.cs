@@ -276,18 +276,34 @@ namespace Proyecto_Presentacion
                 this.pbPass1.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipPass1.SetToolTip(pbPass1, "Debes poner una contraseña");
                 this.toolTipPass1.Show("Debes poner una contraseña", this.tbPass, 1000);
+                passValido = false;
+            }
+            else if (this.tbPass.Text.Length < 8)
+            {
+                //Si el password no tiene 8 caracteres
+                this.pbPass1.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass1.SetToolTip(pbPass1, "La contraseña debe tener 8 caracteres o más");
+                passValido = false;
             }
             else
             {
                 //Si el password es valido se pon ok
                 this.pbPass1.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipPass1.SetToolTip(pbPass1, "Correcto");;
+                this.toolTipPass1.SetToolTip(pbPass1, "Correcto");
+                passValido = true;
             }
             activarBotonAceptar();
         }
         private void tbPass2_Leave(object sender, EventArgs e)
         {
-            if (this.tbPass2.Text == "")
+            if (this.tbPass2.Text.Length < 8)
+            {
+                //Si el password no tiene 8 caracteres
+                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass2.SetToolTip(pbPass2, "La contraseña debe tener 8 caracteres o más");
+                passValido = false;
+            }
+            else if (this.tbPass2.Text == "")
             {
                 this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipPass2.SetToolTip(pbPass2, "Vuelve a escribir la contraseña");
@@ -305,12 +321,21 @@ namespace Proyecto_Presentacion
         }
         private void tbPass2_TextChanged(object sender, EventArgs e)
         {
-            if (this.tbPass2.Text.Equals(this.tbPass.Text))
+            if (this.tbPass2.Text.Length < 8)
+            {
+                //Si el password no tiene 8 caracteres
+                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass2.SetToolTip(pbPass2, "La contraseña debe tener 8 caracteres o más");
+                passValido = false;
+            }
+            else if (this.tbPass2.Text.Equals(this.tbPass.Text))
             {
                 this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.ok;
                 this.toolTipPass2.SetToolTip(pbPass2, "Correcto");
                 passValido = true;
-            }else
+            }
+            
+            else
             {
                 passValido = false;
             }

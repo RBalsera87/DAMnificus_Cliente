@@ -29,7 +29,9 @@ namespace Proyecto_AccesoDatos
             urlServidor = "http://" + ip + ":8080/damnificus/";
         }
 
-        // Método que se usa para codificar la petición y enviarla al servidor
+        /*************************
+         * Método enviarPetición *          Se usa para codificar la petición y enviarla al servidor.
+         *************************/
         public async Task<Respuesta> enviarPeticion(string pet, string user, string pass, string token, Dictionary<string, string> registro)
         {
             string passCifrado = null;
@@ -61,11 +63,12 @@ namespace Proyecto_AccesoDatos
             // Envuelve nuestro JSON dentro de un StringContent que luego puede ser usado por la clase HttpClient
             var httpContent = new StringContent(stringPeticion, Encoding.UTF8, "application/json");
 
-            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(100) }) // Timeout es para el tiempo que se debe esperar a la respuesta
-            {                                                                                 // Para debug poner 100 o mas, para release 5 o 10 como mucho
-                // Ejecuta la solicitud actual y espera la respuesta
+            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(3) })
+            {  // Timeout es para el tiempo que se debe esperar a la respuesta desde el servidor. 
+               // Para debug poner 100 o mas, para release 3 o 5 como mucho !!!
+                
                 try
-                {
+                {   // Ejecuta la solicitud actual y espera la respuesta
                     var httpResponse = await httpClient.PostAsync(urlServidor, httpContent);
                     if (httpResponse.Content != null)
                     {
