@@ -291,8 +291,14 @@ namespace Proyecto_AccesoDatos
             }
             if (token.Equals("")) { token = null; }
             Respuesta respuesta = await enviarPeticion("cambiarActivoRevisionDesactivo", usuario, null, token, datos);
-            var estado = int.Parse(respuesta.respuesta);
-            return estado;
+            if (!respuesta.respuesta.Equals("tokenNoValido"))
+            {
+                var estado = int.Parse(respuesta.respuesta);
+                return estado;
+            }else
+            {
+                return -1;
+            }
         }
         public async Task<string> enviarEmailparaRegistro(string usuario, Dictionary<string, string> datos)
         {
@@ -416,7 +422,14 @@ namespace Proyecto_AccesoDatos
         public async Task<int> sacarUsuario(string usuario, Dictionary<string,string>datos)
         {
             Respuesta respuesta = await enviarPeticion("sacarUsuario", usuario, null, token, datos);
-            return Convert.ToInt32(respuesta.respuesta);
+            if (!respuesta.respuesta.Equals("tokenNoValido"))
+            {
+                return Convert.ToInt32(respuesta.respuesta);
+            }else
+            {
+                return -1;
+            }
+            
         }
 
         public async Task<bool> hayNota (string usuario, Dictionary<string,string>datos)
