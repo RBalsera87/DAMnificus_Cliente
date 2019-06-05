@@ -25,7 +25,7 @@ namespace Proyecto_Negocio
         {
             return await ad.cambiarActivoRevisionDesactivo(usuario, datos);
         }
-        public ImageList cargarImageListLargeEnlaces(List<Enlaces> listaEnlaces, String ruta, int tamanio)
+        public ImageList cargarImageListLargeEnlaces(List<Enlaces> listaEnlaces, Image imagenPorDefecto, int tamanio)
         {
             ImageList imageListLarge = new ImageList();
             imageListLarge.ImageSize = new Size(tamanio, tamanio);
@@ -36,9 +36,9 @@ namespace Proyecto_Negocio
             {
                 if (e.imagen.Equals("") || e.imagen == null)
                 {
-                    img = Image.FromFile(ruta + "/../../Resources/imagenLink.png");
+                    img = imagenPorDefecto;
                 }
-                else if (!e.imagen.Contains("localhost"))
+                else 
                 {   //Convierte imagen de un URL a Image
                     try
                     {
@@ -49,7 +49,7 @@ namespace Proyecto_Negocio
                     }
                     catch (Exception)
                     {
-                        img = Image.FromFile(ruta + "/../../Resources/imagenLink.png");
+                        img = imagenPorDefecto;
                     }
 
                 }

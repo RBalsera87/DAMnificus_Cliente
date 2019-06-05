@@ -516,7 +516,7 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("dontLike-1", Proyecto_Presentacion.Properties.Resources.dislike_1);
 
             listadoEnlaces.SmallImageList = imageListSmall;
-            imageListLarge = m.cargarImageListLargeEnlaces(listaEnlaces, Application.StartupPath, 80);
+            imageListLarge = m.cargarImageListLargeEnlaces(listaEnlaces, Proyecto_Presentacion.Properties.Resources.imagenLink, 80);
 
         }
         public bool containsIgnoreMayusMin(string source, string value, StringComparison comparisonType)

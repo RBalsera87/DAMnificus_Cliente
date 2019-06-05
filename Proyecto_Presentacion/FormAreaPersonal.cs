@@ -618,7 +618,7 @@ namespace Proyecto_Presentacion
             imageListSmall.Images.Add("5Estrellas", Proyecto_Presentacion.Properties.Resources.cincoEstrellas);
 
             listadoEnlaces.SmallImageList = imageListSmall;
-            imageListLarge = mfc.cargarImageListLargeEnlaces(listaEnlaces, System.Windows.Forms.Application.StartupPath, 70);
+            imageListLarge = mfc.cargarImageListLargeEnlaces(listaEnlaces, Proyecto_Presentacion.Properties.Resources.imagenLink, 70);
 
         }
         public bool containsIgnoreMayusMin(string source, string value, StringComparison comparisonType)
