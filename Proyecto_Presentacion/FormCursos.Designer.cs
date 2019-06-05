@@ -225,16 +225,17 @@
             this.columnaTitulo.AspectName = "titulo";
             this.columnaTitulo.FillsFreeSpace = true;
             this.columnaTitulo.ImageAspectName = "FeatureIcon";
+            this.columnaTitulo.MinimumWidth = 300;
             this.columnaTitulo.Text = "Título y descripción";
-            this.columnaTitulo.Width = 150;
+            this.columnaTitulo.Width = 300;
             this.columnaTitulo.WordWrap = true;
             // 
             // columnaTema
             // 
             this.columnaTema.AspectName = "tema";
-            this.columnaTema.MinimumWidth = 200;
+            this.columnaTema.MinimumWidth = 80;
             this.columnaTema.Text = "Tema";
-            this.columnaTema.Width = 300;
+            this.columnaTema.Width = 270;
             // 
             // columnaTipo
             // 
