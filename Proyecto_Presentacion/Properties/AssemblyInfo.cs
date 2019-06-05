@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("Proyecto_Presentacion")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("App Damnificus")]
+[assembly: AssemblyDescription("Aplicación desarrollada como proyecto final de DAM")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("IES Gaspar Melchor de Jovellanos")]
 [assembly: AssemblyProduct("Proyecto_Presentacion")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright © 2019 Rubén Balsera, Antonio Illarramendi y Valentín Sanchez")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -62,11 +62,10 @@ namespace Proyecto_AccesoDatos
             var stringPeticion = await Task.Run(() => JsonConvert.SerializeObject(peticionActual));
             // Envuelve nuestro JSON dentro de un StringContent que luego puede ser usado por la clase HttpClient
             var httpContent = new StringContent(stringPeticion, Encoding.UTF8, "application/json");
-
-            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(3) })
-            {  // Timeout es para el tiempo que se debe esperar a la respuesta desde el servidor. 
-               // Para debug poner 100 o mas, para release 3 o 5 como mucho !!!
-                
+            // Timeout es para el tiempo que se debe esperar a la respuesta desde el servidor. 
+            int timeoutSecs = Int32.Parse(ConfigurationManager.AppSettings["timeoutSecs"]);
+            using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(timeoutSecs) })
+            {  // Para debug poner 100 o mas, para release 3 o 5 como mucho se configura en App Damnificus.exe.config
                 try
                 {   // Ejecuta la solicitud actual y espera la respuesta
                     var httpResponse = await httpClient.PostAsync(urlServidor, httpContent);
