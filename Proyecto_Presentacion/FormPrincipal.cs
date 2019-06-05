@@ -421,9 +421,10 @@ namespace Proyecto_Presentacion
         }
         private void pbTitulo_DoubleClick(object sender, EventArgs e)
         {
-            MsgBox.Show("Aplicación DAMníficus\r\rCreada como proyecto final para el curso de Desarrollo de " +
+            MsgBox.Show("Creada como proyecto final para el curso de Desarrollo de " +
                 "Aplicaciones Multiplataforma 2018/19 del IES Gaspar Melchor de Jovellanos por:\r\r" +
-                "Rubén Balsera, Antonio Illarramendi y Valentín Sanchez.", "Sobre la app", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                "Rubén Balsera, Antonio Illarramendi y Valentín Sanchez.\r\r" +
+                "Contacto: damnificusjovellanos@gmail.com", "Acerca de la Aplicación DAMníficus", MsgBox.Buttons.OK, MsgBox.Icon.Shield, MsgBox.AnimateStyle.FadeIn);
         }
 
 
