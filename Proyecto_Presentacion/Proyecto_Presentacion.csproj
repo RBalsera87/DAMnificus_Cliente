@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Proyecto_Presentacion</RootNamespace>
-    <AssemblyName>Proyecto_Presentacion</AssemblyName>
+    <AssemblyName>App Damnificus</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -135,12 +135,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FormWidget.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormWidget.Designer.cs">
-      <DependentUpon>FormWidget.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="FormAdministracion.resx">
       <DependentUpon>FormAdministracion.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,9 +167,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="FormWidget.resx">
-      <DependentUpon>FormWidget.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

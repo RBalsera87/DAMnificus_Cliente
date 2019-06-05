@@ -546,7 +546,7 @@
             this.tbPass2.TabIndex = 8;
             this.tbPass2.TextChanged += new System.EventHandler(this.tbPass2_TextChanged);
             this.tbPass2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPass_KeyPress);
-            this.tbPass2.Leave += new System.EventHandler(this.tbPass2_Leave);
+            this.tbPass2.Leave += new System.EventHandler(this.tbPass2_TextChanged);
             // 
             // lblPass
             // 
@@ -723,7 +723,7 @@
             this.tbCambiar3.TabIndex = 2;
             this.tbCambiar3.TextChanged += new System.EventHandler(this.tbCambiar3_TextChanged);
             this.tbCambiar3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCambiar2_KeyPress);
-            this.tbCambiar3.Leave += new System.EventHandler(this.tbCambiar3_Leave);
+            this.tbCambiar3.Leave += new System.EventHandler(this.tbCambiar3_TextChanged);
             // 
             // label3
             // 

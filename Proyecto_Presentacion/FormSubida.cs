@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace Proyecto_Presentacion
 {
+
+    /*************************************
+     * INTERFAZ DEL FORMULARIO DE SUBIDA *
+     *************************************/
     public partial class FormSubida : Form
     {
         MetodosFormSubida m = new MetodosFormSubida();
@@ -16,14 +20,14 @@ namespace Proyecto_Presentacion
         private bool temaOk = false;
         List<string> listaAsignaturas, listaTemas;
 
+        /***************
+         * Constructor *
+         ***************/
         public FormSubida()
         {
             InitializeComponent();
         }
-        private void FormSubida_Load(object sender, EventArgs e)
-        {
-            
-        }
+
         private void btnContraer_Click(object sender, EventArgs e)
         {
             tablePanel.ColumnStyles[1].SizeType = SizeType.Absolute;
@@ -32,6 +36,9 @@ namespace Proyecto_Presentacion
             this.btnContraer.Visible = false;
         }
 
+        /****************************
+         * Eventos para los botones *
+         ****************************/
         private void btnExpandir_Click(object sender, EventArgs e)
         {
             tablePanel.ColumnStyles[1].SizeType = SizeType.Percent;
@@ -80,6 +87,10 @@ namespace Proyecto_Presentacion
                 MsgBox.Show("Error al subir el enlace en la base de datos, comprueba que los campos esten correctamente rellenos.", 
                     "Enlace no subido", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
         }
+
+        /******************************
+         * Eventos para los textboxes *
+         ******************************/
         private void tbTitulo_TextChanged(object sender, EventArgs e)
         {
             if (tbTitulo.Text.Trim().Length > 0)
@@ -159,6 +170,10 @@ namespace Proyecto_Presentacion
                 lbAsignatura.Enabled = true;            
             }
         }
+
+        /*************************************
+         * Eventos para los botones de radio *
+         *************************************/
         private async void radioButtonSegundo_CheckedChanged(object sender, EventArgs e)
         {
             lbTema.Items.Clear();
@@ -189,6 +204,9 @@ namespace Proyecto_Presentacion
             lbTema.Enabled = true;            
         }
 
+        /******************************
+         * Eventos para los listBoxes *
+         ******************************/
         private void lbTema_SelectedIndexChanged(object sender, EventArgs e)
         {
             temaOk = true;
@@ -227,6 +245,10 @@ namespace Proyecto_Presentacion
             // Si el cuadro de lista tiene el foco, dibuja un rectángulo alrededor del elemento seleccionado.
             e.DrawFocusRectangle();
         }
+
+        /**********************************************
+         * Métodos internos para el Formulario Inicio *
+         **********************************************/
         private void comprobarActivarBoton()
         {
             if (tituloOk && descripcionOk && enlaceOk && temaOk)

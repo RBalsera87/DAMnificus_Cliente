@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace Proyecto_Presentacion
 {
+    /************************************
+     * INTERFAZ DEL FORMULARIO DE AYUDA *
+     ************************************/
     public partial class FormAyuda : Form
     {
         MetodosFormAyuda m = new MetodosFormAyuda();
@@ -19,6 +22,10 @@ namespace Proyecto_Presentacion
         private string curso;
         private string token = "";
         private string email = "";
+
+        /***************
+         * Constructor *
+         ***************/
         public FormAyuda()
         {
             InitializeComponent();
@@ -27,6 +34,9 @@ namespace Proyecto_Presentacion
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
+        /*****************
+         * Evento onLoad *
+         *****************/
         private async void FormAyuda_Load(object sender, EventArgs e)
         {
             if (UsuarioConectado.nombre.Equals("invitado"))
@@ -48,6 +58,9 @@ namespace Proyecto_Presentacion
             }
         }
 
+        /****************************
+         * Eventos para los botones *
+         ****************************/
         private void btnContraer_Click(object sender, EventArgs e)
         {
             tablePanel.ColumnStyles[1].SizeType = SizeType.Absolute;
@@ -63,131 +76,50 @@ namespace Proyecto_Presentacion
             this.btnExpandir.Visible = false;
             this.btnContraer.Visible = true;
         }
-
-        private void tbCambiar1_TextChanged(object sender, EventArgs e)
-        {
-            if (tbCambiar1.Text.Length > 0)
-            {
-                lblCambiar2.Enabled = lblCambiar3.Enabled = tbCambiar2.Enabled = tbCambiar3.Enabled = true;
-                this.pbCambiar1.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipCambiar1.SetToolTip(tbCambiar1, "Correcto");
-            }
-            else
-            {
-                lblCambiar2.Enabled = lblCambiar3.Enabled = tbCambiar2.Enabled = tbCambiar3.Enabled = false;
-                this.pbCambiar1.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                this.toolTipCambiar1.SetToolTip(pbCambiar1, "Escribe tu contraseña actual");
-                this.toolTipCambiar1.Show("Escribe tu contraseña actual", this.tbCambiar1, 1000);
-            }
-        }
-        private void tbCambiar2_Leave(object sender, EventArgs e)
-        {
-            if (tbCambiar2.Text.Length > 0)
-            {
-                this.pbCambiar2.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipCambiar2.SetToolTip(tbCambiar2, "Correcto");
-            }
-            else
-            {
-                this.pbCambiar2.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                this.toolTipCambiar2.SetToolTip(pbCambiar2, "Escribe una nueva contraseña");
-                this.toolTipCambiar2.Show("Escribe una nueva contraseña", this.tbCambiar2, 1000);
-            }
-        }
-
-        private void tbCambiar3_TextChanged(object sender, EventArgs e)
-        {
-            if (tbCambiar3.Text.Equals(tbCambiar2.Text))
-            {
-                this.btnCambiarPass.Enabled = true;
-                this.pbCambiar3.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipCambiar3.SetToolTip(tbCambiar3, "Las contraseñas coinciden");
-            }
-            else
-            {
-                this.btnCambiarPass.Enabled = false;
-                this.pbCambiar3.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                this.toolTipCambiar3.SetToolTip(pbCambiar1, "Las contraseñas no coinciden");
-                this.toolTipCambiar3.Show("Las contraseñas no coinciden", this.tbCambiar3, 1000);
-            }
-        }
-        private void tbCambiar3_Leave(object sender, EventArgs e)
-        {
-            if (tbCambiar3.Text.Equals(tbCambiar2.Text))
-            {
-                this.btnCambiarPass.Enabled = true;
-                this.pbCambiar3.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipCambiar3.SetToolTip(tbCambiar3, "Las contraseñas coinciden");
-            }
-            else
-            {
-                this.btnCambiarPass.Enabled = false;
-                this.pbCambiar3.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                this.toolTipCambiar3.SetToolTip(pbCambiar1, "Las contraseñas no coinciden");
-                this.toolTipCambiar3.Show("Las contraseñas no coinciden", this.tbCambiar3, 1000);
-            }
-        }
         private async void btnCambiarPass_Click(object sender, EventArgs e)
         {
             string respuesta = await m.cambiarPass(UsuarioConectado.nombre, tbCambiar1.Text, tbCambiar3.Text);
             if (respuesta.Equals("passCambiada"))
             {
-                MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", 
+                    MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
                 this.tbCambiar1.Clear();
                 this.tbCambiar2.Clear();
                 this.tbCambiar3.Clear();
             }
             else if (respuesta.Equals("passNoCambiada"))
             {
-                MsgBox.Show("Ha habido un problema al guardar la nueva contraseña.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                MsgBox.Show("Ha habido un problema al guardar la nueva contraseña.", "Contraseña no actualizada", 
+                    MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
             }
             else if (respuesta.Equals("passNoValida"))
             {
-                MsgBox.Show("La contraseña actual que has introducido es incorrecta.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+                MsgBox.Show("La contraseña actual que has introducido es incorrecta.", "Contraseña no actualizada", 
+                    MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
                 this.tbCambiar1.Text = "";
             }
             else if (respuesta.Equals("tokenNoValido"))
             {
-                MsgBox.Show("El token de sesión de tu usuario no parece valido, cierra sesión y vuelve a conectarte.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
+                MsgBox.Show("El token de sesión de tu usuario no parece valido, cierra sesión y vuelve a conectarte.", 
+                    "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
             }
             else
             {
-                MsgBox.Show("El servidor no responde, por favor revisa tu conexión a internet.", "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, MsgBox.AnimateStyle.FadeIn);
+                MsgBox.Show("El servidor no responde, por favor revisa tu conexión a internet.", 
+                    "Contraseña no actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Warning, 
+                    MsgBox.AnimateStyle.FadeIn);
             }
             btnCambiarPass.Enabled = false;
         }
-
-        private void tbTituloRep_TextChanged(object sender, EventArgs e)
-        {
-            if (tbTituloRep.Text.Length > 0 && tbReporte.Text.Length > 0)
-            {
-                btnEnvReporte.Enabled = true;
-            }
-            else
-            {
-                btnEnvReporte.Enabled = false;
-            }
-        }
-
-        private void tbReporte_TextChanged(object sender, EventArgs e)
-        {
-            if (tbTituloRep.Text.Length > 0 && tbReporte.Text.Length > 0)
-            {
-                btnEnvReporte.Enabled = true;
-            }
-            else
-            {
-                btnEnvReporte.Enabled = false;
-            }
-        }
-
         private async void btnCurso_Click(object sender, EventArgs e)
         {
             curso = await m.obtenerCurso(UsuarioConectado.nombre);
             string mensaje = "Error al cambiar el curso";
             if (curso.Equals("curso1") || curso.Equals("curso2"))
             {
-                if (MsgBox.Show("Tienes notas de tu curso guardadas en la base de datos. ¿Ahora con el cambio quieres borrarlas?", "¿Que es lo que quieres que hagamos?", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
+                if (MsgBox.Show("Tienes notas de tu curso guardadas en la base de datos. ¿Ahora con el cambio quieres borrarlas?", 
+                    "¿Que es lo que quieres que hagamos?", MsgBox.Buttons.YesNo, MsgBox.Icon.Question, 
+                    MsgBox.AnimateStyle.FadeIn) == DialogResult.Yes)
                 {
                     await m.borrarNotas(UsuarioConectado.nombre, curso);
                 }
@@ -218,17 +150,272 @@ namespace Proyecto_Presentacion
             datos.Add("reporte", tbReporte.Text);
             if (await m.enviarEmailReporte(UsuarioConectado.nombre, datos))
             {
-                MsgBox.Show("El reporte ha sido enviado satisfactoriamente, gracias por tu aportación", "Reporte enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                MsgBox.Show("El reporte ha sido enviado satisfactoriamente, gracias por tu aportación", "Reporte enviado", 
+                    MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
                 this.tbTituloRep.Clear();
                 this.tbReporte.Clear();
             }
             else
             {
-                MsgBox.Show("El reporte no se ha podido enviar debido a un error", "Reporte no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                MsgBox.Show("El reporte no se ha podido enviar debido a un error", "Reporte no enviado", 
+                    MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
                 this.btnEnvReporte.Enabled = true;
             }
         }
+        private async void btnEnviarEmailToken_Click(object sender, EventArgs e)
+        {
+            this.btnEnviarEmailToken.Enabled = false;
+            if (lblEmailToken.Text.Equals("Email"))
+            {
+                email = tbEmailToken.Text;
+                try
+                {
+                    if (await m.buscarEmailEnBD(email))
+                    {
+                        datos.Clear();
+                        datos.Add("email", email);
+                        string respuesta = await m.enviarEmailPassPerdida(UsuarioConectado.nombre, datos);
+                        if (respuesta.Equals("emailNoEnviado"))
+                        {
+                            MsgBox.Show("El correo no se ha podido enviar debido a un error.", "Email no enviado", 
+                                MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                        }
+                        else
+                        {
+                            MsgBox.Show("El correo se ha mandado satisfactoriamente, revisa tu correo para copiar el token.", "Email enviado", 
+                                MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                            token = respuesta;
+                            this.btnEnviarEmailToken.Text = "Cambiar contraseña";
+                            this.lblEmailToken.Text = "Token";
+                            this.tbEmailToken.Clear();
+                            this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                            this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce el token");
+                            this.toolTipEmailToken.Show("Introduce el token", this.tbEmailToken, 1000);
 
+                        }
+                    }
+                    else
+                    {
+                        MsgBox.Show("Esa dirección de correo no esta registrada en nuestra aplicación.", "Email no enviado", 
+                            MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+                        this.btnEnviarEmailToken.Enabled = true;
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    MsgBox.Show("Parece que no hay comunicación con el servidor en estos momentos, por favor revisa tu conexión o " +
+                        "ponte en contacto con nosotros en damnificusjovellano@gmail.com y explícanos tu problema.", "Email no enviado", 
+                        MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
+                    this.btnEnviarEmailToken.Enabled = true;
+                }
+                
+
+            }
+            else
+            {
+                if (await m.restaurarPass(email, tbPass2.Text))
+                {
+                    MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", 
+                        MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+
+                    token = email = "";
+                    this.tbPass.Clear();
+                    this.tbPass2.Clear();
+                    this.tbEmailToken.Clear();
+                    this.pbEmailToken.Visible = false;
+                    this.pbPass.Visible = false;
+                    this.pbPass2.Visible = false;
+                    this.panelPassOlvidada.Enabled = false;
+                }
+                else
+                {
+                    MsgBox.Show("Ha habido un problema al restaurar la contraseña.", "Contraseña no restaurada", 
+                        MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
+                    this.btnEnviarEmailToken.Enabled = true;
+                }
+            }
+        }
+
+        /******************************
+         * Eventos para los textBoxes *
+         ******************************/
+        private void tbCambiar1_TextChanged(object sender, EventArgs e)
+        {
+            if (tbCambiar1.Text.Length > 0)
+            {
+                lblCambiar2.Enabled = lblCambiar3.Enabled = tbCambiar2.Enabled = tbCambiar3.Enabled = true;
+                this.pbCambiar1.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                this.toolTipCambiar1.SetToolTip(tbCambiar1, "Correcto");
+            }
+            else
+            {
+                lblCambiar2.Enabled = lblCambiar3.Enabled = tbCambiar2.Enabled = tbCambiar3.Enabled = false;
+                this.pbCambiar1.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipCambiar1.SetToolTip(pbCambiar1, "Escribe tu contraseña actual");
+                this.toolTipCambiar1.Show("Escribe tu contraseña actual", this.tbCambiar1, 1000);
+            }
+        }
+        private void tbCambiar2_Leave(object sender, EventArgs e)
+        {
+            if (tbCambiar2.Text.Trim().Equals(""))
+            {
+                this.pbCambiar2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipCambiar2.SetToolTip(pbCambiar2, "Escribe una nueva contraseña");
+                this.toolTipCambiar2.Show("Escribe una nueva contraseña", this.tbCambiar2, 1000);
+                
+            }
+            else if (tbCambiar2.Text.Trim().Length < 8)
+            {
+                this.pbCambiar2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipCambiar2.SetToolTip(pbCambiar2, "La contraseña debe tener más de 8 caracteres");
+                this.toolTipCambiar2.Show("La contraseña debe tener más de 8 caracteres", this.tbCambiar2, 1000);
+            }
+            else
+            {
+                this.pbCambiar2.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                this.toolTipCambiar2.SetToolTip(tbCambiar2, "Correcto");
+            }
+        }
+
+        private void tbCambiar3_TextChanged(object sender, EventArgs e)
+        {
+            if (tbCambiar3.Text.Trim().Equals(""))
+            {
+                this.btnCambiarPass.Enabled = false;
+                this.pbCambiar3.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipCambiar3.SetToolTip(pbCambiar3, "Escribe una nueva contraseña");
+                this.toolTipCambiar3.Show("Escribe una nueva contraseña", this.tbCambiar3, 1000);
+                
+            }
+            else if (tbCambiar3.Text.Trim().Length < 8)
+            {
+                this.btnCambiarPass.Enabled = false;
+                this.pbCambiar3.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipCambiar3.SetToolTip(pbCambiar3, "La contraseña debe tener más de 8 caracteres");
+                this.toolTipCambiar3.Show("La contraseña debe tener más de 8 caracteres", this.tbCambiar3, 1000);
+            }
+            else if (tbCambiar3.Text.Trim().Equals(tbCambiar2.Text.Trim()))
+            {
+                this.btnCambiarPass.Enabled = true;
+                this.pbCambiar3.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                this.toolTipCambiar3.SetToolTip(tbCambiar3, "Las contraseñas coinciden");
+            }
+            else
+            {
+                this.btnCambiarPass.Enabled = false;
+                this.pbCambiar3.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipCambiar3.SetToolTip(pbCambiar3, "Las contraseñas no coinciden");
+                this.toolTipCambiar3.Show("Las contraseñas no coinciden", this.tbCambiar3, 1000);
+            }
+        }
+        private void tbTituloRep_TextChanged(object sender, EventArgs e)
+        {
+            if (tbTituloRep.Text.Length > 0 && tbReporte.Text.Length > 0)
+            {
+                btnEnvReporte.Enabled = true;
+            }
+            else
+            {
+                btnEnvReporte.Enabled = false;
+            }
+        }
+
+        private void tbReporte_TextChanged(object sender, EventArgs e)
+        {
+            if (tbTituloRep.Text.Length > 0 && tbReporte.Text.Length > 0)
+            {
+                btnEnvReporte.Enabled = true;
+            }
+            else
+            {
+                btnEnvReporte.Enabled = false;
+            }
+        }
+        private void tbPass_Leave(object sender, EventArgs e)
+        {
+            if (tbPass.Text.Trim().Equals(""))
+            {
+                this.pbPass.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass1.SetToolTip(pbPass, "Escribe una nueva contraseña");
+                this.toolTipPass1.Show("Escribe una nueva contraseña", this.tbPass, 1000);
+                
+            }
+            else if (tbPass.Text.Trim().Length < 8)
+            {
+                this.pbPass.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass1.SetToolTip(pbPass, "La contraseña debe tener más de 8 caracteres");
+                this.toolTipPass1.Show("La contraseña debe tener más de 8 caracteres", this.tbPass, 1000);
+            }
+            else
+            {
+                this.pbPass.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                this.toolTipPass1.SetToolTip(tbPass, "Correcto");
+            }
+        }
+
+        private void tbPass2_TextChanged(object sender, EventArgs e)
+        {
+            if (tbPass2.Text.Trim().Equals(""))
+            {
+                this.btnEnviarEmailToken.Enabled = false;
+                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass2.SetToolTip(pbPass2, "Escribe una contraseña");
+                this.toolTipPass2.Show("Escribe una contraseña", this.tbPass2, 1000);
+            }
+            else if (tbPass2.Text.Trim().Length < 7)
+            {
+                this.btnEnviarEmailToken.Enabled = false;
+                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass2.SetToolTip(pbPass2, "La contraseña debe tener más de 8 caracteres");
+                this.toolTipPass2.Show("La contraseña debe tener más de 8 caracteres", this.tbPass2, 1000);
+            }
+            else if (tbPass2.Text.Trim().Equals(tbPass.Text.Trim()))
+            {
+
+                this.btnEnviarEmailToken.Enabled = true;
+                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.ok;
+                this.toolTipPass2.SetToolTip(tbPass2, "Las contraseñas coinciden");
+            }
+            else
+            {
+                this.btnEnviarEmailToken.Enabled = false;
+                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass2.SetToolTip(pbPass2, "Las contraseñas no coinciden");
+                this.toolTipPass2.Show("Las contraseñas no coinciden", this.tbPass2, 1000);
+            }
+        }
+
+        private void tbCambiar2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play(); //Sonido "beep" de windows
+                e.Handled = true;
+                this.toolTipCambiar2.Show("Caracter no permitido, solo letras y numeros", this.tbCambiar2, 1000);
+            }
+        }
+
+        private void tbPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play(); //Sonido "beep" de windows
+                e.Handled = true;
+                this.toolTipPass1.Show("Caracter no permitido, solo letras y numeros", this.tbPass, 1000);
+            }
+        }
+
+        /*************************************
+         * Eventos para los botones de radio *
+         *************************************/
         private void radioButtons_CheckedChanged(object sender, EventArgs e)
         {
             this.btnCurso.Enabled = true;
@@ -283,140 +470,5 @@ namespace Proyecto_Presentacion
 
         }
 
-        private async void btnEnviarEmailToken_Click(object sender, EventArgs e)
-        {
-            this.btnEnviarEmailToken.Enabled = false;
-            if (lblEmailToken.Text.Equals("Email"))
-            {
-                email = tbEmailToken.Text;
-                if (await m.buscarEmailEnBD(email))
-                {
-                    datos.Clear();
-                    datos.Add("email", email);
-                    string respuesta = await m.enviarEmailPassPerdida(UsuarioConectado.nombre, datos);
-                    if (respuesta.Equals("emailNoEnviado"))
-                    {
-                        MsgBox.Show("El correo no se ha podido enviar debido a un error.", "Email no enviado", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-                    }
-                    else
-                    {
-                        MsgBox.Show("El correo se ha mandado satisfactoriamente, revisa tu correo para copiar el token.", "Email enviado", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
-                        token = respuesta;
-                        this.btnEnviarEmailToken.Text = "Cambiar contraseña";
-                        this.lblEmailToken.Text = "Token";
-                        this.tbEmailToken.Clear();
-                        this.pbEmailToken.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                        this.toolTipEmailToken.SetToolTip(pbEmailToken, "Introduce el token");
-                        this.toolTipEmailToken.Show("Introduce el token", this.tbEmailToken, 1000);
-
-                    }
-                }
-                else
-                {
-                    MsgBox.Show("Esa dirección de correo no esta registrada en nuestra aplicación.", "Email enviado", MsgBox.Buttons.OK, MsgBox.Icon.Exclamation, MsgBox.AnimateStyle.FadeIn);
-
-                    this.btnEnviarEmailToken.Enabled = true;
-                }
-
-            }
-            else
-            {
-                if (await m.restaurarPass(email, tbPass2.Text))
-                {
-                    MsgBox.Show("La contraseña se ha cambiado satisfactoriamente.", "Contraseña actualizada", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
-
-                    token = email = "";
-                    this.tbPass.Clear();
-                    this.tbPass2.Clear();
-                    this.tbEmailToken.Clear();
-                    this.pbEmailToken.Visible = false;
-                    this.pbPass.Visible = false;
-                    this.pbPass2.Visible = false;
-                    this.panelPassOlvidada.Enabled = false;
-                }
-                else
-                {
-                    MsgBox.Show("Ha habido un problema al restaurar la contraseña.", "Contraseña no restaurada", MsgBox.Buttons.OK, MsgBox.Icon.Error, MsgBox.AnimateStyle.FadeIn);
-                    this.btnEnviarEmailToken.Enabled = true;
-                }
-            }
-        }
-
-        private void tbPass_Leave(object sender, EventArgs e)
-        {
-            if (tbPass.Text.Length > 0)
-            {
-                this.pbPass.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipPass1.SetToolTip(tbPass, "Correcto");
-            }
-            else
-            {
-                this.pbPass.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                this.toolTipPass1.SetToolTip(pbPass, "Escribe una nueva contraseña");
-                this.toolTipPass1.Show("Escribe una nueva contraseña", this.tbPass, 1000);
-            }
-        }
-
-        private void tbPass2_TextChanged(object sender, EventArgs e)
-        {
-            if (tbPass2.Text.Equals(tbPass.Text))
-            {
-                this.btnEnviarEmailToken.Enabled = true;
-                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipPass2.SetToolTip(tbPass2, "Las contraseñas coinciden");
-            }
-            else
-            {
-                this.btnEnviarEmailToken.Enabled = false;
-                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                this.toolTipPass2.SetToolTip(pbPass2, "Las contraseñas no coinciden");
-                this.toolTipPass2.Show("Las contraseñas no coinciden", this.tbPass2, 1000);
-            }
-        }
-
-        private void tbPass2_Leave(object sender, EventArgs e)
-        {
-            if (tbPass2.Text.Equals(tbPass.Text))
-            {
-                this.btnEnviarEmailToken.Enabled = true;
-                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipPass2.SetToolTip(tbPass2, "Las contraseñas coinciden");
-            }
-            else
-            {
-                this.btnEnviarEmailToken.Enabled = false;
-                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
-                this.toolTipPass2.SetToolTip(pbPass2, "Las contraseñas no coinciden");
-                this.toolTipPass2.Show("Las contraseñas no coinciden", this.tbPass2, 1000);
-            }
-        }
-
-        private void tbCambiar2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                System.Media.SystemSounds.Beep.Play(); //Sonido "beep" de windows
-                e.Handled = true;
-                this.toolTipCambiar2.Show("Caracter no permitido, solo letras y numeros", this.tbCambiar2, 1000);
-            }
-        }
-
-        private void tbPass_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b') // Permitimos BackSpace
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                System.Media.SystemSounds.Beep.Play(); //Sonido "beep" de windows
-                e.Handled = true;
-                this.toolTipPass1.Show("Caracter no permitido, solo letras y numeros", this.tbPass, 1000);
-            }
-        }
     }
 }

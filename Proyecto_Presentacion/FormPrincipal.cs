@@ -9,9 +9,12 @@ using System.Collections.Generic;
 
 namespace Proyecto_Presentacion
 {
+    /*************************************
+     * INTERFAZ DEL FORMULARIO PRINCIPAL *
+     *************************************/
     public partial class FormPrincipal : Form
     {
-        
+        // Inicialización de la clase de metodos de Negocio
         MetodosFormPrincipal m = new MetodosFormPrincipal();
         // Variable para controlar boton conectar
         private bool conectando = false;
@@ -34,10 +37,10 @@ namespace Proyecto_Presentacion
         private const int CS_DROPSHADOW = 0x20000;
         // Timer para animación de inicio
         System.Windows.Forms.Timer fader = new System.Windows.Forms.Timer();
-        // Timer para menu lateral
-        //System.Timers.Timer timer = new System.Timers.Timer(10);
 
-
+        /***************
+         * Constructor *
+         ***************/
         public FormPrincipal()
         {
             InitializeComponent();
@@ -52,12 +55,6 @@ namespace Proyecto_Presentacion
             this.lblTitulo.MouseUp += new MouseEventHandler(Titulo_MouseUp);
             this.lblTitulo.MouseMove += new MouseEventHandler(Titulo_MouseMove);
             m.abrirFormEnPanel(new FormInicio(), this.panelContenido);
-            
-
-            //timer.Enabled = false;
-            //timer.AutoReset = true;
-            //timer.Interval = 10;
-            //timer.SynchronizingObject = this;
         }
         
         /*****************
@@ -67,7 +64,6 @@ namespace Proyecto_Presentacion
         {
             this.Height = 1;
             this.Width = 1;
-            //Opacity = 0;      // Ponemos la opacidad a 0 para la animación
             fader.Interval = 10;  // Intervalo para animación
             fader.Tick += new EventHandler(fadeIn);  // Llama a la función que se ejecutara en el timer
             fader.Start(); // Arranca el timer de la animación de inicio
@@ -163,9 +159,6 @@ namespace Proyecto_Presentacion
         {
             if (menuLateral.Width == 220)
             {
-                //timer.Elapsed -= new ElapsedEventHandler(mostrarMenuLateral);
-                //timer.Elapsed += new ElapsedEventHandler(ocultarMenuLateral);
-                //this.timer.Enabled = true;
                 if (btnCursos.BackColor != Color.FromArgb(73, 55, 34))
                 {
                     this.tmOcultarMenu.Enabled = true;
@@ -181,9 +174,6 @@ namespace Proyecto_Presentacion
             }
             else if (menuLateral.Width == 55)
             {
-                //timer.Elapsed -= new ElapsedEventHandler(ocultarMenuLateral);
-                //timer.Elapsed += new ElapsedEventHandler(mostrarMenuLateral);
-                //this.timer.Enabled = true;
                 this.lblConectado.Visible = true;
                 if (UsuarioConectado.nombre.Equals("invitado"))
                     m.mostrarLogin(this.tmMostrarLogin);
@@ -241,7 +231,6 @@ namespace Proyecto_Presentacion
             }
             
             m.restaurarColorBotones(this.menuLateral);
-            //if (UsuarioConectado.nombre.Equals("invitado"))
             this.btnAreaPersonal.BackColor = Color.FromArgb(73, 55, 34);
             m.abrirFormEnPanel(new FormAreaPersonal(curso, asignaturas, user, todasNotas, notasMedias), this.panelContenido);
         }
@@ -379,37 +368,7 @@ namespace Proyecto_Presentacion
                 actualizarTamañoPanelContenido();
             }
         }
-        private void ocultarMenuLateral(Object source, ElapsedEventArgs e)
-        {
-            if (this.menuLateral.Width <= 55)
-            {
-                //this.timer.Enabled = false;
-
-            }
-            else
-            {
-                this.menuLateral.Width = menuLateral.Width - 5;
-                actualizarTamañoPanelContenido();
-            }
-        }
-        private void mostrarMenuLateral(Object source, ElapsedEventArgs e)
-        {
-            if (menuLateral.Width >= 220)
-            {
-                //this.timer.Enabled = false;
-                this.lblUsuario.Visible = true;
-                this.lblPass.Visible = true;
-                this.lblConectado.Visible = true;
-                this.tbUsuario.Visible = true;
-                this.tbPass.Visible = true;
-            }
-            else
-            {
-                this.menuLateral.Width = menuLateral.Width + 5;
-                actualizarTamañoPanelContenido();
-            }
-        }
-
+        
         private void tmMostrarMenu_Tick(object sender, EventArgs e)
         {
             if (menuLateral.Width >= 220)
@@ -462,9 +421,10 @@ namespace Proyecto_Presentacion
         }
         private void pbTitulo_DoubleClick(object sender, EventArgs e)
         {
-            MsgBox.Show("Aplicación DAMníficus\r\rCreada como proyecto final para el curso de Desarrollo de " +
+            MsgBox.Show("Creada como proyecto final para el curso de Desarrollo de " +
                 "Aplicaciones Multiplataforma 2018/19 del IES Gaspar Melchor de Jovellanos por:\r\r" +
-                "Rubén Balsera, Antonio Illarramendi y Valentín Sanchez.", "Sobre la app", MsgBox.Buttons.OK, MsgBox.Icon.Info, MsgBox.AnimateStyle.FadeIn);
+                "Rubén Balsera, Antonio Illarramendi y Valentín Sanchez.\r\r" +
+                "Contacto: damnificusjovellanos@gmail.com", "Acerca de la Aplicación DAMníficus", MsgBox.Buttons.OK, MsgBox.Icon.Shield, MsgBox.AnimateStyle.FadeIn);
         }
 
 
@@ -493,6 +453,7 @@ namespace Proyecto_Presentacion
                 this.Location = p3;
             }
         }
+
         //Animaciones
         void fadeIn(object sender, EventArgs e)
         {
@@ -682,25 +643,12 @@ namespace Proyecto_Presentacion
                 pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.ok;
                 lblStatusServer.Text = "Servidor Online";
                 UsuarioConectado.status = "online";
-                //if (btnPrincipal.BackColor != Color.FromArgb(32, 32, 32))
-                //{
-                //    btnPrincipal.PerformClick();
-                //}
-                //btnCursos.Enabled = btnAreaPersonal.Enabled = btnAyudaAdmin.Enabled = btnComunidad.Enabled = btnLogin.Enabled = true;
-                //panel2.BackColor = panel3.BackColor = panel4.BackColor = panel5.BackColor = panel7.BackColor = Color.FromArgb(255, 153, 39);
             }
             else
             {
                 pbStatusServer.Image = Proyecto_Presentacion.Properties.Resources.error;
                 lblStatusServer.Text = "Servidor Offline";
-                UsuarioConectado.status = "offline";
-                //if(btnPrincipal.BackColor != Color.FromArgb(32,32,32))
-                //{
-                //    btnPrincipal.PerformClick();
-                //}
-                //btnCursos.Enabled = btnAreaPersonal.Enabled = btnAyudaAdmin.Enabled = btnComunidad.Enabled = btnLogin.Enabled = false;
-                //panel2.BackColor = panel3.BackColor = panel4.BackColor = panel5.BackColor = panel7.BackColor = Color.Red;
-
+                UsuarioConectado.status = "offline";                
             }
         }
         private bool mostrarMensajeSalida()

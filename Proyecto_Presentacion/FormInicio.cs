@@ -6,6 +6,10 @@ using System.Drawing;
 
 namespace Proyecto_Presentacion
 {
+
+    /*************************************
+     * INTERFAZ DEL FORMULARIO DE INICIO *
+     *************************************/
     public partial class FormInicio : Form
     {
         MetodosFormInicio m = new MetodosFormInicio();
@@ -26,31 +30,19 @@ namespace Proyecto_Presentacion
         private Dictionary<string, string> datos = new Dictionary<string, string>();
         private string usuario, pass;
         private string token = "";
+        private Bitmap renderBmp;
 
+        /***************
+         * Constructor *
+         ***************/
         public FormInicio()
         {
             InitializeComponent();
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
-    }
-        private Bitmap renderBmp;
-        public override Image BackgroundImage
-        {
-            set
-            {
-                Image baseImage = value;
-                renderBmp = new Bitmap(Width, Height,
-                    System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-                Graphics g = Graphics.FromImage(renderBmp);
-                g.DrawImage(baseImage, 0, 0, Width, Height);
-                g.Dispose();
-            }
-            get
-            {
-                return renderBmp;
-            }
         }
+
         /*****************
          * Evento onLoad *
          *****************/
@@ -284,18 +276,34 @@ namespace Proyecto_Presentacion
                 this.pbPass1.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipPass1.SetToolTip(pbPass1, "Debes poner una contraseña");
                 this.toolTipPass1.Show("Debes poner una contraseña", this.tbPass, 1000);
+                passValido = false;
+            }
+            else if (this.tbPass.Text.Length < 8)
+            {
+                //Si el password no tiene 8 caracteres
+                this.pbPass1.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass1.SetToolTip(pbPass1, "La contraseña debe tener 8 caracteres o más");
+                passValido = false;
             }
             else
             {
                 //Si el password es valido se pon ok
                 this.pbPass1.Image = Proyecto_Presentacion.Properties.Resources.ok;
-                this.toolTipPass1.SetToolTip(pbPass1, "Correcto");;
+                this.toolTipPass1.SetToolTip(pbPass1, "Correcto");
+                passValido = true;
             }
             activarBotonAceptar();
         }
         private void tbPass2_Leave(object sender, EventArgs e)
         {
-            if (this.tbPass2.Text == "")
+            if (this.tbPass2.Text.Length < 8)
+            {
+                //Si el password no tiene 8 caracteres
+                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass2.SetToolTip(pbPass2, "La contraseña debe tener 8 caracteres o más");
+                passValido = false;
+            }
+            else if (this.tbPass2.Text == "")
             {
                 this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
                 this.toolTipPass2.SetToolTip(pbPass2, "Vuelve a escribir la contraseña");
@@ -313,12 +321,21 @@ namespace Proyecto_Presentacion
         }
         private void tbPass2_TextChanged(object sender, EventArgs e)
         {
-            if (this.tbPass2.Text.Equals(this.tbPass.Text))
+            if (this.tbPass2.Text.Length < 8)
+            {
+                //Si el password no tiene 8 caracteres
+                this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.problem;
+                this.toolTipPass2.SetToolTip(pbPass2, "La contraseña debe tener 8 caracteres o más");
+                passValido = false;
+            }
+            else if (this.tbPass2.Text.Equals(this.tbPass.Text))
             {
                 this.pbPass2.Image = Proyecto_Presentacion.Properties.Resources.ok;
                 this.toolTipPass2.SetToolTip(pbPass2, "Correcto");
                 passValido = true;
-            }else
+            }
+            
+            else
             {
                 passValido = false;
             }
@@ -397,7 +414,22 @@ namespace Proyecto_Presentacion
             this.pbPass1.Image = null;
             this.pbPass2.Image = null;
         }
-    
+        public override Image BackgroundImage
+        {
+            set
+            {
+                Image baseImage = value;
+                renderBmp = new Bitmap(Width, Height,
+                    System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                Graphics g = Graphics.FromImage(renderBmp);
+                g.DrawImage(baseImage, 0, 0, Width, Height);
+                g.Dispose();
+            }
+            get
+            {
+                return renderBmp;
+            }
+        }
     }
     
 }
